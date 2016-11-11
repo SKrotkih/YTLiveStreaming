@@ -1,0 +1,9 @@
+target 'YouTubeLiveVideo' do
+
+platform :ios, '9.0'
+use_frameworks!
+
+pod 'YTLiveStreaming', :path => '../.'
+pod "XCDYouTubeKit", "~> 2.5"
+
+end

@@ -1,0 +1,485 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		62F6B577B430D78912B92163 /* Pods_YouTubeLiveVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D49C69C84C0F80F29371978 /* Pods_YouTubeLiveVideo.framework */; };
+		7F10443A1DBDFFF3006AA1EE /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1044381DBDFFF3006AA1EE /* Alert.swift */; };
+		7F10443B1DBDFFF3006AA1EE /* StatusBarShowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1044391DBDFFF3006AA1EE /* StatusBarShowingViewController.swift */; };
+		7F83E3371DBDD35500DE4102 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E3361DBDD35500DE4102 /* TableViewCell.swift */; };
+		7F83E34C1DBDD49100DE4102 /* Configurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E3481DBDD49100DE4102 /* Configurator.swift */; };
+		7F83E34D1DBDD49100DE4102 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E3491DBDD49100DE4102 /* Presenter.swift */; };
+		7F83E35B1DBDD58C00DE4102 /* YoutubeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E35A1DBDD58C00DE4102 /* YoutubeWorker.swift */; };
+		7F83E35D1DBDD5DB00DE4102 /* YoutubePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E35C1DBDD5DB00DE4102 /* YoutubePlayerViewController.swift */; };
+		7F9274AC1DBDCAD00051DE6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9274AB1DBDCAD00051DE6B /* AppDelegate.swift */; };
+		7F9274AE1DBDCAD00051DE6B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9274AD1DBDCAD00051DE6B /* ViewController.swift */; };
+		7F9274B11DBDCAD00051DE6B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F9274AF1DBDCAD00051DE6B /* Main.storyboard */; };
+		7F9274B31DBDCAD00051DE6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F9274B21DBDCAD00051DE6B /* Assets.xcassets */; };
+		7F9274B61DBDCAD00051DE6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F9274B41DBDCAD00051DE6B /* LaunchScreen.storyboard */; };
+		7FB8A42B1DD23C3100955C2D /* LFLivePreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8A42A1DD23C3100955C2D /* LFLivePreview.m */; };
+		7FB8A42D1DD23F8400955C2D /* LFLiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8A42C1DD23F8400955C2D /* LFLiveViewController.swift */; };
+		7FB8A4371DD2505700955C2D /* UIControl+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8A4341DD2505700955C2D /* UIControl+YYAdd.m */; };
+		7FB8A4381DD2505700955C2D /* UIView+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8A4361DD2505700955C2D /* UIView+YYAdd.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7F0478C11DD599DD00AB6211 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1D25A3DFDBD2707F0A23DDB9 /* Pods-YouTubeLiveVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTubeLiveVideo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YouTubeLiveVideo/Pods-YouTubeLiveVideo.release.xcconfig"; sourceTree = "<group>"; };
+		2F6AF40A23D40D691D15F9E0 /* Pods-YouTubeLiveVideo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTubeLiveVideo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YouTubeLiveVideo/Pods-YouTubeLiveVideo.debug.xcconfig"; sourceTree = "<group>"; };
+		7F1044381DBDFFF3006AA1EE /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Alert.swift; path = YouTubeLiveVideo/Helpers/Alert.swift; sourceTree = "<group>"; };
+		7F1044391DBDFFF3006AA1EE /* StatusBarShowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatusBarShowingViewController.swift; path = YouTubeLiveVideo/Helpers/StatusBarShowingViewController.swift; sourceTree = "<group>"; };
+		7F10443C1DBE0940006AA1EE /* YouTubeLiveVideo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "YouTubeLiveVideo-Bridging-Header.h"; path = "YouTubeLiveVideo/YouTubeLiveVideo-Bridging-Header.h"; sourceTree = "<group>"; };
+		7F1044451DBE2325006AA1EE /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Frameworks/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		7F1044461DBE2325006AA1EE /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Frameworks/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		7F83E3361DBDD35500DE4102 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewCell.swift; path = YouTubeLiveVideo/TableViewCell.swift; sourceTree = "<group>"; };
+		7F83E3481DBDD49100DE4102 /* Configurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Configurator.swift; path = YouTubeLiveVideo/Configurator.swift; sourceTree = "<group>"; };
+		7F83E3491DBDD49100DE4102 /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Presenter.swift; path = YouTubeLiveVideo/Presenter.swift; sourceTree = "<group>"; };
+		7F83E35A1DBDD58C00DE4102 /* YoutubeWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeWorker.swift; sourceTree = "<group>"; };
+		7F83E35C1DBDD5DB00DE4102 /* YoutubePlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubePlayerViewController.swift; sourceTree = "<group>"; };
+		7F9274A81DBDCAD00051DE6B /* YouTubeLiveVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouTubeLiveVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F9274AB1DBDCAD00051DE6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = YouTubeLiveVideo/AppDelegate.swift; sourceTree = "<group>"; };
+		7F9274AD1DBDCAD00051DE6B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = YouTubeLiveVideo/ViewController.swift; sourceTree = "<group>"; };
+		7F9274B01DBDCAD00051DE6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7F9274B21DBDCAD00051DE6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = YouTubeLiveVideo/Assets.xcassets; sourceTree = "<group>"; };
+		7F9274B51DBDCAD00051DE6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7F9274B71DBDCAD00051DE6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = YouTubeLiveVideo/Info.plist; sourceTree = "<group>"; };
+		7FB8A4291DD23C3100955C2D /* LFLivePreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFLivePreview.h; path = YouTubeLiveVideo/LFLivePreview.h; sourceTree = "<group>"; };
+		7FB8A42A1DD23C3100955C2D /* LFLivePreview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFLivePreview.m; path = YouTubeLiveVideo/LFLivePreview.m; sourceTree = "<group>"; };
+		7FB8A42C1DD23F8400955C2D /* LFLiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LFLiveViewController.swift; path = YouTubeLiveVideo/LFLiveViewController.swift; sourceTree = "<group>"; };
+		7FB8A4331DD2505700955C2D /* UIControl+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+YYAdd.h"; sourceTree = "<group>"; };
+		7FB8A4341DD2505700955C2D /* UIControl+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+YYAdd.m"; sourceTree = "<group>"; };
+		7FB8A4351DD2505700955C2D /* UIView+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YYAdd.h"; sourceTree = "<group>"; };
+		7FB8A4361DD2505700955C2D /* UIView+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YYAdd.m"; sourceTree = "<group>"; };
+		8D49C69C84C0F80F29371978 /* Pods_YouTubeLiveVideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YouTubeLiveVideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7F9274A51DBDCAD00051DE6B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62F6B577B430D78912B92163 /* Pods_YouTubeLiveVideo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7F92749F1DBDCAD00051DE6B = {
+			isa = PBXGroup;
+			children = (
+				7FCB1A501DD4F2AF0033145D /* YouTubeLiveVideo */,
+				7F9274A91DBDCAD00051DE6B /* Products */,
+				8D45835BEFA5D646E97921C6 /* Pods */,
+				FD1738076B36F560B35DA7B2 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		7F9274A91DBDCAD00051DE6B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7F9274A81DBDCAD00051DE6B /* YouTubeLiveVideo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7FB8A4321DD2505700955C2D /* category */ = {
+			isa = PBXGroup;
+			children = (
+				7FB8A4331DD2505700955C2D /* UIControl+YYAdd.h */,
+				7FB8A4341DD2505700955C2D /* UIControl+YYAdd.m */,
+				7FB8A4351DD2505700955C2D /* UIView+YYAdd.h */,
+				7FB8A4361DD2505700955C2D /* UIView+YYAdd.m */,
+			);
+			name = category;
+			path = YouTubeLiveVideo/category;
+			sourceTree = "<group>";
+		};
+		7FC001171DD4783200AA22A5 /* YouTubePlayer */ = {
+			isa = PBXGroup;
+			children = (
+				7F83E35A1DBDD58C00DE4102 /* YoutubeWorker.swift */,
+				7F83E35C1DBDD5DB00DE4102 /* YoutubePlayerViewController.swift */,
+			);
+			name = YouTubePlayer;
+			path = YouTubeLiveVideo;
+			sourceTree = "<group>";
+		};
+		7FCB1A501DD4F2AF0033145D /* YouTubeLiveVideo */ = {
+			isa = PBXGroup;
+			children = (
+				7FC001171DD4783200AA22A5 /* YouTubePlayer */,
+				7FB8A4321DD2505700955C2D /* category */,
+				7F1044391DBDFFF3006AA1EE /* StatusBarShowingViewController.swift */,
+				7FB8A42C1DD23F8400955C2D /* LFLiveViewController.swift */,
+				7FB8A4291DD23C3100955C2D /* LFLivePreview.h */,
+				7FB8A42A1DD23C3100955C2D /* LFLivePreview.m */,
+				7F83E3481DBDD49100DE4102 /* Configurator.swift */,
+				7F83E3491DBDD49100DE4102 /* Presenter.swift */,
+				7F9274AD1DBDCAD00051DE6B /* ViewController.swift */,
+				7F83E3361DBDD35500DE4102 /* TableViewCell.swift */,
+				7F1044381DBDFFF3006AA1EE /* Alert.swift */,
+				7F9274AF1DBDCAD00051DE6B /* Main.storyboard */,
+				7F9274B21DBDCAD00051DE6B /* Assets.xcassets */,
+				7F9274B41DBDCAD00051DE6B /* LaunchScreen.storyboard */,
+				7F10443C1DBE0940006AA1EE /* YouTubeLiveVideo-Bridging-Header.h */,
+				7F9274AB1DBDCAD00051DE6B /* AppDelegate.swift */,
+				7F9274B71DBDCAD00051DE6B /* Info.plist */,
+			);
+			name = YouTubeLiveVideo;
+			sourceTree = "<group>";
+		};
+		8D45835BEFA5D646E97921C6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2F6AF40A23D40D691D15F9E0 /* Pods-YouTubeLiveVideo.debug.xcconfig */,
+				1D25A3DFDBD2707F0A23DDB9 /* Pods-YouTubeLiveVideo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		FD1738076B36F560B35DA7B2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7F1044451DBE2325006AA1EE /* FBSDKCoreKit.framework */,
+				7F1044461DBE2325006AA1EE /* FBSDKLoginKit.framework */,
+				8D49C69C84C0F80F29371978 /* Pods_YouTubeLiveVideo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7F9274A71DBDCAD00051DE6B /* YouTubeLiveVideo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F9274BA1DBDCAD00051DE6B /* Build configuration list for PBXNativeTarget "YouTubeLiveVideo" */;
+			buildPhases = (
+				212D28A20033C99140419B3A /* [CP] Check Pods Manifest.lock */,
+				7F9274A41DBDCAD00051DE6B /* Sources */,
+				7F9274A51DBDCAD00051DE6B /* Frameworks */,
+				7F9274A61DBDCAD00051DE6B /* Resources */,
+				25E870AD25798A32FC9B1529 /* [CP] Embed Pods Frameworks */,
+				C68A264E196F15DC0B818B46 /* [CP] Copy Pods Resources */,
+				7F0478C11DD599DD00AB6211 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YouTubeLiveVideo;
+			productName = YouTubeLiveVideo;
+			productReference = 7F9274A81DBDCAD00051DE6B /* YouTubeLiveVideo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7F9274A01DBDCAD00051DE6B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Sergey Krotkih";
+				TargetAttributes = {
+					7F9274A71DBDCAD00051DE6B = {
+						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0810;
+					};
+				};
+			};
+			buildConfigurationList = 7F9274A31DBDCAD00051DE6B /* Build configuration list for PBXProject "YouTubeLiveVideo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7F92749F1DBDCAD00051DE6B;
+			productRefGroup = 7F9274A91DBDCAD00051DE6B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7F9274A71DBDCAD00051DE6B /* YouTubeLiveVideo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7F9274A61DBDCAD00051DE6B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F9274B61DBDCAD00051DE6B /* LaunchScreen.storyboard in Resources */,
+				7F9274B31DBDCAD00051DE6B /* Assets.xcassets in Resources */,
+				7F9274B11DBDCAD00051DE6B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		212D28A20033C99140419B3A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		25E870AD25798A32FC9B1529 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YouTubeLiveVideo/Pods-YouTubeLiveVideo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C68A264E196F15DC0B818B46 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YouTubeLiveVideo/Pods-YouTubeLiveVideo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7F9274A41DBDCAD00051DE6B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7FB8A42B1DD23C3100955C2D /* LFLivePreview.m in Sources */,
+				7F83E3371DBDD35500DE4102 /* TableViewCell.swift in Sources */,
+				7F10443A1DBDFFF3006AA1EE /* Alert.swift in Sources */,
+				7F9274AE1DBDCAD00051DE6B /* ViewController.swift in Sources */,
+				7F83E35B1DBDD58C00DE4102 /* YoutubeWorker.swift in Sources */,
+				7FB8A4371DD2505700955C2D /* UIControl+YYAdd.m in Sources */,
+				7F83E34D1DBDD49100DE4102 /* Presenter.swift in Sources */,
+				7F83E35D1DBDD5DB00DE4102 /* YoutubePlayerViewController.swift in Sources */,
+				7F9274AC1DBDCAD00051DE6B /* AppDelegate.swift in Sources */,
+				7FB8A42D1DD23F8400955C2D /* LFLiveViewController.swift in Sources */,
+				7FB8A4381DD2505700955C2D /* UIView+YYAdd.m in Sources */,
+				7F83E34C1DBDD49100DE4102 /* Configurator.swift in Sources */,
+				7F10443B1DBDFFF3006AA1EE /* StatusBarShowingViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7F9274AF1DBDCAD00051DE6B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7F9274B01DBDCAD00051DE6B /* Base */,
+			);
+			name = Main.storyboard;
+			path = YouTubeLiveVideo;
+			sourceTree = "<group>";
+		};
+		7F9274B41DBDCAD00051DE6B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7F9274B51DBDCAD00051DE6B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			path = YouTubeLiveVideo;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7F9274B81DBDCAD00051DE6B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7F9274B91DBDCAD00051DE6B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7F9274BB1DBDCAD00051DE6B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2F6AF40A23D40D691D15F9E0 /* Pods-YouTubeLiveVideo.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
+				INFOPLIST_FILE = YouTubeLiveVideo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.skappledev.YouTubeLiveVideo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b282cfc9-ff8e-4473-8981-4697d64c28ad";
+				SWIFT_OBJC_BRIDGING_HEADER = "YouTubeLiveVideo/YouTubeLiveVideo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		7F9274BC1DBDCAD00051DE6B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1D25A3DFDBD2707F0A23DDB9 /* Pods-YouTubeLiveVideo.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
+				INFOPLIST_FILE = YouTubeLiveVideo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.skappledev.YouTubeLiveVideo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b282cfc9-ff8e-4473-8981-4697d64c28ad";
+				SWIFT_OBJC_BRIDGING_HEADER = "YouTubeLiveVideo/YouTubeLiveVideo-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7F9274A31DBDCAD00051DE6B /* Build configuration list for PBXProject "YouTubeLiveVideo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F9274B81DBDCAD00051DE6B /* Debug */,
+				7F9274B91DBDCAD00051DE6B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7F9274BA1DBDCAD00051DE6B /* Build configuration list for PBXNativeTarget "YouTubeLiveVideo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F9274BB1DBDCAD00051DE6B /* Debug */,
+				7F9274BC1DBDCAD00051DE6B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7F9274A01DBDCAD00051DE6B /* Project object */;
+}

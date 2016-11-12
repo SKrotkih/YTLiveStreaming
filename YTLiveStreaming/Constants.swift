@@ -8,12 +8,6 @@
 
 import UIKit
 
-// TODO: Change Private parameters on yours:
-struct Private {
-   static let GoogleClientID = "495403403209-heee4af4qefp6ujvi216ar5rockjnr6l.apps.googleusercontent.com"
-   static let APIkey = "AIzaSyCBZOl0Zo__JUPVnmf3ZhIL9g6V9vzWzKE"
-}
-
 struct Auth {
    static let ClientSecret = ""
    static let BaseURL = "https://www.googleapis.com/youtube/v3"

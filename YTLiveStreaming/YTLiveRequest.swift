@@ -40,7 +40,7 @@ extension YTLiveRequest {
          "part": "id,snippet,contentDetails,status" as AnyObject,
          "broadcastStatus": status as AnyObject,
          "maxResults": 50 as AnyObject,
-         "key": Private.APIkey as AnyObject
+         "key": Credentials.APIkey as AnyObject
       ]
       YouTubeLiveVideoProvider.request(LiveStreamingAPI.listBroadcasts(parameters), completion: { result in
          switch result {
@@ -78,7 +78,7 @@ extension YTLiveRequest {
       let parameters: [String: AnyObject] = [
          "part":"id,snippet,contentDetails,status" as AnyObject,
          "id":broadcastId as AnyObject,
-         "key": Private.APIkey as AnyObject
+         "key": Credentials.APIkey as AnyObject
       ]
       YouTubeLiveVideoProvider.request(LiveStreamingAPI.liveBroadcast(parameters), completion: { result in
          switch result {
@@ -119,7 +119,7 @@ extension YTLiveRequest {
             let headers = merge(one: ["Content-Type": "application/json"], ["Authorization":"Bearer \(token)"])
             let jsonBody = "{\"snippet\": {\"title\": \"\(title)\",\"scheduledStartTime\": \"\(startDateTime.toJSONformat())\"},\"status\": {\"privacyStatus\":\"public\"}}"
             let encoder = JSONBodyStringEncoding(jsonBody: jsonBody)
-            let url = "https://www.googleapis.com/youtube/v3/liveBroadcasts?part=id,snippet,contentDetails,status&key=\(Private.APIkey)"
+            let url = "https://www.googleapis.com/youtube/v3/liveBroadcasts?part=id,snippet,contentDetails,status&key=\(Credentials.APIkey)"
             Alamofire.request(url,
                               method: .post,
                               parameters: [:],
@@ -163,7 +163,7 @@ extension YTLiveRequest {
          "id":boadcastId as AnyObject,
          "broadcastStatus":broadcastStatus as AnyObject,
          "part":"id,snippet,contentDetails,status" as AnyObject,
-         "key": Private.APIkey as AnyObject
+         "key": Credentials.APIkey as AnyObject
       ]
       YouTubeLiveVideoProvider.request(LiveStreamingAPI.transitionLiveBroadcast(parameters), completion: { result in
          switch result {
@@ -194,7 +194,7 @@ extension YTLiveRequest {
    class func deleteLiveBroadcast(broadcastId: String, completed: @escaping (Bool) -> Void) {
       let parameters: [String: AnyObject] = [
          "id":broadcastId as AnyObject,
-         "key": Private.APIkey as AnyObject
+         "key": Credentials.APIkey as AnyObject
       ]
       YouTubeLiveVideoProvider.request(LiveStreamingAPI.deleteLiveBroadcast(parameters), completion: { result in
          switch result {
@@ -225,7 +225,7 @@ extension YTLiveRequest {
          "id":broadcastId as AnyObject,
          "streamId":streamId as AnyObject,
          "part":"id,snippet,contentDetails,status" as AnyObject,
-         "key": Private.APIkey as AnyObject
+         "key": Credentials.APIkey as AnyObject
       ]
       YouTubeLiveVideoProvider.request(LiveStreamingAPI.bindLiveBroadcast(parameters), completion: { result in
          switch result {
@@ -260,7 +260,7 @@ extension YTLiveRequest {
             let headers = merge(one: ["Content-Type": "application/json"], ["Authorization":"Bearer \(token)"])
             let jsonBody = "{\"id\":\"\(id)\",\"snippet\": {\"title\":\"\(title)\"},\"cdn\":{\"format\":\"\(format)\",\"ingestionType\":\"\(ingestionType)\"}}}"
             let encoder = JSONBodyStringEncoding(jsonBody: jsonBody)
-            Alamofire.request("https://www.googleapis.com/youtube/v3/liveBroadcasts?part=\"id,snippet,contentDetails,status\"&key=\(Private.APIkey)", method: .put,
+            Alamofire.request("https://www.googleapis.com/youtube/v3/liveBroadcasts?part=\"id,snippet,contentDetails,status\"&key=\(Credentials.APIkey)", method: .put,
                               parameters: nil,
                               encoding: encoder,
                               headers: headers)
@@ -307,7 +307,7 @@ extension YTLiveRequest {
       let parameters: [String: AnyObject] = [
          "part":"id,snippet,cdn,status" as AnyObject,
          "id":liveStreamId as AnyObject,
-         "key": Private.APIkey as AnyObject
+         "key": Credentials.APIkey as AnyObject
       ]
       YouTubeLiveVideoProvider.request(LiveStreamingAPI.liveStream(parameters), completion: { result in
          switch result {
@@ -371,7 +371,7 @@ extension YTLiveRequest {
             let headers = merge(one: ["Content-Type": "application/json"], ["Authorization":"Bearer \(token)"])
             let jsonBody = "{\"snippet\": {\"title\": \"\(title)\",\"description\": \"\(description)\"},\"cdn\": {\"resolution\":\"\(resolution)\",\"frameRate\":\"\(frameRate)\",\"ingestionType\":\"\(ingestionType)\",\"ingestionInfo\":{\"streamName\":\"\(streamName)\"}}}"
             let encoder = JSONBodyStringEncoding(jsonBody: jsonBody)
-            let url = "https://www.googleapis.com/youtube/v3/liveStreams?part=id,snippet,cdn,status&key=\(Private.APIkey)"
+            let url = "https://www.googleapis.com/youtube/v3/liveStreams?part=id,snippet,cdn,status&key=\(Credentials.APIkey)"
             Alamofire.request(url,
                               method: .post,
                               parameters: [:],
@@ -412,7 +412,7 @@ extension YTLiveRequest {
    class func deleteLiveStream(_ liveStreamId: String, completed: @escaping (Bool) -> Void) {
       let parameters: [String: AnyObject] = [
          "id":liveStreamId as AnyObject,
-         "key": Private.APIkey as AnyObject
+         "key": Credentials.APIkey as AnyObject
       ]
       YouTubeLiveVideoProvider.request(LiveStreamingAPI.deleteLiveStream(parameters), completion: { result in
          switch result {
@@ -450,7 +450,7 @@ extension YTLiveRequest {
             let encoder = JSONBodyStringEncoding(jsonBody: jsonBody)
             Alamofire.request("https://www.googleapis.com/youtube/v3/liveStreams",
                               method: .put,
-                              parameters: ["part": "id,snippet,cdn,status", "key": Private.APIkey],
+                              parameters: ["part": "id,snippet,cdn,status", "key": Credentials.APIkey],
                               encoding: encoder,
                               headers: headers)
                .validate()

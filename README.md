@@ -1,5 +1,7 @@
 # YTLiveStreaming
 
+[![Swift 3](https://img.shields.io/badge/Swift-3-orange.svg?style=flat)](https://swift.org/)
+
 YTLiveStreaming is a framework for creating live broadcasts and video streams on YouTube using the YouTube Live Streaming API
 (v.3) in Swift 3 
 
@@ -8,24 +10,36 @@ YTLiveStreaming is a framework for creating live broadcasts and video streams on
 - Xcode 8
 - Swift 3
 
+## Introduction
+
+- First of all enable YouTube LIVE like this: https://switcherstudio.com/en/kb/streaming/how-to-enable-youtube-live 
+- Go to your Google account.
+- Create a new application.
+- Add YouTube Data API in the API Library.  
+- Add API key and OAuth 2.0 client ID:
+
+<img src="https://cloud.githubusercontent.com/assets/2775621/20235174/ca7cbf8e-a893-11e6-9753-b148cdec249e.png" alt="Google API Manager" style="width: 690px;" />
+
+Note. When you will create an API key, don't check iOS apps in the radio box. Don't worry about yellow warning Key restriction. Take the API key and Client ID. They will be used on the next step.
+
 ## Install
 
-First of all accept the Live Streaming in your YouTube account.
+- Download or clone the repository.
 
-Add a new application in your Google account with two thing in the API Manager: API key and OAuth 2.0 client ID.
+- Select Sample folder.
 
-Add YouTube Data API in the API Library.  
+- Launch  `pod install`   
 
-Just one note. When you will create an API key, don't point the iOS apps in the radio box. Don't worry about yellow warning Key restriction. Take the API key and Client ID. They will be used in your Xcode project.
+- Open YouTubeLiveVideo.xcworkspace.
 
-Download or clone the repository.
+- Put your Cliend ID and API key into plist.info:
 
-pod install
+<img src="https://cloud.githubusercontent.com/assets/2775621/20235407/9d4de014-a899-11e6-825b-fb46a4da49fe.png" alt="Credentials" style="width: 690px;" />
 
-Edit Constants.swift:
-Replace the following Private parameters on yours:
-- GoogleClientID
-- APIkey
+## User guide
+
+
+
 
 ## Libraries Used
 
@@ -35,6 +49,7 @@ Replace the following Private parameters on yours:
 - SwiftyJSON
 - Moya
 
-Here is a video how it works: https://youtu.be/HwYbvUU2fJo
 
-11-10-2016
+
+
+11-11-2016

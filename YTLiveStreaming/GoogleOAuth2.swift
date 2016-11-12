@@ -34,7 +34,7 @@ class GoogleOAuth2: NSObject {
                                                 authorizeURL: Auth.AuthorizeURL,
                                                 tokenURL: Auth.TokenURL,
                                                 redirectURL: Auth.RedirectURL,
-                                                clientID: Private.GoogleClientID,
+                                                clientID: Credentials.clientID,
                                                 clientSecret: Auth.ClientSecret,
                                                 scope: Auth.Scope)
       }

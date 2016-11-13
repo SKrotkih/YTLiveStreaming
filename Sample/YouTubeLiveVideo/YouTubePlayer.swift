@@ -1,12 +1,12 @@
 import UIKit
 
-class YoutubeWorker: NSObject {
+class YouTubePlayer: NSObject {
 
    fileprivate var youtubePlayerViewController: YoutubePlayerViewController?
    
-   class var sharedInstance: YoutubeWorker {
+   class var sharedInstance: YouTubePlayer {
       struct SingletonWrapper {
-         static let sharedInstance = YoutubeWorker()
+         static let sharedInstance = YouTubePlayer()
       }
       return SingletonWrapper.sharedInstance;
    }
@@ -20,7 +20,7 @@ class YoutubeWorker: NSObject {
    }
 }
 
-extension YoutubeWorker: YoutubePlayerDelegate {
+extension YouTubePlayer: YoutubePlayerDelegate {
    
    func playerDidFinish() {
       

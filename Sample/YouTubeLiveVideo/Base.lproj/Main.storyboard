@@ -206,7 +206,91 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vz4-74-Hc2" customClass="LFLivePreview">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YGt-hk-nxN">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uwi-hd-huF">
+                                                <rect key="frame" x="203" y="24" width="44" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="44" id="JKE-MX-Lij"/>
+                                                    <constraint firstAttribute="height" constant="44" id="zSN-U6-mA5"/>
+                                                </constraints>
+                                                <state key="normal" image="camra_beauty"/>
+                                                <state key="selected" image="camra_beauty_close"/>
+                                                <connections>
+                                                    <action selector="changeBeautyButtonPressed:" destination="MdF-nG-AaE" eventType="touchUpInside" id="kIz-5z-mI6"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TF9-JK-CE3">
+                                                <rect key="frame" x="262" y="24" width="44" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="fCd-v9-Ytv"/>
+                                                    <constraint firstAttribute="width" constant="44" id="zm9-fq-TYg"/>
+                                                </constraints>
+                                                <state key="normal" image="camra_preview"/>
+                                                <connections>
+                                                    <action selector="changeCameraPositionButtonPressed:" destination="MdF-nG-AaE" eventType="touchUpInside" id="O5l-UD-1EP"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6n-Fd-1lq">
+                                                <rect key="frame" x="319" y="24" width="44" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="44" id="Bvq-Da-mdG"/>
+                                                    <constraint firstAttribute="height" constant="44" id="cs1-SB-6lZ"/>
+                                                </constraints>
+                                                <state key="normal" image="close_preview"/>
+                                                <connections>
+                                                    <action selector="closeButtonPressed:" destination="MdF-nG-AaE" eventType="touchUpInside" id="078-xA-IX2"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y17-aQ-Z8T">
+                                                <rect key="frame" x="113" y="624" width="149" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="YK5-m1-5Fv"/>
+                                                    <constraint firstAttribute="width" constant="149" id="kX1-vZ-S2X"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="15"/>
+                                                <state key="normal" title="Start Live">
+                                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="onClickPublish:" destination="MdF-nG-AaE" eventType="touchUpInside" id="jlY-q1-pRT"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAV-uW-bC0">
+                                                <rect key="frame" x="75" y="595" width="224" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="M9T-JK-18F"/>
+                                                    <constraint firstAttribute="width" constant="224" id="Rkj-xu-9gD"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
+                                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="Uwi-hd-huF" firstAttribute="top" secondItem="YGt-hk-nxN" secondAttribute="top" constant="24" id="11j-r8-xSX"/>
+                                            <constraint firstItem="jAV-uW-bC0" firstAttribute="centerX" secondItem="YGt-hk-nxN" secondAttribute="centerX" id="Ebm-L2-pip"/>
+                                            <constraint firstItem="TF9-JK-CE3" firstAttribute="top" secondItem="YGt-hk-nxN" secondAttribute="top" constant="24" id="GcG-XI-Ez0"/>
+                                            <constraint firstItem="d6n-Fd-1lq" firstAttribute="top" secondItem="YGt-hk-nxN" secondAttribute="top" constant="24" id="HkP-pP-uGF"/>
+                                            <constraint firstItem="d6n-Fd-1lq" firstAttribute="leading" secondItem="TF9-JK-CE3" secondAttribute="trailing" constant="13" id="PzU-T4-c9M"/>
+                                            <constraint firstAttribute="bottom" secondItem="y17-aQ-Z8T" secondAttribute="bottom" constant="13" id="lPV-pN-NgO"/>
+                                            <constraint firstItem="TF9-JK-CE3" firstAttribute="leading" secondItem="Uwi-hd-huF" secondAttribute="trailing" constant="15" id="s3o-rt-D4E"/>
+                                            <constraint firstItem="y17-aQ-Z8T" firstAttribute="centerX" secondItem="YGt-hk-nxN" secondAttribute="centerX" id="w9x-n3-PbJ"/>
+                                            <constraint firstItem="y17-aQ-Z8T" firstAttribute="top" secondItem="jAV-uW-bC0" secondAttribute="bottom" constant="8" id="x3I-Wm-HbV"/>
+                                            <constraint firstAttribute="trailing" secondItem="d6n-Fd-1lq" secondAttribute="trailing" constant="12" id="zgB-93-neE"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="YGt-hk-nxN" firstAttribute="leading" secondItem="vz4-74-Hc2" secondAttribute="leading" id="2Pf-kM-aA8"/>
+                                    <constraint firstItem="YGt-hk-nxN" firstAttribute="top" secondItem="vz4-74-Hc2" secondAttribute="top" id="8dk-bW-1Bp"/>
+                                    <constraint firstAttribute="bottom" secondItem="YGt-hk-nxN" secondAttribute="bottom" id="Jix-oH-Xjt"/>
+                                    <constraint firstAttribute="trailing" secondItem="YGt-hk-nxN" secondAttribute="trailing" id="Twx-fA-Bsq"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -218,12 +302,24 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="beautyButton" destination="Uwi-hd-huF" id="be8-Sf-5P7"/>
+                        <outlet property="cameraButton" destination="TF9-JK-CE3" id="dbK-d5-Io1"/>
+                        <outlet property="closeButton" destination="d6n-Fd-1lq" id="seg-Tp-CJ6"/>
+                        <outlet property="containerView" destination="YGt-hk-nxN" id="Tta-i4-Clb"/>
+                        <outlet property="currentStatusLabel" destination="jAV-uW-bC0" id="W46-0B-OxT"/>
                         <outlet property="lfView" destination="vz4-74-Hc2" id="31i-zi-HuS"/>
+                        <outlet property="startLiveButton" destination="y17-aQ-Z8T" id="Uut-XT-oo8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="njm-gX-vHu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1321" y="626"/>
+            <point key="canvasLocation" x="1320.8" y="625.63718140929541"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camra_beauty" width="23" height="23"/>
+        <image name="camra_beauty_close" width="25" height="23"/>
+        <image name="camra_preview" width="22" height="19"/>
+        <image name="close_preview" width="18" height="18"/>
+    </resources>
 </document>

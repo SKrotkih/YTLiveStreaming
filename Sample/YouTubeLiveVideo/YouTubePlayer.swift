@@ -2,28 +2,21 @@ import UIKit
 
 class YouTubePlayer: NSObject {
 
-   fileprivate var youtubePlayerViewController: YoutubePlayerViewController?
+   static var youtubePlayerViewController: YoutubePlayerViewController?
+   static var youtubePlayerDelegate: PlayerDelegate?
    
-   class var sharedInstance: YouTubePlayer {
-      struct SingletonWrapper {
-         static let sharedInstance = YouTubePlayer()
-      }
-      return SingletonWrapper.sharedInstance;
-   }
-   
-   func playYoutubeID(_ youtubeId: String, viewController: UIViewController) {
+   class func playYoutubeID(_ youtubeId: String, viewController: UIViewController) {
       if self.youtubePlayerViewController == nil {
          self.youtubePlayerViewController = YoutubePlayerViewController()
-         self.youtubePlayerViewController!.delegate = self
+         self.youtubePlayerDelegate = PlayerDelegate()
+         self.youtubePlayerViewController!.delegate = youtubePlayerDelegate
       }
       youtubePlayerViewController!.playVideo(youtubeId, viewController: viewController)
    }
 }
 
-extension YouTubePlayer: YoutubePlayerDelegate {
-   
+class PlayerDelegate: YoutubePlayerDelegate {
    func playerDidFinish() {
       
    }
-   
 }

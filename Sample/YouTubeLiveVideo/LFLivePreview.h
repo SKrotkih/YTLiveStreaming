@@ -10,6 +10,10 @@
 
 @interface LFLivePreview : UIView
 
-- (void) prepareForUsing: (NSString*) streamURL;
+- (void) prepareForUsing;
+- (void) changeCameraPosition;
+- (BOOL) changeBeauty;
+- (void) startPublishingWithStreamURL: (NSString*) streamURL;
+- (void) stopPublishing;
 
 @end

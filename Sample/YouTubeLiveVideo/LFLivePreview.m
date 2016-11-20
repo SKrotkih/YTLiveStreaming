@@ -11,13 +11,12 @@
 // https://github.com/BradLarson/GPUImage
 //
 
-
 #import "LFLivePreview.h"
 #import "UIControl+YYAdd.h"
 #import "UIView+YYAdd.h"
 #import "LFLiveKit.h"
 
-inline static NSString *formatedSpeed(float bytes, float elapsed_milli) {
+inline static NSString* formatedSpeed(float bytes, float elapsed_milli) {
     if (elapsed_milli <= 0) {
         return @"N/A";
     }
@@ -36,46 +35,35 @@ inline static NSString *formatedSpeed(float bytes, float elapsed_milli) {
     }
 }
 
-@interface LFLivePreview ()<LFLiveSessionDelegate>
+@interface LFLivePreview () <LFLiveSessionDelegate>
 
-@property (nonatomic, strong) UIButton *beautyButton;
-@property (nonatomic, strong) UIButton *cameraButton;
-@property (nonatomic, strong) UIButton *closeButton;
-@property (nonatomic, strong) UIButton *startLiveButton;
-@property (nonatomic, strong) UIView *containerView;
-@property (nonatomic, strong) LFLiveDebug *debugInfo;
-@property (nonatomic, strong) LFLiveSession *session;
-@property (nonatomic, strong) UILabel *stateLabel;
+@property (nonatomic, strong) LFLiveDebug* debugInfo;
+@property (nonatomic, strong) LFLiveSession* session;
+
+@property (nonatomic, strong) UILabel* stateLabel;
 @property (nonatomic, copy) NSString* streamURL;
 
 @end
 
 @implementation LFLivePreview
 
-- (void) prepareForUsing: (NSString*) streamURL {
-   self.streamURL = streamURL;
-   self.backgroundColor = [UIColor clearColor];
+- (void) prepareForUsing {
    [self requestAccessForVideo];
    [self requestAccessForAudio];
-   [self addSubview:self.containerView];
-   [self.containerView addSubview:self.stateLabel];
-   [self.containerView addSubview:self.closeButton];
-   [self.containerView addSubview:self.cameraButton];
-   [self.containerView addSubview:self.beautyButton];
-   [self.containerView addSubview:self.startLiveButton];
 }
 
 #pragma mark -- Public Method
-- (void)requestAccessForVideo {
+
+- (void) requestAccessForVideo {
     __weak typeof(self) _self = self;
     AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     switch (status) {
     case AVAuthorizationStatusNotDetermined: {
         // Диалог Лицензия не появляется, запуск Лицензия
-        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler: ^(BOOL granted) {
                 if (granted) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [_self.session setRunning:YES];
+                        [_self.session setRunning: YES];
                     });
                 }
             }];
@@ -84,21 +72,20 @@ inline static NSString *formatedSpeed(float bytes, float elapsed_milli) {
     case AVAuthorizationStatusAuthorized: {
         // Он открыл разрешено продолжать
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_self.session setRunning:YES];
+            [_self.session setRunning: YES];
         });
         break;
     }
     case AVAuthorizationStatusDenied:
     case AVAuthorizationStatusRestricted:
         // Пользователь явно отказано в разрешении, или не может получить доступ к устройству камеры
-
         break;
     default:
         break;
     }
 }
 
-- (void)requestAccessForAudio {
+- (void) requestAccessForAudio {
     AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
     switch (status) {
     case AVAuthorizationStatusNotDetermined: {
@@ -119,9 +106,12 @@ inline static NSString *formatedSpeed(float bytes, float elapsed_milli) {
 
 #pragma mark -- LFStreamingSessionDelegate
 /** live status changed will callback */
-- (void)liveSession:(nullable LFLiveSession *)session liveStateDidChange:(LFLiveState)state {
-    NSLog(@"liveStateDidChange: %ld", state);
-    switch (state) {
+
+- (void) liveSession: (nullable LFLiveSession*) session liveStateDidChange: (LFLiveState) state {
+
+   NSLog(@"liveStateDidChange: %ld", state);
+   
+   switch (state) {
     case LFLiveReady:
         _stateLabel.text = @"No connect";
         break;
@@ -143,16 +133,18 @@ inline static NSString *formatedSpeed(float bytes, float elapsed_milli) {
 }
 
 /** live debug info callback */
-- (void)liveSession:(nullable LFLiveSession *)session debugInfo:(nullable LFLiveDebug *)debugInfo {
+
+- (void) liveSession: (nullable LFLiveSession*) session debugInfo: (nullable LFLiveDebug*)debugInfo {
     NSLog(@"debugInfo uploadSpeed: %@", formatedSpeed(debugInfo.currentBandwidth, debugInfo.elapsedMilli));
 }
 
 /** callback socket errorcode */
-- (void)liveSession:(nullable LFLiveSession *)session errorCode:(LFLiveSocketErrorCode)errorCode {
+- (void) liveSession: (nullable LFLiveSession*) session errorCode: (LFLiveSocketErrorCode)errorCode {
     NSLog(@"errorCode: %ld", errorCode);
 }
 
 #pragma mark -- Getter Setter
+
 - (LFLiveSession *)session {
     if (!_session) {
         /**      发现大家有不会用横屏的请注意啦，横屏需要在ViewController  supportedInterfaceOrientations修改方向  默认竖屏  ****/
@@ -278,17 +270,7 @@ inline static NSString *formatedSpeed(float bytes, float elapsed_milli) {
     return _session;
 }
 
-- (UIView *)containerView {
-    if (!_containerView) {
-        _containerView = [UIView new];
-        _containerView.frame = self.bounds;
-        _containerView.backgroundColor = [UIColor clearColor];
-        _containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    }
-    return _containerView;
-}
-
-- (UILabel *)stateLabel {
+- (UILabel*) stateLabel {
     if (!_stateLabel) {
         _stateLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 80, 40)];
         _stateLabel.text = @"Not Connected";
@@ -298,82 +280,26 @@ inline static NSString *formatedSpeed(float bytes, float elapsed_milli) {
     return _stateLabel;
 }
 
-- (UIButton *)closeButton {
-    if (!_closeButton) {
-        _closeButton = [UIButton new];
-        _closeButton.size = CGSizeMake(44, 44);
-        _closeButton.left = self.width - 10 - _closeButton.width;
-        _closeButton.top = 20;
-        [_closeButton setImage:[UIImage imageNamed:@"close_preview"] forState:UIControlStateNormal];
-        _closeButton.exclusiveTouch = YES;
-        [_closeButton addBlockForControlEvents:UIControlEventTouchUpInside block:^(id sender) {
 
-        }];
-    }
-    return _closeButton;
+- (void) changeCameraPosition {
+   AVCaptureDevicePosition devicePositon = self.session.captureDevicePosition;
+   self.session.captureDevicePosition = (devicePositon == AVCaptureDevicePositionBack) ? AVCaptureDevicePositionFront : AVCaptureDevicePositionBack;
 }
 
-- (UIButton *)cameraButton {
-    if (!_cameraButton) {
-        _cameraButton = [UIButton new];
-        _cameraButton.size = CGSizeMake(44, 44);
-        _cameraButton.origin = CGPointMake(_closeButton.left - 10 - _cameraButton.width, 20);
-        [_cameraButton setImage:[UIImage imageNamed:@"camra_preview"] forState:UIControlStateNormal];
-        _cameraButton.exclusiveTouch = YES;
-        __weak typeof(self) _self = self;
-        [_cameraButton addBlockForControlEvents:UIControlEventTouchUpInside block:^(id sender) {
-            AVCaptureDevicePosition devicePositon = _self.session.captureDevicePosition;
-            _self.session.captureDevicePosition = (devicePositon == AVCaptureDevicePositionBack) ? AVCaptureDevicePositionFront : AVCaptureDevicePositionBack;
-        }];
-    }
-    return _cameraButton;
+- (BOOL) changeBeauty {
+   self.session.beautyFace = !self.session.beautyFace;
+   return !self.session.beautyFace;
 }
 
-- (UIButton *)beautyButton {
-    if (!_beautyButton) {
-        _beautyButton = [UIButton new];
-        _beautyButton.size = CGSizeMake(44, 44);
-        _beautyButton.origin = CGPointMake(_cameraButton.left - 10 - _beautyButton.width, 20);
-        [_beautyButton setImage:[UIImage imageNamed:@"camra_beauty"] forState:UIControlStateNormal];
-        [_beautyButton setImage:[UIImage imageNamed:@"camra_beauty_close"] forState:UIControlStateSelected];
-        _beautyButton.exclusiveTouch = YES;
-        __weak typeof(self) _self = self;
-        [_beautyButton addBlockForControlEvents:UIControlEventTouchUpInside block:^(id sender) {
-            _self.session.beautyFace = !_self.session.beautyFace;
-            _self.beautyButton.selected = !_self.session.beautyFace;
-        }];
-    }
-    return _beautyButton;
+- (void) startPublishingWithStreamURL: (NSString*) streamURL {
+   LFLiveStreamInfo* stream = [LFLiveStreamInfo new];
+   stream.url = streamURL;  // @"rtmp://live.hkstv.hk.lxdns.com:1935/live/stream153";
+   NSLog(@"STREAM URL=%@", streamURL);
+   [self.session startLive: stream];
 }
 
-- (UIButton *)startLiveButton {
-    if (!_startLiveButton) {
-        _startLiveButton = [UIButton new];
-        _startLiveButton.size = CGSizeMake(self.width - 60, 44);
-        _startLiveButton.left = 30;
-        _startLiveButton.bottom = self.height - 50;
-        _startLiveButton.layer.cornerRadius = _startLiveButton.height/2;
-        [_startLiveButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_startLiveButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
-        [_startLiveButton setTitle:@"Start Live" forState:UIControlStateNormal];
-        [_startLiveButton setBackgroundColor:[UIColor colorWithRed:50 green:32 blue:245 alpha:1]];
-        _startLiveButton.exclusiveTouch = YES;
-        __weak typeof(self) _self = self;
-        [_startLiveButton addBlockForControlEvents:UIControlEventTouchUpInside block:^(id sender) {
-            _self.startLiveButton.selected = !_self.startLiveButton.selected;
-            if (_self.startLiveButton.selected) {
-                [_self.startLiveButton setTitle:@"End the broadcast" forState:UIControlStateNormal];
-                LFLiveStreamInfo *stream = [LFLiveStreamInfo new];
-                stream.url = _self.streamURL;  // @"rtmp://live.hkstv.hk.lxdns.com:1935/live/stream153";
-                NSLog(@"STREAM URL=%@", stream.url);
-                [_self.session startLive:stream];
-            } else {
-                [_self.startLiveButton setTitle:@"Start Live" forState:UIControlStateNormal];
-                [_self.session stopLive];
-            }
-        }];
-    }
-    return _startLiveButton;
+- (void) stopPublishing {
+   [self.session stopLive];
 }
 
 @end

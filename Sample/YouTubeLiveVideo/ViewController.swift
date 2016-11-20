@@ -31,10 +31,14 @@ class ViewController: UIViewController {
       configurator.configure(self)
 
       setUpRefreshControl()
-      
-      loadData()
    }
 
+   override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+      
+      loadData()      
+   }
+   
    override func didReceiveMemoryWarning() {
       super.didReceiveMemoryWarning()
       // Dispose of any resources that can be recreated.
@@ -43,29 +47,17 @@ class ViewController: UIViewController {
    @IBAction func createBroadcastButtonTapped(_ sender: AnyObject) {
       let title = "Live video"
       let description = "Test broadcast video"
-      let startDate = self.dateAfter(Date(), after: (hour: 0, minute: 2, second: 0))
+      let startDate = Helpers.dateAfter(Date(), after: (hour: 0, minute: 2, second: 0))
       
       Alert.sharedInstance.showConfirmCancel("YouTube Live Streaming API", message: "You realy want to create a new Live broadcast video?", onConfirm: {
          self.input.createBroadcast(title, description: description, startTime: startDate, completed: { success in
             if success {
-               Alert.sharedInstance.showOk("Done", message: "Please, refresh the table after pair seconds")
+               Alert.sharedInstance.showOk("Done", message: "Please, refresh the table after pair seconds (pull down)")
             } else {
                Alert.sharedInstance.showOk("Sorry", message: "Something went wrong")
             }
          })
       })
-   }
-
-   private func dateAfter(_ date: Date, after: (hour: NSInteger, minute: NSInteger, second: NSInteger)) -> Date {
-      let calendar = Calendar.current
-      if let date = (calendar as NSCalendar).date(byAdding: .hour, value: after.hour, to: date, options: []) {
-         if let date = (calendar as NSCalendar).date(byAdding: .minute, value: after.minute, to: date, options: []) {
-            if let date = (calendar as NSCalendar).date(byAdding: .second, value: after.second, to: date, options: []) {
-               return date
-            }
-         }
-      }
-      return date
    }
    
 }
@@ -75,17 +67,17 @@ extension ViewController {
    fileprivate func loadData() {
       completedThreadsCount = 0
       input.getUpcomingBroadcasts(){ streams in
-         self.applyStreams("upcoming", streams: streams)
+         self.addStreams("upcoming", streams: streams)
       }
       input.getActiveBroadcasts(){ streams in
-         self.applyStreams("current", streams: streams)
+         self.addStreams("current", streams: streams)
       }
       input.getCompletedBroadcasts(){ streams in
-         self.applyStreams("past", streams: streams)
+         self.addStreams("past", streams: streams)
       }
    }
    
-   fileprivate func applyStreams(_ type: String, streams: [LiveBroadcastStreamModel]?) {
+   fileprivate func addStreams(_ type: String, streams: [LiveBroadcastStreamModel]?) {
       completedThreadsCount += 1
       if let broadcasts = streams {
          if type == "upcoming" {
@@ -109,7 +101,6 @@ extension ViewController {
    
    fileprivate func setUpRefreshControl() {
       self.refreshControl = UIRefreshControl()
-      self.refreshControl.attributedTitle = NSAttributedString(string: "Pull down and release for updating table data source", attributes: [NSForegroundColorAttributeName: UIColor.red])
       self.refreshControl.tintColor = UIColor.red
       self.refreshControl.addTarget(self, action: #selector(ViewController.refreshData(_:)), for: UIControlEvents.valueChanged)
       self.tableView.addSubview(refreshControl)
@@ -194,23 +185,17 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
       switch indexPath.section {
       case 0:
          broadcast = self.upcoming[indexPath.row]
-         self.input.startBroadcast(broadcast, completed: {liveStream, liveBroadcast in
-            if let liveStream = liveStream, let liveBroadcast = liveBroadcast {
-               self.presenter.showVideoStreamViewController(liveStream, liveBroadcast: liveBroadcast, completed: {
-                  self.presenter.startPublishing(broadcast: liveBroadcast, completed: { (_) in
-                     self.loadData()
-                  })
-               })
-            } else {
+         self.presenter.startBroadcast(broadcast, completed: { success in
+            if success == false {
                Alert.sharedInstance.showOk("Failed attempt", message: "Can't create broadcast")
             }
          })
       case 1:
          broadcast = self.current[indexPath.row]
-         YoutubeWorker.sharedInstance.playYoutubeID(broadcast.id, viewController: self)
+         YouTubePlayer.playYoutubeID(broadcast.id, viewController: self)
       case 2:
          broadcast = self.past[indexPath.row]
-         YoutubeWorker.sharedInstance.playYoutubeID(broadcast.id, viewController: self)
+         YouTubePlayer.playYoutubeID(broadcast.id, viewController: self)
       default:
          assert(false, "Incorrect number of sections")
       }

@@ -19,8 +19,8 @@ class Configurator: NSObject {
       viewController.input = worker
       viewController.presenter = presenter
       
-      presenter.viewController = viewController
-      presenter.liveStreaming = worker
+      presenter.parentViewController = viewController
+      presenter.youTubeWorker = worker
    }
 }
 

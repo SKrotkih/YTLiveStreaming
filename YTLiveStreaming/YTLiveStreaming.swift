@@ -9,8 +9,10 @@
 import UIKit
 
 public class YTLiveStreaming: NSObject {
-   
+
 }
+
+// MARK: Public methods interface
 
 extension YTLiveStreaming {
    
@@ -53,8 +55,8 @@ extension YTLiveStreaming {
    public func createBroadcast(_ title: String, description: String, startTime: Date, completed: @escaping (Bool) -> Void) {
       
       // Create Live broadcast
-      let liveStreamDescription = "This stream was created by the YouTubeLiveVideo iOS application"
-      let liveStreamName = "Test"
+      let liveStreamDescription = "This stream was created by the YTLiveStreaming iOS framework"
+      let liveStreamName = "YTLiveStreaming"
       
       YTLiveRequest.createLiveBroadcast(title, startDateTime: startTime, completed: { liveBroadcastModel in
          if let liveBroadcast = liveBroadcastModel {
@@ -63,26 +65,26 @@ extension YTLiveStreaming {
                if let liveStream = liveStream {
                   // Bind live stream
                   YTLiveRequest.bindLiveBroadcast(broadcastId: liveBroadcast.id, liveStreamId: liveStream.id, completed: { liveBroadcast in
-                     if let _ = liveBroadcast {
+                     if let liveBroadcast = liveBroadcast {
                         completed(true)
                      } else {
                         completed(false)
                      }
                   })
                } else {
-                  print("Something went wrong")
+                  print("Something went wrong with creating a live stream")
                   completed(false)
                }
             }
          } else {
-            print("Something went wrong")
+            print("Something went wrong with creating a broadcast")
             completed(false)
          }
       })
       
    }
    
-   public func startBroadcast(_ broadcast: LiveBroadcastStreamModel, completed: @escaping (LiveStreamModel?, LiveBroadcastStreamModel?) -> Void) {
+   public func startBroadcast(_ broadcast: LiveBroadcastStreamModel, delegate: YTLiveStreamingDelegate, completed: @escaping (String?, String?, Date?) -> Void) {
       let broadcastId = broadcast.id
       let liveStreamId = broadcast.contentDetails.boundStreamId
       if broadcastId.characters.count > 0 &&  liveStreamId.characters.count > 0 {
@@ -90,21 +92,36 @@ extension YTLiveStreaming {
             if let liveBroadcast = liveBroadcast {
                YTLiveRequest.getLiveStream(liveStreamId, completed: { liveStream in
                   if let liveStream = liveStream {
-                     completed(liveStream, liveBroadcast)
+                     
+                     let streamName = liveStream.cdn.ingestionInfo.streamName
+                     let streamUrl = liveStream.cdn.ingestionInfo.ingestionAddress
+                     let scheduledStartTime = liveBroadcast.snipped.scheduledStartTime
+                     
+                     let sreamId = liveStream.id
+                     let monitorStream = liveBroadcast.contentDetails.monitorStream.embedHtml
+                     let streamTitle = liveStream.snipped.title
+                     
+                     print("\n-BroadcastId=\(liveBroadcast.id);\n-Live stream id=\(sreamId); \n-title=\(streamTitle); \n-start=\(scheduledStartTime); \n-STREAM_URL=\(streamUrl)/STREAM_NAME=\(streamName): created!\n-MONITOR_STREAM=\(monitorStream)\n")
+                     
+                     LiveLauncher.sharedInstance.youTubeWorker = self
+                     LiveLauncher.sharedInstance.delegate = delegate
+                     LiveLauncher.sharedInstance.launchBroadcast(broadcast: broadcast, stream: liveStream)
+                     completed(streamName, streamUrl, scheduledStartTime)
                   }
                })
             } else {
                print("Something went wrong. Please xheck broadcast.youtubeId. It has to contain broadcast Id and live stream Id")
-               completed(nil, nil)
+               completed(nil, nil, nil)
             }
          }
       } else {
          print("Something went wrong. Please xheck broadcast.youtubeId. It has to contain broadcast Id and live stream Id")
-         completed(nil, nil)
+         completed(nil, nil, nil)
       }
    }
    
    public func completeBroadcast(_ broadcast: LiveBroadcastStreamModel, completed: @escaping (Bool) -> Void) {
+      LiveLauncher.sharedInstance.stopBroadcast()
       // complete – The broadcast is over. YouTube stops transmitting video.
       YTLiveRequest.transitionLiveBroadcast(broadcast.id, broadcastStatus: "complete", completed: { liveBroadcast in
          if let _ = liveBroadcast {
@@ -177,9 +194,27 @@ extension YTLiveStreaming {
          }
       })
    }
+
+   public func transitionBroadcastToLiveState(liveBroadcast: LiveBroadcastStreamModel, liveState: @escaping (Bool) -> Void) {
+      self.transitionBroadcast(liveBroadcast, toStatus: "live", completed: { success in
+         if success {
+            print("Transition to the LIVE status was made successfully")
+            liveState(true)
+         } else {
+            print("Failed transition to the LIVE status!")
+            liveState(false)
+            self.transitionBroadcast(liveBroadcast, toStatus: "testing", completed: { success in
+               if success {
+                  print("We in the testing status!")
+               }
+            })
+         }
+      })
+   }
+   
 }
 
-// MARK: Utils
+// MARK: Private methods
 
 extension YTLiveStreaming {
    

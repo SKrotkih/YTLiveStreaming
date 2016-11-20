@@ -24,6 +24,7 @@ class Credentials: NSObject {
             }
          }
       }
+      assert(Credentials._APIkey != nil, "Please put your Client ID to the Info.plist!")
       return Credentials._clientID!
    }
    
@@ -39,8 +40,7 @@ class Credentials: NSObject {
             }
          }
       }
+      assert(Credentials._APIkey != nil, "Please put your APY key to the Info.plist!")
       return Credentials._APIkey!
    }
-   
-   
 }

@@ -24,7 +24,7 @@ class Credentials: NSObject {
             }
          }
       }
-      assert(Credentials._APIkey != nil, "Please put your Client ID to the Info.plist!")
+      assert(Credentials._clientID != nil, "Please put your Client ID to the Info.plist!")
       return Credentials._clientID!
    }
    

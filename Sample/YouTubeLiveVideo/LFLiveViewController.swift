@@ -53,12 +53,12 @@ class LFLiveViewController: UIViewController {
    @IBAction func onClickPublish(_ sender: Any) {
       if startLiveButton.isSelected {
          startLiveButton.isSelected = false
-         startLiveButton.setTitle("Start Live", for: .normal)
+         startLiveButton.setTitle("Start live broadcast", for: .normal)
          lfView.stopPublishing()
          output?.finishPublishing()
       } else  {
          startLiveButton.isSelected = true
-         startLiveButton.setTitle("End the broadcast", for: .normal)
+         startLiveButton.setTitle("Finish live broadcast", for: .normal)
          output?.startPublishing(){ streamURL, streamName in
             if let streamURL = streamURL, let streamName = streamName {
                let streamUrl = "\(streamURL)/\(streamName)"

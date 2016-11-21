@@ -52,10 +52,10 @@ extension YTLiveStreaming {
       completed(sortedItems)
    }
    
-   public func createBroadcast(_ title: String, description: String, startTime: Date, completed: @escaping (Bool) -> Void) {
+   public func createBroadcast(_ title: String, description: String?, startTime: Date, completed: @escaping (LiveBroadcastStreamModel?) -> Void) {
       
       // Create Live broadcast
-      let liveStreamDescription = "This stream was created by the YTLiveStreaming iOS framework"
+      let liveStreamDescription = description == nil ? "This stream was created by the YTLiveStreaming iOS framework" : description!
       let liveStreamName = "YTLiveStreaming"
       
       YTLiveRequest.createLiveBroadcast(title, startDateTime: startTime, completed: { liveBroadcastModel in
@@ -66,19 +66,19 @@ extension YTLiveStreaming {
                   // Bind live stream
                   YTLiveRequest.bindLiveBroadcast(broadcastId: liveBroadcast.id, liveStreamId: liveStream.id, completed: { liveBroadcast in
                      if let liveBroadcast = liveBroadcast {
-                        completed(true)
+                        completed(liveBroadcast)
                      } else {
-                        completed(false)
+                        completed(nil)
                      }
                   })
                } else {
                   print("Something went wrong with creating a live stream")
-                  completed(false)
+                  completed(nil)
                }
             }
          } else {
             print("Something went wrong with creating a broadcast")
-            completed(false)
+            completed(nil)
          }
       })
       

@@ -50,8 +50,8 @@ class ViewController: UIViewController {
       let startDate = Helpers.dateAfter(Date(), after: (hour: 0, minute: 2, second: 0))
       
       Alert.sharedInstance.showConfirmCancel("YouTube Live Streaming API", message: "You realy want to create a new Live broadcast video?", onConfirm: {
-         self.input.createBroadcast(title, description: description, startTime: startDate, completed: { success in
-            if success {
+         self.input.createBroadcast(title, description: description, startTime: startDate, completed: { broadcast in
+            if broadcast != nil {
                Alert.sharedInstance.showOk("Done", message: "Please, refresh the table after pair seconds (pull down)")
             } else {
                Alert.sharedInstance.showOk("Sorry", message: "Something went wrong")

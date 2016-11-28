@@ -212,6 +212,10 @@ extension YTLiveStreaming {
       })
    }
    
+   public func isYouTubeAvailable(completed: (Bool) -> Void) {
+      GoogleOAuth2.sharedInstance.isAccessTokenPresented(completed: completed)
+   }
+   
 }
 
 // MARK: Private methods

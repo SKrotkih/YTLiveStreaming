@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import AlamofireOauth2
+import KeychainAccess
 
 // Developer console
 // https://console.developers.google.com/apis
@@ -20,12 +21,19 @@ import AlamofireOauth2
 class GoogleOAuth2: NSObject {
 
    var _googleOauth2Settings: Oauth2Settings?
+   let keychain:  Keychain
+   let kOAuth2AccessTokenService: String = "OAuth2AccessToken"
    
    class var sharedInstance: GoogleOAuth2 {
       struct Singleton {
          static let instance = GoogleOAuth2()
       }
       return Singleton.instance
+   }
+   
+   override init() {
+      self.keychain = Keychain(service: Auth.BaseURL)
+      super.init()
    }
    
    private var googleOauth2Settings: Oauth2Settings {
@@ -52,6 +60,14 @@ class GoogleOAuth2: NSObject {
    
    func clearToken() {
       Oauth2ClearTokensFromKeychain(googleOauth2Settings)
+   }
+   
+   func isAccessTokenPresented(completed: (Bool) -> Void) {
+      if let optional = keychain[kOAuth2AccessTokenService] {
+         completed(true)
+      } else {
+         completed(false)
+      }
    }
    
 }

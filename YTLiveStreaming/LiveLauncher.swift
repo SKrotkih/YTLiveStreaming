@@ -14,14 +14,29 @@ import Foundation
 
 class LiveLauncher: NSObject {
 
-   let AskStatusStreamFrequencyInSeconds = 5.0
+   let AskStatusStreamFrequencyInSeconds = 3.0
    fileprivate var liveBroadcast: LiveBroadcastStreamModel?
    fileprivate var liveStream: LiveStreamModel?
+   fileprivate var _isLiveStreaming: Bool = false
    
    var delegate: YTLiveStreamingDelegate?
    var youTubeWorker: YTLiveStreaming?
    
    fileprivate var timer: Timer?
+   
+   var isLiveStreaming: Bool {
+      set {
+         if newValue != _isLiveStreaming {
+            _isLiveStreaming = newValue
+            if _isLiveStreaming {
+               self.delegate?.didTransitionToLiveStatus?()
+            }
+         }
+      }
+      get {
+         return _isLiveStreaming
+      }
+   }
    
    private override init() {
       
@@ -35,9 +50,10 @@ class LiveLauncher: NSObject {
    }
 
    func launchBroadcast(broadcast: LiveBroadcastStreamModel?, stream: LiveStreamModel?) {
-      self.liveBroadcast = broadcast
-      self.liveStream = stream
-      self.startTimerForChekingStatusStream()
+      liveBroadcast = broadcast
+      liveStream = stream
+      isLiveStreaming = false
+      startTimerForChekingStatusStream()
    }
 
    func stopBroadcast() {
@@ -55,40 +71,40 @@ class LiveLauncher: NSObject {
    func liveVideoStatusRequestTickTimer() {
       statusRequest() { liveStatus in
          if liveStatus {
-            self.delegate?.didTransitionToLiveStatus?()
+            self.isLiveStreaming = true
          } else {
             self.transitionToLive() { success in
                if success {
-                  self.delegate?.didTransitionToLiveStatus?()
+                  self.isLiveStreaming = true
                }
             }
          }
       }
    }
    
-   fileprivate func statusRequest(completed: @escaping (Bool) -> Void) {
+   fileprivate func statusRequest(completion: @escaping (Bool) -> Void) {
       guard let liveBroadcast = self.liveBroadcast else {
          return
       }
       guard let liveStream = self.liveStream else {
          return
       }
-      self.youTubeWorker?.getStatusBroadcast(liveBroadcast, stream: liveStream, completed: { (broadcastStatus, streamStatus, healthStatus) in
+      self.youTubeWorker?.getStatusBroadcast(liveBroadcast, stream: liveStream, completion: { (broadcastStatus, streamStatus, healthStatus) in
          if let broadcastStatus = broadcastStatus, let streamStatus = streamStatus, let healthStatus = healthStatus {
             if broadcastStatus == "live" || broadcastStatus == "liveStarting" {
-               completed(true)
+               completion(true)
             } else {
                self.delegate?.didTransitionToStatus?(broadcastStatus: broadcastStatus, streamStatus: streamStatus, healthStatus: healthStatus)
-               completed(false)
+               completion(false)
             }
          }
       })
    }
    
-   fileprivate func transitionToLive(completed: @escaping (Bool) -> Void) {
+   fileprivate func transitionToLive(completion: @escaping (Bool) -> Void) {
       guard let liveBroadcast = self.liveBroadcast else {
          return
       }
-      self.youTubeWorker?.transitionBroadcastToLiveState(liveBroadcast: liveBroadcast, liveState: completed)
+      self.youTubeWorker?.transitionBroadcastToLiveState(liveBroadcast: liveBroadcast, liveState: completion)
    }
 }

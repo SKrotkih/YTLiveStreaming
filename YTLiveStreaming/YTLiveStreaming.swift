@@ -16,81 +16,81 @@ public class YTLiveStreaming: NSObject {
 
 extension YTLiveStreaming {
    
-   public func getActiveBroadcasts(_ completed: @escaping ([LiveBroadcastStreamModel]?) -> Void) {
-      YTLiveRequest.listBroadcasts("active", completed: { broadcasts in
+   public func getActiveBroadcasts(_ completion: @escaping ([LiveBroadcastStreamModel]?) -> Void) {
+      YTLiveRequest.listBroadcasts("active", completion: { broadcasts in
          if let broadcasts = broadcasts {
-            self.fillList(broadcasts, completed: completed)
+            self.fillList(broadcasts, completion: completion)
          } else {
-            completed(nil)
+            completion(nil)
          }
       })
    }
    
-   public func getCompletedBroadcasts(_ completed: @escaping ([LiveBroadcastStreamModel]?) -> Void) {
-      YTLiveRequest.listBroadcasts("completed", completed: { broadcasts in
+   public func getCompletedBroadcasts(_ completion: @escaping ([LiveBroadcastStreamModel]?) -> Void) {
+      YTLiveRequest.listBroadcasts("completed", completion: { broadcasts in
          if let broadcasts = broadcasts {
-            self.fillList(broadcasts, completed: completed)
+            self.fillList(broadcasts, completion: completion)
          } else {
-            completed(nil)
+            completion(nil)
          }
       })
    }
    
-   public func getUpcomingBroadcasts(_ completed: @escaping ([LiveBroadcastStreamModel]?) -> Void) {
-      YTLiveRequest.listBroadcasts("upcoming", completed: { broadcasts in
+   public func getUpcomingBroadcasts(_ completion: @escaping ([LiveBroadcastStreamModel]?) -> Void) {
+      YTLiveRequest.listBroadcasts("upcoming", completion: { broadcasts in
          if let broadcasts = broadcasts {
-            self.fillList(broadcasts, completed: completed)
+            self.fillList(broadcasts, completion: completion)
          } else {
-            completed(nil)
+            completion(nil)
          }
       })
    }
    
-   fileprivate func fillList(_ broadcasts: LiveBroadcastListModel, completed: ([LiveBroadcastStreamModel]?) -> Void) {
+   fileprivate func fillList(_ broadcasts: LiveBroadcastListModel, completion: ([LiveBroadcastStreamModel]?) -> Void) {
       let items = broadcasts.items
       let sortedItems = items.sorted(by: { convertJSONtoDate(json: $0.snipped.publishedAt).compare(convertJSONtoDate(json: $1.snipped.publishedAt)) == ComparisonResult.orderedDescending })
-      completed(sortedItems)
+      completion(sortedItems)
    }
    
-   public func createBroadcast(_ title: String, description: String?, startTime: Date, completed: @escaping (LiveBroadcastStreamModel?) -> Void) {
+   public func createBroadcast(_ title: String, description: String?, startTime: Date, completion: @escaping (LiveBroadcastStreamModel?) -> Void) {
       
       // Create Live broadcast
       let liveStreamDescription = description == nil ? "This stream was created by the YTLiveStreaming iOS framework" : description!
       let liveStreamName = "YTLiveStreaming"
       
-      YTLiveRequest.createLiveBroadcast(title, startDateTime: startTime, completed: { liveBroadcastModel in
+      YTLiveRequest.createLiveBroadcast(title, startDateTime: startTime, completion: { liveBroadcastModel in
          if let liveBroadcast = liveBroadcastModel {
             // Create Live stream
             YTLiveRequest.createLiveStream(title, description: liveStreamDescription, streamName: liveStreamName) { liveStream in
                if let liveStream = liveStream {
                   // Bind live stream
-                  YTLiveRequest.bindLiveBroadcast(broadcastId: liveBroadcast.id, liveStreamId: liveStream.id, completed: { liveBroadcast in
+                  YTLiveRequest.bindLiveBroadcast(broadcastId: liveBroadcast.id, liveStreamId: liveStream.id, completion: { liveBroadcast in
                      if let liveBroadcast = liveBroadcast {
-                        completed(liveBroadcast)
+                        completion(liveBroadcast)
                      } else {
-                        completed(nil)
+                        completion(nil)
                      }
                   })
                } else {
                   print("Something went wrong with creating a live stream")
-                  completed(nil)
+                  completion(nil)
                }
             }
          } else {
             print("Something went wrong with creating a broadcast")
-            completed(nil)
+            completion(nil)
          }
       })
       
    }
    
-   public func startBroadcast(_ broadcast: LiveBroadcastStreamModel, delegate: YTLiveStreamingDelegate, completed: @escaping (String?, String?, Date?) -> Void) {
+   public func startBroadcast(_ broadcast: LiveBroadcastStreamModel, delegate: YTLiveStreamingDelegate, completion: @escaping (String?, String?, Date?) -> Void) {
       let broadcastId = broadcast.id
       let liveStreamId = broadcast.contentDetails.boundStreamId
       if broadcastId.characters.count > 0 &&  liveStreamId.characters.count > 0 {
          YTLiveRequest.getLiveBroadcast(broadcastId: broadcastId) { liveBroadcast in
             if let liveBroadcast = liveBroadcast {
-               YTLiveRequest.getLiveStream(liveStreamId, completed: { liveStream in
+               YTLiveRequest.getLiveStream(liveStreamId, completion: { liveStream in
                   if let liveStream = liveStream {
                      
                      let streamName = liveStream.cdn.ingestionInfo.streamName
@@ -106,53 +106,53 @@ extension YTLiveStreaming {
                      LiveLauncher.sharedInstance.youTubeWorker = self
                      LiveLauncher.sharedInstance.delegate = delegate
                      LiveLauncher.sharedInstance.launchBroadcast(broadcast: broadcast, stream: liveStream)
-                     completed(streamName, streamUrl, scheduledStartTime)
+                     completion(streamName, streamUrl, scheduledStartTime)
                   }
                })
             } else {
                print("Something went wrong. Please xheck broadcast.youtubeId. It has to contain broadcast Id and live stream Id")
-               completed(nil, nil, nil)
+               completion(nil, nil, nil)
             }
          }
       } else {
          print("Something went wrong. Please xheck broadcast.youtubeId. It has to contain broadcast Id and live stream Id")
-         completed(nil, nil, nil)
+         completion(nil, nil, nil)
       }
    }
    
-   public func completeBroadcast(_ broadcast: LiveBroadcastStreamModel, completed: @escaping (Bool) -> Void) {
+   public func completeBroadcast(_ broadcast: LiveBroadcastStreamModel, completion: @escaping (Bool) -> Void) {
       LiveLauncher.sharedInstance.stopBroadcast()
       // complete – The broadcast is over. YouTube stops transmitting video.
-      YTLiveRequest.transitionLiveBroadcast(broadcast.id, broadcastStatus: "complete", completed: { liveBroadcast in
+      YTLiveRequest.transitionLiveBroadcast(broadcast.id, broadcastStatus: "complete", completion: { liveBroadcast in
          if let _ = liveBroadcast {
-            completed(true)
+            completion(true)
          } else {
-            completed(false)
+            completion(false)
          }
       })
       
    }
 
-   public func deleteBroadcast(id: String, completed: @escaping (Bool) -> Void) {
-      YTLiveRequest.deleteLiveBroadcast(broadcastId: id, completed: completed)
+   public func deleteBroadcast(id: String, completion: @escaping (Bool) -> Void) {
+      YTLiveRequest.deleteLiveBroadcast(broadcastId: id, completion: completion)
    }
 
-   public func transitionBroadcast(_ broadcast: LiveBroadcastStreamModel, toStatus: String, completed: @escaping (Bool) -> Void) {
+   public func transitionBroadcast(_ broadcast: LiveBroadcastStreamModel, toStatus: String, completion: @escaping (Bool) -> Void) {
          // complete – The broadcast is over. YouTube stops transmitting video.
          // live – The broadcast is visible to its audience. YouTube transmits video to the broadcast's monitor stream and its broadcast stream.
          // testing – Start testing the broadcast. YouTube transmits video to the broadcast's monitor stream.
-         YTLiveRequest.transitionLiveBroadcast(broadcast.id, broadcastStatus: toStatus, completed: { liveBroadcast in
+         YTLiveRequest.transitionLiveBroadcast(broadcast.id, broadcastStatus: toStatus, completion: { liveBroadcast in
             if let _ = liveBroadcast {
-               completed(true)
+               completion(true)
                print("Our broadcast in the \(toStatus) status!")
             } else {
-               completed(false)
+               completion(false)
             }
          })
    }
    
-   public func getStatusBroadcast(_ broadcast: LiveBroadcastStreamModel, stream: LiveStreamModel, completed: @escaping (String?, String?, String?) -> Void) {
-      YTLiveRequest.getLiveBroadcast(broadcastId: broadcast.id, completed: { broadcast in
+   public func getStatusBroadcast(_ broadcast: LiveBroadcastStreamModel, stream: LiveStreamModel, completion: @escaping (String?, String?, String?) -> Void) {
+      YTLiveRequest.getLiveBroadcast(broadcastId: broadcast.id, completion: { broadcast in
          if let broadcast = broadcast {
             let broadcastStatus = broadcast.status.lifeCycleStatus
             
@@ -168,7 +168,7 @@ extension YTLiveStreaming {
             //            testStarting – The broadcast is in the process of transitioning to testing status.
             //            testing – The broadcast is only visible to the partner.
             
-            YTLiveRequest.getLiveStream(stream.id, completed: { liveStream in
+            YTLiveRequest.getLiveStream(stream.id, completion: { liveStream in
                if let liveStream = liveStream {
                   //            Valid values for this property are:
                   //            active – The stream is in active state which means the user is receiving data via the stream.
@@ -184,26 +184,26 @@ extension YTLiveStreaming {
                   //            bad – The stream has some issues for which the severity is error.
                   //            noData – YouTube's live streaming backend servers do not have any information about the stream's health status.
                   let healthStatus = liveStream.status.healthStatus.status
-                  completed(broadcastStatus, streamStatus, healthStatus)
+                  completion(broadcastStatus, streamStatus, healthStatus)
                } else {
-                  completed(nil, nil, nil)
+                  completion(nil, nil, nil)
                }
             })
          } else {
-            completed(nil, nil, nil)
+            completion(nil, nil, nil)
          }
       })
    }
 
    public func transitionBroadcastToLiveState(liveBroadcast: LiveBroadcastStreamModel, liveState: @escaping (Bool) -> Void) {
-      self.transitionBroadcast(liveBroadcast, toStatus: "live", completed: { success in
+      self.transitionBroadcast(liveBroadcast, toStatus: "live", completion: { success in
          if success {
             print("Transition to the LIVE status was made successfully")
             liveState(true)
          } else {
             print("Failed transition to the LIVE status!")
             liveState(false)
-            self.transitionBroadcast(liveBroadcast, toStatus: "testing", completed: { success in
+            self.transitionBroadcast(liveBroadcast, toStatus: "testing", completion: { success in
                if success {
                   print("We in the testing status!")
                }
@@ -212,8 +212,8 @@ extension YTLiveStreaming {
       })
    }
    
-   public func isYouTubeAvailable(completed: (Bool) -> Void) {
-      GoogleOAuth2.sharedInstance.isAccessTokenPresented(completed: completed)
+   public func isYouTubeAvailable(completion: (Bool) -> Void) {
+      GoogleOAuth2.sharedInstance.isAccessTokenPresented(completion: completion)
    }
    
 }
@@ -222,29 +222,29 @@ extension YTLiveStreaming {
 
 extension YTLiveStreaming {
    
-   fileprivate func deleteAllBroadcasts(_ completed: @escaping (Bool) -> Void) {
-      YTLiveRequest.listBroadcasts("all", completed: { broadcastList in
+   fileprivate func deleteAllBroadcasts(_ completion: @escaping (Bool) -> Void) {
+      YTLiveRequest.listBroadcasts("all", completion: { broadcastList in
          if let broadcastList = broadcastList {
             let items = broadcastList.items
-            self.deleteBroadcast(items, index: 0, completed: completed)
+            self.deleteBroadcast(items, index: 0, completion: completion)
          } else {
-            completed(false)
+            completion(false)
          }
       })
    }
    
-   fileprivate func deleteBroadcast(_ items: [LiveBroadcastStreamModel], index: Int, completed: @escaping (Bool) -> Void) {
+   fileprivate func deleteBroadcast(_ items: [LiveBroadcastStreamModel], index: Int, completion: @escaping (Bool) -> Void) {
       if index < items.count {
          let item = items[index]
          let broadcastId = item.id
-         self.deleteBroadcast(id: broadcastId, completed: { success in
+         self.deleteBroadcast(id: broadcastId, completion: { success in
             if success {
                print("Broadcast \"\(broadcastId)\" deleted!")
             }
-            self.deleteBroadcast(items, index: index + 1, completed: completed)
+            self.deleteBroadcast(items, index: index + 1, completion: completion)
          })
       } else {
-         completed(true)
+         completion(true)
       }
    }
 }
@@ -258,7 +258,7 @@ extension YTLiveStreaming {
       let title = "Live Stream"
       let format = "1080p"    // 1080p 1440p 240p 360p 480p 720p
       let ingestionType = "rtmp" // dash rtmp
-      YTLiveRequest.updateLiveStream(liveStreamId, title: title, format: format, ingestionType: ingestionType, completed: { success in
+      YTLiveRequest.updateLiveStream(liveStreamId, title: title, format: format, ingestionType: ingestionType, completion: { success in
          
          if success {
             print("All right")

@@ -49,12 +49,12 @@ class GoogleOAuth2: NSObject {
       return _googleOauth2Settings!
    }
 
-   func requestToken(_ completed: @escaping (String?) -> Void) {
+   func requestToken(_ completion: @escaping (String?) -> Void) {
       UsingOauth2(googleOauth2Settings, performWithToken: { token in
-         completed(token)
+         completion(token)
       }, errorHandler: {
          print("Oauth2 failed")
-         completed(nil)
+         completion(nil)
       })
    }
    
@@ -62,11 +62,11 @@ class GoogleOAuth2: NSObject {
       Oauth2ClearTokensFromKeychain(googleOauth2Settings)
    }
    
-   func isAccessTokenPresented(completed: (Bool) -> Void) {
+   func isAccessTokenPresented(completion: (Bool) -> Void) {
       if let optional = keychain[kOAuth2AccessTokenService] {
-         completed(true)
+         completion(true)
       } else {
-         completed(false)
+         completion(false)
       }
    }
    

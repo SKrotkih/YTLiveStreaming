@@ -8,6 +8,13 @@
 
 import UIKit
 
+public enum YTLiveVideoState: String {
+   case upcoming = "upcoming"
+   case active = "active"
+   case completed = "completed"
+   case all = "all"
+}
+
 public class YTLiveStreaming: NSObject {
 
 }
@@ -17,7 +24,7 @@ public class YTLiveStreaming: NSObject {
 extension YTLiveStreaming {
    
    public func getActiveBroadcasts(_ completion: @escaping ([LiveBroadcastStreamModel]?) -> Void) {
-      YTLiveRequest.listBroadcasts("active", completion: { broadcasts in
+      YTLiveRequest.listBroadcasts(.active, completion: { broadcasts in
          if let broadcasts = broadcasts {
             self.fillList(broadcasts, completion: completion)
          } else {
@@ -27,7 +34,7 @@ extension YTLiveStreaming {
    }
    
    public func getCompletedBroadcasts(_ completion: @escaping ([LiveBroadcastStreamModel]?) -> Void) {
-      YTLiveRequest.listBroadcasts("completed", completion: { broadcasts in
+      YTLiveRequest.listBroadcasts(.completed, completion: { broadcasts in
          if let broadcasts = broadcasts {
             self.fillList(broadcasts, completion: completion)
          } else {
@@ -37,7 +44,7 @@ extension YTLiveStreaming {
    }
    
    public func getUpcomingBroadcasts(_ completion: @escaping ([LiveBroadcastStreamModel]?) -> Void) {
-      YTLiveRequest.listBroadcasts("upcoming", completion: { broadcasts in
+      YTLiveRequest.listBroadcasts(.upcoming, completion: { broadcasts in
          if let broadcasts = broadcasts {
             self.fillList(broadcasts, completion: completion)
          } else {
@@ -215,7 +222,6 @@ extension YTLiveStreaming {
    public func isYouTubeAvailable(completion: (Bool) -> Void) {
       GoogleOAuth2.sharedInstance.isAccessTokenPresented(completion: completion)
    }
-   
 }
 
 // MARK: Private methods
@@ -223,7 +229,7 @@ extension YTLiveStreaming {
 extension YTLiveStreaming {
    
    fileprivate func deleteAllBroadcasts(_ completion: @escaping (Bool) -> Void) {
-      YTLiveRequest.listBroadcasts("all", completion: { broadcastList in
+      YTLiveRequest.listBroadcasts(.all, completion: { broadcastList in
          if let broadcastList = broadcastList {
             let items = broadcastList.items
             self.deleteBroadcast(items, index: 0, completion: completion)
@@ -266,6 +272,18 @@ extension YTLiveStreaming {
             print("Something went wrong")
          }
          
+      })
+   }
+   
+}
+
+// MARK: - GooglePlus API
+
+extension YTLiveStreaming {
+   
+   public func aboutMeInfo(completion: @escaping (GooglePlusAboutMeModel?) -> Void) {
+      GooglePlusRequest.aboutMeInfo(completion: { aboutMeInfo in
+         completion(aboutMeInfo)
       })
    }
    

@@ -35,10 +35,10 @@ extension YTLiveRequest {
    // completed – Return broadcasts that have already ended.
    // upcoming – Return broadcasts that have not yet started.
    
-   class func listBroadcasts(_ status: String, completion: @escaping (LiveBroadcastListModel?) -> Void) {
+   class func listBroadcasts(_ status: YTLiveVideoState, completion: @escaping (LiveBroadcastListModel?) -> Void) {
       let parameters: [String: AnyObject] = [
          "part": "id,snippet,contentDetails,status" as AnyObject,
-         "broadcastStatus": status as AnyObject,
+         "broadcastStatus": status.rawValue as AnyObject,
          "maxResults": 50 as AnyObject,
          "key": Credentials.APIkey as AnyObject
       ]

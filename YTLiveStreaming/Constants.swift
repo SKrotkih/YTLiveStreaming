@@ -14,7 +14,7 @@ struct Auth {
    static let AuthorizeURL = "https://accounts.google.com/o/oauth2/auth"
    static let TokenURL = "https://www.googleapis.com/oauth2/v3/token"
    static let RedirectURL = "http://localhost"
-   static let Scope = "https://www.googleapis.com/auth/youtube"
+   static let Scope = "https://www.googleapis.com/auth/youtube%20https://www.googleapis.com/auth/plus.profile.emails.read"
 }
 
 struct LiveAPI {

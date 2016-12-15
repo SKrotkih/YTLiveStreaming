@@ -90,6 +90,10 @@ extension YTLiveStreaming {
       })
       
    }
+
+   public func updateBroadcast(_ broadcast: LiveBroadcastStreamModel, completion: @escaping (Bool) -> Void) {
+      YTLiveRequest.updateLiveBroadcast(broadcast, completion: completion)
+   }
    
    public func startBroadcast(_ broadcast: LiveBroadcastStreamModel, delegate: YTLiveStreamingDelegate, completion: @escaping (String?, String?, Date?) -> Void) {
       let broadcastId = broadcast.id

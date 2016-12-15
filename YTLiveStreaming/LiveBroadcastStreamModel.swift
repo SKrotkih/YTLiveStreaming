@@ -67,11 +67,11 @@ public struct LiveBroadcastStreamModel {
    public struct Snipped {
       public let publishedAt: String
       public let channelId: String
-      public let title: String
+      public var title: String
       public let description: String
       public let isDefaultBroadcast: Bool
       public let liveChatId: String
-      public let scheduledStartTime: Date
+      public var scheduledStartTime: Date
       public let thumbnails: Thumbnails
    }
 
@@ -116,9 +116,10 @@ public struct LiveBroadcastStreamModel {
    public let kind: String
    public let etag: String
    public let id: String
-   public let snipped: Snipped
+   public var snipped: Snipped
    public let contentDetails: ContentDetails
    public let status: Status
+   public var share: Bool
 }
 
 // MARK: - Decodable
@@ -136,7 +137,8 @@ extension LiveBroadcastStreamModel: Decodable {
       id: json["id"].stringValue,
       snipped: snipped,
       contentDetails: contentDetails,
-      status: status
+      status: status,
+      share: false
       )
       return model
    }

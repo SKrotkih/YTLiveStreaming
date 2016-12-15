@@ -154,6 +154,60 @@ extension YTLiveRequest {
          }
       }
    }
+
+   // Updates a broadcast. For example, you could modify the broadcast settings defined in the liveBroadcast resource's contentDetails object.
+   // https://developers.google.com/youtube/v3/live/docs/liveBroadcasts/update
+   // PUT https://www.googleapis.com/youtube/v3/liveBroadcasts
+   class func updateLiveBroadcast(_ broadcast: LiveBroadcastStreamModel, completion: @escaping (Bool) -> Void) {
+      GoogleOAuth2.sharedInstance.requestToken() { token in
+
+         let broadcastId = broadcast.id
+         let title = broadcast.snipped.title
+         let startTime = broadcast.snipped.scheduledStartTime.toJSONformat()
+         let privacyStatus = broadcast.status.privacyStatus
+         let enableMonitorStream = broadcast.contentDetails.monitorStream.enableMonitorStream
+         let broadcastStreamDelayMs = broadcast.contentDetails.monitorStream.broadcastStreamDelayMs
+         let enableDvr = broadcast.contentDetails.enableDvr
+         let enableContentEncryption = broadcast.contentDetails.enableContentEncryption
+         let enableEmbed = broadcast.contentDetails.enableEmbed
+         let recordFromStart = broadcast.contentDetails.recordFromStart
+         let startWithSlate = broadcast.contentDetails.startWithSlate
+         
+         if let token = token {
+            let headers = merge(one: ["Content-Type": "application/json"], ["Authorization":"Bearer \(token)"])
+         let jsonBody = "{\"id\":\"\(broadcastId)\",\"snippet\":{\"title\":\"\(title)\",\"scheduledStartTime\":\"\(startTime)\"},\"status\":{\"privacyStatus\":\"\(privacyStatus)\"},\"contentDetails\": {\"monitorStream\":{\"enableMonitorStream\":\(enableMonitorStream),\"broadcastStreamDelayMs\":\"\(broadcastStreamDelayMs)\"},\"enableDvr\":\(enableDvr),\"enableContentEncryption\":\(enableContentEncryption),\"enableEmbed\":\(enableEmbed),\"recordFromStart\":\(recordFromStart),\"startWithSlate\":\(startWithSlate)}}"
+            let encoder = JSONBodyStringEncoding(jsonBody: jsonBody)
+            Alamofire.request("https://www.googleapis.com/youtube/v3/liveBroadcasts?part=id,snippet,contentDetails,status&key=\(Credentials.APIkey)",
+               method: .put,
+               parameters: [:],
+               encoding: encoder,
+               headers: headers)
+               .responseData { response in
+                  switch response.result {
+                  case .success:
+                     guard let data = response.data else {
+                        completion(false)
+                        return
+                     }
+                     let json = JSON(data: data)
+                     let error = json["error"].stringValue
+                     if error.characters.count > 0 {
+                        let message = json["message"].stringValue
+                        print("Error while Youtube broadcast was creating" + message)
+                        completion(false)
+                     } else {
+                        completion(true)
+                     }
+                  case .failure(let error):
+                     print("System Error: " + error.localizedDescription)
+                     completion(false)
+                  }
+            }
+         } else {
+            completion(false)
+         }
+      }
+   }
    
    // POST https://www.googleapis.com/youtube/v3/liveBroadcasts/transition
    // Changes the status of a YouTube live broadcast and initiates any processes associated with the new status. For example, when you transition a broadcast's status to testing, YouTube starts to transmit video to that broadcast's monitor stream. Before calling this method, you should confirm that the value of the status.streamStatus property for the stream bound to your broadcast is active.
@@ -248,48 +302,6 @@ extension YTLiveRequest {
             completion(nil)
          }
       })
-   }
-   
-   // Updates a broadcast. For example, you could modify the broadcast settings defined in the liveBroadcast resource's contentDetails object.
-   // https://developers.google.com/youtube/v3/live/docs/liveBroadcasts/update
-   // PUT https://www.googleapis.com/youtube/v3/liveBroadcasts
-   class func updateLiveBroadcast(broadcastId id: String, title: String, format: String, completion: @escaping (Bool) -> Void) {
-      GoogleOAuth2.sharedInstance.requestToken() { token in
-         if let token = token {
-            let ingestionType = "rtmp" // dash rtmp
-            let headers = merge(one: ["Content-Type": "application/json"], ["Authorization":"Bearer \(token)"])
-            let jsonBody = "{\"id\":\"\(id)\",\"snippet\": {\"title\":\"\(title)\"},\"cdn\":{\"format\":\"\(format)\",\"ingestionType\":\"\(ingestionType)\"}}}"
-            let encoder = JSONBodyStringEncoding(jsonBody: jsonBody)
-            Alamofire.request("https://www.googleapis.com/youtube/v3/liveBroadcasts?part=\"id,snippet,contentDetails,status\"&key=\(Credentials.APIkey)", method: .put,
-                              parameters: nil,
-                              encoding: encoder,
-                              headers: headers)
-               .validate()
-               .responseData { response in
-                  switch response.result {
-                  case .success:
-                     guard let data = response.data else {
-                        completion(false)
-                        return
-                     }
-                     let json = JSON(data: data)
-                     let error = json["error"].stringValue
-                     if error.characters.count > 0 {
-                        let message = json["message"].stringValue
-                        print("Error while Youtube broadcast was creating" + message)
-                        completion(false)
-                     } else {
-                        completion(true)
-                     }
-                  case .failure(let error):
-                     print("System Error: " + error.localizedDescription)
-                     completion(false)
-                  }
-            }
-         } else {
-            completion(false)
-         }
-      }
    }
 }
 

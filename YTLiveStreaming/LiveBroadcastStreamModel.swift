@@ -110,7 +110,7 @@ public struct LiveBroadcastStreamModel {
    public struct Status {
       public let lifeCycleStatus: String
       public let recordingStatus: String
-      public let privacyStatus: String
+      public var privacyStatus: String
    }
    
    public let kind: String
@@ -118,8 +118,7 @@ public struct LiveBroadcastStreamModel {
    public let id: String
    public var snipped: Snipped
    public let contentDetails: ContentDetails
-   public let status: Status
-   public var share: Bool
+   public var status: Status
 }
 
 // MARK: - Decodable
@@ -137,8 +136,7 @@ extension LiveBroadcastStreamModel: Decodable {
       id: json["id"].stringValue,
       snipped: snipped,
       contentDetails: contentDetails,
-      status: status,
-      share: false
+      status: status
       )
       return model
    }

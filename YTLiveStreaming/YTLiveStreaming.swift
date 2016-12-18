@@ -15,6 +15,8 @@ public enum YTLiveVideoState: String {
    case all = "all"
 }
 
+private let kOrderByPublishedAt = false
+
 public class YTLiveStreaming: NSObject {
 
 }
@@ -65,8 +67,13 @@ extension YTLiveStreaming {
    
    fileprivate func fillList(_ broadcasts: LiveBroadcastListModel, completion: ([LiveBroadcastStreamModel]?) -> Void) {
       let items = broadcasts.items
-      let sortedItems = items.sorted(by: { convertJSONtoDate(json: $0.snipped.publishedAt).compare(convertJSONtoDate(json: $1.snipped.publishedAt)) == ComparisonResult.orderedDescending })
-      completion(sortedItems)
+      if kOrderByPublishedAt {
+         let sortedItems = items.sorted(by: { convertJSONtoDate(json: $0.snipped.publishedAt).compare(convertJSONtoDate(json: $1.snipped.publishedAt)) == ComparisonResult.orderedDescending })
+         completion(sortedItems)
+      } else {
+         let sortedItems = items.sorted(by: { $0.snipped.scheduledStartTime.compare($1.snipped.scheduledStartTime) == ComparisonResult.orderedDescending })
+         completion(sortedItems)
+      }
    }
    
    public func createBroadcast(_ title: String, description: String?, startTime: Date, completion: @escaping (LiveBroadcastStreamModel?) -> Void) {

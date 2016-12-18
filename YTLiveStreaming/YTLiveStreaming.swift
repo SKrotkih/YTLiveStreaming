@@ -23,7 +23,17 @@ public class YTLiveStreaming: NSObject {
 
 extension YTLiveStreaming {
    
-   public func getActiveBroadcasts(_ completion: @escaping ([LiveBroadcastStreamModel]?) -> Void) {
+   public func getUpcomingBroadcasts(_ completion: @escaping ([LiveBroadcastStreamModel]?) -> Void) {
+      YTLiveRequest.listBroadcasts(.upcoming, completion: { broadcasts in
+         if let broadcasts = broadcasts {
+            self.fillList(broadcasts, completion: completion)
+         } else {
+            completion(nil)
+         }
+      })
+   }
+   
+   public func getLiveNowBroadcasts(_ completion: @escaping ([LiveBroadcastStreamModel]?) -> Void) {
       YTLiveRequest.listBroadcasts(.active, completion: { broadcasts in
          if let broadcasts = broadcasts {
             self.fillList(broadcasts, completion: completion)
@@ -42,9 +52,9 @@ extension YTLiveStreaming {
          }
       })
    }
-   
-   public func getUpcomingBroadcasts(_ completion: @escaping ([LiveBroadcastStreamModel]?) -> Void) {
-      YTLiveRequest.listBroadcasts(.upcoming, completion: { broadcasts in
+
+   public func getAllBroadcasts(_ completion: @escaping ([LiveBroadcastStreamModel]?) -> Void) {
+      YTLiveRequest.listBroadcasts(.all, completion: { broadcasts in
          if let broadcasts = broadcasts {
             self.fillList(broadcasts, completion: completion)
          } else {

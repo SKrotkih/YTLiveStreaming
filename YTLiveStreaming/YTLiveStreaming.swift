@@ -55,12 +55,34 @@ extension YTLiveStreaming {
       })
    }
 
-   public func getAllBroadcasts(_ completion: @escaping ([LiveBroadcastStreamModel]?) -> Void) {
+   public func getAllBroadcasts(_ completion: @escaping ([LiveBroadcastStreamModel]?, [LiveBroadcastStreamModel]?, [LiveBroadcastStreamModel]?) -> Void) {
       YTLiveRequest.listBroadcasts(.all, completion: { broadcasts in
          if let broadcasts = broadcasts {
-            self.fillList(broadcasts, completion: completion)
+            self.fillList(broadcasts, completion: { streams in
+               if let streams = streams {
+                  var streamsReady = [LiveBroadcastStreamModel]()
+                  var streamsLive = [LiveBroadcastStreamModel]()
+                  var streamsComplete = [LiveBroadcastStreamModel]()
+                  for item in streams {
+                     let lifeCycleStatus = item.status.lifeCycleStatus
+                     switch lifeCycleStatus {
+                     case "ready":
+                        streamsReady.append(item)
+                     case "live":
+                        streamsLive.append(item)
+                     case "complete":
+                        streamsComplete.append(item)
+                     default:
+                        break
+                     }
+                  }
+                  completion(streamsReady, streamsLive, streamsComplete)
+               } else {
+                  completion(nil, nil, nil)
+               }
+            })
          } else {
-            completion(nil)
+            completion(nil, nil, nil)
          }
       })
    }

@@ -26,7 +26,9 @@ Note. When you will create an API key, don't check iOS apps in the radio box. Do
 
 - Download or clone the repository.
 
-- Select Sample folder.
+## Prepare and launch the example
+
+- Select Sample folder
 
 - Launch  `pod install`   
 
@@ -38,8 +40,72 @@ Note. When you will create an API key, don't check iOS apps in the radio box. Do
 
 ## User guide
 
+	import YTLiveStreaming
 
+	...
 
+	let input: YTLiveStreaming = YTLiveStreaming
+
+	...
+
+	// Get all events in different arrays of the LiveBroadcastStreamModel type 
+	input.getAllBroadcasts(){ (upcomingEvents, liveNowEvents, completedEvents) in
+	   ...
+	}
+
+	// Get events separately:
+	// Get upcoming events
+	input.getUpcomingBroadcasts() { upcomingEvents in
+	   ...
+	} 
+
+	// Get Live now events
+	input.getLiveNowBroadcasts() ( liveNowEvents in
+	   ...
+	} 
+
+	// Get Completed events
+	input.getCompletedBroadcasts() ( completedEvents in
+	   ...
+	} 
+
+	// Create Broadcast
+	input.createBroadcast(title, description: description, startTime: startDate, completion: { liveBroadcast in
+	   if let liveBroadcast = liveBroadcast {
+	      ...
+	   }
+	})
+
+	// Update of the existing broadcast: LiveBroadcastStreamModel
+	input.updateBroadcast(broadcast, completion: { success in
+	    if success {
+	       ...
+	    }      
+	})
+
+	// Start broadcast streaming video
+	input.startBroadcast(broadcast, delegate: self, completion: { streamName, streamUrl, _ in
+	   if let streamName = streamName, let streamUrl = streamUrl {
+	     completion(streamUrl, streamName)
+	   }
+	})
+
+	// Finish broadcast streaming video
+	input.completeBroadcast(broadcast, completion: { success in
+	   if success {
+	      ...
+	   }
+	})
+
+	// Delete broadcast video from YouTube
+	input.deleteBroadcast(id: broadcastId, completion: { success in
+	    if success {
+	       ...
+	    }
+	})
+	
+
+And some other public methods of the YTLiveStreaming class  
 
 ## Libraries Used
 

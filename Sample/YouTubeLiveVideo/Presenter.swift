@@ -53,7 +53,7 @@ extension Presenter: YouTubeLiveVideoOutput {
          assert(false, "Need Broadcast object for starting live video!")
          return
       }
-      youTubeWorker.startBroadcast(broadcast, delegate: self, completed: { streamName, streamUrl, scheduledStartTime in
+      youTubeWorker.startBroadcast(broadcast, delegate: self, completion: { streamName, streamUrl, scheduledStartTime in
          if let streamName = streamName, let streamUrl = streamUrl, let scheduledStartTime = scheduledStartTime {
             self.viewController.scheduledStartTime = scheduledStartTime as NSDate?
             completed(streamUrl, streamName)
@@ -66,7 +66,7 @@ extension Presenter: YouTubeLiveVideoOutput {
          self.dismissVideoStreamViewController()
          return
       }
-      youTubeWorker.completeBroadcast(broadcast, completed: { success in
+      youTubeWorker.completeBroadcast(broadcast, completion: { success in
          self.dismissVideoStreamViewController()
       })
    }
@@ -76,7 +76,7 @@ extension Presenter: YouTubeLiveVideoOutput {
          self.dismissVideoStreamViewController()
          return
       }
-      youTubeWorker.deleteBroadcast(id: broadcast.id, completed: { success in
+      youTubeWorker.deleteBroadcast(id: broadcast.id, completion: { success in
          if success {
             print("Broadcast \"\(broadcast.id)\" was deleted!")
          } else {

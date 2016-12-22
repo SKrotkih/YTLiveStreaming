@@ -26,6 +26,10 @@ Note. When you will create an API key, don't check iOS apps in the radio box. Do
 
 - Download or clone the repository.
 
+- Select root folder 
+
+- Launch  `pod install`
+
 ## Prepare and launch the example
 
 - Select Sample folder

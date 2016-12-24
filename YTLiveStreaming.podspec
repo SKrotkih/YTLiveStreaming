@@ -1,7 +1,15 @@
 Pod::Spec.new do |s|
 
 s.name         = "YTLiveStreaming"
-s.version      = "0.1.0"
+s.version      = "0.1.1"
+
+# TODO
+# git tag 0.1.1
+# git push -u origin master --tags
+#
+# pod repo add YTLiveStreamingPodSpecs https://github.com/SKrotkih/YTLiveStreamingPodSpecs.git
+# pod repo push YTLiveStreamingPodSpecs YTLiveStreaming.podspec
+
 s.summary      = "YouTube Live Streaming Framework"
 s.description  = <<-DESC
 

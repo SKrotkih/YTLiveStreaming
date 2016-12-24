@@ -132,6 +132,7 @@
 		7F04787B1DD5962C00AB6211 /* YTLiveStreaming */ = {
 			isa = PBXGroup;
 			children = (
+				7F04789E1DD596EB00AB6211 /* Categories */,
 				7F117F2A1E0E81A3000D0745 /* GooglePlus */,
 				7F04789D1DD596DF00AB6211 /* Model */,
 				7F0478931DD596BF00AB6211 /* Constants.swift */,
@@ -160,7 +161,6 @@
 		7F04789D1DD596DF00AB6211 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7F04789E1DD596EB00AB6211 /* Category */,
 				7F0478A31DD5972700AB6211 /* Decodable.swift */,
 				7F0478A51DD5973A00AB6211 /* LiveBroadcastErrorModel.swift */,
 				7F0478A61DD5973A00AB6211 /* LiveBroadcastListModel.swift */,
@@ -171,13 +171,13 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		7F04789E1DD596EB00AB6211 /* Category */ = {
+		7F04789E1DD596EB00AB6211 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
 				7F04789F1DD5970100AB6211 /* Date.swift */,
 				7F0478A01DD5970100AB6211 /* String.swift */,
 			);
-			name = Category;
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		7F117F2A1E0E81A3000D0745 /* GooglePlus */ = {

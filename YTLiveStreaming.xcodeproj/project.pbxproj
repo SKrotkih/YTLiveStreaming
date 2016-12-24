@@ -24,6 +24,10 @@
 		7F0478AC1DD5973A00AB6211 /* LiveBroadcastStreamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0478A71DD5973A00AB6211 /* LiveBroadcastStreamModel.swift */; };
 		7F0478AD1DD5973A00AB6211 /* LiveStreamListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0478A81DD5973A00AB6211 /* LiveStreamListModel.swift */; };
 		7F0478AE1DD5973A00AB6211 /* LiveStreamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0478A91DD5973A00AB6211 /* LiveStreamModel.swift */; };
+		7F117F291E0E816C000D0745 /* LiveLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F117F281E0E816C000D0745 /* LiveLauncher.swift */; };
+		7F117F2E1E0E81A4000D0745 /* GooglePlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F117F2B1E0E81A4000D0745 /* GooglePlus.swift */; };
+		7F117F2F1E0E81A4000D0745 /* GooglePlusAboutMeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F117F2C1E0E81A4000D0745 /* GooglePlusAboutMeModel.swift */; };
+		7F117F301E0E81A4000D0745 /* GooglePlusRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F117F2D1E0E81A4000D0745 /* GooglePlusRequest.swift */; };
 		7FA999B91DD6C81C0061AF0C /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA999B81DD6C81C0061AF0C /* Credentials.swift */; };
 		7FDB95221DD6042700498305 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7FDB95211DD6042700498305 /* README.md */; };
 /* End PBXBuildFile section */
@@ -59,6 +63,10 @@
 		7F0478A71DD5973A00AB6211 /* LiveBroadcastStreamModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveBroadcastStreamModel.swift; sourceTree = "<group>"; };
 		7F0478A81DD5973A00AB6211 /* LiveStreamListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveStreamListModel.swift; sourceTree = "<group>"; };
 		7F0478A91DD5973A00AB6211 /* LiveStreamModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveStreamModel.swift; sourceTree = "<group>"; };
+		7F117F281E0E816C000D0745 /* LiveLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveLauncher.swift; sourceTree = "<group>"; };
+		7F117F2B1E0E81A4000D0745 /* GooglePlus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlus.swift; sourceTree = "<group>"; };
+		7F117F2C1E0E81A4000D0745 /* GooglePlusAboutMeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlusAboutMeModel.swift; sourceTree = "<group>"; };
+		7F117F2D1E0E81A4000D0745 /* GooglePlusRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlusRequest.swift; sourceTree = "<group>"; };
 		7FA999B81DD6C81C0061AF0C /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		7FDB95211DD6042700498305 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		8E99A8A7F06BCB520FF235F8 /* Pods-YTLiveStreaming.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YTLiveStreaming.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YTLiveStreaming/Pods-YTLiveStreaming.debug.xcconfig"; sourceTree = "<group>"; };
@@ -125,9 +133,11 @@
 		7F04787B1DD5962C00AB6211 /* YTLiveStreaming */ = {
 			isa = PBXGroup;
 			children = (
+				7F117F2A1E0E81A3000D0745 /* GooglePlus */,
 				7F04789D1DD596DF00AB6211 /* Model */,
 				7F0478931DD596BF00AB6211 /* Constants.swift */,
 				7FA999B81DD6C81C0061AF0C /* Credentials.swift */,
+				7F117F281E0E816C000D0745 /* LiveLauncher.swift */,
 				7F0478941DD596BF00AB6211 /* GoogleOAuth2.swift */,
 				7F0478951DD596BF00AB6211 /* LiveStreamingAPI.swift */,
 				7F0478961DD596BF00AB6211 /* YTLiveRequest.swift */,
@@ -169,6 +179,16 @@
 				7F0478A01DD5970100AB6211 /* String.swift */,
 			);
 			name = Category;
+			sourceTree = "<group>";
+		};
+		7F117F2A1E0E81A3000D0745 /* GooglePlus */ = {
+			isa = PBXGroup;
+			children = (
+				7F117F2B1E0E81A4000D0745 /* GooglePlus.swift */,
+				7F117F2C1E0E81A4000D0745 /* GooglePlusAboutMeModel.swift */,
+				7F117F2D1E0E81A4000D0745 /* GooglePlusRequest.swift */,
+			);
+			path = GooglePlus;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,6 +341,7 @@
 			files = (
 				7F04789B1DD596BF00AB6211 /* YTLiveRequest.swift in Sources */,
 				7F0478AD1DD5973A00AB6211 /* LiveStreamListModel.swift in Sources */,
+				7F117F2F1E0E81A4000D0745 /* GooglePlusAboutMeModel.swift in Sources */,
 				7F0478A11DD5970100AB6211 /* Date.swift in Sources */,
 				7F04789A1DD596BF00AB6211 /* LiveStreamingAPI.swift in Sources */,
 				7F0478981DD596BF00AB6211 /* Constants.swift in Sources */,
@@ -328,12 +349,15 @@
 				7F0478AC1DD5973A00AB6211 /* LiveBroadcastStreamModel.swift in Sources */,
 				7F0478AA1DD5973A00AB6211 /* LiveBroadcastErrorModel.swift in Sources */,
 				7F0478AB1DD5973A00AB6211 /* LiveBroadcastListModel.swift in Sources */,
+				7F117F301E0E81A4000D0745 /* GooglePlusRequest.swift in Sources */,
 				7F0478A21DD5970100AB6211 /* String.swift in Sources */,
 				7FDB95221DD6042700498305 /* README.md in Sources */,
+				7F117F2E1E0E81A4000D0745 /* GooglePlus.swift in Sources */,
 				7F0478A41DD5972700AB6211 /* Decodable.swift in Sources */,
 				7FA999B91DD6C81C0061AF0C /* Credentials.swift in Sources */,
 				7F04789C1DD596BF00AB6211 /* YTLiveStreaming.swift in Sources */,
 				7F0478991DD596BF00AB6211 /* GoogleOAuth2.swift in Sources */,
+				7F117F291E0E816C000D0745 /* LiveLauncher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,7 +421,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -444,7 +468,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

@@ -17,13 +17,5 @@ s.source       = { :git => "https://github.com/SKrotkih/YTLiveStreaming.git", :t
 s.source_files = "YTLiveStreaming", "YTLiveStreaming/**/*.{h,m,swift}"
 s.frameworks = "Foundation","UIKit"
 s.requires_arc = true
-s.dependency 'AlamofireOauth2'
-s.dependency 'KeychainAccess'
-s.dependency 'XCGLogger'
-s.dependency 'LFLiveKit'
-s.dependency 'SwiftyJSON'
-s.dependency 'Moya', '8.0.0-beta.2'
-s.dependency 'XCDYouTubeKit', '~> 2.5'
-s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3' }
 
 end

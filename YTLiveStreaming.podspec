@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
 
 s.name         = "YTLiveStreaming"
-s.version      = "0.1.2"
+s.version      = "0.1.3"
 
 # TODO
-# git tag 0.1.2
+# git tag 0.1.3
 # git push -u origin master --tags
 #
 # pod repo add YTLiveStreamingPodSpecs https://github.com/SKrotkih/YTLiveStreamingPodSpecs.git
@@ -23,13 +23,10 @@ s.source       = { :git => "https://github.com/SKrotkih/YTLiveStreaming.git", :t
 s.source_files = "YTLiveStreaming", "YTLiveStreaming/**/*.{h,m,swift}"
 s.frameworks = "Foundation","UIKit"
 s.requires_arc = true
+s.dependency 'Moya', '8.0.0-beta.2'
 s.dependency 'AlamofireOauth2'
-s.dependency 'KeychainAccess'
-s.dependency 'XCGLogger'
 s.dependency 'LFLiveKit'
 s.dependency 'SwiftyJSON'
-s.dependency 'Moya', '8.0.0-beta.2'
-s.dependency 'XCDYouTubeKit', '~> 2.5'
 #s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3' }
 
 end

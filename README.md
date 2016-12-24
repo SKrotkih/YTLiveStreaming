@@ -1,7 +1,5 @@
 # YTLiveStreaming
 
-[![Swift 3](https://img.shields.io/badge/Swift-3-orange.svg?style=flat)](https://swift.org/)
-
 YTLiveStreaming is a framework for creating live broadcasts and video streams on YouTube using the YouTube Live Streaming API
 (v.3) in Swift 3 
 

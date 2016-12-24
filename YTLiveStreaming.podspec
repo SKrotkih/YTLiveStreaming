@@ -24,5 +24,6 @@ s.dependency 'LFLiveKit'
 s.dependency 'SwiftyJSON'
 s.dependency 'Moya', '8.0.0-beta.2'
 s.dependency 'XCDYouTubeKit', '~> 2.5'
+s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3' }
 
 end

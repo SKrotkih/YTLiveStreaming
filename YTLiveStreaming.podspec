@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
 
 s.name         = "YTLiveStreaming"
-s.version      = "0.1.1"
+s.version      = "0.1.2"
 
 # TODO
-# git tag 0.1.1
+# git tag 0.1.2
 # git push -u origin master --tags
 #
 # pod repo add YTLiveStreamingPodSpecs https://github.com/SKrotkih/YTLiveStreamingPodSpecs.git
@@ -12,10 +12,8 @@ s.version      = "0.1.1"
 
 s.summary      = "YouTube Live Streaming Framework"
 s.description  = <<-DESC
-
-* Create live broadcasts and video streams on YouTube using the YouTube Live Streaming API.
-DESC
-
+   Create live broadcasts and video streams on YouTube using the YouTube Live Streaming API.
+                 DESC
 s.homepage     = "https://github.com/SKrotkih/YTLiveStreaming.git"
 s.license      = { :type => "MIT", :file => "LICENSE" }
 s.author             = { "Sergey Krotkih" => "sergey.krotkih@gmail.com" }
@@ -32,6 +30,6 @@ s.dependency 'LFLiveKit'
 s.dependency 'SwiftyJSON'
 s.dependency 'Moya', '8.0.0-beta.2'
 s.dependency 'XCDYouTubeKit', '~> 2.5'
-s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3' }
+#s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3' }
 
 end

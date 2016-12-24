@@ -27,12 +27,15 @@ public extension String {
    }
 
    public func urlEncode() -> String {
-      let encodedURL = CFURLCreateStringByAddingPercentEscapes(nil,
-                                                               self as NSString,
-                                                               nil,
-                                                               "!@#$%&*'();:=+,/?[]" as CFString!,
-                                                               CFStringBuiltInEncodings.UTF8.rawValue)
-      return encodedURL as! String
+      
+      let encodedURL = self.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+      
+//      let encodedURL2 = CFURLCreateStringByAddingPercentEscapes(nil,
+//                                                               self as NSString,
+//                                                               nil,
+//                                                               "!@#$%&*'();:=+,/?[]" as CFString!,
+//                                                               CFStringBuiltInEncodings.UTF8.rawValue)
+      return encodedURL!
    }
    
 }

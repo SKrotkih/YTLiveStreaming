@@ -63,7 +63,7 @@ class GoogleOAuth2: NSObject {
    }
    
    func isAccessTokenPresented(completion: (Bool) -> Void) {
-      if let optional = keychain[kOAuth2AccessTokenService] {
+      if keychain[kOAuth2AccessTokenService] != nil {
          completion(true)
       } else {
          completion(false)

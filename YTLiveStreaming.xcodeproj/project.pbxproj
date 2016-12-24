@@ -29,7 +29,6 @@
 		7F117F2F1E0E81A4000D0745 /* GooglePlusAboutMeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F117F2C1E0E81A4000D0745 /* GooglePlusAboutMeModel.swift */; };
 		7F117F301E0E81A4000D0745 /* GooglePlusRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F117F2D1E0E81A4000D0745 /* GooglePlusRequest.swift */; };
 		7FA999B91DD6C81C0061AF0C /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA999B81DD6C81C0061AF0C /* Credentials.swift */; };
-		7FDB95221DD6042700498305 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7FDB95211DD6042700498305 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -250,7 +249,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Sergey Krotkih";
 				TargetAttributes = {
 					7F0478781DD5962C00AB6211 = {
@@ -351,7 +350,6 @@
 				7F0478AB1DD5973A00AB6211 /* LiveBroadcastListModel.swift in Sources */,
 				7F117F301E0E81A4000D0745 /* GooglePlusRequest.swift in Sources */,
 				7F0478A21DD5970100AB6211 /* String.swift in Sources */,
-				7FDB95221DD6042700498305 /* README.md in Sources */,
 				7F117F2E1E0E81A4000D0745 /* GooglePlus.swift in Sources */,
 				7F0478A41DD5972700AB6211 /* Decodable.swift in Sources */,
 				7FA999B91DD6C81C0061AF0C /* Credentials.swift in Sources */,
@@ -398,6 +396,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -451,6 +450,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

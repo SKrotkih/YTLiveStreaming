@@ -25,7 +25,7 @@ let GooglePlusBaseURL = "https://www.googleapis.com/plus/v1"
 let googleAPIrequestClosure = { (endpoint: Moya.Endpoint<GooglePlus>, done: @escaping MoyaProvider<GooglePlus>.RequestResultClosure) in
    GoogleOAuth2.sharedInstance.requestToken() { token in
       if let token = token {
-         var request = endpoint.urlRequest as URLRequest
+         var request = endpoint.urlRequest! as URLRequest
          request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
          var nserror: NSError! = NSError(domain: "LiveStreamingAPIHttp", code: 0, userInfo: nil)
          let error = Moya.Error.underlying(nserror)
@@ -33,7 +33,7 @@ let googleAPIrequestClosure = { (endpoint: Moya.Endpoint<GooglePlus>, done: @esc
       } else {
          var nserror: NSError! = NSError(domain: "GooglePlusHttp", code: 4000, userInfo: ["NSLocalizedDescriptionKey": "Failed Google OAuth2 request token"])
          let error = Moya.Error.underlying(nserror)
-         let request = endpoint.urlRequest as URLRequest
+         let request = endpoint.urlRequest! as URLRequest
          done(Result(request, failWith: error))
       }
    }
@@ -51,7 +51,7 @@ extension GooglePlus: TargetType {
    public var method: Moya.Method {
       switch self {
       case .userInfo:
-         return .GET
+         return .get
       }
    }
    

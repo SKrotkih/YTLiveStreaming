@@ -25,7 +25,7 @@ let BaseURL = "https://www.googleapis.com/youtube/v3"
 let requestClosure = { (endpoint: Moya.Endpoint<LiveStreamingAPI>, done: @escaping MoyaProvider<LiveStreamingAPI>.RequestResultClosure) in
    GoogleOAuth2.sharedInstance.requestToken() { token in
       if let token = token {
-         var request = endpoint.urlRequest as URLRequest
+         var request = endpoint.urlRequest! as URLRequest
          request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
          var nserror: NSError! = NSError(domain: "LiveStreamingAPIHttp", code: 0, userInfo: nil)
          let error = Moya.Error.underlying(nserror)
@@ -33,7 +33,7 @@ let requestClosure = { (endpoint: Moya.Endpoint<LiveStreamingAPI>, done: @escapi
       } else {
          var nserror: NSError! = NSError(domain: "LiveStreamingAPIHttp", code: 4000, userInfo: ["NSLocalizedDescriptionKey": "Failed Google OAuth2 request token"])
          let error = Moya.Error.underlying(nserror)
-         let request = endpoint.urlRequest as URLRequest
+         let request = endpoint.urlRequest! as URLRequest
          done(Result(request, failWith: error))
       }
    }
@@ -57,19 +57,19 @@ extension LiveStreamingAPI: TargetType {
    public var method: Moya.Method {
       switch self {
       case .listBroadcasts:
-         return .GET
+         return .get
       case .liveBroadcast:
-         return .GET
+         return .get
       case .transitionLiveBroadcast:
-         return .POST
+         return .post
       case .deleteLiveBroadcast:
-         return .DELETE
+         return .delete
       case .bindLiveBroadcast:
-         return .POST
+         return .post
       case .liveStream:
-         return .GET
+         return .get
       case .deleteLiveStream:
-         return .DELETE
+         return .delete
       }
    }
    

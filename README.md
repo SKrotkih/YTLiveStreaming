@@ -20,15 +20,38 @@ YTLiveStreaming is a framework for creating live broadcasts and video streams on
 
 Note. When you will create an API key, don't check iOS apps in the radio box. Don't worry about yellow warning Key restriction. Take the API key and Client ID. They will be used on the next step.
 
-## Install
+## Installation
 
-- Download or clone the repository.
+### CocoaPods
 
-- Select root folder 
+[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
 
-- Launch  `pod install`
+```bash
+$ gem install cocoapods
+```
+
+> CocoaPods 1.1.0+ is required to build YTLiveStreaming
+
+To integrate YTLiveStreaming into your Xcode project using CocoaPods, specify it in your `Podfile`:
+
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '9.0'
+use_frameworks!
+
+target '<Your Target Name>' do
+    pod 'YTLiveStreaming'
+end
+```
+
+Then, run the following command:
+
+```bash
+$ pod install
 
 ## Prepare and launch the example
+
+- Download or clone the repository.
 
 - Select Sample folder
 

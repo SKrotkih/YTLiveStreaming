@@ -27,6 +27,8 @@
 		7F101E9C1E0F63DF003EAF3F /* GooglePlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F101E991E0F63DF003EAF3F /* GooglePlus.swift */; };
 		7F101E9D1E0F63DF003EAF3F /* GooglePlusAboutMeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F101E9A1E0F63DF003EAF3F /* GooglePlusAboutMeModel.swift */; };
 		7F101E9E1E0F63DF003EAF3F /* GooglePlusRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F101E9B1E0F63DF003EAF3F /* GooglePlusRequest.swift */; };
+		7F101EA91E0FBD8A003EAF3F /* YTLiveStreaming.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 7F101EA81E0FBD8A003EAF3F /* YTLiveStreaming.podspec */; };
+		7F101EAB1E0FBDA5003EAF3F /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7F101EAA1E0FBDA5003EAF3F /* LICENSE */; };
 		7F117F291E0E816C000D0745 /* LiveLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F117F281E0E816C000D0745 /* LiveLauncher.swift */; };
 		7FA999B91DD6C81C0061AF0C /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA999B81DD6C81C0061AF0C /* Credentials.swift */; };
 /* End PBXBuildFile section */
@@ -65,6 +67,8 @@
 		7F101E991E0F63DF003EAF3F /* GooglePlus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlus.swift; sourceTree = "<group>"; };
 		7F101E9A1E0F63DF003EAF3F /* GooglePlusAboutMeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlusAboutMeModel.swift; sourceTree = "<group>"; };
 		7F101E9B1E0F63DF003EAF3F /* GooglePlusRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlusRequest.swift; sourceTree = "<group>"; };
+		7F101EA81E0FBD8A003EAF3F /* YTLiveStreaming.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = YTLiveStreaming.podspec; sourceTree = "<group>"; };
+		7F101EAA1E0FBDA5003EAF3F /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		7F117F281E0E816C000D0745 /* LiveLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveLauncher.swift; sourceTree = "<group>"; };
 		7FA999B81DD6C81C0061AF0C /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		7FDB95211DD6042700498305 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -113,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				7F04787B1DD5962C00AB6211 /* YTLiveStreaming */,
+				7F101EA71E0FBD6F003EAF3F /* Podspec Metadata */,
 				7F0478861DD5962C00AB6211 /* YTLiveStreamingTests */,
 				7F04787A1DD5962C00AB6211 /* Products */,
 				5F31E0090264BC5A4F04FE62 /* Pods */,
@@ -144,7 +149,6 @@
 				7F0478971DD596BF00AB6211 /* YTLiveStreaming.swift */,
 				7F04787C1DD5962C00AB6211 /* YTLiveStreaming.h */,
 				7F04787D1DD5962C00AB6211 /* Info.plist */,
-				7FDB95211DD6042700498305 /* README.md */,
 			);
 			path = YTLiveStreaming;
 			sourceTree = "<group>";
@@ -188,6 +192,16 @@
 				7F101E9B1E0F63DF003EAF3F /* GooglePlusRequest.swift */,
 			);
 			name = GooglePlus;
+			sourceTree = "<group>";
+		};
+		7F101EA71E0FBD6F003EAF3F /* Podspec Metadata */ = {
+			isa = PBXGroup;
+			children = (
+				7F101EAA1E0FBDA5003EAF3F /* LICENSE */,
+				7FDB95211DD6042700498305 /* README.md */,
+				7F101EA81E0FBD8A003EAF3F /* YTLiveStreaming.podspec */,
+			);
+			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,6 +302,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F101EAB1E0FBDA5003EAF3F /* LICENSE in Resources */,
+				7F101EA91E0FBD8A003EAF3F /* YTLiveStreaming.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

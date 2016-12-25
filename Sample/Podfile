@@ -1,10 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
 target 'YouTubeLiveVideo' do
 
 platform :ios, '9.0'
 use_frameworks!
 
 #pod 'YTLiveStreaming', :path => '../.'
-pod 'YTLiveStreaming', '~> 0.1.9'
+pod 'YTLiveStreaming'
 pod "XCDYouTubeKit", "~> 2.5"
 
 end

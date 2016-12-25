@@ -9,13 +9,14 @@ Pod::Spec.new do |s|
   s.summary      = "YTLiveStreaming is a YouTube Live Streaming Framework"
   s.requires_arc = true
 
-  s.version      = "0.1.8"
+  s.version      = "0.1.9"
 
-  # git tag 0.1.8
-  # git push -u origin master --tags
+  # 1. git tag 0.1.9
+  # 2. git push -u origin master --tags
   # - pod repo add YTLiveStreamingPodSpecs https://github.com/SKrotkih/YTLiveStreamingPodSpecs.git
-  # - clean cashe: rm -rf ~/Library/Caches/Cocoapods /tmp/Cocoapods
-  # pod repo push YTLiveStreamingPodSpecs YTLiveStreaming.podspec --verbose
+  # 3. pod spec lint YTLiveStreaming.podspec --allow-warnings
+  # 4. pod trunk push YTLiveStreaming.podspec --verbose --allow-warnings
+  # pod repo push YTLiveStreamingPodSpecs YTLiveStreaming.podspec --verbose --allow-warnings
 
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author       = { "Sergey Krotkih" => "sergey.krotkih@gmail.com" }

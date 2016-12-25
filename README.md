@@ -48,6 +48,7 @@ Then, run the following command:
 
 ```bash
 $ pod install
+```
 
 ## Prepare and launch the example
 

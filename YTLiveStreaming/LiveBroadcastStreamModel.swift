@@ -65,7 +65,7 @@ import SwiftyJSON
 public struct LiveBroadcastStreamModel {
 
    public struct Snipped {
-      public let publishedAt: String
+      public let publishedAt: Date
       public let channelId: String
       public var title: String
       public let description: String
@@ -148,7 +148,7 @@ extension LiveBroadcastStreamModel.Snipped {
       let thumbnails = LiveBroadcastStreamModel.Thumbnails.decode(json["thumbnails"])
       
       let model = LiveBroadcastStreamModel.Snipped (
-         publishedAt: json["publishedAt"].stringValue,
+         publishedAt: convertJSONtoDate(json: json["publishedAt"].stringValue),
          channelId: json["channelId"].stringValue,
          title: json["title"].stringValue,
          description: json["description"].stringValue,

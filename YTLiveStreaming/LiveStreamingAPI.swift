@@ -23,17 +23,27 @@ private func JSONResponseDataFormatter(_ data: Data) -> Data {
 let requestClosure = { (endpoint: Moya.Endpoint<LiveStreamingAPI>, done: @escaping MoyaProvider<LiveStreamingAPI>.RequestResultClosure) in
    GoogleOAuth2.sharedInstance.requestToken() { token in
       if let token = token {
-         var request = endpoint.urlRequest! as URLRequest
-         request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-         request.addValue(Bundle.main.bundleIdentifier!, forHTTPHeaderField: "X-Ios-Bundle-Identifier")
-         var nserror: NSError! = NSError(domain: "LiveStreamingAPIHttp", code: 0, userInfo: nil)
-         let error = MoyaError.underlying(nserror, nil)
-         done(Result(request, failWith: error))
+         do {
+            var request = try endpoint.urlRequest() as URLRequest
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            request.addValue(Bundle.main.bundleIdentifier!, forHTTPHeaderField: "X-Ios-Bundle-Identifier")
+            var nserror: NSError! = NSError(domain: "LiveStreamingAPIHttp", code: 0, userInfo: nil)
+            let error = MoyaError.underlying(nserror, nil)
+            done(Result(request, failWith: error))
+         }
+         catch {
+            
+         }
       } else {
-         var nserror: NSError! = NSError(domain: "LiveStreamingAPIHttp", code: 4000, userInfo: ["NSLocalizedDescriptionKey": "Failed Google OAuth2 request token"])
-         let error = MoyaError.underlying(nserror, nil)
-         let request = endpoint.urlRequest! as URLRequest
-         done(Result(request, failWith: error))
+         do {
+            let request = try endpoint.urlRequest() as URLRequest
+            var nserror: NSError! = NSError(domain: "LiveStreamingAPIHttp", code: 4000, userInfo: ["NSLocalizedDescriptionKey": "Failed Google OAuth2 request token"])
+            let error = MoyaError.underlying(nserror, nil)
+            done(Result(request, failWith: error))
+         }
+         catch {
+            
+         }
       }
    }
 }

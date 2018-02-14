@@ -45,7 +45,8 @@ extension YTLiveRequest {
       YouTubeLiveVideoProvider.request(LiveStreamingAPI.listBroadcasts(parameters), completion: { result in
          switch result {
          case let .success(response):
-               let json = JSON(data: response.data)
+            do {
+               let json = try JSON(data: response.data)
             let error = json["error"]
             let message = error["message"].stringValue
             if !message.isEmpty {
@@ -65,6 +66,9 @@ extension YTLiveRequest {
                
                completion(broadcastList)
             }
+            } catch {
+               completion(nil)
+            }
          case let .failure(error):
             print("System Error: \(error.localizedDescription)")
             completion(nil)
@@ -81,7 +85,8 @@ extension YTLiveRequest {
       YouTubeLiveVideoProvider.request(LiveStreamingAPI.liveBroadcast(parameters)) { result in
          switch result {
          case let .success(response):
-               let json = JSON(data: response.data)
+            do {
+               let json = try JSON(data: response.data)
             let error = json["error"]
             let message = error["message"].stringValue
             if !message.isEmpty {
@@ -99,6 +104,9 @@ extension YTLiveRequest {
                   }
                }
                completion(broadcast)
+            }
+            } catch {
+               completion(nil)
             }
          case let .failure(error):
             print("System Error: \(error.localizedDescription)")
@@ -129,7 +137,8 @@ extension YTLiveRequest {
                         completion(nil)
                         return
                      }
-                        let json = JSON(data: data)
+                     do {
+                        let json = try JSON(data: data)
                      let error = json["error"].stringValue
                      if !error.isEmpty {
                         let message = json["message"].stringValue
@@ -140,6 +149,10 @@ extension YTLiveRequest {
                         let liveBroadcast = LiveBroadcastStreamModel.decode(json)
                         completion(liveBroadcast)
                      }
+                     } catch {
+                        completion(nil)
+                     }
+                     
                   case .failure(let error):
                      print("System Error: " + error.localizedDescription)
                      completion(nil)
@@ -185,7 +198,8 @@ extension YTLiveRequest {
                         completion(false)
                         return
                      }
-                        let json = JSON(data: data)
+                     do {
+                        let json = try JSON(data: data)
                      let error = json["error"].stringValue
                      if !error.isEmpty {
                         let message = json["message"].stringValue
@@ -193,6 +207,9 @@ extension YTLiveRequest {
                         completion(false)
                      } else {
                         completion(true)
+                     }
+                     } catch {
+                        completion(false)
                      }
                   case .failure(let error):
                      print("System Error: " + error.localizedDescription)
@@ -221,7 +238,8 @@ extension YTLiveRequest {
       YouTubeLiveVideoProvider.request(LiveStreamingAPI.transitionLiveBroadcast(parameters)) { result in
          switch result {
          case let .success(response):
-               let json = JSON(data: response.data)
+            do {
+               let json = try JSON(data: response.data)
             let error = json["error"]
             let message = error["message"].stringValue
             if !message.isEmpty {
@@ -232,6 +250,9 @@ extension YTLiveRequest {
                //print(json)
                let liveBroadcast = LiveBroadcastStreamModel.decode(json)
                completion(liveBroadcast)
+            }
+            } catch {
+               completion(nil)
             }
          case let .failure(error):
             print("System Error: " + error.localizedDescription)
@@ -250,7 +271,8 @@ extension YTLiveRequest {
       YouTubeLiveVideoProvider.request(LiveStreamingAPI.deleteLiveBroadcast(parameters)) { result in
          switch result {
          case let .success(response):
-               let json = JSON(data: response.data)
+            do {
+               let json = try JSON(data: response.data)
             let error = LiveBroadcastErrorModel.decode(json["error"])
             if let code = error.code, code > 0 {
                print("Failed to delete broadcast: " + error.message!)
@@ -258,6 +280,9 @@ extension YTLiveRequest {
             } else {
                //print("Broadcast deleted: \(json)")
                completion(true)
+            }
+            } catch {
+               completion(false)
             }
          case let .failure(error):
             print("System Error" + error.localizedDescription)
@@ -279,7 +304,8 @@ extension YTLiveRequest {
       YouTubeLiveVideoProvider.request(LiveStreamingAPI.bindLiveBroadcast(parameters)) { result in
          switch result {
          case let .success(response):
-               let json = JSON(data: response.data)
+            do {
+               let json = try JSON(data: response.data)
             let error = json["error"]
             let message = error["message"].stringValue
             if !message.isEmpty {
@@ -289,6 +315,9 @@ extension YTLiveRequest {
                //print(json)
                let liveBroadcast = LiveBroadcastStreamModel.decode(json)
                completion(liveBroadcast)
+            }
+            } catch {
+               completion(nil)
             }
          case let .failure(error):
             print("System Error" + error.localizedDescription)
@@ -317,7 +346,8 @@ extension YTLiveRequest {
       YouTubeLiveVideoProvider.request(LiveStreamingAPI.liveStream(parameters)) { result in
          switch result {
          case let .success(response):
-               let json = JSON(data: response.data)
+            do {
+               let json = try JSON(data: response.data)
             let error = json["error"]
             let message = error["message"].stringValue
             if !message.isEmpty {
@@ -335,6 +365,9 @@ extension YTLiveRequest {
                   }
                }
                completion(liveStream)
+            }
+            } catch {
+               completion(nil)
             }
          case let .failure(error):
             print("System Error" + error.localizedDescription)
@@ -388,7 +421,8 @@ extension YTLiveRequest {
                         completion(nil)
                         return
                      }
-                        let json = JSON(data: data)
+                     do {
+                        let json = try JSON(data: data)
                      let error = json["error"]
                      if !error.isEmpty {
                         let message = json["message"].stringValue
@@ -397,6 +431,9 @@ extension YTLiveRequest {
                      } else {
                         let liveStream = LiveStreamModel.decode(json)
                         completion(liveStream)
+                     }
+                     } catch {
+                        completion(nil)
                      }
                   case .failure(let error):
                      print("System Error: " +  error.localizedDescription)
@@ -420,7 +457,8 @@ extension YTLiveRequest {
       YouTubeLiveVideoProvider.request(LiveStreamingAPI.deleteLiveStream(parameters)) { result in
          switch result {
          case let .success(response):
-               let json = JSON(data: response.data)
+            do {
+               let json = try JSON(data: response.data)
             let error = json["error"].stringValue
             if !error.isEmpty {
                let message = json["message"].stringValue
@@ -429,6 +467,9 @@ extension YTLiveRequest {
             } else {
                print("video stream deleted: \(json)")
                completion(true)
+            }
+            } catch {
+               completion(false)
             }
          case let .failure(error):
             print("System Error: \(error.localizedDescription)")
@@ -462,7 +503,8 @@ extension YTLiveRequest {
                         completion(false)
                         return
                      }
-                        let json = JSON(data: data)
+                     do {
+                        let json = try JSON(data: data)
                      let error = json["error"].stringValue
                      if !error.isEmpty {
                         let message = json["message"].stringValue
@@ -470,6 +512,9 @@ extension YTLiveRequest {
                         completion(false)
                      } else {
                         completion(true)
+                     }
+                     } catch {
+                        completion(false)
                      }
                   case .failure(let error):
                      print("System Error: \(error.localizedDescription)")

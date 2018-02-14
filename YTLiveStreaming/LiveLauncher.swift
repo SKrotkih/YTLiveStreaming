@@ -68,7 +68,7 @@ class LiveLauncher: NSObject {
       liveVideoStatusRequestTickTimer()
    }
    
-   func liveVideoStatusRequestTickTimer() {
+   @objc func liveVideoStatusRequestTickTimer() {
       statusRequest() { liveStatus in
          if liveStatus {
             self.isLiveStreaming = true

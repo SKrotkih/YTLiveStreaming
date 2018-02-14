@@ -42,29 +42,30 @@ class GooglePlusRequest: NSObject {
       
       //GoogleOAuth2.sharedInstance.clearToken()
       
-      
       let parameters: [String: AnyObject] = [:]
       GooglePlusProvider.request(GooglePlus.userInfo(parameters), completion: { result in
          switch result {
          case let .success(response):
-            let json = JSON(data: response.data)
-            let error = json["error"]
-            let message = error["message"].stringValue
-            if message.characters.count > 0 {
-               print("Error while getting broadcast info: " + message)
+            do {
+               let json = try JSON(data: response.data)
+               let error = json["error"]
+               let message = error["message"].stringValue
+               if !message.isEmpty {
+                  print("Error while getting broadcast info: " + message)
+                  completion(nil)
+               } else {
+                  //print(json)
+                  let aboutMeInfo = GooglePlusAboutMeModel.decode(json)
+                  completion(aboutMeInfo)
+               }
+            } catch {
+               print("System Error: \(error.localizedDescription)")
                completion(nil)
-            } else {
-               //print(json)
-               let aboutMeInfo = GooglePlusAboutMeModel.decode(json)
-               completion(aboutMeInfo)
             }
          case let .failure(error):
-            if let error = error as? CustomStringConvertible {
-               print("System Error: \(error.description)")
-            }
+            print("System Error: \(error.localizedDescription)")
             completion(nil)
          }
       })
    }
-   
 }

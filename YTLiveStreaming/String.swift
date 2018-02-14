@@ -1,22 +1,6 @@
 import Foundation
 
 public extension String {
-   func websiteLink() -> String {
-      var str = self
-      if str.hasPrefix("http://") {
-         str = str[str.characters.index(str.startIndex, offsetBy: "http://".characters.count)..<str.endIndex]
-      }
-      
-      if str.hasPrefix("www.") {
-         str = str[str.characters.index(str.startIndex, offsetBy: "www.".characters.count)..<str.endIndex]
-      }
-      
-      if let index = str.characters.index(of: "/") {
-         str = str.substring(to: index)
-      }
-      
-      return str
-   }
    
    func trim() -> String {
       return self.trimmingCharacters(in: CharacterSet.whitespaces)

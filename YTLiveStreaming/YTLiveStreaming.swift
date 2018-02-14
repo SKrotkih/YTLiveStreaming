@@ -262,8 +262,8 @@ extension YTLiveStreaming {
       })
    }
    
-   public func isYouTubeAvailable(completion: (Bool) -> Void) {
-      GoogleOAuth2.sharedInstance.isAccessTokenPresented(completion: completion)
+   public func isYouTubeAvailable() -> Bool {
+      return GoogleOAuth2.sharedInstance.isAccessTokenPresented
    }
 }
 

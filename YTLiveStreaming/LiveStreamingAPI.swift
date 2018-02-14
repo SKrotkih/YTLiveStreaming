@@ -20,13 +20,12 @@ private func JSONResponseDataFormatter(_ data: Data) -> Data {
    }
 }
 
-let BaseURL = "https://www.googleapis.com/youtube/v3"
-
 let requestClosure = { (endpoint: Moya.Endpoint<LiveStreamingAPI>, done: @escaping MoyaProvider<LiveStreamingAPI>.RequestResultClosure) in
    GoogleOAuth2.sharedInstance.requestToken() { token in
       if let token = token {
          var request = endpoint.urlRequest! as URLRequest
          request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+         request.addValue(Bundle.main.bundleIdentifier!, forHTTPHeaderField: "X-Ios-Bundle-Identifier")
          var nserror: NSError! = NSError(domain: "LiveStreamingAPIHttp", code: 0, userInfo: nil)
          let error = Moya.Error.underlying(nserror)
          done(Result(request, failWith: error))
@@ -52,7 +51,7 @@ enum LiveStreamingAPI {
 }
 
 extension LiveStreamingAPI: TargetType {
-   public var baseURL: URL { return URL(string: BaseURL)! }
+   public var baseURL: URL { return URL(string: LiveAPI.BaseURL)! }
    
    public var method: Moya.Method {
       switch self {

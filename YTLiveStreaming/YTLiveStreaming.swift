@@ -320,14 +320,3 @@ extension YTLiveStreaming {
    
 }
 
-// MARK: - GooglePlus API
-
-extension YTLiveStreaming {
-   
-   public func aboutMeInfo(completion: @escaping (GooglePlusAboutMeModel?) -> Void) {
-      GooglePlusRequest.aboutMeInfo(completion: { aboutMeInfo in
-         completion(aboutMeInfo)
-      })
-   }
-   
-}

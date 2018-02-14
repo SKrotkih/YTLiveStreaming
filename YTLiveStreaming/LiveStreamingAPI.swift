@@ -27,11 +27,11 @@ let requestClosure = { (endpoint: Moya.Endpoint<LiveStreamingAPI>, done: @escapi
          request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
          request.addValue(Bundle.main.bundleIdentifier!, forHTTPHeaderField: "X-Ios-Bundle-Identifier")
          var nserror: NSError! = NSError(domain: "LiveStreamingAPIHttp", code: 0, userInfo: nil)
-         let error = Moya.Error.underlying(nserror)
+         let error = MoyaError.underlying(nserror, nil)
          done(Result(request, failWith: error))
       } else {
          var nserror: NSError! = NSError(domain: "LiveStreamingAPIHttp", code: 4000, userInfo: ["NSLocalizedDescriptionKey": "Failed Google OAuth2 request token"])
-         let error = Moya.Error.underlying(nserror)
+         let error = MoyaError.underlying(nserror, nil)
          let request = endpoint.urlRequest! as URLRequest
          done(Result(request, failWith: error))
       }
@@ -51,6 +51,10 @@ enum LiveStreamingAPI {
 }
 
 extension LiveStreamingAPI: TargetType {
+   var headers: [String : String]? {
+      return nil
+   }
+   
    public var baseURL: URL { return URL(string: LiveAPI.BaseURL)! }
    
    public var method: Moya.Method {
@@ -136,7 +140,7 @@ extension LiveStreamingAPI: TargetType {
    }
    
    public var task: Task {
-      return .request
+      return .requestPlain
    }
    
 }

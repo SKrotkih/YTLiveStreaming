@@ -24,9 +24,6 @@
 		7F0478AC1DD5973A00AB6211 /* LiveBroadcastStreamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0478A71DD5973A00AB6211 /* LiveBroadcastStreamModel.swift */; };
 		7F0478AD1DD5973A00AB6211 /* LiveStreamListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0478A81DD5973A00AB6211 /* LiveStreamListModel.swift */; };
 		7F0478AE1DD5973A00AB6211 /* LiveStreamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0478A91DD5973A00AB6211 /* LiveStreamModel.swift */; };
-		7F101E9C1E0F63DF003EAF3F /* GooglePlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F101E991E0F63DF003EAF3F /* GooglePlus.swift */; };
-		7F101E9D1E0F63DF003EAF3F /* GooglePlusAboutMeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F101E9A1E0F63DF003EAF3F /* GooglePlusAboutMeModel.swift */; };
-		7F101E9E1E0F63DF003EAF3F /* GooglePlusRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F101E9B1E0F63DF003EAF3F /* GooglePlusRequest.swift */; };
 		7F101EA91E0FBD8A003EAF3F /* YTLiveStreaming.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 7F101EA81E0FBD8A003EAF3F /* YTLiveStreaming.podspec */; };
 		7F101EAB1E0FBDA5003EAF3F /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7F101EAA1E0FBDA5003EAF3F /* LICENSE */; };
 		7F117F291E0E816C000D0745 /* LiveLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F117F281E0E816C000D0745 /* LiveLauncher.swift */; };
@@ -64,9 +61,6 @@
 		7F0478A71DD5973A00AB6211 /* LiveBroadcastStreamModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveBroadcastStreamModel.swift; sourceTree = "<group>"; };
 		7F0478A81DD5973A00AB6211 /* LiveStreamListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveStreamListModel.swift; sourceTree = "<group>"; };
 		7F0478A91DD5973A00AB6211 /* LiveStreamModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveStreamModel.swift; sourceTree = "<group>"; };
-		7F101E991E0F63DF003EAF3F /* GooglePlus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlus.swift; sourceTree = "<group>"; };
-		7F101E9A1E0F63DF003EAF3F /* GooglePlusAboutMeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlusAboutMeModel.swift; sourceTree = "<group>"; };
-		7F101E9B1E0F63DF003EAF3F /* GooglePlusRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlusRequest.swift; sourceTree = "<group>"; };
 		7F101EA81E0FBD8A003EAF3F /* YTLiveStreaming.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = YTLiveStreaming.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		7F101EAA1E0FBDA5003EAF3F /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		7F117F281E0E816C000D0745 /* LiveLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveLauncher.swift; sourceTree = "<group>"; };
@@ -137,7 +131,6 @@
 		7F04787B1DD5962C00AB6211 /* YTLiveStreaming */ = {
 			isa = PBXGroup;
 			children = (
-				7F101E981E0F63D0003EAF3F /* GooglePlus */,
 				7F04789E1DD596EB00AB6211 /* Categories */,
 				7F04789D1DD596DF00AB6211 /* Model */,
 				7F0478931DD596BF00AB6211 /* Constants.swift */,
@@ -182,16 +175,6 @@
 				7F0478A01DD5970100AB6211 /* String.swift */,
 			);
 			name = Categories;
-			sourceTree = "<group>";
-		};
-		7F101E981E0F63D0003EAF3F /* GooglePlus */ = {
-			isa = PBXGroup;
-			children = (
-				7F101E991E0F63DF003EAF3F /* GooglePlus.swift */,
-				7F101E9A1E0F63DF003EAF3F /* GooglePlusAboutMeModel.swift */,
-				7F101E9B1E0F63DF003EAF3F /* GooglePlusRequest.swift */,
-			);
-			name = GooglePlus;
 			sourceTree = "<group>";
 		};
 		7F101EA71E0FBD6F003EAF3F /* Podspec Metadata */ = {
@@ -359,12 +342,9 @@
 			files = (
 				7F04789B1DD596BF00AB6211 /* YTLiveRequest.swift in Sources */,
 				7F0478AD1DD5973A00AB6211 /* LiveStreamListModel.swift in Sources */,
-				7F101E9E1E0F63DF003EAF3F /* GooglePlusRequest.swift in Sources */,
 				7F0478A11DD5970100AB6211 /* Date.swift in Sources */,
 				7F04789A1DD596BF00AB6211 /* LiveStreamingAPI.swift in Sources */,
 				7F0478981DD596BF00AB6211 /* Constants.swift in Sources */,
-				7F101E9D1E0F63DF003EAF3F /* GooglePlusAboutMeModel.swift in Sources */,
-				7F101E9C1E0F63DF003EAF3F /* GooglePlus.swift in Sources */,
 				7F0478AE1DD5973A00AB6211 /* LiveStreamModel.swift in Sources */,
 				7F0478AC1DD5973A00AB6211 /* LiveBroadcastStreamModel.swift in Sources */,
 				7F0478AA1DD5973A00AB6211 /* LiveBroadcastErrorModel.swift in Sources */,

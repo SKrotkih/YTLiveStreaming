@@ -67,7 +67,7 @@
 		7F101E991E0F63DF003EAF3F /* GooglePlus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlus.swift; sourceTree = "<group>"; };
 		7F101E9A1E0F63DF003EAF3F /* GooglePlusAboutMeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlusAboutMeModel.swift; sourceTree = "<group>"; };
 		7F101E9B1E0F63DF003EAF3F /* GooglePlusRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlusRequest.swift; sourceTree = "<group>"; };
-		7F101EA81E0FBD8A003EAF3F /* YTLiveStreaming.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = YTLiveStreaming.podspec; sourceTree = "<group>"; };
+		7F101EA81E0FBD8A003EAF3F /* YTLiveStreaming.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = YTLiveStreaming.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		7F101EAA1E0FBDA5003EAF3F /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		7F117F281E0E816C000D0745 /* LiveLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveLauncher.swift; sourceTree = "<group>"; };
 		7FA999B81DD6C81C0061AF0C /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
@@ -269,7 +269,7 @@
 					7F0478781DD5962C00AB6211 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = N5B5T39W8Y;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					7F0478811DD5962C00AB6211 = {
@@ -530,7 +530,8 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -553,7 +554,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

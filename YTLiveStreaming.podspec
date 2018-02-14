@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.summary      = "YTLiveStreaming is a YouTube Live Streaming Framework"
   s.requires_arc = true
 
-  s.version      = "0.1.10"
+  s.version      = "0.2.5"
 
   # Initialize
   # Check podspec
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   # git push -u origin master
 
   # Make for new version:
-  # 1. git tag 0.1.10
+  # 1. git tag 0.2.5
   # 2. git push -u origin master --tags
   # 3. pod spec lint YTLiveStreaming.podspec --allow-warnings
   # Push podspec with the new version info
@@ -35,10 +35,10 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/SKrotkih/YTLiveStreaming.git", :tag => s.version.to_s }
 
   s.frameworks   = "UIKit"
-  s.dependency 'Moya', '8.0.0-beta.6'
-  s.dependency 'AlamofireOauth2'
+  s.dependency 'Moya', '10.0.0'
   s.dependency 'LFLiveKit'
   s.dependency 'SwiftyJSON'
+  s.dependency 'KeychainAccess'
 
   s.source_files = "YTLiveStreaming/**/*.{swift,h,m}"
 

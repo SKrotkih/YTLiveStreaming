@@ -20,7 +20,7 @@ YTLiveStreaming is a framework for creating live broadcasts and video streams on
 - Create Oauth Cient ID
 - Add API key and OAuth 2.0 client ID:
 
-<img src="https://cloud.githubusercontent.com/assets/2775621/36204190-e80344a6-1192-11e8-9431-e18ad4bff9a3.png" alt="Google API Manager" style="width: 690px;" />
+<img src="https://user-images.githubusercontent.com/2775621/36204190-e80344a6-1192-11e8-9431-e18ad4bff9a3.png" alt="Google API Manager" style="width: 690px;" />
 
 Note. When you will create an API key, don't check iOS apps in the radio box. Don't worry about yellow warning Key restriction. Take the API key and Client ID. They will be used on the next step.
 
@@ -66,7 +66,7 @@ $ pod install
 
 - Put your CLIENT_ID and API_KEY into the plist.info:
 
-<img src="https://cloud.githubusercontent.com/assets/2775621/36204258-42684ab8-1193-11e8-88c4-a7668f7de368.png" alt="Credentials" style="width: 690px;" />
+<img src="https://user-images.githubusercontent.com/2775621/36204258-42684ab8-1193-11e8-88c4-a7668f7de368.png" alt="Credentials" style="width: 690px;" />
 
 ## User guide
 
@@ -145,5 +145,6 @@ And some other public methods of the YTLiveStreaming class
 - Moya
 
 11-11-2016
+
 Updated 02-14-2018
 

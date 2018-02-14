@@ -19,12 +19,13 @@ class YoutubePlayerViewController: UIViewController {
       }
    }
    
-   func moviePlayerPlaybackDidFinish(_ notification: Notification) {
+   @objc func moviePlayerPlaybackDidFinish(_ notification: Notification) {
       NotificationCenter.default.removeObserver(self, name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish, object: nil)
       if let finishReason: MPMovieFinishReason = (notification.userInfo![MPMoviePlayerPlaybackDidFinishReasonUserInfoKey]! as AnyObject).int32Value as? MPMovieFinishReason {
          if finishReason == .playbackError {
-            let error = notification.userInfo![XCDMoviePlayerPlaybackDidFinishErrorUserInfoKey]
-            print(error)
+            if let error = notification.userInfo![XCDMoviePlayerPlaybackDidFinishErrorUserInfoKey] {
+               print(error)
+            }
          }
       }
       delegate?.playerDidFinish()

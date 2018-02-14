@@ -16,7 +16,7 @@ protocol YouTubeLiveVideoOutput: class {
 }
 
 class LFLiveViewController: UIViewController {
-
+   
    var output: YouTubeLiveVideoOutput?
    var scheduledStartTime: NSDate?
    
@@ -28,13 +28,13 @@ class LFLiveViewController: UIViewController {
    @IBOutlet weak var startLiveButton: UIButton!
    @IBOutlet weak var currentStatusLabel: UILabel!
    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+   override func viewDidLoad() {
+      super.viewDidLoad()
       beautyButton.isExclusiveTouch = true
       cameraButton.isExclusiveTouch = true
       closeButton.isExclusiveTouch = true
-    }
-
+   }
+   
    override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(animated)
       DispatchQueue.main.async {
@@ -67,7 +67,7 @@ class LFLiveViewController: UIViewController {
          }
       }
    }
-
+   
    @IBAction func closeButtonPressed(_ sender: Any) {
       output?.cancelPublishing()
    }
@@ -76,3 +76,4 @@ class LFLiveViewController: UIViewController {
       currentStatusLabel.text = currStatus
    }
 }
+

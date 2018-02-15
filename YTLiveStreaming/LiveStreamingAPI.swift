@@ -61,11 +61,27 @@ enum LiveStreamingAPI {
 }
 
 extension LiveStreamingAPI: TargetType {
-   var headers: [String : String]? {
-      return nil
-   }
    
    public var baseURL: URL { return URL(string: LiveAPI.BaseURL)! }
+   
+   public var path: String {
+      switch self {
+      case .listBroadcasts(_):
+         return "/liveBroadcasts"
+      case .liveBroadcast(_):
+         return "/liveBroadcasts"
+      case .transitionLiveBroadcast(_):
+         return "/liveBroadcasts/transition"
+      case .deleteLiveBroadcast(_):
+         return "/liveBroadcasts"
+      case .bindLiveBroadcast(_):
+         return "/liveBroadcasts/bind"
+      case .liveStream(_):
+         return "/liveStreams"
+      case .deleteLiveStream(_):
+         return "/liveStreams"
+      }
+   }
    
    public var method: Moya.Method {
       switch self {
@@ -86,23 +102,22 @@ extension LiveStreamingAPI: TargetType {
       }
    }
    
-   public var path: String {
+   public var task: Task {
       switch self {
-      case .listBroadcasts(_):
-         return "/liveBroadcasts"
-      case .liveBroadcast(_):
-         return "/liveBroadcasts"
-      case .transitionLiveBroadcast(_):
-         return "/liveBroadcasts/transition"
-      case .deleteLiveBroadcast(_):
-         return "/liveBroadcasts"
-      case .bindLiveBroadcast(_):
-         return "/liveBroadcasts/bind"
-      case .liveStream(_):
-         return "/liveStreams"
-      case .deleteLiveStream(_):
-         return "/liveStreams"
-         
+      case .listBroadcasts(let parameters):
+         return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+      case .liveBroadcast(let parameters):
+         return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+      case .transitionLiveBroadcast(let parameters):
+         return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+      case .deleteLiveBroadcast(let parameters):
+         return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+      case .bindLiveBroadcast(let parameters):
+         return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+      case .liveStream(let parameters):
+         return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+      case .deleteLiveStream(let parameters):
+         return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
       }
    }
    
@@ -149,10 +164,9 @@ extension LiveStreamingAPI: TargetType {
       return []
    }
    
-   public var task: Task {
-      return .requestPlain
+   var headers: [String : String]? {
+      return ["Content-type": "application/json"]
    }
-   
 }
 
 public func url(_ route: TargetType) -> String {

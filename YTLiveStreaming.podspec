@@ -22,11 +22,11 @@ Pod::Spec.new do |s|
   # Make for new version:
   # 1. git tag 0.2.6
   # 2. git push -u origin master --tags
-  # 3. pod spec lint YTLiveStreaming.podspec --allow-warnings
+  # 3. pod spec lint YTLiveStreaming.podspec --allow-warnings --swift-version=4.0
   # Push podspec with the new version info
   # Create session:
   # 4. pod trunk register sergey.krotkih@gmail.com "Sergey Krotkih" --description="CocoaPods Session for the YTLiveStreaming"
-  # 5. pod trunk push YTLiveStreaming.podspec --verbose --allow-warnings
+  # 5. pod trunk push YTLiveStreaming.podspec --verbose --allow-warnings --swift-version=4.0
 
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author       = { "Sergey Krotkih" => "sergey.krotkih@gmail.com" }

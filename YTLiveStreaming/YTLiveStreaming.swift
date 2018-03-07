@@ -134,7 +134,7 @@ extension YTLiveStreaming {
       YTLiveRequest.updateLiveBroadcast(broadcast, completion: completion)
    }
    
-   public func startBroadcast(_ broadcast: LiveBroadcastStreamModel, delegate: YTLiveStreamingDelegate, completion: @escaping (String?, String?, Date?) -> Void) {
+   public func startBroadcast(_ broadcast: LiveBroadcastStreamModel, delegate: LiveStreamTransitioning, completion: @escaping (String?, String?, Date?) -> Void) {
       let broadcastId = broadcast.id
       let liveStreamId = broadcast.contentDetails.boundStreamId
       if !broadcastId.isEmpty &&  !liveStreamId.isEmpty {

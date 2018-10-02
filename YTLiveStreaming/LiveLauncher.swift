@@ -64,7 +64,7 @@ class LiveLauncher: NSObject {
    fileprivate func startTimerForChekingStatusStream() {
       timer?.invalidate()
       timer = Timer(timeInterval: AskStatusStreamFrequencyInSeconds, target: self, selector: #selector(liveVideoStatusRequestTickTimer), userInfo: nil, repeats: true)
-      RunLoop.main.add(timer!, forMode: RunLoopMode.commonModes)
+    RunLoop.main.add(timer!, forMode: RunLoop.Mode.common)
       liveVideoStatusRequestTickTimer()
    }
    

@@ -5,8 +5,8 @@ YTLiveStreaming is a framework for creating live broadcasts and video streams on
 
 ## Requirements
 
-- Xcode 9.2
-- Swift 4
+- Xcode 10.0
+- Swift 4.2
 
 ## Introduction
 
@@ -155,5 +155,5 @@ Sergey Krotkih
 
 11-11-2016
 
-Updated 02-14-2018
+Updated 10-02-2018
 

@@ -6,10 +6,10 @@ Pod::Spec.new do |s|
   s.description  = <<-DESC
      YTLiveStreaming is a framework which lets create live broadcasts and video streams on YouTube using the YouTube Live Streaming API.
                    DESC
-  s.summary      = "YTLiveStreaming is a YouTube Live Streaming Framework"
+  s.summary      = "YTLiveStreaming is an YouTube Live Streaming Framework"
   s.requires_arc = true
 
-  s.version      = "0.2.7"
+  s.version      = "0.2.10"
 
   # Initialize
   # Check podspec
@@ -20,9 +20,9 @@ Pod::Spec.new do |s|
   # git push -u origin master
 
   # Make for new version:
-  # 1. git tag 0.2.7
+  # 1. git tag 0.2.10
   # 2. git push -u origin master --tags
-  # 3. pod spec lint YTLiveStreaming.podspec --allow-warnings --swift-version=4.0
+  # 3. pod spec lint YTLiveStreaming.podspec --allow-warnings --swift-version=4.2
   # Push podspec with the new version info
   # Create session:
   # 4. pod trunk register sergey.krotkih@gmail.com "Sergey Krotkih" --description="CocoaPods Session for the YTLiveStreaming"

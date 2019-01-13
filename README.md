@@ -1,7 +1,7 @@
 # YTLiveStreaming
 
 YTLiveStreaming is a framework for creating live broadcasts and video streams on YouTube using the YouTube Live Streaming API
-(YouTube Data API v3) in Swift 4
+(YouTube Data API v3) in Swift 4.2
 
 ## Requirements
 
@@ -155,5 +155,4 @@ Sergey Krotkih
 
 11-11-2016
 
-Updated 10-02-2018
-
+Updated 14-01-2019

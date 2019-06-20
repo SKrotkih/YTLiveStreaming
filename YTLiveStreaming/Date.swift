@@ -24,9 +24,15 @@ extension Date {
          $0 == " " ? "T" : $0
          })
       let timeZone: TimeZone = TimeZone.autoupdatingCurrent
-      let gmt = ("0" + String(timeZone.secondsFromGMT(for: self) / 3600)) as NSString
-      gmt.substring(with: NSRange(location: gmt.length - 2, length: 2))
-      let startDate = startDateStr + "+" + (gmt as String) + ":00"
+      let gmth = timeZone.secondsFromGMT(for: self) / 3600
+      let gmtm = (timeZone.secondsFromGMT(for: self) % 3600)/60
+    
+      var hour:String = String(format: "+%02d", gmth)
+      if(gmth < 0) {
+        hour = String(format: "%03d", gmth)
+      }
+    
+      let startDate = startDateStr + hour + ":" +  String(format: "%02d", gmtm)
       return startDate
    }
    

@@ -110,7 +110,7 @@ extension ViewController {
    fileprivate func setUpRefreshControl() {
       self.refreshControl = UIRefreshControl()
       self.refreshControl.tintColor = UIColor.red
-      self.refreshControl.addTarget(self, action: #selector(ViewController.refreshData(_:)), for: UIControlEvents.valueChanged)
+    self.refreshControl.addTarget(self, action: #selector(ViewController.refreshData(_:)), for: UIControl.Event.valueChanged)
       self.tableView.addSubview(refreshControl)
    }
    

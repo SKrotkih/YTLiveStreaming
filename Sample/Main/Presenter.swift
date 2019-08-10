@@ -136,7 +136,7 @@ extension Presenter: YouTubeLiveVideoOutput {
          assert(false, "Need Broadcast object for starting live video!")
          return
       }
-      youTubeWorker.startBroadcast(broadcast, delegate: self, completion: { streamName, streamUrl, scheduledStartTime in
+    youTubeWorker.startBroadcast(broadcast, delegate: self as! LiveStreamTransitioning, completion: { streamName, streamUrl, scheduledStartTime in
          if let streamName = streamName, let streamUrl = streamUrl, let scheduledStartTime = scheduledStartTime {
             self.liveViewController.scheduledStartTime = scheduledStartTime as NSDate?
             completed(streamUrl, streamName)
@@ -170,9 +170,7 @@ extension Presenter: YouTubeLiveVideoOutput {
    }
 }
 
-// MARK: YTLiveStreamingDelegate protocol
-
-extension Presenter: YTLiveStreamingDelegate {
+extension Presenter {
    
    func didTransitionToLiveStatus() {
       self.liveViewController.showCurrentStatus(currStatus: "● LIVE")

@@ -16,7 +16,7 @@ class Alert: NSObject {
     fileprivate override init() {
         let screenBounds = UIScreen.main.bounds
         popupWindow = UIWindow(frame: CGRect(x: 0, y: 0, width: screenBounds.width, height: screenBounds.height))
-        popupWindow.windowLevel = UIWindowLevelStatusBar + 1
+        popupWindow.windowLevel = UIWindow.Level.statusBar + 1
         
         rootVC = StatusBarShowingViewController()
         popupWindow.rootViewController = rootVC
@@ -26,8 +26,8 @@ class Alert: NSObject {
 
     func showOk(_ title: String, message: String, onComplete: @escaping ()->Void = {  }) {
         popupWindow.isHidden = false
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { _ in
             self.resignPopupWindow()
             onComplete()
         }))
@@ -37,12 +37,12 @@ class Alert: NSObject {
     
     func showOkCancel(_ title: String, message: String, onComplete: (()->Void)?, onCancel: (()->Void)?) {
         popupWindow.isHidden = false
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { _ in
             self.resignPopupWindow()
             onComplete?()
         })
-        let cancelAction = UIAlertAction(title: "Close", style: UIAlertActionStyle.cancel, handler: { _ in
+        let cancelAction = UIAlertAction(title: "Close", style: UIAlertAction.Style.cancel, handler: { _ in
             self.resignPopupWindow()
             onCancel?()
         })
@@ -54,12 +54,12 @@ class Alert: NSObject {
     
     func showYesNo(_ title: String, message: String, onYes: @escaping ()->Void = {}, onNo: @escaping ()->Void = {}) {
         popupWindow.isHidden = false
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: { _ in
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let okAction = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { _ in
             self.resignPopupWindow()
             onYes()
         })
-        let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default, handler: { _ in
+        let cancelAction = UIAlertAction(title: "No", style: UIAlertAction.Style.default, handler: { _ in
             self.resignPopupWindow()
             onNo()
         })
@@ -71,12 +71,12 @@ class Alert: NSObject {
     
     func showConfirmCancel(_ title: String, message: String, onConfirm: @escaping ()->Void = {}, onCancel: @escaping ()->Void = {}) {
         popupWindow.isHidden = false
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let okAction = UIAlertAction(title: "Conform", style: UIAlertActionStyle.default, handler: { _ in
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let okAction = UIAlertAction(title: "Conform", style: UIAlertAction.Style.default, handler: { _ in
             self.resignPopupWindow()
             onConfirm()
         })
-        let cancelAction = UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler: { _ in
+        let cancelAction = UIAlertAction(title: "Close", style: UIAlertAction.Style.default, handler: { _ in
             self.resignPopupWindow()
             onCancel()
         })
@@ -88,12 +88,12 @@ class Alert: NSObject {
     
     func showConfirmChange(_ title: String, message: String, onConfirm: @escaping ()->Void = {}, onChange: @escaping ()->Void = {}) {
         popupWindow.isHidden = false
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let okAction = UIAlertAction(title: "Conform", style: UIAlertActionStyle.default, handler: { _ in
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let okAction = UIAlertAction(title: "Conform", style: UIAlertAction.Style.default, handler: { _ in
             self.resignPopupWindow()
             onConfirm()
         })
-        let cancelAction = UIAlertAction(title: "Change", style: UIAlertActionStyle.default, handler: { _ in
+        let cancelAction = UIAlertAction(title: "Change", style: UIAlertAction.Style.default, handler: { _ in
             self.resignPopupWindow()
             onChange()
         })
@@ -105,12 +105,12 @@ class Alert: NSObject {
     
     func showOkChange(_ title: String, message: String, onOk: @escaping ()->Void = {}, onChange: @escaping ()->Void = {}) {
         popupWindow.isHidden = false
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { _ in
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let okAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in
             self.resignPopupWindow()
             onOk()
         })
-        let cancelAction = UIAlertAction(title: "Change", style: UIAlertActionStyle.default, handler: { _ in
+        let cancelAction = UIAlertAction(title: "Change", style: UIAlertAction.Style.default, handler: { _ in
             self.resignPopupWindow()
             onChange()
         })
@@ -122,12 +122,12 @@ class Alert: NSObject {
     
     func showLetsgoLater(_ title: String, message: String, onLetsGo: @escaping ()->Void = {}, onLater: @escaping ()->Void = {}) {
         popupWindow.isHidden = false
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let letsGoAction = UIAlertAction(title: "Go", style: UIAlertActionStyle.default, handler: { _ in
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let letsGoAction = UIAlertAction(title: "Go", style: UIAlertAction.Style.default, handler: { _ in
             self.resignPopupWindow()
             onLetsGo()
         })
-        let laterAction = UIAlertAction(title: "Later", style: UIAlertActionStyle.default, handler: { _ in
+        let laterAction = UIAlertAction(title: "Later", style: UIAlertAction.Style.default, handler: { _ in
             self.resignPopupWindow()
             onLater()
         })
@@ -139,12 +139,12 @@ class Alert: NSObject {
     
     func showOkNo(_ title: String, message: String, onOk: @escaping ()->Void = {}, onNo: @escaping ()->Void = {}) {
         popupWindow.isHidden = false
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let letsGoAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { _ in
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let letsGoAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in
             self.resignPopupWindow()
             onOk()
         })
-        let laterAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default, handler: { _ in
+        let laterAction = UIAlertAction(title: "No", style: UIAlertAction.Style.default, handler: { _ in
             self.resignPopupWindow()
             onNo()
         })

@@ -14,7 +14,6 @@
 		7F53B1AB2030724200E09CFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F53B1A82030724200E09CFA /* Main.storyboard */; };
 		7F53B1B12030B38100E09CFA /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F53B1B02030B38100E09CFA /* Interactor.swift */; };
 		7F53B1B72030B4B400E09CFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F53B1B32030B4B300E09CFA /* AppDelegate.swift */; };
-		7F53B1BB2030B57E00E09CFA /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F53B1BA2030B57E00E09CFA /* Info.plist */; };
 		7F83E3371DBDD35500DE4102 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E3361DBDD35500DE4102 /* TableViewCell.swift */; };
 		7F83E34C1DBDD49100DE4102 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E3481DBDD49100DE4102 /* Dependencies.swift */; };
 		7F83E34D1DBDD49100DE4102 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E3491DBDD49100DE4102 /* Presenter.swift */; };
@@ -283,6 +282,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -303,7 +303,6 @@
 			files = (
 				7F53B1AB2030724200E09CFA /* Main.storyboard in Resources */,
 				7F9274B31DBDCAD00051DE6B /* Assets.xcassets in Resources */,
-				7F53B1BB2030B57E00E09CFA /* Info.plist in Resources */,
 				7F53B1AA2030724200E09CFA /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,7 +336,6 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-YouTubeLiveVideo/Pods-YouTubeLiveVideo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
@@ -351,7 +349,6 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
@@ -478,6 +475,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -518,6 +516,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -545,7 +544,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "YouTubeLiveVideo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -571,7 +570,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "YouTubeLiveVideo-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

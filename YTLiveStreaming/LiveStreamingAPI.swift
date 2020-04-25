@@ -8,7 +8,6 @@
 
 import Foundation
 import Moya
-import Result
 
 private func JSONResponseDataFormatter(_ data: Data) -> Data {
    do {
@@ -20,35 +19,29 @@ private func JSONResponseDataFormatter(_ data: Data) -> Data {
    }
 }
 
-let requestClosure = { (endpoint: Moya.Endpoint<LiveStreamingAPI>, done: @escaping MoyaProvider<LiveStreamingAPI>.RequestResultClosure) in
+let requestClosure = { (endpoint: Moya.Endpoint, done: @escaping MoyaProvider<LiveStreamingAPI>.RequestResultClosure) in
    GoogleOAuth2.sharedInstance.requestToken() { token in
       if let token = token {
          do {
             var request = try endpoint.urlRequest() as URLRequest
             request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             request.addValue(Bundle.main.bundleIdentifier!, forHTTPHeaderField: "X-Ios-Bundle-Identifier")
-            var nserror: NSError! = NSError(domain: "LiveStreamingAPIHttp", code: 0, userInfo: nil)
-            let error = MoyaError.underlying(nserror, nil)
-            done(Result(request, failWith: error))
+            done(.success(request))
          }
          catch {
-            
-         }
-      } else {
-         do {
-            let request = try endpoint.urlRequest() as URLRequest
             var nserror: NSError! = NSError(domain: "LiveStreamingAPIHttp", code: 4000, userInfo: ["NSLocalizedDescriptionKey": "Failed Google OAuth2 request token"])
             let error = MoyaError.underlying(nserror, nil)
-            done(Result(request, failWith: error))
+            done(.failure(error))
          }
-         catch {
-            
-         }
+      } else {
+        var nserror: NSError! = NSError(domain: "LiveStreamingAPIHttp", code: 4000, userInfo: ["NSLocalizedDescriptionKey": "Failed Google OAuth2 request token"])
+        let error = MoyaError.underlying(nserror, nil)
+        done(.failure(error))
       }
    }
 }
 
-let YouTubeLiveVideoProvider = MoyaProvider<LiveStreamingAPI>(requestClosure: requestClosure, plugins: [NetworkLoggerPlugin(verbose: true, responseDataFormatter: JSONResponseDataFormatter)])
+let YouTubeLiveVideoProvider = MoyaProvider<LiveStreamingAPI>(requestClosure: requestClosure, plugins: [NetworkLoggerPlugin()])
 
 enum LiveStreamingAPI {
    case listBroadcasts([String: AnyObject])

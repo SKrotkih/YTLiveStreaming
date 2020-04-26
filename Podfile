@@ -1,6 +1,6 @@
 target 'YTLiveStreaming' do
     
-    platform :ios, '11.0'
+    platform :ios, '11.2'
 
     use_frameworks!
     

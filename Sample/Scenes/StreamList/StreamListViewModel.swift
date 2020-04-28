@@ -8,7 +8,7 @@ import RxSwift
 
 class StreamListViewModel {
     
-    unowned var interactor: LiveStreamingInteractor!
+    var interactor: LiveStreamingInteractor!
     unowned var viewController: StreamListViewController!
 
     private let disposeBag = DisposeBag()

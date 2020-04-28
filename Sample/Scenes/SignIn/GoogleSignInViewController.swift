@@ -9,13 +9,15 @@ import GoogleSignIn
 // [START viewcontroller_interfaces]
 class GoogleSignInViewController: UIViewController {
     // [END viewcontroller_interfaces]
+
+    var viewModel: GoogleSignInViewModel!
+    var interactor: GoogleSignInInteractor!
     
     // [START viewcontroller_vars]
     @IBOutlet weak var signInButton: GIDSignInButton!
     // [END viewcontroller_vars]
     
-    var interactor: GoogleSignInInteractor!
-    private var viewModel: GoogleSignInViewModel!
+    let dependencies = GoogleSignInDependencies()
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -24,14 +26,12 @@ class GoogleSignInViewController: UIViewController {
     // [START viewdidload]
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        configureViewModel()
+        dependencies.configure(self)
     }
     // [END viewdidload]
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         startListeningToSignIn()
     }
     
@@ -45,11 +45,6 @@ class GoogleSignInViewController: UIViewController {
 // MARK: - Private Methods
 
 extension GoogleSignInViewController {
-    
-    private func configureViewModel() {
-        viewModel = GoogleSignInViewModel(viewController: self, interactor: interactor)
-        viewModel.configure()
-    }
     
     private func startListeningToSignIn() {
         viewModel.startListeningToSignIn { result in

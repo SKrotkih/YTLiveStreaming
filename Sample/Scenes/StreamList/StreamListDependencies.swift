@@ -1,24 +1,30 @@
 //
-//  Dependencies.swift
+//  StreamListDependencies.swift
 //  YouTubeLiveVideo
 //
 
 import UIKit
 import YTLiveStreaming
 
-class Dependencies: NSObject {
+class StreamListDependencies: NSObject {
     
     func configure(_ viewController: StreamListViewController) {
+        let signInInteractor = AppDelegate.shared.googleSignIn
+        
+        viewController.signInInteractor = signInInteractor
+        viewController.signInViewModel = GoogleSessionViewModel(viewController: viewController, signInInteractor: signInInteractor)
+        let streamListInteractor = LiveStreamingInteractor()
+        viewController.streamListViewModel = StreamListViewModel(viewController: viewController, interactor: streamListInteractor)
+
+        
+        
+        
         
         let worker = YTLiveStreaming()
         let presenter = Presenter()
         let interactor = LiveStreamingInteractor()
         
-        let signInInteractor = AppDelegate.shared.googleSignIn
-        
         interactor.input = worker
-        
-        viewController.input = worker
         
         presenter.viewController = viewController
         presenter.signinInteractor = signInInteractor

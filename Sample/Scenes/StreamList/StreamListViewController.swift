@@ -15,11 +15,9 @@ struct Stream {
 class StreamListViewController: UIViewController {
     
     unowned var signInInteractor: GoogleSignInInteractor!
-    private var signInViewModel: GoogleSessionViewModel!
-    private var streamListInteractor: LiveStreamingInteractor!
-    private var streamListViewModel: StreamListViewModel!
     
-    var input: YTLiveStreaming!
+    var signInViewModel: GoogleSessionViewModel!
+    var streamListViewModel: StreamListViewModel!
     
     internal struct CellName {
         static let StreamItemCell = "TableViewCell"
@@ -31,25 +29,21 @@ class StreamListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
+
     fileprivate var refreshControl: UIRefreshControl!
     
     fileprivate var upcomingStreams = [Stream]()
     fileprivate var currentStreams = [Stream]()
     fileprivate var pastStreams = [Stream]()
-    
-    let rxSignInNeeded: PublishSubject<Bool> = PublishSubject()
+
+    let dependencies = StreamListDependencies()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let dependencies = Dependencies()
+
         dependencies.configure(self)
         
         configureView()
-
-        configureSignInViewModel()
-        configureStreamListViewModel()
         signInViewModel.didLoad()
     }
     
@@ -57,15 +51,6 @@ class StreamListViewController: UIViewController {
         setUpRefreshControl()
     }
 
-    private func configureSignInViewModel() {
-        signInViewModel = GoogleSessionViewModel(viewController: self, signInInteractor: signInInteractor)
-    }
-    
-    private func configureStreamListViewModel() {
-        streamListInteractor = LiveStreamingInteractor()
-        streamListViewModel = StreamListViewModel(viewController: self, interactor: streamListInteractor)
-    }
-    
     func present(content: (upcoming: [Stream], current: [Stream], past: [Stream])) {
         DispatchQueue.main.async() {
             self.upcomingStreams = content.upcoming

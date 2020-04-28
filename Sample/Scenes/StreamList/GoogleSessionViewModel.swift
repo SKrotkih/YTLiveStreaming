@@ -35,7 +35,7 @@ class GoogleSessionViewModel {
                 self.viewController.startActivity()
                 self.interactor.signOut()
             }).disposed(by: disposeBag)
-
+        
         viewController
             .disconnectButton.rx
             .tap

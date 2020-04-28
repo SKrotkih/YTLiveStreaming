@@ -34,6 +34,12 @@ class GoogleSignInViewController: UIViewController {
         
         startListeningToSignIn()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let streamListVC = segue.destination as? StreamListViewController {
+            streamListVC.signInInteractor = interactor
+        }
+    }
 }
 
 // MARK: - Private Methods

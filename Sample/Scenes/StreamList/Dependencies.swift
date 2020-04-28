@@ -12,15 +12,13 @@ class Dependencies: NSObject {
         
         let worker = YTLiveStreaming()
         let presenter = Presenter()
-        let interactor = YouTubeInteractor()
+        let interactor = LiveStreamingInteractor()
         
         let signInInteractor = AppDelegate.shared.googleSignIn
         
         interactor.input = worker
         
         viewController.input = worker
-        viewController.presenter = presenter
-        viewController.eventHandler = presenter
         
         presenter.viewController = viewController
         presenter.signinInteractor = signInInteractor

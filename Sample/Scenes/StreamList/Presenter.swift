@@ -14,7 +14,7 @@ class Presenter: NSObject {
    var signinInteractor: GoogleSignInInteractor!
    
    var youTubeWorker: YTLiveStreaming!
-   var interactor: YouTubeInteractor!
+   var interactor: LiveStreamingInteractor!
    
    fileprivate var liveBroadcast: LiveBroadcastStreamModel?
    fileprivate var liveViewController: LFLiveViewController!

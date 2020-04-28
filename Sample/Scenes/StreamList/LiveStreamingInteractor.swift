@@ -1,5 +1,5 @@
 //
-//  YouTubeInteractor.swift
+//  LiveStreamingInteractor.swift
 //  YouTubeLiveVideo
 //
 
@@ -8,7 +8,7 @@ import YTLiveStreaming
 
 typealias BroadCastStreams = (_ upcoming: [Stream], _ current: [Stream], _ past: [Stream]) -> Void
 
-class YouTubeInteractor: NSObject {
+class LiveStreamingInteractor: NSObject {
    
    // Dependebcies
    var input: YTLiveStreaming!
@@ -88,7 +88,7 @@ class YouTubeInteractor: NSObject {
 
 // MARK: -
 
-extension YouTubeInteractor {
+extension LiveStreamingInteractor {
    
    func getUpcomingBroadcastItem(index: Int) -> LiveBroadcastStreamModel {
       assert(index < upcoming.count, "Broadcast index is invalid")

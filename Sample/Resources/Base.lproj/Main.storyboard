@@ -97,18 +97,26 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J7W-c8-bcn">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                                 <subviews>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UHp-jt-BwV">
-                                        <rect key="frame" x="181" y="13" width="49" height="30"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pAK-Am-Tnu">
+                                        <rect key="frame" x="94" y="13" width="49" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="lLb-rA-GOd"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="49" id="K7J-xQ-q82"/>
+                                            <constraint firstAttribute="height" constant="30" id="ROx-vN-xaa"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="Sign Out">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
-                                        <connections>
-                                            <action selector="signOutButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Aew-od-7fA"/>
-                                        </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UHp-jt-BwV">
+                                        <rect key="frame" x="166" y="13" width="64" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="lLb-rA-GOd"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <state key="normal" title="Disconnect">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1E-Zl-lDA">
                                         <rect key="frame" x="240" y="11" width="127" height="34"/>
@@ -130,18 +138,18 @@
                                                 <include reference="7wo-Jb-uBS"/>
                                             </mask>
                                         </variation>
-                                        <connections>
-                                            <action selector="createBroadcastButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mkd-JY-rcW"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="pAK-Am-Tnu" firstAttribute="leading" secondItem="J7W-c8-bcn" secondAttribute="leading" constant="94" id="5It-cJ-Jaa"/>
                                     <constraint firstItem="UHp-jt-BwV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="J7W-c8-bcn" secondAttribute="leading" constant="20" symbolic="YES" id="80a-na-sc4"/>
                                     <constraint firstAttribute="height" constant="56" id="B4D-z2-gGd"/>
                                     <constraint firstItem="K1E-Zl-lDA" firstAttribute="trailing" secondItem="J7W-c8-bcn" secondAttribute="trailingMargin" id="IJF-MS-rTd"/>
+                                    <constraint firstItem="UHp-jt-BwV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pAK-Am-Tnu" secondAttribute="trailing" constant="8" symbolic="YES" id="JEC-af-n4q"/>
                                     <constraint firstItem="K1E-Zl-lDA" firstAttribute="centerY" secondItem="J7W-c8-bcn" secondAttribute="centerY" id="YCb-B4-Xa3"/>
                                     <constraint firstItem="K1E-Zl-lDA" firstAttribute="leading" secondItem="UHp-jt-BwV" secondAttribute="trailing" constant="10" id="iU6-IZ-HRK"/>
+                                    <constraint firstItem="pAK-Am-Tnu" firstAttribute="centerY" secondItem="UHp-jt-BwV" secondAttribute="centerY" id="kzZ-ot-u98"/>
                                     <constraint firstItem="UHp-jt-BwV" firstAttribute="centerY" secondItem="K1E-Zl-lDA" secondAttribute="centerY" id="uT5-ca-UFr"/>
                                 </constraints>
                                 <variation key="default">
@@ -278,7 +286,9 @@
                     <navigationItem key="navigationItem" id="TdB-fK-77R"/>
                     <connections>
                         <outlet property="activityIndicator" destination="5f9-ko-rs4" id="S6B-M2-rKb"/>
-                        <outlet property="signOutButton" destination="UHp-jt-BwV" id="FQL-b6-hmd"/>
+                        <outlet property="createBroadcastButton" destination="K1E-Zl-lDA" id="hFk-ZZ-Edc"/>
+                        <outlet property="disconnectButton" destination="UHp-jt-BwV" id="MIq-bu-bNh"/>
+                        <outlet property="signOutButton" destination="pAK-Am-Tnu" id="Yxc-Ew-MVj"/>
                         <outlet property="tableView" destination="6i4-xu-QJL" id="HdF-Zz-450"/>
                     </connections>
                 </viewController>

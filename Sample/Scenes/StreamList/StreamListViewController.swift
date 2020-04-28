@@ -7,9 +7,6 @@ import UIKit
 import YTLiveStreaming
 import RxSwift
 
-// NEW: 1052952934375-9c5i3ar8b197eg7rnqdd39mf7l585ihi.apps.googleusercontent.com
-// OLD: 495403403209-heee4af4qefp6ujvi216ar5rockjnr6l.apps.googleusercontent.com
-
 struct Stream {
     var time: String
     var name: String
@@ -17,24 +14,26 @@ struct Stream {
 
 class StreamListViewController: UIViewController {
     
-    var input: YTLiveStreaming!
-    var presenter: Presenter!
-    var eventHandler: Presenter!
+    unowned var signInInteractor: GoogleSignInInteractor!
+    private var signInViewModel: GoogleSessionViewModel!
+    private var streamListInteractor: LiveStreamingInteractor!
+    private var streamListViewModel: StreamListViewModel!
     
-    private var signInView: GoogleSignInViewInterface!
+    var input: YTLiveStreaming!
     
     internal struct CellName {
         static let StreamItemCell = "TableViewCell"
     }
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var signInBackgroundView: UIView!
-    @IBOutlet weak var userInfoLabel: UILabel!
-    @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var signOutButton: UIButton!
+    @IBOutlet weak var disconnectButton: UIButton!
+    @IBOutlet weak var createBroadcastButton: UIButton!
+    
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     fileprivate var refreshControl: UIRefreshControl!
+    
     fileprivate var upcomingStreams = [Stream]()
     fileprivate var currentStreams = [Stream]()
     fileprivate var pastStreams = [Stream]()
@@ -48,37 +47,23 @@ class StreamListViewController: UIViewController {
         dependencies.configure(self)
         
         configureView()
-        
-        signInView.didLoad()
-    }
-    
-    @IBAction func createBroadcastButtonTapped(_ sender: AnyObject) {
-        creadeBroadcast()
+
+        configureSignInViewModel()
+        configureStreamListViewModel()
+        signInViewModel.didLoad()
     }
     
     private func configureView() {
-        addSignInView()
         setUpRefreshControl()
     }
-    
-    private func addSignInView() {
-        // TODO: Here should be Factory
-        signInView = GoogleSignInView(viewController: self)
+
+    private func configureSignInViewModel() {
+        signInViewModel = GoogleSessionViewModel(viewController: self, signInInteractor: signInInteractor)
     }
     
-    func presentUserInfo(connected: Bool, userInfo: String ) {
-        DispatchQueue.main.async {
-            if connected {
-                self.signInButton.isHidden = true
-                self.userInfoLabel.isHidden = false
-                self.userInfoLabel.text = userInfo
-                self.signOutButton.isHidden = false
-            } else {
-                self.signInButton.isHidden = false
-                self.userInfoLabel.isHidden = true
-                self.signOutButton.isHidden = true
-            }
-        }
+    private func configureStreamListViewModel() {
+        streamListInteractor = LiveStreamingInteractor()
+        streamListViewModel = StreamListViewModel(viewController: self, interactor: streamListInteractor)
     }
     
     func present(content: (upcoming: [Stream], current: [Stream], past: [Stream])) {
@@ -101,6 +86,11 @@ class StreamListViewController: UIViewController {
             self?.activityIndicator.stopAnimating()
         }
     }
+    
+    func close() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
 }
 
 // MARK: Refresh Controller
@@ -116,24 +106,7 @@ extension StreamListViewController {
     
     @objc func refreshData(_ sender: AnyObject) {
         self.refreshControl.endRefreshing()
-        signInView.reloadData()
-    }
-}
-
-// MARK: - Private methods
-
-extension StreamListViewController {
-    
-    fileprivate func creadeBroadcast() {
-        Alert.sharedInstance.showConfirmCancel("YouTube Live Streaming API", message: "You realy want to create a new Live broadcast video?", onConfirm: {
-            self.eventHandler.createBroadcast() { error in
-                if let error = error {
-                    Alert.sharedInstance.showOk("Error", message: error.localizedDescription)
-                } else {
-                    Alert.sharedInstance.showOk("Done", message: "Please, refresh the table after pair seconds (pull down)")
-                }
-            }
-        })
+        streamListViewModel.reloadData()
     }
 }
 
@@ -191,6 +164,6 @@ extension StreamListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        eventHandler.launchLiveStream(section: indexPath.section, index: indexPath.row)
+        streamListViewModel.launchStream(section: indexPath.section, index: indexPath.row)
     }
 }

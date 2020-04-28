@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Dp0-Ym-GUw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Dp0-Ym-GUw">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -27,7 +27,7 @@
         <!--Google Sign In View Controller-->
         <scene sceneID="9qC-sI-G38">
             <objects>
-                <viewController id="pph-nD-yos" customClass="GoogleSignInViewController" sceneMemberID="viewController">
+                <viewController id="pph-nD-yos" customClass="GoogleSignInViewController" customModule="YouTubeLiveVideo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cPr-2u-Zg8"/>
                         <viewControllerLayoutGuide type="bottom" id="mxb-aJ-Pgs"/>
@@ -36,12 +36,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BPr-8M-IRH">
-                                <rect key="frame" x="15" y="534" width="345" height="0.0"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-logo" translatesAutoresizingMaskIntoConstraints="NO" id="Ehc-aJ-xPd">
+                                <rect key="frame" x="147.5" y="293.5" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="IdJ-Jl-Fln"/>
+                                    <constraint firstAttribute="width" constant="80" id="Ym2-vn-xmn"/>
+                                </constraints>
+                            </imageView>
                             <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="2SR-5M-ihU" customClass="GIDSignInButton">
                                 <rect key="frame" x="107.5" y="584" width="160" height="49"/>
                                 <color key="backgroundColor" red="0.66666668650000005" green="0.66666668650000005" blue="0.66666668650000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -50,31 +51,20 @@
                                     <constraint firstAttribute="width" constant="160" id="kMC-ec-JdM"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-logo" translatesAutoresizingMaskIntoConstraints="NO" id="Ehc-aJ-xPd">
-                                <rect key="frame" x="147.5" y="293.5" width="80" height="80"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="IdJ-Jl-Fln"/>
-                                    <constraint firstAttribute="width" constant="80" id="Ym2-vn-xmn"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="mxb-aJ-Pgs" firstAttribute="top" secondItem="2SR-5M-ihU" secondAttribute="bottom" constant="34" id="4aH-1r-3aN"/>
                             <constraint firstItem="2SR-5M-ihU" firstAttribute="centerX" secondItem="IWH-eP-jG6" secondAttribute="centerX" id="Cvy-hi-KdW"/>
                             <constraint firstItem="Ehc-aJ-xPd" firstAttribute="centerX" secondItem="IWH-eP-jG6" secondAttribute="centerX" id="LFz-AY-Uk3"/>
-                            <constraint firstAttribute="trailing" secondItem="BPr-8M-IRH" secondAttribute="trailing" constant="15" id="MKH-NA-n1g"/>
                             <constraint firstItem="Ehc-aJ-xPd" firstAttribute="centerY" secondItem="IWH-eP-jG6" secondAttribute="centerY" id="Mag-FX-TFs"/>
-                            <constraint firstItem="2SR-5M-ihU" firstAttribute="top" secondItem="BPr-8M-IRH" secondAttribute="bottom" constant="50" id="amP-ZL-a9c"/>
                             <constraint firstItem="2SR-5M-ihU" firstAttribute="width" secondItem="2SR-5M-ihU" secondAttribute="height" multiplier="160:49" id="byP-uj-4xN"/>
-                            <constraint firstItem="BPr-8M-IRH" firstAttribute="leading" secondItem="IWH-eP-jG6" secondAttribute="leading" constant="15" id="o0C-Hd-Vi5"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="GwT-YG-Hjd"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="signInButton" destination="2SR-5M-ihU" id="Vr1-mz-gsX"/>
-                        <outlet property="statusText" destination="BPr-8M-IRH" id="RdS-U9-d6z"/>
+                        <outlet property="signInButton" destination="2SR-5M-ihU" id="RO0-Hi-cmF"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="streamlist" id="Wto-ez-Bqs"/>
                     </connections>
                 </viewController>

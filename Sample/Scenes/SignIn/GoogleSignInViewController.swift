@@ -7,7 +7,7 @@ import UIKit
 import GoogleSignIn
 
 // [START viewcontroller_interfaces]
-class GoogleSignInViewController: UIViewController {
+class GoogleSignInViewController: BaseViewController {
     // [END viewcontroller_interfaces]
 
     var viewModel: GoogleSignInViewModel!
@@ -19,10 +19,6 @@ class GoogleSignInViewController: UIViewController {
     
     let dependencies = GoogleSignInDependencies()
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle.lightContent
-    }
-    
     // [START viewdidload]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,9 +28,16 @@ class GoogleSignInViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         startListeningToSignIn()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Show the Navigation Bar
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let streamListVC = segue.destination as? StreamListViewController {
             streamListVC.signInInteractor = interactor

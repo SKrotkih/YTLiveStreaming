@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Main Nav Controller-->
         <scene sceneID="VtU-V6-cfz">
             <objects>
-                <navigationController id="Dp0-Ym-GUw" sceneMemberID="viewController">
+                <navigationController id="Dp0-Ym-GUw" customClass="MainNavController" customModule="YouTubeLiveVideo" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aYc-Cr-PUc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -62,7 +62,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="GwT-YG-Hjd"/>
-                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="signInButton" destination="2SR-5M-ihU" id="RO0-Hi-cmF"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="streamlist" id="Wto-ez-Bqs"/>
@@ -72,7 +71,7 @@
             </objects>
             <point key="canvasLocation" x="-610.39999999999998" y="614.84257871064472"/>
         </scene>
-        <!--Stream List View Controller-->
+        <!--Live Events-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="StreamListViewController" customModule="YouTubeLiveVideo" customModuleProvider="target" sceneMemberID="viewController">
@@ -84,77 +83,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J7W-c8-bcn">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
-                                <subviews>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pAK-Am-Tnu">
-                                        <rect key="frame" x="94" y="13" width="49" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="49" id="K7J-xQ-q82"/>
-                                            <constraint firstAttribute="height" constant="30" id="ROx-vN-xaa"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <state key="normal" title="Sign Out">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                    </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UHp-jt-BwV">
-                                        <rect key="frame" x="166" y="13" width="64" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="lLb-rA-GOd"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <state key="normal" title="Disconnect">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1E-Zl-lDA">
-                                        <rect key="frame" x="240" y="11" width="127" height="34"/>
-                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="34" id="7wo-Jb-uBS"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
-                                        <state key="normal" title="Create a new live event">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="7wo-Jb-uBS"/>
-                                            </mask>
-                                        </variation>
-                                        <variation key="widthClass=compact">
-                                            <mask key="constraints">
-                                                <include reference="7wo-Jb-uBS"/>
-                                            </mask>
-                                        </variation>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="pAK-Am-Tnu" firstAttribute="leading" secondItem="J7W-c8-bcn" secondAttribute="leading" constant="94" id="5It-cJ-Jaa"/>
-                                    <constraint firstItem="UHp-jt-BwV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="J7W-c8-bcn" secondAttribute="leading" constant="20" symbolic="YES" id="80a-na-sc4"/>
-                                    <constraint firstAttribute="height" constant="56" id="B4D-z2-gGd"/>
-                                    <constraint firstItem="K1E-Zl-lDA" firstAttribute="trailing" secondItem="J7W-c8-bcn" secondAttribute="trailingMargin" id="IJF-MS-rTd"/>
-                                    <constraint firstItem="UHp-jt-BwV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pAK-Am-Tnu" secondAttribute="trailing" constant="8" symbolic="YES" id="JEC-af-n4q"/>
-                                    <constraint firstItem="K1E-Zl-lDA" firstAttribute="centerY" secondItem="J7W-c8-bcn" secondAttribute="centerY" id="YCb-B4-Xa3"/>
-                                    <constraint firstItem="K1E-Zl-lDA" firstAttribute="leading" secondItem="UHp-jt-BwV" secondAttribute="trailing" constant="10" id="iU6-IZ-HRK"/>
-                                    <constraint firstItem="pAK-Am-Tnu" firstAttribute="centerY" secondItem="UHp-jt-BwV" secondAttribute="centerY" id="kzZ-ot-u98"/>
-                                    <constraint firstItem="UHp-jt-BwV" firstAttribute="centerY" secondItem="K1E-Zl-lDA" secondAttribute="centerY" id="uT5-ca-UFr"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="B4D-z2-gGd"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="B4D-z2-gGd"/>
-                                    </mask>
-                                </variation>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6i4-xu-QJL">
-                                <rect key="frame" x="0.0" y="56" width="375" height="611"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TableViewCell" id="a7S-E4-yLG" customClass="TableViewCell" customModule="YouTubeLiveVideo" customModuleProvider="target">
@@ -232,53 +162,35 @@
                         <constraints>
                             <constraint firstItem="6i4-xu-QJL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Kgy-r2-uk4"/>
                             <constraint firstAttribute="trailing" secondItem="6i4-xu-QJL" secondAttribute="trailing" id="Nok-Kf-HRr"/>
-                            <constraint firstItem="J7W-c8-bcn" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Znt-55-szU"/>
-                            <constraint firstItem="6i4-xu-QJL" firstAttribute="top" secondItem="J7W-c8-bcn" secondAttribute="bottom" id="cAm-e3-cTd">
-                                <variation key="widthClass=compact" constant="0.0"/>
-                            </constraint>
+                            <constraint firstItem="6i4-xu-QJL" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="dIy-Qj-YYN"/>
                             <constraint firstItem="5f9-ko-rs4" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="gvf-hj-YMW"/>
                             <constraint firstItem="5f9-ko-rs4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iPc-xo-HrP"/>
-                            <constraint firstAttribute="trailing" secondItem="J7W-c8-bcn" secondAttribute="trailing" id="krK-x0-MeH"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="6i4-xu-QJL" secondAttribute="bottom" id="pNB-Po-ZYw"/>
-                            <constraint firstItem="J7W-c8-bcn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="s7t-RR-4U2"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="J7W-c8-bcn"/>
                                 <exclude reference="6i4-xu-QJL"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Znt-55-szU"/>
-                                <exclude reference="krK-x0-MeH"/>
-                                <exclude reference="s7t-RR-4U2"/>
-                                <exclude reference="pNB-Po-ZYw"/>
                                 <exclude reference="Kgy-r2-uk4"/>
                                 <exclude reference="Nok-Kf-HRr"/>
-                                <exclude reference="cAm-e3-cTd"/>
+                                <exclude reference="pNB-Po-ZYw"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="J7W-c8-bcn"/>
                                 <include reference="6i4-xu-QJL"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Znt-55-szU"/>
-                                <include reference="krK-x0-MeH"/>
-                                <include reference="s7t-RR-4U2"/>
-                                <include reference="pNB-Po-ZYw"/>
                                 <include reference="Kgy-r2-uk4"/>
                                 <include reference="Nok-Kf-HRr"/>
-                                <include reference="cAm-e3-cTd"/>
+                                <include reference="pNB-Po-ZYw"/>
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="TdB-fK-77R"/>
+                    <navigationItem key="navigationItem" title="Live Events" id="TdB-fK-77R"/>
                     <connections>
                         <outlet property="activityIndicator" destination="5f9-ko-rs4" id="S6B-M2-rKb"/>
-                        <outlet property="createBroadcastButton" destination="K1E-Zl-lDA" id="hFk-ZZ-Edc"/>
-                        <outlet property="disconnectButton" destination="UHp-jt-BwV" id="MIq-bu-bNh"/>
-                        <outlet property="signOutButton" destination="pAK-Am-Tnu" id="Yxc-Ew-MVj"/>
                         <outlet property="tableView" destination="6i4-xu-QJL" id="HdF-Zz-450"/>
                     </connections>
                 </viewController>

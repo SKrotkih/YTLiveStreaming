@@ -18,12 +18,12 @@ class StreamListViewModel {
         self.interactor = interactor
     }
     
-    func configure() {
-        viewController
-            .createBroadcastButton.rx
+    func bindEvents() {
+        viewController.addNewStreamButton
+            .rx
             .tap
             .debounce(.milliseconds(Constants.UI.debounce), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self]  _ in
+            .subscribe(onNext: { [weak self] in
                 guard let `self` = self else { return }
                 self.creadeBroadcast()
             }).disposed(by: disposeBag)

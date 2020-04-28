@@ -25,29 +25,20 @@ class GoogleSessionViewModel {
         self.interactor = signInInteractor
     }
     
-    func didLoad() {
-        viewController
-            .signOutButton.rx
-            .tap
-            .debounce(.milliseconds(Constants.UI.debounce), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self]  _ in
-                guard let `self` = self else { return }
-                self.viewController.startActivity()
-                self.interactor.signOut()
-            }).disposed(by: disposeBag)
+    func bindEvents() {
         
-        viewController
-            .disconnectButton.rx
-            .tap
-            .debounce(.milliseconds(Constants.UI.debounce), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self]  _ in
-                guard let `self` = self else { return }
-                self.interactor.disconnect()
-            }).disposed(by: disposeBag)
-        
+        viewController.navigationItem.leftBarButtonItem?.rx
+        .tap
+        .debounce(.milliseconds(Constants.UI.debounce), scheduler: MainScheduler.instance)
+        .subscribe(onNext: { [weak self]  _ in
+            guard let `self` = self else { return }
+            self.viewController.startActivity()
+            self.interactor.disconnect()
+        }).disposed(by: disposeBag)
+
         interactor
             .rxSignOut
-            .subscribe(onNext: { [weak self] accessToken in
+            .subscribe(onNext: { [weak self] _ in
                 guard let `self` = self else { return }
                 self.viewController.stopActivity()
                 self.viewController.close()

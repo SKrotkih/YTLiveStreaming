@@ -12,7 +12,7 @@ struct Stream {
     var name: String
 }
 
-class StreamListViewController: UIViewController {
+class StreamListViewController: BaseViewController {
     
     unowned var signInInteractor: GoogleSignInInteractor!
     
@@ -23,13 +23,12 @@ class StreamListViewController: UIViewController {
         static let StreamItemCell = "TableViewCell"
     }
     
-    @IBOutlet weak var signOutButton: UIButton!
-    @IBOutlet weak var disconnectButton: UIButton!
     @IBOutlet weak var createBroadcastButton: UIButton!
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
+    var addNewStreamButton: UIButton!
+    
     fileprivate var refreshControl: UIRefreshControl!
     
     fileprivate var upcomingStreams = [Stream]()
@@ -40,17 +39,27 @@ class StreamListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         dependencies.configure(self)
-        
         configureView()
-        signInViewModel.didLoad()
     }
     
     private func configureView() {
         setUpRefreshControl()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let backButton = UIBarButtonItem.init(title: "Log Out",
+                                                     style: .plain,
+                                                     target: nil,
+                                                     action: nil)
+        self.navigationItem.leftBarButtonItem = backButton
+        addAddNewStreamButton()
+        signInViewModel.bindEvents()
+        streamListViewModel.bindEvents()
+    }
+    
     func present(content: (upcoming: [Stream], current: [Stream], past: [Stream])) {
         DispatchQueue.main.async() {
             self.upcomingStreams = content.upcoming
@@ -75,7 +84,22 @@ class StreamListViewController: UIViewController {
     func close() {
         self.navigationController?.popViewController(animated: true)
     }
-    
+}
+
+// MARK: - Add New Stram Button
+
+extension StreamListViewController {
+
+    private func addAddNewStreamButton() {
+        self.addNewStreamButton = UIButton(frame: CGRect(x: 0, y: 0, width: 55.0, height: 55.0))
+        addNewStreamButton.setImage(#imageLiteral(resourceName: "addStreamButton"), for: .normal)
+        self.view.addSubview(addNewStreamButton)
+        addNewStreamButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            addNewStreamButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40.0),
+            addNewStreamButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20.0),
+        ])
+    }
 }
 
 // MARK: Refresh Controller

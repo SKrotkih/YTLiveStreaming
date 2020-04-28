@@ -145,7 +145,7 @@ extension StreamListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellName.StreamItemCell) as! TableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellName.StreamItemCell) as! StreamListTableViewCell
         var stream: Stream!
         switch indexPath.section {
         case 0:

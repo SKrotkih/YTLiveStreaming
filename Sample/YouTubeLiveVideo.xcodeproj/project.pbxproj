@@ -22,7 +22,7 @@
 		7F53B1AB2030724200E09CFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F53B1A82030724200E09CFA /* Main.storyboard */; };
 		7F53B1B12030B38100E09CFA /* LiveStreamingInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F53B1B02030B38100E09CFA /* LiveStreamingInteractor.swift */; };
 		7F53B1B72030B4B400E09CFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F53B1B32030B4B300E09CFA /* AppDelegate.swift */; };
-		7F83E3371DBDD35500DE4102 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E3361DBDD35500DE4102 /* TableViewCell.swift */; };
+		7F83E3371DBDD35500DE4102 /* StreamListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E3361DBDD35500DE4102 /* StreamListTableViewCell.swift */; };
 		7F83E34C1DBDD49100DE4102 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E3481DBDD49100DE4102 /* Dependencies.swift */; };
 		7F83E34D1DBDD49100DE4102 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E3491DBDD49100DE4102 /* Presenter.swift */; };
 		7F83E35B1DBDD58C00DE4102 /* YouTubePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E35A1DBDD58C00DE4102 /* YouTubePlayer.swift */; };
@@ -73,7 +73,7 @@
 		7F53B1B42030B4B400E09CFA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		7F53B1B62030B4B400E09CFA /* YouTubeLiveVideo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YouTubeLiveVideo-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		7F53B1BA2030B57E00E09CFA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = YouTubeLiveVideo/Info.plist; sourceTree = SOURCE_ROOT; };
-		7F83E3361DBDD35500DE4102 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		7F83E3361DBDD35500DE4102 /* StreamListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamListTableViewCell.swift; sourceTree = "<group>"; };
 		7F83E3481DBDD49100DE4102 /* Dependencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
 		7F83E3491DBDD49100DE4102 /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		7F83E35A1DBDD58C00DE4102 /* YouTubePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubePlayer.swift; sourceTree = "<group>"; };
@@ -147,12 +147,12 @@
 			isa = PBXGroup;
 			children = (
 				7F9274AD1DBDCAD00051DE6B /* StreamListViewController.swift */,
+				7F83E3361DBDD35500DE4102 /* StreamListTableViewCell.swift */,
 				7F2439F524580FA500C1FB17 /* StreamListViewModel.swift */,
 				7F39A88C2456FD0400C18130 /* GoogleSessionViewModel.swift */,
 				7F53B1B02030B38100E09CFA /* LiveStreamingInteractor.swift */,
 				7F83E3481DBDD49100DE4102 /* Dependencies.swift */,
 				7F83E3491DBDD49100DE4102 /* Presenter.swift */,
-				7F83E3361DBDD35500DE4102 /* TableViewCell.swift */,
 			);
 			path = StreamList;
 			sourceTree = "<group>";
@@ -160,11 +160,11 @@
 		7F53B1B22030B43000E09CFA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7F53B1BA2030B57E00E09CFA /* Info.plist */,
 				7F53B1B32030B4B300E09CFA /* AppDelegate.swift */,
 				7F53B1B42030B4B400E09CFA /* GoogleService-Info.plist */,
-				7F53B1BA2030B57E00E09CFA /* Info.plist */,
-				7F2439F724581AE700C1FB17 /* Constants.swift */,
 				7F53B1B62030B4B400E09CFA /* YouTubeLiveVideo-Bridging-Header.h */,
+				7F2439F724581AE700C1FB17 /* Constants.swift */,
 				7F2439F32457BF9A00C1FB17 /* ResultsError.swift */,
 			);
 			name = "Supporting Files";
@@ -433,7 +433,7 @@
 				7F2439F42457BF9A00C1FB17 /* ResultsError.swift in Sources */,
 				7FB8A42B1DD23C3100955C2D /* LFLivePreview.m in Sources */,
 				7FC2FCD21DD7372D007D8BF9 /* Helpers.swift in Sources */,
-				7F83E3371DBDD35500DE4102 /* TableViewCell.swift in Sources */,
+				7F83E3371DBDD35500DE4102 /* StreamListTableViewCell.swift in Sources */,
 				7F10443A1DBDFFF3006AA1EE /* Alert.swift in Sources */,
 				7F9274AE1DBDCAD00051DE6B /* StreamListViewController.swift in Sources */,
 				7F0933CD2457258300FB5579 /* GoogleSignInViewController.swift in Sources */,

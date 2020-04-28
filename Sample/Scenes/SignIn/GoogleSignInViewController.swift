@@ -14,7 +14,7 @@ class GoogleSignInViewController: UIViewController {
     @IBOutlet weak var signInButton: GIDSignInButton!
     // [END viewcontroller_vars]
     
-    private var interactor: GoogleSignInInteractor!
+    var interactor: GoogleSignInInteractor!
     private var viewModel: GoogleSignInViewModel!
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -47,7 +47,6 @@ class GoogleSignInViewController: UIViewController {
 extension GoogleSignInViewController {
     
     private func configureViewModel() {
-        interactor = GoogleSignInInteractor()
         viewModel = GoogleSignInViewModel(viewController: self, interactor: interactor)
         viewModel.configure()
     }

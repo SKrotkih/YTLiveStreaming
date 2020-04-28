@@ -1,11 +1,11 @@
 //
-//  TableViewCell.swift
+//  StreamListTableViewCell.swift
 //  YouTubeLiveVideo
 //
 
 import UIKit
 
-class TableViewCell: UITableViewCell {
+class StreamListTableViewCell: UITableViewCell {
    @IBOutlet weak var nameLabel: UILabel!
    @IBOutlet weak var beginLabel: UILabel!
    @IBOutlet weak var thumbnailsImageView: UIImageView!

@@ -1,10 +1,6 @@
 //
 //  UIView+Add.m
 //
-//
-//  Created by guoyaoyuan on 13-4-3.
-//  Copyright (c) 2013 live Interactive. All rights reserved.
-//
 
 #import "UIView+YYAdd.h"
 #import <QuartzCore/QuartzCore.h>

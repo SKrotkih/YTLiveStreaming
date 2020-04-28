@@ -2,9 +2,6 @@
 //  Presenter.swift
 //  YouTubeLiveVideo
 //
-//  Created by Sergey Krotkih on 10/24/16.
-//  Copyright © 2016 Sergey Krotkih. All rights reserved.
-//
 
 import UIKit
 import YTLiveStreaming
@@ -12,41 +9,15 @@ import YTLiveStreaming
 class Presenter: NSObject {
 
    // Dependebcies
-   var viewController: ViewController!
-   var output: ViewController!
-   var signinInteractor: GoogleConnect!
+   var viewController: StreamListViewController!
+   var output: StreamListViewController!
+   var signinInteractor: GoogleSignInInteractor!
    
    var youTubeWorker: YTLiveStreaming!
    var interactor: YouTubeInteractor!
    
    fileprivate var liveBroadcast: LiveBroadcastStreamModel?
    fileprivate var liveViewController: LFLiveViewController!
-   
-   func launchShow() {
-      launchSignIn()
-   }
-
-   func presentUserInfo() {
-      if let userInfo = signinInteractor.currentUserInfo {
-         output.presentUserInfo(connected: true, userInfo: userInfo)
-         loadData()
-      } else {
-         output.presentUserInfo(connected: false, userInfo: "")
-      }
-   }
-
-   func launchReloadData() {
-      reloadData()
-   }
-   
-   func launchSignIn() {
-      signinInteractor.signIn(with: viewController)
-   }
-
-   func launchSignOut() {
-      signinInteractor.signOut()
-      presentUserInfo()
-   }
    
    func launchLiveStream(section: Int, index: Int) {
       if section == 0 {
@@ -67,29 +38,6 @@ class Presenter: NSObject {
    
    func stopActivity() {
       viewController.stopActivity()
-   }
-}
-
-// MARK: - Privete methods
-
-extension Presenter {
-
-   fileprivate func reloadData() {
-      guard signinInteractor.isConnected else {
-         return
-      }
-      interactor.reloadData() { upcoming, current, past  in
-         self.output.present(content: (upcoming, current, past))
-      }
-   }
-   
-   fileprivate func loadData() {
-      guard signinInteractor.isConnected else {
-         return
-      }
-      interactor.loadData() { (upcoming, current, past) in
-         self.output.present(content: (upcoming, current, past))
-      }
    }
 }
 

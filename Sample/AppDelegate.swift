@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
    var window: UIWindow?
 
-   var googleSignIn = GoogleConnect()
+   var googleSignIn = GoogleSignInInteractor()
    
    static var shared: AppDelegate {
       guard let `self` = UIApplication.shared.delegate as? AppDelegate else {

@@ -2,9 +2,6 @@
 //  UIControl+YYAdd.h
 //
 //
-//  Created by guoyaoyuan on 13-4-5.
-//  Copyright (c) 2013 live Interactive. All rights reserved.
-//
 
 #import <UIKit/UIKit.h>
 

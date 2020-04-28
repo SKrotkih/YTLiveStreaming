@@ -2,9 +2,6 @@
 //  UIView+Add.h
 //
 //
-//  Created by guoyaoyuan on 13-4-3.
-//  Copyright (c) 2013 live Interactive. All rights reserved.
-//
 
 #import <UIKit/UIKit.h>
 

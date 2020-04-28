@@ -13,4 +13,7 @@ target 'YouTubeLiveVideo' do
 
     pod "XCDYouTubeKit", "~> 2.5"
     
+    pod 'RxSwift'
+    pod 'RxCocoa'
+    
 end

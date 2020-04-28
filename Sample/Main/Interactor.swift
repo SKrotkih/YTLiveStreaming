@@ -2,9 +2,6 @@
 //  YouTubeInteractor.swift
 //  YouTubeLiveVideo
 //
-//  Created by Sergey Krotkih on 2/11/18.
-//  Copyright © 2018 Sergey Krotkih. All rights reserved.
-//
 
 import UIKit
 import YTLiveStreaming
@@ -44,9 +41,6 @@ class YouTubeInteractor: NSObject {
       DispatchQueue.global(qos: .utility).async(group: fetchingGroup, execute: {
          self.input.getUpcomingBroadcasts() { streams in
             self.addStreams(.upcoming, streams: streams)
-            
-            print("======== 1 ========\n")
-            
             fetchingGroup.leave()
          }
       })
@@ -55,9 +49,6 @@ class YouTubeInteractor: NSObject {
       DispatchQueue.global(qos: .utility).async(group: fetchingGroup, execute: {
          self.input.getLiveNowBroadcasts() { streams in
             self.addStreams(.current, streams: streams)
-            
-            print("======== 2 ========\n")
-            
             fetchingGroup.leave()
          }
       })
@@ -66,18 +57,12 @@ class YouTubeInteractor: NSObject {
       DispatchQueue.global(qos: .utility).async(group: fetchingGroup, execute: {
          self.input.getCompletedBroadcasts() { streams in
             self.addStreams(.past, streams: streams)
-            
-            print("======== 3 ========\n")
-            
             fetchingGroup.leave()
          }
       })
       
       fetchingGroup.notify(queue: DispatchQueue.main) {
          if let completion = self.completionClosure {
-
-            print("======== Finish ==== (\(self.upcoming.count);\(self.current.count);\(self.past.count); )====\n")
-            
             let upcomingStreams = self.upcoming.map({Stream(time: "start: \($0.snipped.publishedAt)", name: "\($0.snipped.title)") })
             let currentStreams = self.current.map({Stream(time: "start: \($0.snipped.publishedAt)", name: "\($0.snipped.title)") })
             let pastStreams = self.past.map({Stream(time: "start: \($0.snipped.publishedAt)", name: "\($0.snipped.title)") })

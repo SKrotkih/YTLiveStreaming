@@ -22,6 +22,7 @@ class GoogleSignInViewController: BaseViewController {
     // [START viewdidload]
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         dependencies.configure(self)
     }
     // [END viewdidload]
@@ -30,6 +31,7 @@ class GoogleSignInViewController: BaseViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         startListeningToSignIn()
+        viewModel.configure()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -54,6 +54,9 @@ public class GoogleSignInInteractor: NSObject  {
     func configure() {
         GIDSignIn.sharedInstance().clientID = worker.googleClientId
         GIDSignIn.sharedInstance().delegate = self
+        
+        // Automatically sign in the user.
+        GIDSignIn.sharedInstance()?.restorePreviousSignIn()
     }
     
     func openURL(_ url: URL, sourceApplication: String?, annotation: Any) -> Bool {
@@ -77,7 +80,13 @@ extension GoogleSignInInteractor: GIDSignInDelegate {
 
     // [START signin_handler]
     public func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        
+        print("SIGN IN")
+        
         if let error = error {
+            
+            print("ERROR")
+            
             if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
                 self.rxSignInResult.onNext(.failure(.message("The user has not signed in before or they have since signed out.")))
             } else {
@@ -86,9 +95,16 @@ extension GoogleSignInInteractor: GIDSignInDelegate {
         } else {
             GoogleUser.save(user)
             if let accessToken = self.accessToken {
+
+                print("OPEN NEXT")
+
+
                 GoogleOAuth2.sharedInstance.accessToken = accessToken
                 self.rxSignInResult.onNext(.success(Void()))
             } else {
+                
+                print("ERROR")
+                
                 self.rxSignInResult.onNext(.failure(.message("access token is not presented")))
             }
         }

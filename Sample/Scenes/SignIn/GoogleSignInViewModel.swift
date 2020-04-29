@@ -22,8 +22,6 @@ class GoogleSignInViewModel {
     
     func configure() {
         GIDSignIn.sharedInstance()?.presentingViewController = self.viewController
-        // Automatically sign in the user.
-        GIDSignIn.sharedInstance()?.restorePreviousSignIn()
         interactor.configure()
     }
     

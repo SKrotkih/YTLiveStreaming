@@ -84,27 +84,17 @@ extension GoogleSignInInteractor: GIDSignInDelegate {
         print("SIGN IN")
         
         if let error = error {
-            
-            print("ERROR")
-            
             if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
-                self.rxSignInResult.onNext(.failure(.message("The user has not signed in before or they have since signed out.")))
+                self.rxSignInResult.onNext(.failure(.systemMessage(401, "The user has not signed in before or they have since signed out.")))
             } else {
                 self.rxSignInResult.onNext(.failure(.message(error.localizedDescription)))
             }
         } else {
             GoogleUser.save(user)
             if let accessToken = self.accessToken {
-
-                print("OPEN NEXT")
-
-
                 GoogleOAuth2.sharedInstance.accessToken = accessToken
                 self.rxSignInResult.onNext(.success(Void()))
             } else {
-                
-                print("ERROR")
-                
                 self.rxSignInResult.onNext(.failure(.message("access token is not presented")))
             }
         }
@@ -113,6 +103,9 @@ extension GoogleSignInInteractor: GIDSignInDelegate {
     
     // [START disconnect_handler]
     public func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        
+        print("SIGN OUT")
+        
         // Perform any operations when the user disconnects from app here.
         rxSignOut.onNext(true)
     }

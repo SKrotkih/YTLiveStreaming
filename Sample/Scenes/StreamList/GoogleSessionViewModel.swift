@@ -32,8 +32,8 @@ class GoogleSessionViewModel {
         .debounce(.milliseconds(Constants.UI.debounce), scheduler: MainScheduler.instance)
         .subscribe(onNext: { [weak self]  _ in
             guard let `self` = self else { return }
-            self.viewController.startActivity()
-            self.interactor.disconnect()
+            self.interactor.signOut()
+            self.viewController.close()
         }).disposed(by: disposeBag)
 
         interactor

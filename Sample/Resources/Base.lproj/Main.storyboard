@@ -47,8 +47,8 @@
                                 <rect key="frame" x="107.5" y="584" width="160" height="49"/>
                                 <color key="backgroundColor" red="0.66666668650000005" green="0.66666668650000005" blue="0.66666668650000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="2SR-5M-ihU" secondAttribute="height" multiplier="160:49" id="MNA-oT-eaP"/>
-                                    <constraint firstAttribute="width" constant="160" id="kMC-ec-JdM"/>
+                                    <constraint firstAttribute="width" constant="160" id="7sB-VR-a9u"/>
+                                    <constraint firstAttribute="height" constant="49" id="xGR-ZS-uAx"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -58,7 +58,6 @@
                             <constraint firstItem="2SR-5M-ihU" firstAttribute="centerX" secondItem="IWH-eP-jG6" secondAttribute="centerX" id="Cvy-hi-KdW"/>
                             <constraint firstItem="Ehc-aJ-xPd" firstAttribute="centerX" secondItem="IWH-eP-jG6" secondAttribute="centerX" id="LFz-AY-Uk3"/>
                             <constraint firstItem="Ehc-aJ-xPd" firstAttribute="centerY" secondItem="IWH-eP-jG6" secondAttribute="centerY" id="Mag-FX-TFs"/>
-                            <constraint firstItem="2SR-5M-ihU" firstAttribute="width" secondItem="2SR-5M-ihU" secondAttribute="height" multiplier="160:49" id="byP-uj-4xN"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="GwT-YG-Hjd"/>
@@ -172,9 +171,9 @@
                                 <exclude reference="6i4-xu-QJL"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="pNB-Po-ZYw"/>
                                 <exclude reference="Kgy-r2-uk4"/>
                                 <exclude reference="Nok-Kf-HRr"/>
-                                <exclude reference="pNB-Po-ZYw"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -182,9 +181,9 @@
                                 <include reference="6i4-xu-QJL"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="pNB-Po-ZYw"/>
                                 <include reference="Kgy-r2-uk4"/>
                                 <include reference="Nok-Kf-HRr"/>
-                                <include reference="pNB-Po-ZYw"/>
                             </mask>
                         </variation>
                     </view>

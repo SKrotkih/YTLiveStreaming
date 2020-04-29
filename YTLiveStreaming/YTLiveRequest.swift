@@ -55,6 +55,13 @@ extension YTLiveRequest {
             "maxResults": LiveRequest.MaxResultObjects as AnyObject,
             "key": Credentials.APIkey as AnyObject
         ]
+
+//        let parameters: [String: AnyObject] = [
+//            "part": "id" as AnyObject,
+//            "broadcastStatus": status.rawValue as AnyObject,
+//            "key": Credentials.APIkey as AnyObject
+//        ]
+
         YouTubeLiveVideoProvider.request(LiveStreamingAPI.listBroadcasts(parameters), completion: { result in
             switch result {
             case let .success(response):

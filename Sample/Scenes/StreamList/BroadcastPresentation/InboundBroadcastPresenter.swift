@@ -36,6 +36,14 @@ class InboundBroadcastPresenter: NSObject {
         completionClosure = completion
         
         let fetchingGroup = DispatchGroup()
+
+        fetchingGroup.enter()
+        DispatchQueue.global(qos: .utility).async(group: fetchingGroup, execute: {
+            self.incomingBroadcastWorker.getAllBroadcasts() { (b1, b2, b3) in
+                fetchingGroup.leave()
+            }
+        })
+        
         fetchingGroup.enter()
         DispatchQueue.global(qos: .utility).async(group: fetchingGroup, execute: {
             self.incomingBroadcastWorker.getUpcomingBroadcasts() { streams in

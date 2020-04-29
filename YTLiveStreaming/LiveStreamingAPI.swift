@@ -25,6 +25,7 @@ let requestClosure = { (endpoint: Moya.Endpoint, done: @escaping MoyaProvider<Li
             do {
                 var request = try endpoint.urlRequest() as URLRequest
                 request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+                request.addValue("application/json", forHTTPHeaderField: "Accept")
                 request.addValue(Bundle.main.bundleIdentifier!, forHTTPHeaderField: "X-Ios-Bundle-Identifier")
                 done(.success(request))
             }

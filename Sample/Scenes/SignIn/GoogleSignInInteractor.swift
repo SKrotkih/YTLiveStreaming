@@ -80,9 +80,6 @@ extension GoogleSignInInteractor: GIDSignInDelegate {
 
     // [START signin_handler]
     public func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        
-        print("SIGN IN")
-        
         if let error = error {
             if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
                 self.rxSignInResult.onNext(.failure(.systemMessage(401, "The user has not signed in before or they have since signed out.")))
@@ -103,9 +100,6 @@ extension GoogleSignInInteractor: GIDSignInDelegate {
     
     // [START disconnect_handler]
     public func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-        
-        print("SIGN OUT")
-        
         // Perform any operations when the user disconnects from app here.
         rxSignOut.onNext(true)
     }

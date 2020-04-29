@@ -43,5 +43,7 @@ class GoogleSessionViewModel {
                 self.viewController.stopActivity()
                 self.viewController.close()
             }).disposed(by: disposeBag)
+        
+        
     }
 }

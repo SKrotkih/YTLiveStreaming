@@ -29,7 +29,7 @@ class StreamListViewModel {
             }).disposed(by: disposeBag)
     }
     
-    fileprivate func loadData() {
+    func loadData() {
         interactor.loadData() { (upcoming, current, past) in
             self.viewController.present(content: (upcoming, current, past))
         }

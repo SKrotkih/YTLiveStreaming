@@ -114,12 +114,14 @@ extension InboundBroadcastPresenter {
         let description = "Test broadcast video"
         let startDate = Helpers.dateAfter(Date(), after: (hour: 0, minute: 2, second: 0))
         
-        self.incomingBroadcastWorker.createBroadcast(title, description: description, startTime: startDate, completion: { broadcast in
-            if broadcast != nil {
-                completion(nil)
-            } else {
-                let error = NSError(domain: "Something went wrong", code: 440, userInfo: nil)
-                completion(error)
+        self.incomingBroadcastWorker.createBroadcast(title, description: description, startTime: startDate, completion: { result in
+            switch result {
+                case .success(let broadcast):
+                    print("Broadcast \(broadcast.snipped.title) was created sccessfully")
+                    completion(nil)
+                case .failure(let error):
+                    let err = NSError(domain: error.message(), code: 0, userInfo: nil)
+                    completion(err)
             }
         })
     }

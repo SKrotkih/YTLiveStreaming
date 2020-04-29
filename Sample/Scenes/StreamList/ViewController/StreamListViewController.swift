@@ -45,6 +45,7 @@ class StreamListViewController: BaseViewController {
     
     private func configureView() {
         setUpRefreshControl()
+        loadData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -55,6 +56,13 @@ class StreamListViewController: BaseViewController {
                                                      target: nil,
                                                      action: nil)
         self.navigationItem.leftBarButtonItem = backButton
+        
+        let userNameLabel = UILabel(frame: CGRect.zero)
+        userNameLabel.text = UserStorage.user?.fullName
+        userNameLabel.textColor = .white
+        let rightBarButton = UIBarButtonItem(customView: userNameLabel)
+        self.navigationItem.rightBarButtonItem = rightBarButton
+        
         addAddNewStreamButton()
         signInViewModel.bindEvents()
         streamListViewModel.bindEvents()
@@ -116,6 +124,10 @@ extension StreamListViewController {
     @objc func refreshData(_ sender: AnyObject) {
         self.refreshControl.endRefreshing()
         streamListViewModel.reloadData()
+    }
+    
+    private func loadData() {
+        streamListViewModel.loadData()
     }
 }
 

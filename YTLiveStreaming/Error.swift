@@ -9,7 +9,7 @@ public enum YTError: Error {
     case message(String)
     case systemMessage(Int, String)
     
-    func message() -> String {
+    public func message() -> String {
         switch self {
         case .message(let message):
             return message

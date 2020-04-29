@@ -27,6 +27,19 @@ class YTLiveRequest: NSObject {
 
 extension YTLiveRequest {
     
+    class func getHeaders(_ completion: @escaping (HTTPHeaders?) -> Void) {
+        GoogleOAuth2.sharedInstance.requestToken() { token in
+            if let token = token {
+                var headers: HTTPHeaders = [.contentType("application/json")]
+                headers.add(.accept("application/json"))
+                headers.add(.authorization("Bearer \(token)"))
+                completion(headers)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
     // Returns a list of YouTube broadcasts that match the API request parameters.
     // broadcastStatus:
     // Acceptable values are:
@@ -110,55 +123,45 @@ extension YTLiveRequest {
     // https://developers.google.com/youtube/v3/live/docs/liveBroadcasts/insert
     // Creates a broadcast.
     class func createLiveBroadcast(_ title: String, startDateTime: Date, completion: @escaping (Result<LiveBroadcastStreamModel, YTError>) -> Void) {
-        GoogleOAuth2.sharedInstance.requestToken() { token in
-            if let token = token {
-                var headers: HTTPHeaders = [.contentType("application/json")]
-                headers.add(.accept("application/json"))
-                headers.add(.authorization("Bearer \(token)"))
-                
-//                --header 'Authorization: Bearer [YOUR_ACCESS_TOKEN]' \
-//                --header 'Accept: application/json' \
-//                --header 'Content-Type: application/json' \
-
-                
-                
-                let jsonBody = "{\"snippet\": {\"title\": \"\(title)\",\"scheduledStartTime\": \"\(startDateTime.toJSONformat())\"},\"status\": {\"privacyStatus\":\"public\"}}"
-                let encoder = JSONBodyStringEncoding(jsonBody: jsonBody)
-                let url = "\(LiveAPI.BaseURL)/liveBroadcasts?part=id,snippet,contentDetails,status&key=\(Credentials.APIkey)"
-                AF.request(url, method: .post, parameters: [:], encoding: encoder, headers: headers)
-                    .validate()
-                    .responseData { response in
-                        switch response.result {
-                        case .success:
-                            guard let data = response.data else {
-                                completion(.failure(.message("create liveBroadcasts response is empty")))
-                                return
-                            }
-                            do {
-                                let json = try JSON(data: data)
-                                let error = json["error"].stringValue
-                                if !error.isEmpty {
-                                    let message = json["message"].stringValue
-                                    completion(.failure(.message("Error while Youtube broadcast was creating: \(message)")))
-                                } else {
-                                    //print(json)
-                                    let decoder = JSONDecoder()
-                                    let liveBroadcast = try decoder.decode(LiveBroadcastStreamModel.self, from: data)
-                                    completion(.success(liveBroadcast))
-                                }
-                            } catch {
-                                completion(.failure(.message("parse response failure")))
-                            }
-                        case .failure(let error):
-                            let descr = error.errorDescription ?? ""
-                            completion(.failure(.message("System Error: " + descr)))
-                        }
-                    }.cURLDescription { (description) in
-                        print("\n====== REQUEST =======\n\(description)\n==============\n")
-                    }
-            } else {
+        getHeaders() { headers in
+            guard let headers = headers else {
                 completion(.failure(.message("OAuth token is not presented")))
+                return
             }
+            let jsonBody = "{\"snippet\": {\"title\": \"\(title)\",\"scheduledStartTime\": \"\(startDateTime.toJSONformat())\"},\"status\": {\"privacyStatus\":\"public\"}}"
+            let encoder = JSONBodyStringEncoding(jsonBody: jsonBody)
+            let url = "\(LiveAPI.BaseURL)/liveBroadcasts?part=id,snippet,contentDetails,status&key=\(Credentials.APIkey)"
+            AF.request(url, method: .post, parameters: [:], encoding: encoder, headers: headers)
+                .validate()
+                .responseData { response in
+                    switch response.result {
+                    case .success:
+                        guard let data = response.data else {
+                            completion(.failure(.message("create liveBroadcasts response is empty")))
+                            return
+                        }
+                        do {
+                            let json = try JSON(data: data)
+                            let error = json["error"].stringValue
+                            if !error.isEmpty {
+                                let message = json["message"].stringValue
+                                completion(.failure(.message("Error while Youtube broadcast was creating: \(message)")))
+                            } else {
+                                //print(json)
+                                let decoder = JSONDecoder()
+                                let liveBroadcast = try decoder.decode(LiveBroadcastStreamModel.self, from: data)
+                                completion(.success(liveBroadcast))
+                            }
+                        } catch {
+                            completion(.failure(.message("parse response failure")))
+                        }
+                    case .failure(let error):
+                        let descr = error.errorDescription ?? ""
+                        completion(.failure(.message("System Error: " + descr)))
+                    }
+                }.cURLDescription { (description) in
+                    print("\n====== REQUEST =======\n\(description)\n==============\n")
+                }
         }
     }
     
@@ -166,8 +169,11 @@ extension YTLiveRequest {
     // https://developers.google.com/youtube/v3/live/docs/liveBroadcasts/update
     // PUT https://www.googleapis.com/youtube/v3/liveBroadcasts
     class func updateLiveBroadcast(_ broadcast: LiveBroadcastStreamModel, completion: @escaping (Result<Void, YTError>) -> Void) {
-        GoogleOAuth2.sharedInstance.requestToken() { token in
-            
+        getHeaders() { headers in
+            guard let headers = headers else {
+                completion(.failure(.message("OAuth token is not presented")))
+                return
+            }
             let broadcastId = broadcast.id
             let title = broadcast.snipped.title
             let startTime = broadcast.snipped.scheduledStartTime.toJSONformat()
@@ -179,19 +185,15 @@ extension YTLiveRequest {
             let enableEmbed = broadcast.contentDetails.enableEmbed
             let recordFromStart = broadcast.contentDetails.recordFromStart
             let startWithSlate = broadcast.contentDetails.startWithSlate
-            
-            if let token = token {
-                var headers: HTTPHeaders = [.contentType("application/json")]
-                headers.add(.authorization(token))
-                let jsonBody = "{\"id\":\"\(broadcastId)\",\"snippet\":{\"title\":\"\(title)\",\"scheduledStartTime\":\"\(startTime)\"},\"status\":{\"privacyStatus\":\"\(privacyStatus)\"},\"contentDetails\": {\"monitorStream\":{\"enableMonitorStream\":\(enableMonitorStream),\"broadcastStreamDelayMs\":\"\(broadcastStreamDelayMs)\"},\"enableDvr\":\(enableDvr),\"enableContentEncryption\":\(enableContentEncryption),\"enableEmbed\":\(enableEmbed),\"recordFromStart\":\(recordFromStart),\"startWithSlate\":\(startWithSlate)}}"
-                let encoder = JSONBodyStringEncoding(jsonBody: jsonBody)
-                AF.request("\(LiveAPI.BaseURL)/liveBroadcasts?part=id,snippet,contentDetails,status&key=\(Credentials.APIkey)",
-                    method: .put,
-                    parameters: [:],
-                    encoding: encoder,
-                    headers: headers)
-                    .responseData { response in
-                        switch response.result {
+            let jsonBody = "{\"id\":\"\(broadcastId)\",\"snippet\":{\"title\":\"\(title)\",\"scheduledStartTime\":\"\(startTime)\"},\"status\":{\"privacyStatus\":\"\(privacyStatus)\"},\"contentDetails\": {\"monitorStream\":{\"enableMonitorStream\":\(enableMonitorStream),\"broadcastStreamDelayMs\":\"\(broadcastStreamDelayMs)\"},\"enableDvr\":\(enableDvr),\"enableContentEncryption\":\(enableContentEncryption),\"enableEmbed\":\(enableEmbed),\"recordFromStart\":\(recordFromStart),\"startWithSlate\":\(startWithSlate)}}"
+            let encoder = JSONBodyStringEncoding(jsonBody: jsonBody)
+            AF.request("\(LiveAPI.BaseURL)/liveBroadcasts?part=id,snippet,contentDetails,status&key=\(Credentials.APIkey)",
+                method: .put,
+                parameters: [:],
+                encoding: encoder,
+                headers: headers)
+                .responseData { response in
+                    switch response.result {
                         case .success:
                             guard let data = response.data else {
                                 completion(.failure(.message("update broadcast response is empty")))
@@ -208,16 +210,12 @@ extension YTLiveRequest {
                                 }
                             } catch {
                                 completion(.failure(.message("parse response failure")))
-                            }
+                        }
                         case .failure(let error):
                             completion(.failure(.message("System Error: " + error.localizedDescription)))
-                        }
-                    }.cURLDescription { (description) in
-                        print("\n====== REQUEST =======\n\(description)\n==============\n")
                     }
-
-            } else {
-                completion(.failure(.message("OAuth token is not presented!")))
+            }.cURLDescription { (description) in
+                print("\n====== REQUEST =======\n\(description)\n==============\n")
             }
         }
     }
@@ -397,50 +395,44 @@ extension YTLiveRequest {
     //   }
     
     class func createLiveStream(_ title: String, description: String, streamName: String, completion: @escaping (Result<LiveStreamModel, YTError>) -> Void) {
-        GoogleOAuth2.sharedInstance.requestToken() { token in
-            if let token = token {
-                let resolution = LiveAPI.Resolution
-                let frameRate = LiveAPI.FrameRate
-                let ingestionType = LiveAPI.IngestionType
-                var headers: HTTPHeaders = [.contentType("application/json")]
-                headers.add(.authorization(token))
-                let jsonBody = "{\"snippet\": {\"title\": \"\(title)\",\"description\": \"\(description)\"},\"cdn\": {\"resolution\":\"\(resolution)\",\"frameRate\":\"\(frameRate)\",\"ingestionType\":\"\(ingestionType)\",\"ingestionInfo\":{\"streamName\":\"\(streamName)\"}}}"
-                let encoder = JSONBodyStringEncoding(jsonBody: jsonBody)
-                let url = "\(LiveAPI.BaseURL)/liveStreams?part=id,snippet,cdn,status&key=\(Credentials.APIkey)"
-                AF.request(url,
-                                  method: .post,
-                                  parameters: [:],
-                                  encoding: encoder,
-                                  headers: headers)
-                    .validate()
-                    .responseData { response in
-                        switch response.result {
-                        case .success:
-                            guard let data = response.data else {
-                                completion(.failure(.message("createLiveStream response is empty")))
-                                return
-                            }
-                            do {
-                                let json = try JSON(data: data)
-                                let error = json["error"]
-                                if !error.isEmpty {
-                                    let message = json["message"].stringValue
-                                    completion(.failure(.message("Error while Youtube broadcast was creating: " + message)))
-                                } else {
-                                    let liveStream = LiveStreamModel.decode(json)
-                                    completion(.success(liveStream))
-                                }
-                            } catch {
-                                completion(.failure(.message("parse response failure")))
-                            }
-                        case .failure(let error):
-                            completion(.failure(.message("System Error: " +  error.localizedDescription)))
+        getHeaders() { headers in
+            guard let headers = headers else {
+                completion(.failure(.message("OAuth token is not presented")))
+                return
+            }
+            let resolution = LiveAPI.Resolution
+            let frameRate = LiveAPI.FrameRate
+            let ingestionType = LiveAPI.IngestionType
+            let jsonBody = "{\"snippet\": {\"title\": \"\(title)\",\"description\": \"\(description)\"},\"cdn\": {\"resolution\":\"\(resolution)\",\"frameRate\":\"\(frameRate)\",\"ingestionType\":\"\(ingestionType)\",\"ingestionInfo\":{\"streamName\":\"\(streamName)\"}}}"
+            let encoder = JSONBodyStringEncoding(jsonBody: jsonBody)
+            let url = "\(LiveAPI.BaseURL)/liveStreams?part=id,snippet,cdn,status&key=\(Credentials.APIkey)"
+            AF.request(url, method: .post, parameters: [:], encoding: encoder, headers: headers)
+                .validate()
+                .responseData { response in
+                    switch response.result {
+                    case .success:
+                        guard let data = response.data else {
+                            completion(.failure(.message("createLiveStream response is empty")))
+                            return
                         }
-                }.cURLDescription { (description) in
-                    print("\n====== REQUEST =======\n\(description)\n==============\n")
-                }
-            } else {
-                
+                        do {
+                            let json = try JSON(data: data)
+                            let error = json["error"]
+                            if !error.isEmpty {
+                                let message = json["message"].stringValue
+                                completion(.failure(.message("Error while Youtube broadcast was creating: " + message)))
+                            } else {
+                                let liveStream = LiveStreamModel.decode(json)
+                                completion(.success(liveStream))
+                            }
+                        } catch {
+                            completion(.failure(.message("parse response failure")))
+                        }
+                    case .failure(let error):
+                        completion(.failure(.message("System Error: " +  error.localizedDescription)))
+                    }
+            }.cURLDescription { (description) in
+                print("\n====== REQUEST =======\n\(description)\n==============\n")
             }
         }
     }
@@ -482,47 +474,44 @@ extension YTLiveRequest {
     // ingestionType = dash rtmp
     
     class func updateLiveStream(_ liveStreamId: String, title: String, format: String, ingestionType: String, completion: @escaping (Result<Void, YTError>) -> Void) {
-        GoogleOAuth2.sharedInstance.requestToken() { token in
-            if let token = token {
-                var headers: HTTPHeaders = [.contentType("application/json")]
-                headers.add(.authorization(token))
-                let jsonBody = "{\"id\":\"\(liveStreamId)\",\"snippet\": {\"title\":\"\(title)\"},\"cdn\":{\"format\":\"\(format)\",\"ingestionType\":\"\(ingestionType)\"}}}"
-                let encoder = JSONBodyStringEncoding(jsonBody: jsonBody)
-                AF.request("\(LiveAPI.BaseURL)/liveStreams",
-                    method: .put,
-                    parameters: ["part": "id,snippet,cdn,status", "key": Credentials.APIkey],
-                    encoding: encoder,
-                    headers: headers)
-                    .validate()
-                    .responseData { response in
-                        switch response.result {
-                        case .success:
-                            guard let data = response.data else {
-                                completion(.failure(.message("updateLiveStream response is empty")))
-                                return
-                            }
-                            do {
-                                let json = try JSON(data: data)
-                                let error = json["error"].stringValue
-                                if !error.isEmpty {
-                                    let message = json["message"].stringValue
-                                    completion(.failure(.message("Error while Youtube broadcast was creating" + message)))
-                                } else {
-                                    completion(.success(Void()))
-                                }
-                            } catch {
-                                completion(.failure(.message("parse response failure")))
-                            }
-                        case .failure(let error):
-                            completion(.failure(.message("System Error: \(error.localizedDescription)")))
-                        }
-                    }.cURLDescription { (description) in
-                        print("\n====== REQUEST =======\n\(description)\n==============\n")
-                    }
-
-            } else {
+        getHeaders() { headers in
+            guard let headers = headers else {
                 completion(.failure(.message("OAuth token is not presented")))
+                return
             }
+            let jsonBody = "{\"id\":\"\(liveStreamId)\",\"snippet\": {\"title\":\"\(title)\"},\"cdn\":{\"format\":\"\(format)\",\"ingestionType\":\"\(ingestionType)\"}}}"
+            let encoder = JSONBodyStringEncoding(jsonBody: jsonBody)
+            AF.request("\(LiveAPI.BaseURL)/liveStreams",
+                method: .put,
+                parameters: ["part": "id,snippet,cdn,status", "key": Credentials.APIkey],
+                encoding: encoder,
+                headers: headers)
+                .validate()
+                .responseData { response in
+                    switch response.result {
+                    case .success:
+                        guard let data = response.data else {
+                            completion(.failure(.message("updateLiveStream response is empty")))
+                            return
+                        }
+                        do {
+                            let json = try JSON(data: data)
+                            let error = json["error"].stringValue
+                            if !error.isEmpty {
+                                let message = json["message"].stringValue
+                                completion(.failure(.message("Error while Youtube broadcast was creating" + message)))
+                            } else {
+                                completion(.success(Void()))
+                            }
+                        } catch {
+                            completion(.failure(.message("parse response failure")))
+                        }
+                    case .failure(let error):
+                        completion(.failure(.message("System Error: \(error.localizedDescription)")))
+                    }
+                }.cURLDescription { (description) in
+                    print("\n====== REQUEST =======\n\(description)\n==============\n")
+                }
         }
     }
 }

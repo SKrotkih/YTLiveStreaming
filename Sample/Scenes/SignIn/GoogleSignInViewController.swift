@@ -62,7 +62,7 @@ extension GoogleSignInViewController {
                     switch error {
                         case .systemMessage(let code, let message):
                             if code == 401 {
-                                
+                                print(message)
                             } else {
                                 Alert.sharedInstance.showOk("", message: message)
                         }

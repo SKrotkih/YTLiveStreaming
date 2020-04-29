@@ -8,12 +8,12 @@ import RxSwift
 
 class StreamListViewModel {
     
-    var interactor: LiveStreamingInteractor!
+    var interactor: InboundBroadcastPresenter!
     unowned var viewController: StreamListViewController!
 
     private let disposeBag = DisposeBag()
     
-    init(viewController: StreamListViewController, interactor: LiveStreamingInteractor) {
+    init(viewController: StreamListViewController, interactor: InboundBroadcastPresenter) {
         self.viewController = viewController
         self.interactor = interactor
     }
@@ -29,14 +29,14 @@ class StreamListViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func reloadData() {
-        interactor.reloadData() { upcoming, current, past  in
+    fileprivate func loadData() {
+        interactor.loadData() { (upcoming, current, past) in
             self.viewController.present(content: (upcoming, current, past))
         }
     }
-    
-    fileprivate func loadData() {
-        interactor.loadData() { (upcoming, current, past) in
+
+    func reloadData() {
+        interactor.reloadData() { upcoming, current, past  in
             self.viewController.present(content: (upcoming, current, past))
         }
     }

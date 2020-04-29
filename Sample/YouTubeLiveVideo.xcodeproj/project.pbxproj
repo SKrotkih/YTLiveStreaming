@@ -32,6 +32,7 @@
 		7F83E34D1DBDD49100DE4102 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E3491DBDD49100DE4102 /* Presenter.swift */; };
 		7F83E35B1DBDD58C00DE4102 /* YouTubePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E35A1DBDD58C00DE4102 /* YouTubePlayer.swift */; };
 		7F83E35D1DBDD5DB00DE4102 /* YoutubePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E35C1DBDD5DB00DE4102 /* YoutubePlayerViewController.swift */; };
+		7F8FD2A4245940530041CF36 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7F8FD2A3245940530041CF36 /* README.md */; };
 		7F9274AE1DBDCAD00051DE6B /* StreamListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9274AD1DBDCAD00051DE6B /* StreamListViewController.swift */; };
 		7F9274B31DBDCAD00051DE6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F9274B21DBDCAD00051DE6B /* Assets.xcassets */; };
 		7FA950022032C5750083B23B /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA950002032C5750083B23B /* UserStorage.swift */; };
@@ -88,6 +89,7 @@
 		7F83E3491DBDD49100DE4102 /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		7F83E35A1DBDD58C00DE4102 /* YouTubePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubePlayer.swift; sourceTree = "<group>"; };
 		7F83E35C1DBDD5DB00DE4102 /* YoutubePlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubePlayerViewController.swift; sourceTree = "<group>"; };
+		7F8FD2A3245940530041CF36 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		7F9274A81DBDCAD00051DE6B /* YouTubeLiveVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouTubeLiveVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F9274AD1DBDCAD00051DE6B /* StreamListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamListViewController.swift; sourceTree = "<group>"; };
 		7F9274B21DBDCAD00051DE6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				7F53B1B62030B4B400E09CFA /* YouTubeLiveVideo-Bridging-Header.h */,
 				7F2439F724581AE700C1FB17 /* Constants.swift */,
 				7F2439F32457BF9A00C1FB17 /* ResultsError.swift */,
+				7F8FD2A3245940530041CF36 /* README.md */,
 			);
 			name = "Supporting Files";
 			path = Resources;
@@ -295,8 +298,8 @@
 				7F9274A51DBDCAD00051DE6B /* Frameworks */,
 				7F9274A61DBDCAD00051DE6B /* Resources */,
 				25E870AD25798A32FC9B1529 /* [CP] Embed Pods Frameworks */,
-				C68A264E196F15DC0B818B46 /* [CP] Copy Pods Resources */,
 				7F0478C11DD599DD00AB6211 /* Embed Frameworks */,
+				7853DD346448FB0999341CFA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -351,6 +354,7 @@
 			files = (
 				7F53B1AB2030724200E09CFA /* Main.storyboard in Resources */,
 				7F9274B31DBDCAD00051DE6B /* Assets.xcassets in Resources */,
+				7F8FD2A4245940530041CF36 /* README.md in Resources */,
 				7F53B1AA2030724200E09CFA /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,7 +422,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YouTubeLiveVideo/Pods-YouTubeLiveVideo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C68A264E196F15DC0B818B46 /* [CP] Copy Pods Resources */ = {
+		7853DD346448FB0999341CFA /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

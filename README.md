@@ -1,12 +1,12 @@
 # YTLiveStreaming
 
 YTLiveStreaming is a framework for creating live broadcasts and video streams on YouTube using the YouTube Live Streaming API
-(YouTube Data API v3) in Swift 4.2
+(YouTube Data API v3) in Swift 5.0
 
 ## Requirements
 
-- Xcode 10.0
-- Swift 4.2
+- Xcode 11.4
+- Swift 5.0
 
 ## Introduction
 
@@ -144,15 +144,21 @@ And some other public methods of the YTLiveStreaming class
 - SwiftyJSON
 - Moya
 
-Note. Here I used the following things:
-- Goggle Sign-In for iOS ( https://developers.google.com/identity/sign-in/ios/ )
+Note. Here were  used the following things:
+- Goggle Sign-In for iOS ( https://developers.google.com/identity/sign-in/ios/ )  
 - VIPER architect (Clean for iOS) ( https://www.objc.io/issues/13-architecture/viper/ )
 - Moya 10
 - Alamofire
+- RxSwift
 - Podspec ( https://guides.cocoapods.org/syntax/podspec.html )
 
 Sergey Krotkih
 
 11-11-2016
 
-Updated 14-01-2019
+Changes history:
+29-04-2020 
+ -  build 0.2.17
+ - Sample app was redesigned
+ -  GoogleSignIn (used in the Sample app): up to 5.0.2
+ 

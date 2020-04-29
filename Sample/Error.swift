@@ -1,11 +1,11 @@
 //
-//  ResultsError.swift
+//  Error.swift
 //  YouTubeLiveVideo
 //
 
 import Foundation
 
-enum ResultsError: Error {
+enum LVError: Error {
     case message(String)
     case systemMessage(Int, String)
     

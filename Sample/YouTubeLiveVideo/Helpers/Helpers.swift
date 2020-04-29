@@ -18,9 +18,4 @@ class Helpers {
       }
       return date
    }
-   
 }
-
-
-
-

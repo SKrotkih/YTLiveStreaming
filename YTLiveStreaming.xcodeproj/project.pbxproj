@@ -27,6 +27,7 @@
 		7F101EA91E0FBD8A003EAF3F /* YTLiveStreaming.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 7F101EA81E0FBD8A003EAF3F /* YTLiveStreaming.podspec */; };
 		7F101EAB1E0FBDA5003EAF3F /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7F101EAA1E0FBDA5003EAF3F /* LICENSE */; };
 		7F117F291E0E816C000D0745 /* LiveLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F117F281E0E816C000D0745 /* LiveLauncher.swift */; };
+		7F8FD2CC2459AA860041CF36 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8FD2CB2459AA860041CF36 /* Error.swift */; };
 		7FA999B91DD6C81C0061AF0C /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA999B81DD6C81C0061AF0C /* Credentials.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		7F101EA81E0FBD8A003EAF3F /* YTLiveStreaming.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = YTLiveStreaming.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		7F101EAA1E0FBDA5003EAF3F /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		7F117F281E0E816C000D0745 /* LiveLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveLauncher.swift; sourceTree = "<group>"; };
+		7F8FD2CB2459AA860041CF36 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		7FA999B81DD6C81C0061AF0C /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		7FDB95211DD6042700498305 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		8E99A8A7F06BCB520FF235F8 /* Pods-YTLiveStreaming.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YTLiveStreaming.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YTLiveStreaming/Pods-YTLiveStreaming.debug.xcconfig"; sourceTree = "<group>"; };
@@ -131,8 +133,15 @@
 		7F04787B1DD5962C00AB6211 /* YTLiveStreaming */ = {
 			isa = PBXGroup;
 			children = (
-				7F04789E1DD596EB00AB6211 /* Categories */,
-				7F04789D1DD596DF00AB6211 /* Model */,
+				7F04789F1DD5970100AB6211 /* Date.swift */,
+				7F8FD2CB2459AA860041CF36 /* Error.swift */,
+				7F0478A01DD5970100AB6211 /* String.swift */,
+				7F0478A31DD5972700AB6211 /* Decodable.swift */,
+				7F0478A51DD5973A00AB6211 /* LiveBroadcastErrorModel.swift */,
+				7F0478A61DD5973A00AB6211 /* LiveBroadcastListModel.swift */,
+				7F0478A71DD5973A00AB6211 /* LiveBroadcastStreamModel.swift */,
+				7F0478A81DD5973A00AB6211 /* LiveStreamListModel.swift */,
+				7F0478A91DD5973A00AB6211 /* LiveStreamModel.swift */,
 				7F0478931DD596BF00AB6211 /* Constants.swift */,
 				7FA999B81DD6C81C0061AF0C /* Credentials.swift */,
 				7F117F281E0E816C000D0745 /* LiveLauncher.swift */,
@@ -153,28 +162,6 @@
 				7F0478891DD5962C00AB6211 /* Info.plist */,
 			);
 			path = YTLiveStreamingTests;
-			sourceTree = "<group>";
-		};
-		7F04789D1DD596DF00AB6211 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				7F0478A31DD5972700AB6211 /* Decodable.swift */,
-				7F0478A51DD5973A00AB6211 /* LiveBroadcastErrorModel.swift */,
-				7F0478A61DD5973A00AB6211 /* LiveBroadcastListModel.swift */,
-				7F0478A71DD5973A00AB6211 /* LiveBroadcastStreamModel.swift */,
-				7F0478A81DD5973A00AB6211 /* LiveStreamListModel.swift */,
-				7F0478A91DD5973A00AB6211 /* LiveStreamModel.swift */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		7F04789E1DD596EB00AB6211 /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				7F04789F1DD5970100AB6211 /* Date.swift */,
-				7F0478A01DD5970100AB6211 /* String.swift */,
-			);
-			name = Categories;
 			sourceTree = "<group>";
 		};
 		7F101EA71E0FBD6F003EAF3F /* Podspec Metadata */ = {
@@ -245,7 +232,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Sergey Krotkih";
 				TargetAttributes = {
 					7F0478781DD5962C00AB6211 = {
@@ -264,11 +251,11 @@
 			};
 			buildConfigurationList = 7F0478731DD5962C00AB6211 /* Build configuration list for PBXProject "YTLiveStreaming" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
+				Base,
 			);
 			mainGroup = 7F04786F1DD5962C00AB6211;
 			productRefGroup = 7F04787A1DD5962C00AB6211 /* Products */;
@@ -326,6 +313,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F8FD2CC2459AA860041CF36 /* Error.swift in Sources */,
 				7F04789B1DD596BF00AB6211 /* YTLiveRequest.swift in Sources */,
 				7F0478AD1DD5973A00AB6211 /* LiveStreamListModel.swift in Sources */,
 				7F0478A11DD5970100AB6211 /* Date.swift in Sources */,
@@ -487,7 +475,7 @@
 			baseConfigurationReference = 8E99A8A7F06BCB520FF235F8 /* Pods-YTLiveStreaming.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
@@ -516,7 +504,7 @@
 			baseConfigurationReference = 26D18BB0B0E41F4706947120 /* Pods-YTLiveStreaming.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;

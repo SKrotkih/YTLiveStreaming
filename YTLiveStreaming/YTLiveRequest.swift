@@ -35,7 +35,7 @@ extension YTLiveRequest {
     // completed – Return broadcasts that have already ended.
     // upcoming – Return broadcasts that have not yet started.
     
-    class func listBroadcasts(_ status: YTLiveVideoState, completion: @escaping (LiveBroadcastListModel?) -> Void) {
+    class func listBroadcasts(_ status: YTLiveVideoState, completion: @escaping (Result<LiveBroadcastListModel, YTError>) -> Void) {
         let parameters: [String: AnyObject] = [
             "part": "id,snippet,contentDetails,status" as AnyObject,
             "broadcastStatus": status.rawValue as AnyObject,
@@ -56,18 +56,17 @@ extension YTLiveRequest {
                     if totalResults > resultsPerPage {
                         print("Need to read next page!")  // TODO: In this case you should send request with pageToken=nextPageToken or pageToken=prevPageToken parameter
                     }
-                    completion(response)
+                    completion(.success(response))
                 } catch {
-                    print(error)
+                    completion(.failure(.message(error.localizedDescription)))
                 }
             case let .failure(error):
-                print("System Error: \(error.localizedDescription)")
-                completion(nil)
+                completion(.failure(.message(error.localizedDescription)))
             }
         })
     }
     
-    class func getLiveBroadcast(broadcastId: String, completion: @escaping (LiveBroadcastStreamModel?) -> Void) {
+    class func getLiveBroadcast(broadcastId: String, completion: @escaping (Result<LiveBroadcastStreamModel, YTError>) -> Void) {
         let parameters: [String: AnyObject] = [
             "part":"id,snippet,contentDetails,status" as AnyObject,
             "id":broadcastId as AnyObject,
@@ -81,8 +80,7 @@ extension YTLiveRequest {
                     let error = json["error"]
                     let message = error["message"].stringValue
                     if !message.isEmpty {
-                        print("Error while request broadcast list" + message)
-                        completion(nil)
+                        completion(.failure(.message("Error while request broadcast list" + message)))
                     } else {
                         let decoder = JSONDecoder()
                         let broadcastList = try decoder.decode(LiveBroadcastListModel.self, from: response.data)
@@ -94,25 +92,36 @@ extension YTLiveRequest {
                                 break
                             }
                         }
-                        completion(broadcast)
+                        if let _ = broadcast {
+                            completion(.success(broadcast!))
+                        } else {
+                            completion(.failure(.message("broadcast does not exist")))
+                        }
                     }
                 } catch {
-                    print(error)
+                    completion(.failure(.message(error.localizedDescription)))
                 }
             case let .failure(error):
-                print("System Error: \(error.localizedDescription)")
-                completion(nil)
+                completion(.failure(.message("System Error: \(error.localizedDescription)")))
             }
         }
     }
     
     // https://developers.google.com/youtube/v3/live/docs/liveBroadcasts/insert
     // Creates a broadcast.
-    class func createLiveBroadcast(_ title: String, startDateTime: Date, completion: @escaping (LiveBroadcastStreamModel?) -> Void) {
+    class func createLiveBroadcast(_ title: String, startDateTime: Date, completion: @escaping (Result<LiveBroadcastStreamModel, YTError>) -> Void) {
         GoogleOAuth2.sharedInstance.requestToken() { token in
             if let token = token {
                 var headers: HTTPHeaders = [.contentType("application/json")]
-                headers.add(.authorization(token))
+                headers.add(.accept("application/json"))
+                headers.add(.authorization("Bearer \(token)"))
+                
+//                --header 'Authorization: Bearer [YOUR_ACCESS_TOKEN]' \
+//                --header 'Accept: application/json' \
+//                --header 'Content-Type: application/json' \
+
+                
+                
                 let jsonBody = "{\"snippet\": {\"title\": \"\(title)\",\"scheduledStartTime\": \"\(startDateTime.toJSONformat())\"},\"status\": {\"privacyStatus\":\"public\"}}"
                 let encoder = JSONBodyStringEncoding(jsonBody: jsonBody)
                 let url = "\(LiveAPI.BaseURL)/liveBroadcasts?part=id,snippet,contentDetails,status&key=\(Credentials.APIkey)"
@@ -122,7 +131,7 @@ extension YTLiveRequest {
                         switch response.result {
                         case .success:
                             guard let data = response.data else {
-                                completion(nil)
+                                completion(.failure(.message("create liveBroadcasts response is empty")))
                                 return
                             }
                             do {
@@ -130,25 +139,25 @@ extension YTLiveRequest {
                                 let error = json["error"].stringValue
                                 if !error.isEmpty {
                                     let message = json["message"].stringValue
-                                    print("Error while Youtube broadcast was creating: \(message)")
-                                    completion(nil)
+                                    completion(.failure(.message("Error while Youtube broadcast was creating: \(message)")))
                                 } else {
                                     //print(json)
                                     let decoder = JSONDecoder()
                                     let liveBroadcast = try decoder.decode(LiveBroadcastStreamModel.self, from: data)
-                                    completion(liveBroadcast)
+                                    completion(.success(liveBroadcast))
                                 }
                             } catch {
-                                completion(nil)
+                                completion(.failure(.message("parse response failure")))
                             }
-                            
                         case .failure(let error):
-                            print("System Error: " + error.localizedDescription)
-                            completion(nil)
+                            let descr = error.errorDescription ?? ""
+                            completion(.failure(.message("System Error: " + descr)))
                         }
-                }
+                    }.cURLDescription { (description) in
+                        print("\n====== REQUEST =======\n\(description)\n==============\n")
+                    }
             } else {
-                completion(nil)
+                completion(.failure(.message("OAuth token is not presented")))
             }
         }
     }
@@ -156,7 +165,7 @@ extension YTLiveRequest {
     // Updates a broadcast. For example, you could modify the broadcast settings defined in the liveBroadcast resource's contentDetails object.
     // https://developers.google.com/youtube/v3/live/docs/liveBroadcasts/update
     // PUT https://www.googleapis.com/youtube/v3/liveBroadcasts
-    class func updateLiveBroadcast(_ broadcast: LiveBroadcastStreamModel, completion: @escaping (Bool) -> Void) {
+    class func updateLiveBroadcast(_ broadcast: LiveBroadcastStreamModel, completion: @escaping (Result<Void, YTError>) -> Void) {
         GoogleOAuth2.sharedInstance.requestToken() { token in
             
             let broadcastId = broadcast.id
@@ -185,7 +194,7 @@ extension YTLiveRequest {
                         switch response.result {
                         case .success:
                             guard let data = response.data else {
-                                completion(false)
+                                completion(.failure(.message("update broadcast response is empty")))
                                 return
                             }
                             do {
@@ -193,21 +202,22 @@ extension YTLiveRequest {
                                 let error = json["error"].stringValue
                                 if !error.isEmpty {
                                     let message = json["message"].stringValue
-                                    print("Error while Youtube broadcast was creating" + message)
-                                    completion(false)
+                                    completion(.failure(.message("Error while Youtube broadcast was creating" + message)))
                                 } else {
-                                    completion(true)
+                                    completion(.success(Void()))
                                 }
                             } catch {
-                                completion(false)
+                                completion(.failure(.message("parse response failure")))
                             }
                         case .failure(let error):
-                            print("System Error: " + error.localizedDescription)
-                            completion(false)
+                            completion(.failure(.message("System Error: " + error.localizedDescription)))
                         }
-                }
+                    }.cURLDescription { (description) in
+                        print("\n====== REQUEST =======\n\(description)\n==============\n")
+                    }
+
             } else {
-                completion(false)
+                completion(.failure(.message("OAuth token is not presented!")))
             }
         }
     }
@@ -217,7 +227,7 @@ extension YTLiveRequest {
     // For example, when you transition a broadcast's status to testing, YouTube starts to transmit video
     // to that broadcast's monitor stream. Before calling this method, you should confirm that the value of the
     // status.streamStatus property for the stream bound to your broadcast is active.
-    class func transitionLiveBroadcast(_ boadcastId: String, broadcastStatus: String, completion: @escaping (LiveBroadcastStreamModel?) -> Void) {
+    class func transitionLiveBroadcast(_ boadcastId: String, broadcastStatus: String, completion: @escaping (Result<LiveBroadcastStreamModel, YTError>) -> Void) {
         
         let parameters: [String: AnyObject] = [
             "id":boadcastId as AnyObject,
@@ -233,28 +243,26 @@ extension YTLiveRequest {
                     let error = json["error"]
                     let message = error["message"].stringValue
                     if !message.isEmpty {
-                        print("FAILED TRANSITION TO THE \(broadcastStatus) STATUS [\(message)]!")
                         //print("Error while Youtube broadcast transition", message: message)
-                        completion(nil)
+                        completion(.failure(.message("FAILED TRANSITION TO THE \(broadcastStatus) STATUS [\(message)]!")))
                     } else {
                         //print(json)
                         let decoder = JSONDecoder()
                         let liveBroadcast = try decoder.decode(LiveBroadcastStreamModel.self, from: response.data)
-                        completion(liveBroadcast)
+                        completion(.success(liveBroadcast))
                     }
                 } catch {
-                    completion(nil)
+                    completion(.failure(.message("parse response failure")))
                 }
             case let .failure(error):
-                print("System Error: " + error.localizedDescription)
-                completion(nil)
+                completion(.failure(.message("System Error: " + error.localizedDescription)))
             }
         }
     }
     
     // Deletes a broadcast.
     // DELETE https://www.googleapis.com/youtube/v3/liveBroadcasts
-    class func deleteLiveBroadcast(broadcastId: String, completion: @escaping (Bool) -> Void) {
+    class func deleteLiveBroadcast(broadcastId: String, completion: @escaping (Result<Void, YTError>) -> Void) {
         let parameters: [String: AnyObject] = [
             "id":broadcastId as AnyObject,
             "key": Credentials.APIkey as AnyObject
@@ -266,18 +274,16 @@ extension YTLiveRequest {
                     let json = try JSON(data: response.data)
                     let error = LiveBroadcastErrorModel.decode(json["error"])
                     if let code = error.code, code > 0 {
-                        print("Failed to delete broadcast: " + error.message!)
-                        completion(false)
+                        completion(.failure(.message("Failed of deleting broadcast: " + error.message!)))
                     } else {
                         //print("Broadcast deleted: \(json)")
-                        completion(true)
+                        completion(.success(Void()))
                     }
                 } catch {
-                    completion(false)
+                    completion(.failure(.message("parse response failure")))
                 }
             case let .failure(error):
-                print("System Error" + error.localizedDescription)
-                completion(false)
+                completion(.failure(.message("System Error" + error.localizedDescription)))
             }
         }
     }
@@ -285,7 +291,7 @@ extension YTLiveRequest {
     // Binds a YouTube broadcast to a stream or removes an existing binding between a broadcast and a stream.
     // A broadcast can only be bound to one video stream, though a video stream may be bound to more than one broadcast.
     // POST https://www.googleapis.com/youtube/v3/liveBroadcasts/bind
-    class func bindLiveBroadcast(broadcastId: String, liveStreamId streamId: String, completion: @escaping (LiveBroadcastStreamModel?) -> Void) {
+    class func bindLiveBroadcast(broadcastId: String, liveStreamId streamId: String, completion: @escaping (Result<LiveBroadcastStreamModel, YTError>) -> Void) {
         let parameters: [String: AnyObject] = [
             "id":broadcastId as AnyObject,
             "streamId":streamId as AnyObject,
@@ -300,20 +306,18 @@ extension YTLiveRequest {
                     let error = json["error"]
                     let message = error["message"].stringValue
                     if !message.isEmpty {
-                        print("Error while Youtube broadcast binding with live stream: \(message)")
-                        completion(nil)
+                        completion(.failure(.message("Error while Youtube broadcast binding with live stream: \(message)")))
                     } else {
                         //print(json)
                         let decoder = JSONDecoder()
                         let liveBroadcast = try decoder.decode(LiveBroadcastStreamModel.self, from: response.data)
-                        completion(liveBroadcast)
+                        completion(.success(liveBroadcast))
                     }
                 } catch {
-                    completion(nil)
+                    completion(.failure(.message("parse response failure")))
                 }
             case let .failure(error):
-                print("System Error" + error.localizedDescription)
-                completion(nil)
+                completion(.failure(.message("System Error" + error.localizedDescription)))
             }
         }
     }
@@ -329,7 +333,7 @@ extension YTLiveRequest {
     
     // Returns a list of video streams that match the API request parameters.
     // https://developers.google.com/youtube/v3/live/docs/liveStreams/list
-    class func getLiveStream(_ liveStreamId: String, completion: @escaping (LiveStreamModel?) -> Void) {
+    class func getLiveStream(_ liveStreamId: String, completion: @escaping (Result<LiveStreamModel, YTError>) -> Void) {
         let parameters: [String: AnyObject] = [
             "part":"id,snippet,cdn,status" as AnyObject,
             "id":liveStreamId as AnyObject,
@@ -343,8 +347,7 @@ extension YTLiveRequest {
                     let error = json["error"]
                     let message = error["message"].stringValue
                     if !message.isEmpty {
-                        print("Error while Youtube broadcast creating: " + message)
-                        completion(nil)
+                        completion(.failure(.message("Error while Youtube broadcast creating: " + message)))
                     } else {
                         //print(json)
                         let broadcastList = LiveStreamListModel.decode(json)
@@ -356,14 +359,17 @@ extension YTLiveRequest {
                                 break
                             }
                         }
-                        completion(liveStream)
+                        if let _ = liveStream {
+                            completion(.success(liveStream!))
+                        } else {
+                            completion(.failure(.message("liveStream is empty")))
+                        }
                     }
                 } catch {
-                    completion(nil)
+                    completion(.failure(.message("parse response failure")))
                 }
             case let .failure(error):
-                print("System Error" + error.localizedDescription)
-                completion(nil)
+                completion(.failure(.message("System Error" + error.localizedDescription)))
             }
         }
     }
@@ -390,7 +396,7 @@ extension YTLiveRequest {
     //   }
     //   }
     
-    class func createLiveStream(_ title: String, description: String, streamName: String, completion: @escaping (LiveStreamModel?) -> Void) {
+    class func createLiveStream(_ title: String, description: String, streamName: String, completion: @escaping (Result<LiveStreamModel, YTError>) -> Void) {
         GoogleOAuth2.sharedInstance.requestToken() { token in
             if let token = token {
                 let resolution = LiveAPI.Resolution
@@ -411,7 +417,7 @@ extension YTLiveRequest {
                         switch response.result {
                         case .success:
                             guard let data = response.data else {
-                                completion(nil)
+                                completion(.failure(.message("createLiveStream response is empty")))
                                 return
                             }
                             do {
@@ -419,19 +425,19 @@ extension YTLiveRequest {
                                 let error = json["error"]
                                 if !error.isEmpty {
                                     let message = json["message"].stringValue
-                                    print("Error while Youtube broadcast was creating: " + message)
-                                    completion(nil)
+                                    completion(.failure(.message("Error while Youtube broadcast was creating: " + message)))
                                 } else {
                                     let liveStream = LiveStreamModel.decode(json)
-                                    completion(liveStream)
+                                    completion(.success(liveStream))
                                 }
                             } catch {
-                                completion(nil)
+                                completion(.failure(.message("parse response failure")))
                             }
                         case .failure(let error):
-                            print("System Error: " +  error.localizedDescription)
-                            completion(nil)
+                            completion(.failure(.message("System Error: " +  error.localizedDescription)))
                         }
+                }.cURLDescription { (description) in
+                    print("\n====== REQUEST =======\n\(description)\n==============\n")
                 }
             } else {
                 
@@ -442,7 +448,7 @@ extension YTLiveRequest {
     // Deletes a video stream
     // Request:
     // DELETE https://www.googleapis.com/youtube/v3/liveStreams
-    class func deleteLiveStream(_ liveStreamId: String, completion: @escaping (Bool) -> Void) {
+    class func deleteLiveStream(_ liveStreamId: String, completion: @escaping (Result<Void, YTError>) -> Void) {
         let parameters: [String: AnyObject] = [
             "id":liveStreamId as AnyObject,
             "key": Credentials.APIkey as AnyObject
@@ -455,18 +461,16 @@ extension YTLiveRequest {
                     let error = json["error"].stringValue
                     if !error.isEmpty {
                         let message = json["message"].stringValue
-                        print(error + ";" + message)
-                        completion(false)
+                        completion(.failure(.message(error + ";" + message)))
                     } else {
                         print("video stream deleted: \(json)")
-                        completion(true)
+                        completion(.success(Void()))
                     }
                 } catch {
-                    completion(false)
+                    completion(.failure(.message("parse response failure")))
                 }
             case let .failure(error):
-                print("System Error: \(error.localizedDescription)")
-                completion(false)
+                completion(.failure(.message("System Error: \(error.localizedDescription)")))
             }
         }
     }
@@ -477,7 +481,7 @@ extension YTLiveRequest {
     // format = 1080p 1440p 240p 360p 480p 720p
     // ingestionType = dash rtmp
     
-    class func updateLiveStream(_ liveStreamId: String, title: String, format: String, ingestionType: String, completion: @escaping (Bool) -> Void) {
+    class func updateLiveStream(_ liveStreamId: String, title: String, format: String, ingestionType: String, completion: @escaping (Result<Void, YTError>) -> Void) {
         GoogleOAuth2.sharedInstance.requestToken() { token in
             if let token = token {
                 var headers: HTTPHeaders = [.contentType("application/json")]
@@ -494,7 +498,7 @@ extension YTLiveRequest {
                         switch response.result {
                         case .success:
                             guard let data = response.data else {
-                                completion(false)
+                                completion(.failure(.message("updateLiveStream response is empty")))
                                 return
                             }
                             do {
@@ -502,21 +506,22 @@ extension YTLiveRequest {
                                 let error = json["error"].stringValue
                                 if !error.isEmpty {
                                     let message = json["message"].stringValue
-                                    print("Error while Youtube broadcast was creating" + message)
-                                    completion(false)
+                                    completion(.failure(.message("Error while Youtube broadcast was creating" + message)))
                                 } else {
-                                    completion(true)
+                                    completion(.success(Void()))
                                 }
                             } catch {
-                                completion(false)
+                                completion(.failure(.message("parse response failure")))
                             }
                         case .failure(let error):
-                            print("System Error: \(error.localizedDescription)")
-                            completion(false)
+                            completion(.failure(.message("System Error: \(error.localizedDescription)")))
                         }
-                }
+                    }.cURLDescription { (description) in
+                        print("\n====== REQUEST =======\n\(description)\n==============\n")
+                    }
+
             } else {
-                completion(false)
+                completion(.failure(.message("OAuth token is not presented")))
             }
         }
     }

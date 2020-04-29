@@ -25,7 +25,7 @@ class GoogleSignInViewModel {
         interactor.configure()
     }
     
-    func startListeningToSignIn(_ completion: @escaping (Result<Void, ResultsError>) -> Void) {
+    func startListeningToSignIn(_ completion: @escaping (Result<Void, LVError>) -> Void) {
         interactor
             .rxSignInResult
             .subscribe(onNext: { result in

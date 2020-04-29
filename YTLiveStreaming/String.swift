@@ -10,7 +10,7 @@ public extension String {
       return range(of: string, options: .literal, range: nil, locale: nil)?.lowerBound
    }
 
-   public func urlEncode() -> String {
+   func urlEncode() -> String {
       let encodedURL = self.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
       return encodedURL!
    }

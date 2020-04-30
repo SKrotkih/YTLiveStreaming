@@ -17,12 +17,17 @@ YTLiveStreaming is a framework for creating live broadcasts and video streams on
 - Select Library
 - Select "YouTube Data API v3"
 - Create Api key (API_KEY) ; In Key restriction select iOS, enter your iOS app bundle id; Save
-- Create Oauth Cient ID
-- Add API key and OAuth 2.0 client ID:
+- Create Oauth 2.0 Cient ID
+
+- add three scopes for Google APIs: "https://www.googleapis.com/auth/youtube", "https://www.googleapis.com/auth/youtube.readonly",  "https://www.googleapis.com/auth/youtube.force-ssl"
+
+<img src="https://user-images.githubusercontent.com/2775621/80702066-23271b80-8ae9-11ea-99e8-314ee1ae1c27.png alt="OAuth consent screen" style="width: 690px;" />
+
+- fill Application Homepage link and Application Privacy Policy link. Subnit for verification
+
+- as result you will have API_KEY and Cient ID which will be used in info.plist your iOS app.
 
 <img src="https://user-images.githubusercontent.com/2775621/36204190-e80344a6-1192-11e8-9431-e18ad4bff9a3.png" alt="Google API Manager" style="width: 690px;" />
-
-Note. When you will create an API key, don't check iOS apps in the radio box. Don't worry about yellow warning Key restriction. Take the API key and Client ID. They will be used on the next step.
 
 ## Installation
 
@@ -55,6 +60,8 @@ $ pod install
 ```
 
 ## Prepare and launch the example
+
+
 
 - Download or clone the repository.
 
@@ -139,13 +146,14 @@ And some other public methods of the YTLiveStreaming class
 
 ## Libraries Used
 
+- GoogleSignIn
 - LFLiveKit (https://github.com/LaiFengiOS/LFLiveKit)
 - Alamofire
 - SwiftyJSON
 - Moya
 
 Note. Here were  used the following things:
-- Goggle Sign-In for iOS ( https://developers.google.com/identity/sign-in/ios/ )  
+- Goggle Sign-In for iOS ( https://developers.google.com/identity/sign-in/ios/ ) 
 - VIPER architect (Clean for iOS) ( https://www.objc.io/issues/13-architecture/viper/ )
 - Moya 10
 - Alamofire

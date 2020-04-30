@@ -55,13 +55,6 @@ extension YTLiveRequest {
             "maxResults": LiveRequest.MaxResultObjects as AnyObject,
             "key": Credentials.APIkey as AnyObject
         ]
-
-//        let parameters: [String: AnyObject] = [
-//            "part": "id" as AnyObject,
-//            "broadcastStatus": status.rawValue as AnyObject,
-//            "key": Credentials.APIkey as AnyObject
-//        ]
-
         YouTubeLiveVideoProvider.request(LiveStreamingAPI.listBroadcasts(parameters), completion: { result in
             switch result {
             case let .success(response):
@@ -78,10 +71,13 @@ extension YTLiveRequest {
                     }
                     completion(.success(response))
                 } catch {
-                    completion(.failure(.message(error.localizedDescription)))
+                    let message = "Parsing data error: \(error.localizedDescription)"
+                    completion(.failure(.message(message)))
                 }
             case let .failure(error):
-                completion(.failure(.message(error.localizedDescription)))
+                let code = error.errorCode
+                let message = error.errorDescription ?? error.localizedDescription
+                completion(.failure(.systemMessage(code, message)))
             }
         })
     }
@@ -119,10 +115,13 @@ extension YTLiveRequest {
                         }
                     }
                 } catch {
-                    completion(.failure(.message(error.localizedDescription)))
+                    let message = "Parsing data error: \(error.localizedDescription)"
+                    completion(.failure(.message(message)))
                 }
             case let .failure(error):
-                completion(.failure(.message("System Error: \(error.localizedDescription)")))
+                let code = error.errorCode
+                let message = error.errorDescription ?? error.localizedDescription
+                completion(.failure(.systemMessage(code, message)))
             }
         }
     }
@@ -160,11 +159,13 @@ extension YTLiveRequest {
                                 completion(.success(liveBroadcast))
                             }
                         } catch {
-                            completion(.failure(.message("parse response failure")))
+                            let message = "Parsing data error: \(error.localizedDescription)"
+                            completion(.failure(.message(message)))
                         }
                     case .failure(let error):
-                        let descr = error.errorDescription ?? ""
-                        completion(.failure(.message("System Error: " + descr)))
+                        let code = error.responseCode ?? -1
+                        let message = error.errorDescription ?? error.localizedDescription
+                        completion(.failure(.systemMessage(code, message)))
                     }
                 }.cURLDescription { (description) in
                     print("\n====== REQUEST =======\n\(description)\n==============\n")
@@ -216,10 +217,13 @@ extension YTLiveRequest {
                                     completion(.success(Void()))
                                 }
                             } catch {
-                                completion(.failure(.message("parse response failure")))
+                                let message = "Parsing data error: \(error.localizedDescription)"
+                                completion(.failure(.message(message)))
                         }
                         case .failure(let error):
-                            completion(.failure(.message("System Error: " + error.localizedDescription)))
+                            let code = error.responseCode ?? -1
+                            let message = error.errorDescription ?? error.localizedDescription
+                            completion(.failure(.systemMessage(code, message)))
                     }
             }.cURLDescription { (description) in
                 print("\n====== REQUEST =======\n\(description)\n==============\n")
@@ -257,10 +261,13 @@ extension YTLiveRequest {
                         completion(.success(liveBroadcast))
                     }
                 } catch {
-                    completion(.failure(.message("parse response failure")))
+                    let message = "Parsing data error: \(error.localizedDescription)"
+                    completion(.failure(.message(message)))
                 }
             case let .failure(error):
-                completion(.failure(.message("System Error: " + error.localizedDescription)))
+                let code = error.errorCode
+                let message = error.errorDescription ?? error.localizedDescription
+                completion(.failure(.systemMessage(code, message)))
             }
         }
     }
@@ -285,10 +292,13 @@ extension YTLiveRequest {
                         completion(.success(Void()))
                     }
                 } catch {
-                    completion(.failure(.message("parse response failure")))
+                    let message = "Parsing data error: \(error.localizedDescription)"
+                    completion(.failure(.message(message)))
                 }
             case let .failure(error):
-                completion(.failure(.message("System Error" + error.localizedDescription)))
+                let code = error.errorCode
+                let message = error.errorDescription ?? error.localizedDescription
+                completion(.failure(.systemMessage(code, message)))
             }
         }
     }
@@ -319,10 +329,13 @@ extension YTLiveRequest {
                         completion(.success(liveBroadcast))
                     }
                 } catch {
-                    completion(.failure(.message("parse response failure")))
+                    let message = "Parsing data error: \(error.localizedDescription)"
+                    completion(.failure(.message(message)))
                 }
             case let .failure(error):
-                completion(.failure(.message("System Error" + error.localizedDescription)))
+                let code = error.errorCode
+                let message = error.errorDescription ?? error.localizedDescription
+                completion(.failure(.systemMessage(code, message)))
             }
         }
     }
@@ -371,10 +384,13 @@ extension YTLiveRequest {
                         }
                     }
                 } catch {
-                    completion(.failure(.message("parse response failure")))
+                    let message = "Parsing data error: \(error.localizedDescription)"
+                    completion(.failure(.message(message)))
                 }
             case let .failure(error):
-                completion(.failure(.message("System Error" + error.localizedDescription)))
+                let code = error.errorCode
+                let message = error.errorDescription ?? error.localizedDescription
+                completion(.failure(.systemMessage(code, message)))
             }
         }
     }
@@ -433,10 +449,13 @@ extension YTLiveRequest {
                                 completion(.success(liveStream))
                             }
                         } catch {
-                            completion(.failure(.message("parse response failure")))
+                            let message = "Parsing data error: \(error.localizedDescription)"
+                            completion(.failure(.message(message)))
                         }
                     case .failure(let error):
-                        completion(.failure(.message("System Error: " +  error.localizedDescription)))
+                        let code = error.responseCode ?? -1
+                        let message = error.errorDescription ?? error.localizedDescription
+                        completion(.failure(.systemMessage(code, message)))
                     }
             }.cURLDescription { (description) in
                 print("\n====== REQUEST =======\n\(description)\n==============\n")
@@ -466,10 +485,13 @@ extension YTLiveRequest {
                         completion(.success(Void()))
                     }
                 } catch {
-                    completion(.failure(.message("parse response failure")))
+                    let message = "Parsing data error: \(error.localizedDescription)"
+                    completion(.failure(.message(message)))
                 }
             case let .failure(error):
-                completion(.failure(.message("System Error: \(error.localizedDescription)")))
+                let code = error.errorCode
+                let message = error.errorDescription ?? error.localizedDescription
+                completion(.failure(.systemMessage(code, message)))
             }
         }
     }
@@ -511,10 +533,13 @@ extension YTLiveRequest {
                                 completion(.success(Void()))
                             }
                         } catch {
-                            completion(.failure(.message("parse response failure")))
+                            let message = "Parsing data error: \(error.localizedDescription)"
+                            completion(.failure(.message(message)))
                         }
                     case .failure(let error):
-                        completion(.failure(.message("System Error: \(error.localizedDescription)")))
+                        let code = error.responseCode ?? -1
+                        let message = error.errorDescription ?? error.localizedDescription
+                        completion(.failure(.systemMessage(code, message)))
                     }
                 }.cURLDescription { (description) in
                     print("\n====== REQUEST =======\n\(description)\n==============\n")

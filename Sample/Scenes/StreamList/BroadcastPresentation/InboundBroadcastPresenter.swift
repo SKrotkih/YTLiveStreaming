@@ -117,9 +117,8 @@ extension InboundBroadcastPresenter {
         }
     }
     
-    func createBroadcast(_ completion: @escaping (Error?) -> Void) {
-        let title = "Live video"
-        let description = "Test broadcast video"
+    func createBroadcast(title: String = "Live video", description: String = "Test broadcast video", _ completion: @escaping (Error?) -> Void) {
+
         let startDate = Helpers.dateAfter(Date(), after: (hour: 0, minute: 2, second: 0))
         
         self.incomingBroadcastWorker.createBroadcast(title, description: description, startTime: startDate, completion: { result in
@@ -128,8 +127,14 @@ extension InboundBroadcastPresenter {
                     print("Broadcast \(broadcast.snipped.title) was created sccessfully")
                     completion(nil)
                 case .failure(let error):
-                    let err = NSError(domain: error.message(), code: 0, userInfo: nil)
-                    completion(err)
+                    switch error {
+                        case .systemMessage(let code, let message):
+                            let err = NSError(domain: message, code: code, userInfo: nil)
+                            completion(err)
+                        default:
+                            let err = NSError(domain: error.message(), code: -1, userInfo: nil)
+                            completion(err)
+                    }
             }
         })
     }

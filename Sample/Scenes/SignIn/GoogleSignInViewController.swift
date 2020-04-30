@@ -57,7 +57,7 @@ extension GoogleSignInViewController {
                 case .success():
                     DispatchQueue.performUIUpdate {
                         self.performSegue(withIdentifier: "streamlist", sender: nil)
-                }
+                    }
                 case .failure(let error):
                     switch error {
                         case .systemMessage(let code, let message):

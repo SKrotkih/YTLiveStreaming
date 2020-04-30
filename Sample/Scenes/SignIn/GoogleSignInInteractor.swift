@@ -17,7 +17,9 @@ public class GoogleSignInInteractor: NSObject  {
     private let worker = GoogleSignInWorker()
     
     fileprivate struct Auth {
-        static let Scope: NSString = "https://www.googleapis.com/auth/youtube"
+        static let scope1: NSString = "https://www.googleapis.com/auth/youtube"
+        static let scope2: NSString = "https://www.googleapis.com/auth/youtube.readonly"
+        static let scope3: NSString = "https://www.googleapis.com/auth/youtube.force-ssl"
     }
     
     fileprivate var mViewController: UIViewController?
@@ -72,6 +74,26 @@ public class GoogleSignInInteractor: NSObject  {
     func disconnect() {
         GIDSignIn.sharedInstance().disconnect()
     }
+    
+    func requestAdditionalScopes() -> Bool {
+        guard let currentUser = GIDSignIn.sharedInstance()?.currentUser, let email = UserStorage.user?.email else {
+            return false
+        }
+        if currentUser.grantedScopes.contains(where: { (object) -> Bool in
+            guard let scope = object as? String else {
+                return false
+            }
+            return scope == String(Auth.scope1) || scope == String(Auth.scope2) || scope == String(Auth.scope3)
+        }) {
+            return true
+        } else  {
+            GIDSignIn.sharedInstance().scopes.append(contentsOf: [Auth.scope1, Auth.scope2, Auth.scope3])
+            GIDSignIn.sharedInstance().loginHint = email
+            GIDSignIn.sharedInstance().signIn()
+            return false
+        }
+    }
+    
 }
 
 // MARK: - GIDSignInDelegate methods
@@ -89,6 +111,9 @@ extension GoogleSignInInteractor: GIDSignInDelegate {
         } else {
             GoogleUser.save(user)
             if let accessToken = self.accessToken {
+
+                print("SCOPES=\(GIDSignIn.sharedInstance().scopes ?? [])")
+                
                 GoogleOAuth2.sharedInstance.accessToken = accessToken
                 self.rxSignInResult.onNext(.success(Void()))
             } else {

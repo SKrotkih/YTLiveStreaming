@@ -21,7 +21,7 @@ YTLiveStreaming is a framework for creating live broadcasts and video streams on
 
 - add three scopes for Google APIs: "https://www.googleapis.com/auth/youtube", "https://www.googleapis.com/auth/youtube.readonly",  "https://www.googleapis.com/auth/youtube.force-ssl"
 
-<img src="https://user-images.githubusercontent.com/2775621/80702066-23271b80-8ae9-11ea-99e8-314ee1ae1c27.png alt="OAuth consent screen" style="width: 690px;" />
+<img src="https://user-images.githubusercontent.com/2775621/80702066-23271b80-8ae9-11ea-99e8-314ee1ae1c27.png" alt="OAuth consent screen" style="width: 690px;" />
 
 - fill Application Homepage link and Application Privacy Policy link. Subnit for verification
 

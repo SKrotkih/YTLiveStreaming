@@ -140,6 +140,11 @@ extension YTLiveRequest {
             AF.request(url, method: .post, parameters: [:], encoding: encoder, headers: headers)
                 .validate()
                 .responseData { response in
+                    
+                    print("======RESPONSE========")
+                    print(response.debugDescription)
+                    print("======================")
+                    
                     switch response.result {
                     case .success:
                         guard let data = response.data else {

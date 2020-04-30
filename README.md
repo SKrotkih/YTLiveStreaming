@@ -16,16 +16,17 @@ YTLiveStreaming is a framework for creating live broadcasts and video streams on
 - Go to the new application
 - Select Library
 - Select "YouTube Data API v3"
+- Select Credetials
 - Create Api key (API_KEY) ; In Key restriction select iOS, enter your iOS app bundle id; Save
-- Create Oauth 2.0 Cient ID
+- Create Oauth 2.0 Cient ID (CLIENT_ID)
 
 - add three scopes for Google APIs: "https://www.googleapis.com/auth/youtube", "https://www.googleapis.com/auth/youtube.readonly",  "https://www.googleapis.com/auth/youtube.force-ssl"
 
 <img src="https://user-images.githubusercontent.com/2775621/80702066-23271b80-8ae9-11ea-99e8-314ee1ae1c27.png" alt="OAuth consent screen" style="width: 690px;" />
 
-- fill Application Homepage link and Application Privacy Policy link. Subnit for verification
+- fill Application Homepage link and Application Privacy Policy link. Submit for verification
 
-- as result you will have API_KEY and Cient ID which will be used in info.plist your iOS app.
+- as result you will have API_KEY and CLIENT_ID which will be used in info.plist your iOS app later.
 
 <img src="https://user-images.githubusercontent.com/2775621/36204190-e80344a6-1192-11e8-9431-e18ad4bff9a3.png" alt="Google API Manager" style="width: 690px;" />
 
@@ -45,7 +46,7 @@ To integrate YTLiveStreaming into your Xcode project using CocoaPods, specify it
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '9.0'
+platform :ios, '11'
 use_frameworks!
 
 target '<Your Target Name>' do
@@ -59,8 +60,11 @@ Then, run the following command:
 $ pod install
 ```
 
-## Prepare and launch the example
+## Prepare and launch an example
 
+As an example used iOS app Live Events
+
+<img src="https://user-images.githubusercontent.com/2775621/80704225-e826e700-8aec-11ea-875a-7971b76e40da.png" alt="Live Events Logo" style="width: 690px;" />
 
 
 - Download or clone the repository.
@@ -71,7 +75,9 @@ $ pod install
 
 - Open YouTubeLiveVideo.xcworkspace.
 
-- Put your CLIENT_ID and API_KEY into the plist.info:
+- Enter your bundle id
+
+- Put CLIENT_ID and API_KEY into the plist.info:
 
 <img src="https://user-images.githubusercontent.com/2775621/36204258-42684ab8-1193-11e8-88c4-a7668f7de368.png" alt="Credentials" style="width: 690px;" />
 

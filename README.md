@@ -91,26 +91,42 @@ As an example used iOS app Live Events
 
 	...
 
-	// Get all events in different arrays of the LiveBroadcastStreamModel type 
+	// Get all events in different arrays of the LiveBroadcastStreamModel type
 	input.getAllBroadcasts(){ (upcomingEvents, liveNowEvents, completedEvents) in
 	   ...
 	}
 
 	// Get events separately:
-	// Get upcoming events
-	input.getUpcomingBroadcasts() { upcomingEvents in
-	   ...
+
+	// Get Ready to broadcast events
+	input.getUpcomingBroadcasts() { result in
+          switch result {
+              case .success(let upcomingEvents):
+                ...
+              case .failure(let error):
+                ...
+          }    
 	} 
 
-	// Get Live now events
-	input.getLiveNowBroadcasts() ( liveNowEvents in
-	   ...
+	// Get Live now broadcasts
+	input.getLiveNowBroadcasts() ( result in
+          switch result {
+              case .success(let  liveNowEvents):
+                  ...
+              case .failure(let error):
+                  ...
+          }
 	} 
 
-	// Get Completed events
-	input.getCompletedBroadcasts() ( completedEvents in
-	   ...
-	} 
+	// Get Completed broadcasts
+	input.getCompletedBroadcasts() ( result in
+             switch result {
+                 case .success(let completedEvents):
+                     ...
+                 case .failure(let error):
+                     ...
+             }
+       } 
 
 	// Create Broadcast
 	input.createBroadcast(title, description: description, startTime: startDate, completion: { liveBroadcast in

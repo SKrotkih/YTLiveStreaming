@@ -25,40 +25,16 @@ public class YTLiveStreaming: NSObject {
 
 extension YTLiveStreaming {
     
-    public func getUpcomingBroadcasts(_ completion: @escaping ([LiveBroadcastStreamModel]?) -> Void) {
-        YTLiveRequest.listBroadcasts(.upcoming) { result in
-            switch result {
-                case .success(let broadcasts):
-                    self.fillList(broadcasts, completion: completion)
-                case .failure(let error):
-                    print(error.message())
-                    completion(nil)
-            }
-        }
+    public func getUpcomingBroadcasts(_ completion: @escaping (Result<[LiveBroadcastStreamModel], YTError>) -> Void) {
+        getBroadcastList(.upcoming, completion)
     }
     
-    public func getLiveNowBroadcasts(_ completion: @escaping ([LiveBroadcastStreamModel]?) -> Void) {
-        YTLiveRequest.listBroadcasts(.active) { result in
-            switch result {
-                case .success(let broadcasts):
-                    self.fillList(broadcasts, completion: completion)
-                case .failure(let error):
-                    print(error.message())
-                    completion(nil)
-            }
-        }
+    public func getLiveNowBroadcasts(_ completion: @escaping (Result<[LiveBroadcastStreamModel], YTError>) -> Void) {
+        getBroadcastList(.active, completion)
     }
     
-    public func getCompletedBroadcasts(_ completion: @escaping ([LiveBroadcastStreamModel]?) -> Void) {
-        YTLiveRequest.listBroadcasts(.completed) { result in
-            switch result {
-                case .success(let broadcasts):
-                    self.fillList(broadcasts, completion: completion)
-                case .failure(let error):
-                    print(error.message())
-                    completion(nil)
-            }
-        }
+    public func getCompletedBroadcasts(_ completion: @escaping (Result<[LiveBroadcastStreamModel], YTError>) -> Void) {
+        getBroadcastList(.completed, completion)
     }
     
     public func getAllBroadcasts(_ completion: @escaping ([LiveBroadcastStreamModel]?, [LiveBroadcastStreamModel]?, [LiveBroadcastStreamModel]?) -> Void) {
@@ -92,17 +68,6 @@ extension YTLiveStreaming {
                     print(error.message())
                     completion(nil, nil, nil)
             }
-        }
-    }
-    
-    fileprivate func fillList(_ broadcasts: LiveBroadcastListModel, completion: ([LiveBroadcastStreamModel]?) -> Void) {
-        let items = broadcasts.items
-        if kOrderByPublishedAt {
-            let sortedItems = items.sorted(by: {$0.snipped.publishedAt.compare($1.snipped.publishedAt) == ComparisonResult.orderedDescending})
-            completion(sortedItems)
-        } else {
-            let sortedItems = items.sorted(by: { $0.snipped.scheduledStartTime.compare($1.snipped.scheduledStartTime) == ComparisonResult.orderedDescending })
-            completion(sortedItems)
         }
     }
     
@@ -304,6 +269,34 @@ extension YTLiveStreaming {
 
 extension YTLiveStreaming {
     
+    fileprivate func getBroadcastList(_ status: YTLiveVideoState, _ completion: @escaping (Result<[LiveBroadcastStreamModel], YTError>) -> Void) {
+        YTLiveRequest.listBroadcasts(status) { result in
+            switch result {
+                case .success(let broadcasts):
+                        self.fillList(broadcasts) { list in
+                            if let list = list {
+                                completion(.success(list))
+                            } else {
+                                completion(.failure(.message("Parse error")))
+                            }
+                    }
+                case .failure(let error):
+                    completion(.failure(error))
+            }
+        }
+    }
+    
+    fileprivate func fillList(_ broadcasts: LiveBroadcastListModel, completion: ([LiveBroadcastStreamModel]?) -> Void) {
+        let items = broadcasts.items
+        if kOrderByPublishedAt {
+            let sortedItems = items.sorted(by: {$0.snipped.publishedAt.compare($1.snipped.publishedAt) == ComparisonResult.orderedDescending})
+            completion(sortedItems)
+        } else {
+            let sortedItems = items.sorted(by: { $0.snipped.scheduledStartTime.compare($1.snipped.scheduledStartTime) == ComparisonResult.orderedDescending })
+            completion(sortedItems)
+        }
+    }
+    
     fileprivate func deleteAllBroadcasts(_ completion: @escaping (Bool) -> Void) {
         YTLiveRequest.listBroadcasts(.all, completion: { result in
             switch result {
@@ -333,7 +326,7 @@ extension YTLiveStreaming {
     }
 }
 
-// MARK Tests
+// MARK: - Tests
 
 extension YTLiveStreaming {
     

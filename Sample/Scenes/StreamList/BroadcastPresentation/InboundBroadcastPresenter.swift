@@ -46,25 +46,39 @@ class InboundBroadcastPresenter: NSObject {
         
         fetchingGroup.enter()
         DispatchQueue.global(qos: .utility).async(group: fetchingGroup, execute: {
-            self.incomingBroadcastWorker.getUpcomingBroadcasts() { streams in
-                self.addStreams(.upcoming, streams: streams)
+            self.incomingBroadcastWorker.getUpcomingBroadcasts() { result in
+                switch result {
+                    case .success(let streams):
+                        self.addStreams(.upcoming, streams: streams)
+                    case .failure(let error):
+                        print(error.message())
+                }
                 fetchingGroup.leave()
             }
         })
         
         fetchingGroup.enter()
         DispatchQueue.global(qos: .utility).async(group: fetchingGroup, execute: {
-            self.incomingBroadcastWorker.getLiveNowBroadcasts() { streams in
-                self.addStreams(.current, streams: streams)
+            self.incomingBroadcastWorker.getLiveNowBroadcasts() { result in
+                switch result {
+                    case .success(let streams):
+                        self.addStreams(.current, streams: streams)
+                    case .failure(let error):
+                        print(error.message())
+                }
                 fetchingGroup.leave()
             }
         })
         
         fetchingGroup.enter()
         DispatchQueue.global(qos: .utility).async(group: fetchingGroup, execute: {
-            self.incomingBroadcastWorker.getCompletedBroadcasts() { streams in
-                self.addStreams(.past, streams: streams)
-                fetchingGroup.leave()
+            self.incomingBroadcastWorker.getCompletedBroadcasts() { result in
+                switch result {
+                    case .success(let streams):
+                        self.addStreams(.past, streams: streams)
+                    case .failure(let error):
+                        print(error.message())
+                }
             }
         })
         

@@ -37,6 +37,7 @@
 		7F9274B31DBDCAD00051DE6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F9274B21DBDCAD00051DE6B /* Assets.xcassets */; };
 		7FA950022032C5750083B23B /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA950002032C5750083B23B /* UserStorage.swift */; };
 		7FA950032032C5750083B23B /* GoogleSignInInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA950012032C5750083B23B /* GoogleSignInInteractor.swift */; };
+		7FAF9E92246187B900C8B81B /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FAF9E91246187B900C8B81B /* Config.plist */; };
 		7FB8A42B1DD23C3100955C2D /* LFLivePreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8A42A1DD23C3100955C2D /* LFLivePreview.m */; };
 		7FB8A42D1DD23F8400955C2D /* LFLiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8A42C1DD23F8400955C2D /* LFLiveViewController.swift */; };
 		7FB8A4371DD2505700955C2D /* UIControl+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8A4341DD2505700955C2D /* UIControl+YYAdd.m */; };
@@ -95,6 +96,7 @@
 		7F9274B21DBDCAD00051DE6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7FA950002032C5750083B23B /* UserStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
 		7FA950012032C5750083B23B /* GoogleSignInInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleSignInInteractor.swift; sourceTree = "<group>"; };
+		7FAF9E91246187B900C8B81B /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Config.plist; sourceTree = SOURCE_ROOT; };
 		7FB8A4291DD23C3100955C2D /* LFLivePreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFLivePreview.h; sourceTree = "<group>"; };
 		7FB8A42A1DD23C3100955C2D /* LFLivePreview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFLivePreview.m; sourceTree = "<group>"; };
 		7FB8A42C1DD23F8400955C2D /* LFLiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFLiveViewController.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				7F53B1BA2030B57E00E09CFA /* Info.plist */,
+				7FAF9E91246187B900C8B81B /* Config.plist */,
 				7F53B1B32030B4B300E09CFA /* AppDelegate.swift */,
 				7F53B1B42030B4B400E09CFA /* GoogleService-Info.plist */,
 				7F53B1B62030B4B400E09CFA /* YouTubeLiveVideo-Bridging-Header.h */,
@@ -379,6 +382,7 @@
 				7F53B1AB2030724200E09CFA /* Main.storyboard in Resources */,
 				7F9274B31DBDCAD00051DE6B /* Assets.xcassets in Resources */,
 				7F8FD2A4245940530041CF36 /* README.md in Resources */,
+				7FAF9E92246187B900C8B81B /* Config.plist in Resources */,
 				7F53B1AA2030724200E09CFA /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,21 +7,34 @@ import Foundation
 
 class GoogleSignInWorker {
 
-    fileprivate var mClientID: String?
+    fileprivate var _clientID: String?
     fileprivate let clientIDkey = "CLIENT_ID"
     
     var googleClientId: String {
-        if let clientID = self.mClientID {
-            return clientID
+        if let _ = _clientID {
+        } else if let clientID = getInfo(clientIDkey) {
+            _clientID = clientID
+        } else {
+            assert(false, "Please put your Client ID in info.plist as GoogleAPIClientID value")
         }
-        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
-            if let plist = NSDictionary(contentsOfFile: path) as NSDictionary? {
-                if let clientID = plist[clientIDkey] as? String, !clientID.isEmpty {
-                    mClientID = clientID
-                }
-            }
+        return _clientID!
+    }
+    
+    private func getInfo(_ key: String) -> String? {
+        if let plist = getPlist("Info"), let info = plist[key] as? String, !info.isEmpty {
+            return info
+        } else if let plist = getPlist("Config"), let info = plist[key] as? String, !info.isEmpty {
+            return info
+        } else {
+            return nil
         }
-        assert(mClientID != nil, "Please put your Client ID in info.plist as GoogleAPIClientID value")
-        return mClientID!
+    }
+
+    private func getPlist(_ name: String) -> NSDictionary? {
+        if let path = Bundle.main.path(forResource: name, ofType: "plist") {
+            return NSDictionary(contentsOfFile: path) as NSDictionary?
+        } else {
+            return nil
+        }
     }
 }

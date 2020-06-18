@@ -5,7 +5,6 @@ target 'YTLiveStreaming' do
     use_frameworks!
     
     pod 'Moya', '~> 14.0'
-    pod 'LFLiveKit'
     pod 'SwiftyJSON'
     pod 'KeychainAccess'
     

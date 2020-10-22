@@ -6,37 +6,37 @@
 import Foundation
 import GoogleSignIn
 
-internal let UserDefaultsInstance = DataStorageImpl.default.instance
-internal let DataStorage = DataStorageImpl.default
+internal let kUserDefaultsInstance = DataStorageImpl.default.instance
+internal let kDataStorage = DataStorageImpl.default
 
 class DataStorageImpl: NSObject {
-    
+
     private override init() {
     }
-    
+
     static let `default` = DataStorageImpl()
     static let sharingData = false
-    
+
     enum DefaultKeyName {
         static let fullName = "com.ytlivevideo.fullName"
         static let token = "com.ytlivevideo.token"
     }
-    
+
     var instance: UserDefaults {
         return UserDefaults.init()
     }
-    
+
     private func isValueExist(_ key: String) -> Bool {
         return instance.object(forKey: key) != nil
     }
-    
+
     private func removeValue(_ key: String) {
         guard self.isValueExist(key) else {
             return
         }
         instance.removeObject(forKey: key)
     }
-    
+
     private func setString(_ key: String, _ value: String?) {
         if let value = value, !value.isEmpty {
             value.store(key: key)
@@ -51,22 +51,22 @@ class DataStorageImpl: NSObject {
         }
         return String(key: key)
     }
-    
+
     var fullName: String? {
-        set {
-            setString(DefaultKeyName.fullName, newValue)
-        }
         get {
             return getString(DefaultKeyName.fullName)
         }
-    }
-    
-    var token: String? {
         set {
-            setString(DefaultKeyName.token, newValue)
+            setString(DefaultKeyName.fullName, newValue)
         }
+    }
+
+    var token: String? {
         get {
             return getString(DefaultKeyName.token)
+        }
+        set {
+            setString(DefaultKeyName.token, newValue)
         }
     }
 }
@@ -74,12 +74,12 @@ class DataStorageImpl: NSObject {
 extension String {
 
     init?(key: String) {
-        guard let str = UserDefaultsInstance.string(forKey: key) else { return nil }
+        guard let str = kUserDefaultsInstance.string(forKey: key) else { return nil }
         self.init(str)
     }
-    
+
     func store(key: String) {
-        UserDefaultsInstance.set(self, forKey: key)
+        kUserDefaultsInstance.set(self, forKey: key)
     }
 }
 
@@ -92,7 +92,7 @@ struct GoogleUser: Codable {
     let givenName: String
     let familyName: String
     let email: String
-    
+
     static func save(_ user: GIDGoogleUser) {
         if let userId = user.userID,                        // For client-side use only!
             let idToken = user.authentication.idToken {     // Safe to send to the server
@@ -100,9 +100,14 @@ struct GoogleUser: Codable {
             let givenName = user.profile.givenName ?? ""
             let familyName = user.profile.familyName ?? ""
             let email = user.profile.email ?? ""
-            let googleUser = GoogleUser(userId: userId, idToken: idToken, fullName: fullName, givenName: givenName, familyName: familyName, email: email)
+            let googleUser = GoogleUser(userId: userId,
+                                        idToken: idToken,
+                                        fullName: fullName,
+                                        givenName: givenName,
+                                        familyName: familyName,
+                                        email: email)
             UserStorage.user = googleUser
-        }  else {
+        } else {
             UserStorage.user = nil
             print("GIDGoogleUser is wrong")
         }
@@ -110,9 +115,9 @@ struct GoogleUser: Codable {
 }
 
 struct UserStorage {
-    
+
     static let kCurrentUserDataKey = "CurrentUserKey"
-    
+
     static var user: GoogleUser? {
         get {
             let userDefaults = UserDefaults.standard

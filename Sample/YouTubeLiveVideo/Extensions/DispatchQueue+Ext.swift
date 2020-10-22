@@ -28,8 +28,8 @@ extension DispatchQueue {
 
 	/**
 	 Executes a closure on the main tread.
-	 If the code is already executing on the main thread the closure will be executed synchronously, otherwise asynchronously.
-
+     If the code is already executing on the main thread the closure will
+     be executed synchronously, otherwise asynchronously.
 	 - parameter closure: The closure to execute on the main thread mainly to update the UI.
 	 */
 	public class func performUIUpdate(using closure: @escaping () -> Void) {

@@ -4,7 +4,7 @@ class YouTubePlayer: NSObject {
 
    static var youtubePlayerViewController: YoutubePlayerViewController?
    static var youtubePlayerDelegate: PlayerDelegate?
-   
+
    class func playYoutubeID(_ youtubeId: String, viewController: UIViewController) {
       if self.youtubePlayerViewController == nil {
          self.youtubePlayerViewController = YoutubePlayerViewController()
@@ -17,6 +17,5 @@ class YouTubePlayer: NSObject {
 
 class PlayerDelegate: YoutubePlayerDelegate {
    func playerDidFinish() {
-      
    }
 }

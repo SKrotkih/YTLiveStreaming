@@ -16,4 +16,7 @@ target 'YouTubeLiveVideo' do
     pod 'RxSwift'
     pod 'RxCocoa'
     pod 'LFLiveKit'
+    
+    #A tool to enforce Swift style and conventions:
+    pod 'SwiftLint'
 end

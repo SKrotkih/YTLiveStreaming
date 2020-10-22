@@ -6,7 +6,7 @@
 import UIKit
 
 final class Appearance {
-    
+
     private init() {
     }
 

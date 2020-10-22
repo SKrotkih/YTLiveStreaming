@@ -9,10 +9,8 @@ import GoogleSignIn
 import RxSwift
 
 class GoogleSignInViewModel {
-    
     unowned let interactor: GoogleSignInInteractor
     unowned let viewController: UIViewController
-    
     private let disposeBag = DisposeBag()
     
     init(viewController: UIViewController, interactor: GoogleSignInInteractor) {

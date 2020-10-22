@@ -327,6 +327,7 @@
 				25E870AD25798A32FC9B1529 /* [CP] Embed Pods Frameworks */,
 				7F0478C11DD599DD00AB6211 /* Embed Frameworks */,
 				7853DD346448FB0999341CFA /* [CP] Copy Pods Resources */,
+				7F215E0725414A7B00DF520A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -467,6 +468,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YouTubeLiveVideo/Pods-YouTubeLiveVideo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		7F215E0725414A7B00DF520A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -638,7 +656,7 @@
 				INFOPLIST_FILE = YouTubeLiveVideo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.skdevappleid.YouTubeLiveVideo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skdevappleid.FightFan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "iOS Development Wildcard";
@@ -667,7 +685,7 @@
 				INFOPLIST_FILE = YouTubeLiveVideo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.skdevappleid.YouTubeLiveVideo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skdevappleid.FightFan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "iOS Development Wildcard";

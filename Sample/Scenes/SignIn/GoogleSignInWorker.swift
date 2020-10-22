@@ -9,7 +9,7 @@ class GoogleSignInWorker {
 
     fileprivate var _clientID: String?
     fileprivate let clientIDkey = "CLIENT_ID"
-    
+
     var googleClientId: String {
         if let _ = _clientID {
         } else if let clientID = getInfo(clientIDkey) {
@@ -19,7 +19,7 @@ class GoogleSignInWorker {
         }
         return _clientID!
     }
-    
+
     private func getInfo(_ key: String) -> String? {
         if let plist = getPlist("Info"), let info = plist[key] as? String, !info.isEmpty {
             return info

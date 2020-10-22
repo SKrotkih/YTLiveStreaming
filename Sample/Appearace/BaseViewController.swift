@@ -21,20 +21,20 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.leftBarButtonItem = leftBarButtonItem
     }
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return Appearance.statusBarStyle
     }
-    
+
     @objc func backButtonClick(_: UIBarButtonItem) {
         backActionHandle()
     }
-    
+
     open func backActionHandle() {
         self.view.endEditing(true)
         self.navigationController?.popViewController(animated: true)

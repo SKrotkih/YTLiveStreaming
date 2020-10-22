@@ -17,7 +17,7 @@ class GoogleSessionViewModel {
     
     unowned let viewController: StreamListViewController
     unowned let interactor: GoogleSignInInteractor
-    
+
     private let disposeBag = DisposeBag()
     
     init(viewController: StreamListViewController, signInInteractor: GoogleSignInInteractor) {
@@ -26,7 +26,7 @@ class GoogleSessionViewModel {
     }
     
     func bindEvents() {
-        
+
         viewController.navigationItem.leftBarButtonItem?.rx
         .tap
         .debounce(.milliseconds(Constants.UI.debounce), scheduler: MainScheduler.instance)
@@ -43,7 +43,5 @@ class GoogleSessionViewModel {
                 self.viewController.stopActivity()
                 self.viewController.close()
             }).disposed(by: disposeBag)
-        
-        
     }
 }

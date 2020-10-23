@@ -29,7 +29,7 @@ class GoogleSessionViewModel {
 
         viewController.navigationItem.leftBarButtonItem?.rx
         .tap
-        .debounce(.milliseconds(Constants.UI.debounce), scheduler: MainScheduler.instance)
+        .debounce(.milliseconds(Constants.UiConstraints.debounce), scheduler: MainScheduler.instance)
         .subscribe(onNext: { [weak self]  _ in
             guard let `self` = self else { return }
             self.interactor.signOut()

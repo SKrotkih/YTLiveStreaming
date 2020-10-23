@@ -22,7 +22,7 @@ class StreamListViewModel {
         viewController.addNewStreamButton
             .rx
             .tap
-            .debounce(.milliseconds(Constants.UI.debounce), scheduler: MainScheduler.instance)
+            .debounce(.milliseconds(Constants.UiConstraints.debounce), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 guard let `self` = self else { return }
                 self.creadeBroadcast()

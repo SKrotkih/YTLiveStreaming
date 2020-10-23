@@ -51,7 +51,10 @@ class Alert: NSObject {
         rootVC.present(alert, animated: true, completion: nil)
     }
 
-    func showYesNo(_ title: String, message: String, onYes: @escaping () -> Void = {}, onNo: @escaping () -> Void = {}) {
+    func showYesNo(_ title: String,
+                   message: String,
+                   onYes: @escaping () -> Void = {},
+                   onNo: @escaping () -> Void = {}) {
         popupWindow.isHidden = false
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         let okAction = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { _ in
@@ -68,7 +71,10 @@ class Alert: NSObject {
         rootVC.present(alert, animated: true, completion: nil)
     }
 
-    func showConfirmCancel(_ title: String, message: String, onConfirm: @escaping () -> Void = {}, onCancel: @escaping () -> Void = {}) {
+    func showConfirmCancel(_ title: String,
+                           message: String,
+                           onConfirm: @escaping () -> Void = {},
+                           onCancel: @escaping () -> Void = {}) {
         popupWindow.isHidden = false
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         let okAction = UIAlertAction(title: "Conform", style: UIAlertAction.Style.default, handler: { _ in
@@ -85,7 +91,10 @@ class Alert: NSObject {
         rootVC.present(alert, animated: true, completion: nil)
     }
 
-    func showConfirmChange(_ title: String, message: String, onConfirm: @escaping () -> Void = {}, onChange: @escaping () -> Void = {}) {
+    func showConfirmChange(_ title: String,
+                           message: String,
+                           onConfirm: @escaping () -> Void = {},
+                           onChange: @escaping () -> Void = {}) {
         popupWindow.isHidden = false
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         let okAction = UIAlertAction(title: "Conform", style: UIAlertAction.Style.default, handler: { _ in
@@ -102,7 +111,10 @@ class Alert: NSObject {
         rootVC.present(alert, animated: true, completion: nil)
     }
 
-    func showOkChange(_ title: String, message: String, onOk: @escaping () -> Void = {}, onChange: @escaping () -> Void = {}) {
+    func showOkChange(_ title: String,
+                      message: String,
+                      onOk: @escaping () -> Void = {},
+                      onChange: @escaping () -> Void = {}) {
         popupWindow.isHidden = false
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         let okAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in
@@ -119,7 +131,10 @@ class Alert: NSObject {
         rootVC.present(alert, animated: true, completion: nil)
     }
 
-    func showLetsgoLater(_ title: String, message: String, onLetsGo: @escaping () -> Void = {}, onLater: @escaping () -> Void = {}) {
+    func showLetsgoLater(_ title: String,
+                         message: String,
+                         onLetsGo: @escaping () -> Void = {},
+                         onLater: @escaping () -> Void = {}) {
         popupWindow.isHidden = false
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         let letsGoAction = UIAlertAction(title: "Go", style: UIAlertAction.Style.default, handler: { _ in

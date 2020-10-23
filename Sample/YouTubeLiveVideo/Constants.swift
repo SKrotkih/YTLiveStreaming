@@ -13,7 +13,7 @@ extension Constants {
 
     static let kAppName = "Live Events"
 
-    enum UI {
+    enum UiConstraints {
         static let debounce: Int = 300  // Milliseconds
     }
 }

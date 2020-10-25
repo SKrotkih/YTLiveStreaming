@@ -9,39 +9,22 @@ import RxSwift
 class StreamListViewModel {
 
     var interactor: InboundBroadcastPresenter!
-    unowned var viewController: StreamListViewController!
 
     private let disposeBag = DisposeBag()
 
-    init(viewController: StreamListViewController, interactor: InboundBroadcastPresenter) {
-        self.viewController = viewController
-        self.interactor = interactor
-    }
-
-    func bindEvents() {
-        viewController.addNewStreamButton
-            .rx
-            .tap
-            .debounce(.milliseconds(Constants.UiConstraints.debounce), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                guard let `self` = self else { return }
-                self.creadeBroadcast()
-            }).disposed(by: disposeBag)
-    }
-
-    func loadData() {
-        interactor.loadData { (upcoming, current, past) in
-            self.viewController.present(content: (upcoming, current, past))
+    func loadData(_ completion: @escaping (Result<([Stream], [Stream], [Stream]), LVError>) -> Void) {
+        interactor.loadData { (upcomingStreams, currentStreams, pastStreams)  in
+            completion(.success((upcomingStreams, currentStreams, pastStreams)))
         }
     }
 
-    func reloadData() {
-        interactor.reloadData { upcoming, current, past  in
-            self.viewController.present(content: (upcoming, current, past))
+    func reloadData(_ completion: @escaping (Result<([Stream], [Stream], [Stream]), LVError>) -> Void) {
+        interactor.reloadData { (upcomingStreams, currentStreams, pastStreams)  in
+            completion(.success((upcomingStreams, currentStreams, pastStreams)))
         }
     }
 
-    fileprivate func creadeBroadcast() {
+    func creadeBroadcast() {
         Alert.sharedInstance.showConfirmCancel("YouTube Live Streaming API",
                                                message: "You realy want to create a new Live broadcast video?",
                                                onConfirm: {
@@ -56,7 +39,7 @@ class StreamListViewModel {
         })
     }
 
-    func launchStream(section: Int, index: Int) {
+    func launchStream(section: Int, index: Int, viewController: UIViewController) {
         interactor.launchLiveStream(section: section, index: index, viewController: viewController)
     }
 }

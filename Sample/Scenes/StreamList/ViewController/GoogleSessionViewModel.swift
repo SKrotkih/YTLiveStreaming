@@ -4,44 +4,29 @@
 //
 
 import UIKit
-import YTLiveStreaming
-import RxCocoa
 import RxSwift
-
-protocol GoogleSignInViewInterface {
-    func didLoad()
-    func reloadData()
-}
 
 class GoogleSessionViewModel {
     
-    unowned let viewController: StreamListViewController
-    unowned let interactor: GoogleSignInInteractor
-
+    var interactor: GoogleSignInInteractor!
+    let rxSignOut: PublishSubject<Bool> = PublishSubject()
+    
     private let disposeBag = DisposeBag()
     
-    init(viewController: StreamListViewController, signInInteractor: GoogleSignInInteractor) {
-        self.viewController = viewController
-        self.interactor = signInInteractor
+    init(_ interactor: GoogleSignInInteractor) {
+        self.interactor = interactor
+        bindEvents()
     }
     
-    func bindEvents() {
-
-        viewController.navigationItem.leftBarButtonItem?.rx
-        .tap
-        .debounce(.milliseconds(Constants.UiConstraints.debounce), scheduler: MainScheduler.instance)
-        .subscribe(onNext: { [weak self]  _ in
-            guard let `self` = self else { return }
-            self.interactor.signOut()
-            self.viewController.close()
-        }).disposed(by: disposeBag)
-
+    private func bindEvents() {
         interactor
             .rxSignOut
             .subscribe(onNext: { [weak self] _ in
-                guard let `self` = self else { return }
-                self.viewController.stopActivity()
-                self.viewController.close()
+                self?.rxSignOut.onNext(true)
             }).disposed(by: disposeBag)
+    }
+    
+    func signOut() {
+        self.interactor.signOut()
     }
 }

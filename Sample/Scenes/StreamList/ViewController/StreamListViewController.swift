@@ -5,6 +5,7 @@
 
 import UIKit
 import YTLiveStreaming
+import RxCocoa
 import RxSwift
 
 struct Stream {
@@ -14,10 +15,8 @@ struct Stream {
 
 class StreamListViewController: BaseViewController {
 
-    unowned var signInInteractor: GoogleSignInInteractor!
-
+    var viewModel: StreamListViewModel!
     var signInViewModel: GoogleSessionViewModel!
-    var streamListViewModel: StreamListViewModel!
 
     internal struct CellName {
         static let StreamItemCell = "TableViewCell"
@@ -35,17 +34,19 @@ class StreamListViewController: BaseViewController {
     fileprivate var currentStreams = [Stream]()
     fileprivate var pastStreams = [Stream]()
 
-    let dependencies = StreamListDependencies()
-
+    private let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        dependencies.configure(self)
         configureView()
     }
 
     private func configureView() {
+        createAddStreamButton()
         setUpRefreshControl()
+        bindUserActivity()
         loadData()
+        configureTableView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -62,10 +63,6 @@ class StreamListViewController: BaseViewController {
         userNameLabel.textColor = .white
         let rightBarButton = UIBarButtonItem(customView: userNameLabel)
         self.navigationItem.rightBarButtonItem = rightBarButton
-
-        addAddNewStreamButton()
-        signInViewModel.bindEvents()
-        streamListViewModel.bindEvents()
     }
 
     func present(content: (upcoming: [Stream], current: [Stream], past: [Stream])) {
@@ -76,7 +73,7 @@ class StreamListViewController: BaseViewController {
             self.tableView.reloadData()
         }
     }
-
+    
     func startActivity() {
         DispatchQueue.main.async { [weak self] in
             self?.activityIndicator.startAnimating()
@@ -89,16 +86,54 @@ class StreamListViewController: BaseViewController {
         }
     }
 
-    func close() {
+    private func close() {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    private func didSignOut() {
+        self.stopActivity()
+        self.close()
+    }
+    
+    private func bindUserActivity() {
+        addNewStreamButton
+            .rx
+            .tap
+            .debounce(.milliseconds(Constants.UiConstraints.debounce), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                self.viewModel.creadeBroadcast()
+            }).disposed(by: disposeBag)
+        self.navigationItem
+            .leftBarButtonItem?
+            .rx
+            .tap
+            .debounce(.milliseconds(Constants.UiConstraints.debounce), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self]  _ in
+                guard let `self` = self else { return }
+                self.signInViewModel.signOut()
+                self.close()
+            }).disposed(by: disposeBag)
+        self.signInViewModel
+            .rxSignOut
+            .subscribe(onNext: { [weak self] _ in
+                self?.didSignOut()
+            }).disposed(by: disposeBag)
+    }
+    
+    private func configureTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        present(content: ([], [], []))
+    }
+    
 }
 
 // MARK: - Add New Stram Button
 
 extension StreamListViewController {
 
-    private func addAddNewStreamButton() {
+    private func createAddStreamButton() {
         self.addNewStreamButton = UIButton(frame: CGRect(x: 0, y: 0, width: 55.0, height: 55.0))
         addNewStreamButton.setImage(#imageLiteral(resourceName: "addStreamButton"), for: .normal)
         self.view.addSubview(addNewStreamButton)
@@ -124,12 +159,33 @@ extension StreamListViewController {
     }
 
     @objc func refreshData(_ sender: AnyObject) {
-        self.refreshControl.endRefreshing()
-        streamListViewModel.reloadData()
+        viewModel.reloadData { result in
+            switch result {
+            case .success(let (upcoming, current, past)):
+                DispatchQueue.main.async { [weak self] in
+                    self?.refreshControl.endRefreshing()
+                    self?.present(content: (upcoming, current, past))
+                }
+            case .failure(let error):
+                DispatchQueue.main.async { [weak self] in
+                    self?.refreshControl.endRefreshing()
+                }
+                print(error.message())
+            }
+        }
     }
 
     private func loadData() {
-        streamListViewModel.loadData()
+        viewModel.loadData { result in
+            switch result {
+            case .success(let (upcoming, current, past)):
+                DispatchQueue.main.async { [weak self] in
+                    self?.present(content: (upcoming, current, past))
+                }
+            case .failure(let error):
+                print(error.message())
+            }
+        }
     }
 }
 
@@ -187,6 +243,6 @@ extension StreamListViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        streamListViewModel.launchStream(section: indexPath.section, index: indexPath.row)
+        viewModel.launchStream(section: indexPath.section, index: indexPath.row, viewController: self)
     }
 }

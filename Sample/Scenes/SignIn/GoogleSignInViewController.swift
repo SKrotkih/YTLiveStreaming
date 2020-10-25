@@ -11,19 +11,14 @@ class GoogleSignInViewController: BaseViewController {
     // [END viewcontroller_interfaces]
 
     var viewModel: GoogleSignInViewModel!
-    var interactor: GoogleSignInInteractor!
 
     // [START viewcontroller_vars]
     @IBOutlet weak var signInButton: GIDSignInButton!
     // [END viewcontroller_vars]
 
-    let dependencies = GoogleSignInDependencies()
-
     // [START viewdidload]
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        dependencies.configure(self)
         startListeningToSignIn()
         viewModel.configure()
     }
@@ -39,12 +34,6 @@ class GoogleSignInViewController: BaseViewController {
         // Show the Navigation Bar
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let streamListVC = segue.destination as? StreamListViewController {
-            streamListVC.signInInteractor = interactor
-        }
-    }
 }
 
 // MARK: - Private Methods
@@ -52,12 +41,11 @@ class GoogleSignInViewController: BaseViewController {
 extension GoogleSignInViewController {
 
     private func startListeningToSignIn() {
-        viewModel.startListeningToSignIn { result in
+        viewModel
+            .startListeningToSignIn { result in
             switch result {
             case .success:
-                DispatchQueue.performUIUpdate {
-                    self.performSegue(withIdentifier: "streamlist", sender: nil)
-                }
+                AppDelegate.shared.appRouter.showStreamingList()
             case .failure(let error):
                 switch error {
                 case .systemMessage(let code, let message):

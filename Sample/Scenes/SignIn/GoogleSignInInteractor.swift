@@ -56,7 +56,7 @@ public class GoogleSignInInteractor: NSObject {
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
     }
 
-    func openURL(_ url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+    func openURL(_ url: URL) -> Bool {
         return GIDSignIn.sharedInstance().handle(url)
     }
 

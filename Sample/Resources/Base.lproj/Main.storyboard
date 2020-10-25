@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Dp0-Ym-GUw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Dp0-Ym-GUw">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,9 +16,6 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
-                    <connections>
-                        <segue destination="pph-nD-yos" kind="relationship" relationship="rootViewController" id="TDh-a4-54A"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k5d-wL-xLp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -27,7 +24,7 @@
         <!--Google Sign In View Controller-->
         <scene sceneID="9qC-sI-G38">
             <objects>
-                <viewController id="pph-nD-yos" customClass="GoogleSignInViewController" customModule="YouTubeLiveVideo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GoogleSignInViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pph-nD-yos" customClass="GoogleSignInViewController" customModule="YouTubeLiveVideo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cPr-2u-Zg8"/>
                         <viewControllerLayoutGuide type="bottom" id="mxb-aJ-Pgs"/>
@@ -63,27 +60,26 @@
                     <navigationItem key="navigationItem" id="GwT-YG-Hjd"/>
                     <connections>
                         <outlet property="signInButton" destination="2SR-5M-ihU" id="RO0-Hi-cmF"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="streamlist" id="Wto-ez-Bqs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wGR-Xt-kIi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-610.39999999999998" y="614.84257871064472"/>
         </scene>
-        <!--Live Events-->
+        <!--Stream List View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="StreamListViewController" customModule="YouTubeLiveVideo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StreamListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="StreamListViewController" customModule="YouTubeLiveVideo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6i4-xu-QJL">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TableViewCell" id="a7S-E4-yLG" customClass="TableViewCell" customModule="YouTubeLiveVideo" customModuleProvider="target">
@@ -147,47 +143,27 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="QrY-dR-uUc"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="ETp-7l-dbn"/>
-                                </connections>
                             </tableView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="5f9-ko-rs4">
                                 <rect key="frame" x="169" y="315" width="37" height="37"/>
                                 <color key="color" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                             </activityIndicatorView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="6i4-xu-QJL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Kgy-r2-uk4"/>
-                            <constraint firstAttribute="trailing" secondItem="6i4-xu-QJL" secondAttribute="trailing" id="Nok-Kf-HRr"/>
-                            <constraint firstItem="6i4-xu-QJL" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="dIy-Qj-YYN"/>
+                            <constraint firstItem="6i4-xu-QJL" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="4BZ-vi-qX4"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="6i4-xu-QJL" secondAttribute="bottom" id="DcG-IZ-rLN"/>
+                            <constraint firstAttribute="trailing" secondItem="6i4-xu-QJL" secondAttribute="trailing" id="PLE-fY-mfH"/>
                             <constraint firstItem="5f9-ko-rs4" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="gvf-hj-YMW"/>
                             <constraint firstItem="5f9-ko-rs4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iPc-xo-HrP"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="6i4-xu-QJL" secondAttribute="bottom" id="pNB-Po-ZYw"/>
+                            <constraint firstItem="6i4-xu-QJL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mSf-vn-x8h"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="6i4-xu-QJL"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="pNB-Po-ZYw"/>
-                                <exclude reference="Kgy-r2-uk4"/>
-                                <exclude reference="Nok-Kf-HRr"/>
-                            </mask>
-                        </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="6i4-xu-QJL"/>
                             </mask>
-                            <mask key="constraints">
-                                <include reference="pNB-Po-ZYw"/>
-                                <include reference="Kgy-r2-uk4"/>
-                                <include reference="Nok-Kf-HRr"/>
-                            </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Live Events" id="TdB-fK-77R"/>
                     <connections>
                         <outlet property="activityIndicator" destination="5f9-ko-rs4" id="S6B-M2-rKb"/>
                         <outlet property="tableView" destination="6i4-xu-QJL" id="HdF-Zz-450"/>

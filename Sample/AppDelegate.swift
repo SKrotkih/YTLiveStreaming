@@ -10,8 +10,8 @@ import YTLiveStreaming
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
     var googleSignIn = GoogleSignInInteractor()
+    var appRouter = AppRouter()
 
     static var shared: AppDelegate {
         guard let `self` = UIApplication.shared.delegate as? AppDelegate else {
@@ -22,14 +22,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
         Appearance.customize()
-        // Override point for customization after application launch.
+        setUpWindow()
+        appRouter.launchSignInViewController()
         return true
     }
 
+    private func setUpWindow() {
+        window = UIWindow()
+        window!.frame = UIScreen.main.bounds
+        window!.makeKeyAndVisible()
+    }
+    
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        return googleSignIn.openURL(url, sourceApplication: sourceApplication, annotation: annotation)
+        return googleSignIn.openURL(url)
     }
 
     /**

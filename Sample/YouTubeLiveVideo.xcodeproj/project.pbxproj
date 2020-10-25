@@ -16,7 +16,9 @@
 		7F2439F42457BF9A00C1FB17 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2439F32457BF9A00C1FB17 /* Error.swift */; };
 		7F2439F624580FA500C1FB17 /* StreamListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2439F524580FA500C1FB17 /* StreamListViewModel.swift */; };
 		7F2439F824581AE700C1FB17 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2439F724581AE700C1FB17 /* Constants.swift */; };
-		7F2439FA24583CA900C1FB17 /* GoogleSignInDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2439F924583CA900C1FB17 /* GoogleSignInDependencies.swift */; };
+		7F2C3C382544170900CA9912 /* UIStoryboard+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2C3C372544170900CA9912 /* UIStoryboard+Ext.swift */; };
+		7F2C3C3A2544182F00CA9912 /* EnumIteration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2C3C392544182F00CA9912 /* EnumIteration.swift */; };
+		7F2C3C3C2544187100CA9912 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2C3C3B2544187100CA9912 /* AppRouter.swift */; };
 		7F384BEB245873A6004C07EE /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F384BE9245873A5004C07EE /* BaseViewController.swift */; };
 		7F384BEC245873A6004C07EE /* MainNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F384BEA245873A5004C07EE /* MainNavController.swift */; };
 		7F384BEE24587498004C07EE /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F384BED24587498004C07EE /* Appearance.swift */; };
@@ -28,7 +30,6 @@
 		7F53B1B12030B38100E09CFA /* InboundBroadcastPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F53B1B02030B38100E09CFA /* InboundBroadcastPresenter.swift */; };
 		7F53B1B72030B4B400E09CFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F53B1B32030B4B300E09CFA /* AppDelegate.swift */; };
 		7F83E3371DBDD35500DE4102 /* StreamListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E3361DBDD35500DE4102 /* StreamListTableViewCell.swift */; };
-		7F83E34C1DBDD49100DE4102 /* StreamListDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E3481DBDD49100DE4102 /* StreamListDependencies.swift */; };
 		7F83E34D1DBDD49100DE4102 /* OutboundBroadcastPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E3491DBDD49100DE4102 /* OutboundBroadcastPresenter.swift */; };
 		7F83E35B1DBDD58C00DE4102 /* YouTubePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E35A1DBDD58C00DE4102 /* YouTubePlayer.swift */; };
 		7F83E35D1DBDD5DB00DE4102 /* YoutubePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E35C1DBDD5DB00DE4102 /* YoutubePlayerViewController.swift */; };
@@ -71,7 +72,9 @@
 		7F2439F32457BF9A00C1FB17 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		7F2439F524580FA500C1FB17 /* StreamListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamListViewModel.swift; sourceTree = "<group>"; };
 		7F2439F724581AE700C1FB17 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = YouTubeLiveVideo/Constants.swift; sourceTree = SOURCE_ROOT; };
-		7F2439F924583CA900C1FB17 /* GoogleSignInDependencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleSignInDependencies.swift; sourceTree = "<group>"; };
+		7F2C3C372544170900CA9912 /* UIStoryboard+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Ext.swift"; sourceTree = "<group>"; };
+		7F2C3C392544182F00CA9912 /* EnumIteration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumIteration.swift; sourceTree = "<group>"; };
+		7F2C3C3B2544187100CA9912 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		7F384BE9245873A5004C07EE /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7F384BEA245873A5004C07EE /* MainNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavController.swift; sourceTree = "<group>"; };
 		7F384BED24587498004C07EE /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
@@ -86,7 +89,6 @@
 		7F53B1B62030B4B400E09CFA /* YouTubeLiveVideo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YouTubeLiveVideo-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		7F53B1BA2030B57E00E09CFA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = YouTubeLiveVideo/Info.plist; sourceTree = SOURCE_ROOT; };
 		7F83E3361DBDD35500DE4102 /* StreamListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamListTableViewCell.swift; sourceTree = "<group>"; };
-		7F83E3481DBDD49100DE4102 /* StreamListDependencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamListDependencies.swift; sourceTree = "<group>"; };
 		7F83E3491DBDD49100DE4102 /* OutboundBroadcastPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutboundBroadcastPresenter.swift; sourceTree = "<group>"; };
 		7F83E35A1DBDD58C00DE4102 /* YouTubePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubePlayer.swift; sourceTree = "<group>"; };
 		7F83E35C1DBDD5DB00DE4102 /* YoutubePlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubePlayerViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 			children = (
 				7FA94FFF2032C5750083B23B /* SignIn */,
 				7F53B1AF2030B15C00E09CFA /* StreamList */,
+				7F2C3C3B2544187100CA9912 /* AppRouter.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -160,7 +163,6 @@
 		7F53B1AF2030B15C00E09CFA /* StreamList */ = {
 			isa = PBXGroup;
 			children = (
-				7F83E3481DBDD49100DE4102 /* StreamListDependencies.swift */,
 				7F8FD2A524596D970041CF36 /* ViewController */,
 				7F8FD2A624596DB20041CF36 /* BroadcastPresentation */,
 			);
@@ -233,7 +235,6 @@
 		7FA94FFF2032C5750083B23B /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
-				7F2439F924583CA900C1FB17 /* GoogleSignInDependencies.swift */,
 				7F0933CC2457258300FB5579 /* GoogleSignInViewController.swift */,
 				7F0933CE24574FCB00FB5579 /* GoogleSignInViewModel.swift */,
 				7FA950012032C5750083B23B /* GoogleSignInInteractor.swift */,
@@ -247,6 +248,8 @@
 			isa = PBXGroup;
 			children = (
 				7F2439F12457BA2800C1FB17 /* DispatchQueue+Ext.swift */,
+				7F2C3C372544170900CA9912 /* UIStoryboard+Ext.swift */,
+				7F2C3C392544182F00CA9912 /* EnumIteration.swift */,
 				7F384BEF245879D2004C07EE /* Color+Ext.swift */,
 				7FB8A4331DD2505700955C2D /* UIControl+YYAdd.h */,
 				7FB8A4341DD2505700955C2D /* UIControl+YYAdd.m */,
@@ -327,7 +330,6 @@
 				25E870AD25798A32FC9B1529 /* [CP] Embed Pods Frameworks */,
 				7F0478C11DD599DD00AB6211 /* Embed Frameworks */,
 				7853DD346448FB0999341CFA /* [CP] Copy Pods Resources */,
-				7F215E0725414A7B00DF520A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -469,23 +471,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YouTubeLiveVideo/Pods-YouTubeLiveVideo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7F215E0725414A7B00DF520A /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -499,7 +484,6 @@
 				7FB8A42B1DD23C3100955C2D /* LFLivePreview.m in Sources */,
 				7FC2FCD21DD7372D007D8BF9 /* Helpers.swift in Sources */,
 				7F384BEB245873A6004C07EE /* BaseViewController.swift in Sources */,
-				7F2439FA24583CA900C1FB17 /* GoogleSignInDependencies.swift in Sources */,
 				7F83E3371DBDD35500DE4102 /* StreamListTableViewCell.swift in Sources */,
 				7F10443A1DBDFFF3006AA1EE /* Alert.swift in Sources */,
 				7F384BEE24587498004C07EE /* Appearance.swift in Sources */,
@@ -508,20 +492,22 @@
 				7F2439F624580FA500C1FB17 /* StreamListViewModel.swift in Sources */,
 				7F83E35B1DBDD58C00DE4102 /* YouTubePlayer.swift in Sources */,
 				7FB8A4371DD2505700955C2D /* UIControl+YYAdd.m in Sources */,
+				7F2C3C3A2544182F00CA9912 /* EnumIteration.swift in Sources */,
 				7F83E34D1DBDD49100DE4102 /* OutboundBroadcastPresenter.swift in Sources */,
 				7F0933CF24574FCB00FB5579 /* GoogleSignInViewModel.swift in Sources */,
 				7F2439F22457BA2800C1FB17 /* DispatchQueue+Ext.swift in Sources */,
 				7F83E35D1DBDD5DB00DE4102 /* YoutubePlayerViewController.swift in Sources */,
 				7F53B1B72030B4B400E09CFA /* AppDelegate.swift in Sources */,
+				7F2C3C382544170900CA9912 /* UIStoryboard+Ext.swift in Sources */,
 				7F53B1B12030B38100E09CFA /* InboundBroadcastPresenter.swift in Sources */,
 				7F39A88D2456FD0400C18130 /* GoogleSessionViewModel.swift in Sources */,
 				7FB8A42D1DD23F8400955C2D /* LFLiveViewController.swift in Sources */,
 				7FA950032032C5750083B23B /* GoogleSignInInteractor.swift in Sources */,
 				7FB8A4381DD2505700955C2D /* UIView+YYAdd.m in Sources */,
 				7F384BEC245873A6004C07EE /* MainNavController.swift in Sources */,
-				7F83E34C1DBDD49100DE4102 /* StreamListDependencies.swift in Sources */,
 				7F10443B1DBDFFF3006AA1EE /* StatusBarShowingViewController.swift in Sources */,
 				7F39A88A24569BF200C18130 /* GoogleSignInWorker.swift in Sources */,
+				7F2C3C3C2544187100CA9912 /* AppRouter.swift in Sources */,
 				7F384BF0245879D2004C07EE /* Color+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

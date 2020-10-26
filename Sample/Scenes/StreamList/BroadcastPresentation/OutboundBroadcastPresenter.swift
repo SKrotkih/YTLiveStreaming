@@ -9,33 +9,11 @@ import YTLiveStreaming
 class OutboundBroadcastPresenter: NSObject {
 
     // Dependebcies
-    var viewController: StreamListViewController!
     var interactor: InboundBroadcastPresenter!
+    weak var liveViewController: LFLiveViewController!
+    var outgoingBroadcastWorker: YTLiveStreaming!
 
-    fileprivate let outgoingBroadcastWorker = YTLiveStreaming()
     fileprivate var liveBroadcast: LiveBroadcastStreamModel?
-    fileprivate var liveViewController: LFLiveViewController!
-
-    func launchLiveStream(section: Int, index: Int) {
-        if section == 0 {
-            let broadcast = interactor.getUpcomingBroadcastItem(index: index)
-            self.startBroadcast(broadcast, completed: { success in
-                if success == false {
-                    Alert.sharedInstance.showOk("Failed attempt", message: "Can't create broadcast")
-                }
-            })
-        } else {
-            interactor.launchLiveStream(section: section, index: index, viewController: viewController)
-        }
-    }
-
-    func startActivity() {
-        viewController.startActivity()
-    }
-
-    func stopActivity() {
-        viewController.stopActivity()
-    }
 }
 
 // MARK: -
@@ -46,27 +24,17 @@ extension OutboundBroadcastPresenter {
         interactor.createBroadcast(completion)
     }
 
-    func startBroadcast(_ liveBroadcast: LiveBroadcastStreamModel, completed: @escaping (Bool) -> Void) {
+    private func startBroadcast(_ liveBroadcast: LiveBroadcastStreamModel) {
         self.liveBroadcast = liveBroadcast
 
         print("Watch the live video: https://www.youtube.com/watch?v=\(liveBroadcast.id)")
 
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "LFLiveViewController")
-        if let liveViewController = controller as? LFLiveViewController {
-            self.liveViewController = liveViewController
-            self.liveViewController.output = self
-            self.viewController.present(self.liveViewController, animated: false, completion: {
-                completed(true)
-            })
-        } else {
-            completed(false)
-        }
+        AppDelegate.shared.appRouter.showLiveVideoViewController()
     }
 
     fileprivate func dismissVideoStreamViewController() {
         DispatchQueue.main.async {
-            self.viewController.dismiss(animated: true, completion: {
+            self.liveViewController.dismiss(animated: true, completion: {
             })
         }
     }

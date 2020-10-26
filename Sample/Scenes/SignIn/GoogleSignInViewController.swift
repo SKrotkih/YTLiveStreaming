@@ -45,7 +45,7 @@ extension GoogleSignInViewController {
             .startListeningToSignIn { result in
             switch result {
             case .success:
-                AppDelegate.shared.appRouter.showStreamingList()
+                AppDelegate.shared.appRouter.showMainViewController()
             case .failure(let error):
                 switch error {
                 case .systemMessage(let code, let message):

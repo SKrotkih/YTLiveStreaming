@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import YTLiveStreaming
 
 struct AppRouter {
     
@@ -14,27 +15,44 @@ struct AppRouter {
         }
     }
     
-    func launchSignInViewController() {
+    // TODO: Remove this later
+    let broadcastPresenter = OutboundBroadcastPresenter()
+    
+    func showSignInViewController() {
         DispatchQueue.performUIUpdate {
-            UIStoryboard.main.launchAsRootViewController(self.signInDependencies)
+            UIStoryboard.main.segueToRootViewController(self.signInDependencies)
         }
     }
     
-    func showStreamingList() {
+    func showMainViewController() {
         DispatchQueue.performUIUpdate {
-            UIStoryboard.main.launchAsRootViewController(self.streamingListDependencies)
+            UIStoryboard.main.segueToRootViewController(self.streamingListDependencies)
         }
     }
 
+    func showLiveVideoViewController() {
+        DispatchQueue.performUIUpdate {
+            UIStoryboard.main.segueToModalViewController(self.liveVideoDependencies)
+        }
+    }
+}
+
+// MARK: - Dependencies Injection
+
+extension AppRouter {
+    
     ///
     /// Inject dependecncies in the GoogleSignInViewController
     ///
-    func signInDependencies(_ viewController: GoogleSignInViewController) {
+    private func signInDependencies(_ viewController: GoogleSignInViewController) {
         let viewModel = GoogleSignInViewModel(viewController: viewController)
         viewController.viewModel = viewModel
     }
     
-    func streamingListDependencies(_ viewController: StreamListViewController) {
+    ///
+    /// Inject dependecncies in the StreamListViewController
+    ///
+    private func streamingListDependencies(_ viewController: StreamListViewController) {
         let signInInteractor = AppDelegate.shared.googleSignIn
         let signInViewModel = GoogleSessionViewModel(signInInteractor)
         viewController.signInViewModel = signInViewModel
@@ -47,8 +65,16 @@ struct AppRouter {
         viewController.viewModel = viewModel
         
         // Outbound Broadcast
-        let presenter = OutboundBroadcastPresenter()
-        presenter.viewController = viewController
-        presenter.interactor = streamListInteractor
+        let outgoingBroadcastWorker = YTLiveStreaming()
+        broadcastPresenter.interactor = streamListInteractor
+        broadcastPresenter.outgoingBroadcastWorker = outgoingBroadcastWorker
+    }
+    
+    ///
+    /// Inject dependecncies in the LFLiveViewController
+    ///
+    private func liveVideoDependencies(_ viewController: LFLiveViewController) {
+        broadcastPresenter.liveViewController = viewController
+        viewController.output = broadcastPresenter
     }
 }

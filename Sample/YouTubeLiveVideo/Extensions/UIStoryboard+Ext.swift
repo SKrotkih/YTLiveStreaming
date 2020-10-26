@@ -23,18 +23,18 @@ extension UIStoryboard {
         return vc
     }
     
-    func launchAsRootViewController<T>(_ configure: (T) -> Void) where T: UIViewController {
+    func segueToRootViewController<T>(_ configure: (T) -> Void) where T: UIViewController {
         let id = String(describing: T.self)
         if let viewController = self.instantiateViewController(withIdentifier: id) as? T {
             configure(viewController)
-            initAsRootViewController(viewController)
+            setUpRootViewController(viewController)
         } else {
             print("Failed to open \(id) screen")
             fatalError()
         }
     }
     
-    private func initAsRootViewController(_ viewController: UIViewController?) {
+    private func setUpRootViewController(_ viewController: UIViewController?) {
         guard let window = AppDelegate.shared.window else {
             assertionFailure()
             return
@@ -49,6 +49,23 @@ extension UIStoryboard {
         let vc = viewController ?? self.instantiateInitialViewController()
         window.rootViewController = vc
     }
+    
+    func segueToModalViewController<T>(_ configure: (T) -> Void) where T: UIViewController {
+        guard let window = AppDelegate.shared.window else {
+            assertionFailure()
+            return
+        }
+        let id = String(describing: T.self)
+        if let viewController = self.instantiateViewController(withIdentifier: id) as? T {
+            configure(viewController)
+            window.rootViewController?.present(viewController, animated: false, completion: {
+            })
+        } else {
+            print("Failed to open \(id) screen")
+            fatalError()
+        }
+    }
+    
 }
 
 extension UIStoryboard {

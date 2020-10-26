@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         Appearance.customize()
         setUpWindow()
-        appRouter.launchSignInViewController()
+        appRouter.showSignInViewController()
         return true
     }
 

@@ -9,14 +9,14 @@
 import UIKit
 import YTLiveStreaming
 
-protocol YouTubeLiveVideoOutput: class {
+protocol YouTubeLiveVideoPublisher: class {
    func startPublishing(completed: @escaping (String?, String?) -> Void)
    func finishPublishing()
    func cancelPublishing()
 }
 
 class LFLiveViewController: UIViewController {
-   var viewModel: YouTubeLiveVideoOutput?
+   var viewModel: YouTubeLiveVideoPublisher?
    var scheduledStartTime: NSDate?
    
    @IBOutlet weak var lfView: LFLivePreview!

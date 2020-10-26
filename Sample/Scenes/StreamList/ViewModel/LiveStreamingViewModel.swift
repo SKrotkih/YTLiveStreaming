@@ -37,7 +37,7 @@ extension LiveStreamingViewModel {
 
 // MARK: Live stream publishing output protocol
 
-extension LiveStreamingViewModel: YouTubeLiveVideoOutput {
+extension LiveStreamingViewModel: YouTubeLiveVideoPublisher {
 
     func startPublishing(completed: @escaping (String?, String?) -> Void) {
         guard let broadcast = self.liveBroadcast else {

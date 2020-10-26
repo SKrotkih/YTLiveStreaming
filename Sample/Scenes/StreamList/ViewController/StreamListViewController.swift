@@ -41,30 +41,21 @@ class StreamListViewController: BaseViewController {
         configureView()
     }
 
-    private func configureView() {
-        createAddStreamButton()
-        setUpRefreshControl()
-        bindUserActivity()
-        loadData()
-        configureTableView()
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        let backButton = UIBarButtonItem.init(title: "Log Out",
-                                                     style: .plain,
-                                                     target: nil,
-                                                     action: nil)
-        self.navigationItem.leftBarButtonItem = backButton
-
-        let userNameLabel = UILabel(frame: CGRect.zero)
-        userNameLabel.text = UserStorage.user?.fullName
-        userNameLabel.textColor = .white
-        let rightBarButton = UIBarButtonItem(customView: userNameLabel)
-        self.navigationItem.rightBarButtonItem = rightBarButton
+        configureLeftBarButtonItem()
+        configureRightBarButtonItem()
     }
-
+    
+    private func configureView() {
+        configureAddStreamButton()
+        setUpRefreshControl()
+        bindUserActivity()
+        configureTableView()
+        loadData()
+    }
+    
     func present(content: (upcoming: [Stream], current: [Stream], past: [Stream])) {
         DispatchQueue.main.async {
             self.upcomingStreams = content.upcoming
@@ -87,12 +78,16 @@ class StreamListViewController: BaseViewController {
     }
 
     private func close() {
-        self.navigationController?.popViewController(animated: true)
+        AppDelegate.shared.appRouter.showSignInViewController()
     }
     
     private func didSignOut() {
         self.stopActivity()
         self.close()
+    }
+    
+    @objc private func signOut() {
+        self.signInViewModel.signOut()
     }
     
     private func bindUserActivity() {
@@ -126,14 +121,29 @@ class StreamListViewController: BaseViewController {
         tableView.delegate = self
         present(content: ([], [], []))
     }
-    
 }
 
-// MARK: - Add New Stram Button
+// MARK: - Configure View Items
 
 extension StreamListViewController {
+    
+    private func configureLeftBarButtonItem() {
+        let backButton = UIBarButtonItem.init(title: "Log Out",
+                                              style: .plain,
+                                              target: self,
+                                              action: #selector(signOut))
+        self.navigationItem.leftBarButtonItem = backButton
+    }
+    
+    private func configureRightBarButtonItem() {
+        let userNameLabel = UILabel(frame: CGRect.zero)
+        userNameLabel.text = UserStorage.user?.fullName
+        userNameLabel.textColor = .white
+        let rightBarButton = UIBarButtonItem(customView: userNameLabel)
+        self.navigationItem.rightBarButtonItem = rightBarButton
+    }
 
-    private func createAddStreamButton() {
+    private func configureAddStreamButton() {
         self.addNewStreamButton = UIButton(frame: CGRect(x: 0, y: 0, width: 55.0, height: 55.0))
         addNewStreamButton.setImage(#imageLiteral(resourceName: "addStreamButton"), for: .normal)
         self.view.addSubview(addNewStreamButton)
@@ -170,19 +180,6 @@ extension StreamListViewController {
                 DispatchQueue.main.async { [weak self] in
                     self?.refreshControl.endRefreshing()
                 }
-                print(error.message())
-            }
-        }
-    }
-
-    private func loadData() {
-        viewModel.loadData { result in
-            switch result {
-            case .success(let (upcoming, current, past)):
-                DispatchQueue.main.async { [weak self] in
-                    self?.present(content: (upcoming, current, past))
-                }
-            case .failure(let error):
                 print(error.message())
             }
         }
@@ -235,7 +232,25 @@ extension StreamListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.launchStream(indexPath: indexPath, viewController: self)
     }
+}
+
+// MARK: - Private Methods
+
+extension StreamListViewController {
     
+    private func loadData() {
+        viewModel.loadData { result in
+            switch result {
+            case .success(let (upcoming, current, past)):
+                DispatchQueue.main.async { [weak self] in
+                    self?.present(content: (upcoming, current, past))
+                }
+            case .failure(let error):
+                print(error.message())
+            }
+        }
+    }
+
     private func getStreamData(indexPath: IndexPath) -> Stream {
         var stream: Stream!
         switch indexPath.section {

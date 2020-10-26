@@ -64,6 +64,9 @@ public class GoogleSignInInteractor: NSObject {
         GIDSignIn.sharedInstance().signOut()
         GoogleOAuth2.sharedInstance.clearToken()
         UserStorage.user = nil
+        
+        // TODO: Find Out Why does not work callback, then remove it:
+        rxSignOut.onNext(true)
     }
 
     func disconnect() {

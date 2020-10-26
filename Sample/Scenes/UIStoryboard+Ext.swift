@@ -6,7 +6,7 @@
 import UIKit
 
 extension UIStoryboard {
-
+    
     convenience init(_ storyboard: AppRouter.StroyboadType) {
         self.init(name: storyboard.filename, bundle: nil)
     }
@@ -29,8 +29,7 @@ extension UIStoryboard {
             configure(viewController)
             setUpRootViewController(viewController)
         } else {
-            print("Failed to open \(id) screen")
-            fatalError()
+            assertionFailure("Failed to open \(id) screen")
         }
     }
     
@@ -61,11 +60,31 @@ extension UIStoryboard {
             window.rootViewController?.present(viewController, animated: false, completion: {
             })
         } else {
-            print("Failed to open \(id) screen")
-            fatalError()
+            assertionFailure("Failed to open \(id) screen")
         }
     }
     
+    func sequePushViewController<T>(_ configure: (T) -> Void) where T: UIViewController {
+        guard let window = AppDelegate.shared.window else {
+            assertionFailure()
+            return
+        }
+        if window.rootViewController as? UINavigationController == nil {
+            let navController = UINavigationController()
+            window.rootViewController = navController
+        }
+        if let navController = window.rootViewController as? UINavigationController {
+            let id = String(describing: T.self)
+            if let viewController = self.instantiateViewController(withIdentifier: id) as? T {
+                configure(viewController)
+                navController.pushViewController(viewController, animated: false)
+            } else {
+                assertionFailure("Failed to open \(id) screen")
+            }
+        } else {
+            assertionFailure("Failed to open screen")
+        }
+    }
 }
 
 extension UIStoryboard {
@@ -73,3 +92,4 @@ extension UIStoryboard {
         return UIStoryboard(name: AppRouter.StroyboadType.main.rawValue, bundle: nil)
     }
 }
+

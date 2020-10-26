@@ -23,7 +23,7 @@ struct AppRouter {
     
     func showMainViewController() {
         DispatchQueue.performUIUpdate {
-            UIStoryboard.main.segueToRootViewController(self.streamingListDependencies)
+            UIStoryboard.main.sequePushViewController(self.streamingListDependencies)
         }
     }
 

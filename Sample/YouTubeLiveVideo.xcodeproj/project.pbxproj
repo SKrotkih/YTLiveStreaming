@@ -173,7 +173,6 @@
 			children = (
 				7F1E96B22546B8BF00638965 /* UIControl+YYAdd.h */,
 				7F1E96B32546B8BF00638965 /* UIViewController+FullScreen.swift */,
-				7F1E96B42546B8BF00638965 /* UIStoryboard+Ext.swift */,
 				7F1E96B52546B8BF00638965 /* UIView+YYAdd.m */,
 				7F1E96B62546B8BF00638965 /* Color+Ext.swift */,
 				7F1E96B72546B8BF00638965 /* DispatchQueue+Ext.swift */,
@@ -214,6 +213,7 @@
 		7F53B1AD203072EA00E09CFA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				7F1E96B42546B8BF00638965 /* UIStoryboard+Ext.swift */,
 				7F2C3C3B2544187100CA9912 /* AppRouter.swift */,
 				7FA94FFF2032C5750083B23B /* SignIn */,
 				7F53B1AF2030B15C00E09CFA /* StreamList */,

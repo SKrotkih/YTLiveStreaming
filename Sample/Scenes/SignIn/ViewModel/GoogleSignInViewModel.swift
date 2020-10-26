@@ -2,9 +2,10 @@
 //  GoogleSignInViewModel.swift
 //  YouTubeLiveVideo
 //
+//  Created by Sergey Krotkih
+//
 
 import Foundation
-import YTLiveStreaming
 import GoogleSignIn
 import RxSwift
 

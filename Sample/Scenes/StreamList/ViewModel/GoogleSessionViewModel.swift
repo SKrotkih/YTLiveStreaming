@@ -2,6 +2,8 @@
 //  GoogleSessionViewModel.swift
 //  YouTubeLiveVideo
 //
+//  Created by Sergey Krotkih
+//
 
 import UIKit
 import RxSwift

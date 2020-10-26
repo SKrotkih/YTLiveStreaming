@@ -2,6 +2,8 @@
 //  AppRouter.swift
 //  YouTubeLiveVideo
 //
+//  Created by Sergey Krotkih
+//
 
 import Foundation
 import YTLiveStreaming

@@ -1,6 +1,8 @@
 //
 //  StatusBarShowingViewController.swift
-//  ParkingBuddy
+//  YouTubeLiveVideo
+//
+//  Created by Sergey Krotkih
 //
 
 import UIKit

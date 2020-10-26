@@ -1,6 +1,8 @@
 //
 //  UserStorage.swift
-//  YTLiveStreaming
+//  YouTubeLiveVideo
+//
+//  Created by Sergey Krotkih
 //
 
 import Foundation

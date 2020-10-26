@@ -1,6 +1,8 @@
 //
 //  MainNavController.swift
-//  KnowMe
+//  YouTubeLiveVideo
+//
+//  Created by Sergey Krotkih
 //
 
 import UIKit

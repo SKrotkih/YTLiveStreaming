@@ -3,7 +3,6 @@
 //  YouTubeLiveVideo
 //
 //  Created by Sergey Krotkih on 11/8/16.
-//  Copyright © 2016 Sergey Krotkih. All rights reserved.
 //
 
 import UIKit

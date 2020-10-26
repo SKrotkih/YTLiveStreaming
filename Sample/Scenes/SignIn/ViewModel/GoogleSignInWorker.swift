@@ -2,6 +2,8 @@
 //  GoogleSignInWorker.swift
 //  YouTubeLiveVideo
 //
+//  Created by Sergey Krotkih
+//
 
 import Foundation
 

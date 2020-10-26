@@ -1,6 +1,9 @@
 //
 //  Helpers.swift
 //  YouTubeLiveVideo
+//  YouTubeLiveVideo
+//
+//  Created by Sergey Krotkih
 //
 
 import Foundation

@@ -150,13 +150,6 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		7F1E96AA2546B50500638965 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		7F1E96AD2546B8BF00638965 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,7 +220,6 @@
 			isa = PBXGroup;
 			children = (
 				7F1E96A92546B4EB00638965 /* ViewController */,
-				7F1E96AA2546B50500638965 /* ViewModel */,
 			);
 			path = LiveStreaming;
 			sourceTree = "<group>";

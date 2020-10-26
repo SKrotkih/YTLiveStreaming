@@ -2,6 +2,8 @@
 //  GoogleSignInInteractor.swift
 //  YTLiveStreaming
 //
+//  Created by Sergey Krotkih
+//
 
 import UIKit
 import GoogleSignIn

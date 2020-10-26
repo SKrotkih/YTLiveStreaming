@@ -2,6 +2,8 @@
 //  AppDelegate.swift
 //  YouTubeLiveVideo
 //
+//  Created by Sergey Krotkih
+//
 
 import UIKit
 import YTLiveStreaming

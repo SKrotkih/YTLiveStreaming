@@ -2,6 +2,8 @@
 //  StreamListTableViewCell.swift
 //  YouTubeLiveVideo
 //
+//  Created by Sergey Krotkih
+//
 
 import UIKit
 

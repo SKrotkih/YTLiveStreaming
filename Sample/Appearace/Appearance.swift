@@ -1,6 +1,7 @@
 //  Appearance
+//  YouTubeLiveVideo
 //
-//  KnowMe
+//  Created by Sergey Krotkih
 //
 
 import UIKit

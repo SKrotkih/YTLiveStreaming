@@ -16,7 +16,7 @@ protocol YouTubeLiveVideoOutput: class {
 }
 
 class LFLiveViewController: UIViewController {
-   var output: YouTubeLiveVideoOutput?
+   var viewModel: YouTubeLiveVideoOutput?
    var scheduledStartTime: NSDate?
    
    @IBOutlet weak var lfView: LFLivePreview!
@@ -54,11 +54,11 @@ class LFLiveViewController: UIViewController {
          startLiveButton.isSelected = false
          startLiveButton.setTitle("Start live broadcast", for: .normal)
          lfView.stopPublishing()
-         output?.finishPublishing()
+         viewModel?.finishPublishing()
       } else {
          startLiveButton.isSelected = true
          startLiveButton.setTitle("Finish live broadcast", for: .normal)
-         output?.startPublishing { streamURL, streamName in
+         viewModel?.startPublishing { streamURL, streamName in
             if let streamURL = streamURL, let streamName = streamName {
                let streamUrl = "\(streamURL)/\(streamName)"
                self.lfView.startPublishing(withStreamURL: streamUrl)
@@ -68,7 +68,7 @@ class LFLiveViewController: UIViewController {
    }
 
    @IBAction func closeButtonPressed(_ sender: Any) {
-      output?.cancelPublishing()
+      viewModel?.cancelPublishing()
    }
 
    func showCurrentStatus(currStatus: String) {

@@ -1,28 +1,23 @@
 //
-//  OutboundBroadcastPresenter.swift
+//  LiveStreamingViewModel.swift
 //  YouTubeLiveVideo
 //
 
 import UIKit
 import YTLiveStreaming
 
-class OutboundBroadcastPresenter: NSObject {
+class LiveStreamingViewModel: NSObject {
 
     // Dependebcies
-    var interactor: InboundBroadcastPresenter!
+    var broadcastsAPI: YTLiveStreaming!
     weak var liveViewController: LFLiveViewController!
-    var outgoingBroadcastWorker: YTLiveStreaming!
 
     fileprivate var liveBroadcast: LiveBroadcastStreamModel?
 }
 
 // MARK: -
 
-extension OutboundBroadcastPresenter {
-
-    func createBroadcast(_ completion: @escaping (Error?) -> Void) {
-        interactor.createBroadcast(completion)
-    }
+extension LiveStreamingViewModel {
 
     private func startBroadcast(_ liveBroadcast: LiveBroadcastStreamModel) {
         self.liveBroadcast = liveBroadcast
@@ -42,7 +37,7 @@ extension OutboundBroadcastPresenter {
 
 // MARK: Live stream publishing output protocol
 
-extension OutboundBroadcastPresenter: YouTubeLiveVideoOutput {
+extension LiveStreamingViewModel: YouTubeLiveVideoOutput {
 
     func startPublishing(completed: @escaping (String?, String?) -> Void) {
         guard let broadcast = self.liveBroadcast else {
@@ -52,7 +47,7 @@ extension OutboundBroadcastPresenter: YouTubeLiveVideoOutput {
         guard let delegate = self as? LiveStreamTransitioning else {
             return
         }
-        outgoingBroadcastWorker.startBroadcast(broadcast,
+        broadcastsAPI.startBroadcast(broadcast,
                                                delegate: delegate,
                                                completion: { streamName, streamUrl, scheduledStartTime in
             if let streamName = streamName, let streamUrl = streamUrl, let scheduledStartTime = scheduledStartTime {
@@ -67,7 +62,7 @@ extension OutboundBroadcastPresenter: YouTubeLiveVideoOutput {
             self.dismissVideoStreamViewController()
             return
         }
-        outgoingBroadcastWorker.completeBroadcast(broadcast, completion: { _ in
+        broadcastsAPI.completeBroadcast(broadcast, completion: { _ in
             self.dismissVideoStreamViewController()
         })
     }
@@ -77,7 +72,7 @@ extension OutboundBroadcastPresenter: YouTubeLiveVideoOutput {
             self.dismissVideoStreamViewController()
             return
         }
-        outgoingBroadcastWorker.deleteBroadcast(id: broadcast.id, completion: { success in
+        broadcastsAPI.deleteBroadcast(id: broadcast.id, completion: { success in
             if success {
                 print("Broadcast \"\(broadcast.id)\" was deleted!")
             } else {
@@ -89,7 +84,7 @@ extension OutboundBroadcastPresenter: YouTubeLiveVideoOutput {
     }
 }
 
-extension OutboundBroadcastPresenter {
+extension LiveStreamingViewModel {
 
     func didTransitionToLiveStatus() {
         self.liveViewController.showCurrentStatus(currStatus: "● LIVE")

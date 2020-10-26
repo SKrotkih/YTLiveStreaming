@@ -225,6 +225,18 @@ extension StreamListViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellName.StreamItemCell) as? StreamListTableViewCell
+        let stream = getStreamData(indexPath: indexPath)
+        cell?.beginLabel.text = stream.time
+        cell?.nameLabel.text = stream.name
+
+        return cell ?? UITableViewCell()
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.launchStream(indexPath: indexPath, viewController: self)
+    }
+    
+    private func getStreamData(indexPath: IndexPath) -> Stream {
         var stream: Stream!
         switch indexPath.section {
         case 0:
@@ -236,13 +248,6 @@ extension StreamListViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             assert(false, "Incorrect section number")
         }
-        cell?.beginLabel.text = stream.time
-        cell?.nameLabel.text = stream.name
-
-        return cell ?? UITableViewCell()
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.launchStream(section: indexPath.section, index: indexPath.row, viewController: self)
+        return stream
     }
 }

@@ -1,5 +1,5 @@
 //
-//  InboundBroadcastPresenter.swift
+//  StreamListDataSource.swift
 //  YouTubeLiveVideo
 //
 
@@ -8,14 +8,29 @@ import YTLiveStreaming
 
 typealias BroadCastStreams = (_ upcoming: [Stream], _ current: [Stream], _ past: [Stream]) -> Void
 
-class InboundBroadcastPresenter: NSObject {
+class StreamListDataSource: NSObject {
 
-    fileprivate let incomingBroadcastWorker = YTLiveStreaming()
+    var broadcastsAPI: YTLiveStreaming!
 
     fileprivate var upcoming = [LiveBroadcastStreamModel]()
     fileprivate var current = [LiveBroadcastStreamModel]()
     fileprivate var past = [LiveBroadcastStreamModel]()
 
+    func upcoming(_ index: Int) -> LiveBroadcastStreamModel {
+        assert(index < upcoming.count, "Broadcast index is invalid")
+        return self.upcoming[index]
+    }
+    
+    func current(_ index: Int) -> LiveBroadcastStreamModel {
+        assert(index < current.count, "Broadcast index is invalid")
+        return self.current[index]
+    }
+    
+    func past(_ index: Int) -> LiveBroadcastStreamModel {
+        assert(index < past.count, "Broadcast index is invalid")
+        return self.past[index]
+    }
+    
     private var completionClosure: BroadCastStreams?
 
     private enum StreamType {
@@ -37,13 +52,13 @@ class InboundBroadcastPresenter: NSObject {
         let fetchingGroup = DispatchGroup()
         fetchingGroup.enter()
         DispatchQueue.global(qos: .utility).async(group: fetchingGroup, execute: {
-            self.incomingBroadcastWorker.getAllBroadcasts { (_, _, _) in
+            self.broadcastsAPI.getAllBroadcasts { (_, _, _) in
                 fetchingGroup.leave()
             }
         })
         fetchingGroup.enter()
         DispatchQueue.global(qos: .utility).async(group: fetchingGroup, execute: {
-            self.incomingBroadcastWorker.getUpcomingBroadcasts { result in
+            self.broadcastsAPI.getUpcomingBroadcasts { result in
                 switch result {
                 case .success(let streams):
                     self.addStreams(.upcoming, streams: streams)
@@ -55,7 +70,7 @@ class InboundBroadcastPresenter: NSObject {
         })
         fetchingGroup.enter()
         DispatchQueue.global(qos: .utility).async(group: fetchingGroup, execute: {
-            self.incomingBroadcastWorker.getLiveNowBroadcasts { result in
+            self.broadcastsAPI.getLiveNowBroadcasts { result in
                 switch result {
                 case .success(let streams):
                     self.addStreams(.current, streams: streams)
@@ -67,7 +82,7 @@ class InboundBroadcastPresenter: NSObject {
         })
         fetchingGroup.enter()
         DispatchQueue.global(qos: .utility).async(group: fetchingGroup, execute: {
-            self.incomingBroadcastWorker.getCompletedBroadcasts { result in
+            self.broadcastsAPI.getCompletedBroadcasts { result in
                 switch result {
                 case .success(let streams):
                     self.addStreams(.past, streams: streams)
@@ -104,55 +119,5 @@ class InboundBroadcastPresenter: NSObject {
         case .past:
             self.past += broadcasts
         }
-    }
-}
-
-// MARK: -
-
-extension InboundBroadcastPresenter {
-
-    func getUpcomingBroadcastItem(index: Int) -> LiveBroadcastStreamModel {
-        assert(index < upcoming.count, "Broadcast index is invalid")
-        return upcoming[index]
-    }
-
-    func launchLiveStream(section: Int, index: Int, viewController: UIViewController) {
-        switch section {
-        case 0:
-            assert(false, "Incorrect section number")
-        case 1:
-            let broadcast = self.current[index]
-            YouTubePlayer.playYoutubeID(broadcast.id, viewController: viewController)
-        case 2:
-            let broadcast = self.past[index]
-            YouTubePlayer.playYoutubeID(broadcast.id, viewController: viewController)
-        default:
-            assert(false, "Incorrect section number")
-        }
-    }
-
-    func createBroadcast(title: String = "Live video",
-                         description: String = "Test broadcast video",
-                         _ completion: @escaping (Error?) -> Void) {
-        let startDate = Helpers.dateAfter(Date(), after: (hour: 0, minute: 2, second: 0))
-        self.incomingBroadcastWorker.createBroadcast(title,
-                                                     description: description,
-                                                     startTime: startDate,
-                                                     completion: { result in
-            switch result {
-            case .success(let broadcast):
-                print("Broadcast \(broadcast.snipped.title) was created sccessfully")
-                completion(nil)
-            case .failure(let error):
-                switch error {
-                case .systemMessage(let code, let message):
-                    let err = NSError(domain: message, code: code, userInfo: nil)
-                        completion(err)
-                default:
-                    let err = NSError(domain: error.message(), code: -1, userInfo: nil)
-                        completion(err)
-                    }
-            }
-        })
     }
 }

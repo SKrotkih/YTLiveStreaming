@@ -15,9 +15,6 @@ struct AppRouter {
         }
     }
     
-    // TODO: Remove this later
-    let broadcastPresenter = OutboundBroadcastPresenter()
-    
     func showSignInViewController() {
         DispatchQueue.performUIUpdate {
             UIStoryboard.main.segueToRootViewController(self.signInDependencies)
@@ -53,28 +50,31 @@ extension AppRouter {
     /// Inject dependecncies in the StreamListViewController
     ///
     private func streamingListDependencies(_ viewController: StreamListViewController) {
+
         let signInInteractor = AppDelegate.shared.googleSignIn
         let signInViewModel = GoogleSessionViewModel(signInInteractor)
         viewController.signInViewModel = signInViewModel
         
         let viewModel = StreamListViewModel()
-        let streamListInteractor = InboundBroadcastPresenter()
-        viewModel.interactor = streamListInteractor
+        let dataSource = StreamListDataSource()
+        let broadcastsAPI = YTLiveStreaming()
+        dataSource.broadcastsAPI = broadcastsAPI
+        viewModel.dataSource = dataSource
+        viewModel.broadcastsAPI = broadcastsAPI
         
         // Inbound Broadcast
         viewController.viewModel = viewModel
-        
-        // Outbound Broadcast
-        let outgoingBroadcastWorker = YTLiveStreaming()
-        broadcastPresenter.interactor = streamListInteractor
-        broadcastPresenter.outgoingBroadcastWorker = outgoingBroadcastWorker
     }
     
     ///
     /// Inject dependecncies in the LFLiveViewController
     ///
     private func liveVideoDependencies(_ viewController: LFLiveViewController) {
-        broadcastPresenter.liveViewController = viewController
-        viewController.output = broadcastPresenter
+        let viewModel = LiveStreamingViewModel()
+        let broadcastsAPI = YTLiveStreaming()
+
+        viewModel.broadcastsAPI = broadcastsAPI
+        viewModel.liveViewController = viewController
+        viewController.viewModel = viewModel
     }
 }

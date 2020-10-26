@@ -5,50 +5,53 @@
 
 import UIKit
 import YTLiveStreaming
+import RxDataSources
+import RxSwift
 
-typealias BroadCastStreams = (_ upcoming: [Stream], _ current: [Stream], _ past: [Stream]) -> Void
+struct SectionModel {
+    var model: String
+    var items: [LiveBroadcastStreamModel]
+}
+
+extension SectionModel: SectionModelType {
+    init(original: SectionModel, items: [LiveBroadcastStreamModel]) {
+        self = original
+        self.items = items
+    }
+}
 
 class StreamListDataSource: NSObject {
 
     var broadcastsAPI: YTLiveStreaming!
-
-    fileprivate var upcoming = [LiveBroadcastStreamModel]()
-    fileprivate var current = [LiveBroadcastStreamModel]()
-    fileprivate var past = [LiveBroadcastStreamModel]()
+    
+    var rxData: PublishSubject<[SectionModel]> = PublishSubject<[SectionModel]>()
+    
+    private var data = [
+        SectionModel(model: "Upcoming", items: []),
+        SectionModel(model: "Live now", items: []),
+        SectionModel(model: "Completed", items: [])
+    ]
 
     func upcoming(_ index: Int) -> LiveBroadcastStreamModel {
-        assert(index < upcoming.count, "Broadcast index is invalid")
-        return self.upcoming[index]
+        assert(index < data[0].items.count, "Broadcast index is invalid")
+        return self.data[0].items[index]
     }
     
     func current(_ index: Int) -> LiveBroadcastStreamModel {
-        assert(index < current.count, "Broadcast index is invalid")
-        return self.current[index]
+        assert(index < data[1].items.count, "Broadcast index is invalid")
+        return self.data[1].items[index]
     }
     
     func past(_ index: Int) -> LiveBroadcastStreamModel {
-        assert(index < past.count, "Broadcast index is invalid")
-        return self.past[index]
+        assert(index < data[2].items.count, "Broadcast index is invalid")
+        return self.data[2].items[index]
     }
     
-    private var completionClosure: BroadCastStreams?
-
-    private enum StreamType {
-        case upcoming
-        case current
-        case past
-    }
-
-    func reloadData(_ completion: @escaping BroadCastStreams) {
-        self.upcoming.removeAll()
-        self.current.removeAll()
-        self.past.removeAll()
-        completion([], [], [])
-        self.loadData(completion)
-    }
-
-    func loadData(_ completion: @escaping BroadCastStreams) {
-        completionClosure = completion
+    func loadData() {
+        for i in 0..<data.count {
+            data[i].items.removeAll()
+        }
+        rxData.onNext(self.data)
         let fetchingGroup = DispatchGroup()
         fetchingGroup.enter()
         DispatchQueue.global(qos: .utility).async(group: fetchingGroup, execute: {
@@ -61,7 +64,7 @@ class StreamListDataSource: NSObject {
             self.broadcastsAPI.getUpcomingBroadcasts { result in
                 switch result {
                 case .success(let streams):
-                    self.addStreams(.upcoming, streams: streams)
+                    self.data[0].items += streams
                 case .failure(let error):
                     print(error.message())
                 }
@@ -73,7 +76,7 @@ class StreamListDataSource: NSObject {
             self.broadcastsAPI.getLiveNowBroadcasts { result in
                 switch result {
                 case .success(let streams):
-                    self.addStreams(.current, streams: streams)
+                    self.data[1].items += streams
                 case .failure(let error):
                     print(error.message())
                 }
@@ -85,39 +88,14 @@ class StreamListDataSource: NSObject {
             self.broadcastsAPI.getCompletedBroadcasts { result in
                 switch result {
                 case .success(let streams):
-                    self.addStreams(.past, streams: streams)
+                    self.data[2].items += streams
                 case .failure(let error):
                     print(error.message())
                 }
             }
         })
         fetchingGroup.notify(queue: DispatchQueue.main) {
-            if let completion = self.completionClosure {
-                let upcomingStreams = self.upcoming.map {
-                    Stream(time: "start: \($0.snipped.publishedAt)", name: "\($0.snipped.title)")
-                }
-                let currentStreams = self.current.map {
-                    Stream(time: "start: \($0.snipped.publishedAt)", name: "\($0.snipped.title)")
-                }
-                let pastStreams = self.past.map {
-                    Stream(time: "start: \($0.snipped.publishedAt)", name: "\($0.snipped.title)")
-                }
-                completion(upcomingStreams, currentStreams, pastStreams)
-            }
-        }
-    }
-
-    private func addStreams(_ type: StreamType, streams: [LiveBroadcastStreamModel]?) {
-        guard let broadcasts = streams else {
-            return
-        }
-        switch type {
-        case .upcoming:
-            self.upcoming += broadcasts
-        case .current:
-            self.current += broadcasts
-        case .past:
-            self.past += broadcasts
+            self.rxData.onNext(self.data)
         }
     }
 }

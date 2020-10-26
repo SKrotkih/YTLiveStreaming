@@ -6,6 +6,7 @@
 import UIKit
 import YTLiveStreaming
 import RxCocoa
+import RxDataSources
 import RxSwift
 
 struct Stream {
@@ -17,8 +18,8 @@ class StreamListViewController: BaseViewController {
 
     var viewModel: StreamListViewModel!
 
-    internal struct CellName {
-        static let StreamItemCell = "TableViewCell"
+    enum CellIdentifier: String {
+        case cell
     }
 
     @IBOutlet weak var createBroadcastButton: UIButton!
@@ -29,9 +30,7 @@ class StreamListViewController: BaseViewController {
 
     fileprivate var refreshControl: UIRefreshControl!
 
-    fileprivate var upcomingStreams = [Stream]()
-    fileprivate var currentStreams = [Stream]()
-    fileprivate var pastStreams = [Stream]()
+    var dataSource: Any?
 
     private let disposeBag = DisposeBag()
     
@@ -51,17 +50,8 @@ class StreamListViewController: BaseViewController {
         configureAddStreamButton()
         setUpRefreshControl()
         bindUserActivity()
-        configureTableView()
-        loadData()
-    }
-    
-    func present(content: (upcoming: [Stream], current: [Stream], past: [Stream])) {
-        DispatchQueue.main.async {
-            self.upcomingStreams = content.upcoming
-            self.currentStreams = content.current
-            self.pastStreams = content.past
-            self.tableView.reloadData()
-        }
+        bindData()
+        viewModel.loadData()
     }
     
     func startActivity() {
@@ -95,8 +85,7 @@ class StreamListViewController: BaseViewController {
             .tap
             .debounce(.milliseconds(Constants.UiConstraints.debounce), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
-                guard let `self` = self else { return }
-                self.viewModel.creadeBroadcast()
+                self?.viewModel.creadeBroadcast()
             }).disposed(by: disposeBag)
         viewModel
             .rxSignOut
@@ -105,10 +94,33 @@ class StreamListViewController: BaseViewController {
             }).disposed(by: disposeBag)
     }
     
-    private func configureTableView() {
-        tableView.dataSource = self
+    private func bindData() {
+        tableView.register(StreamListTableViewCell.self, forCellReuseIdentifier: CellIdentifier.cell.rawValue)
         tableView.delegate = self
-        present(content: ([], [], []))
+        dataSource = RxTableViewSectionedReloadDataSource<SectionModel>(
+            configureCell: { (_, tableView, indexPath, element) in
+                let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.cell.rawValue) as! StreamListTableViewCell
+                cell.beginLabel.text = "start: \(element.snipped.publishedAt)"
+                cell.nameLabel.text = element.snipped.title
+                return cell
+        },
+            titleForHeaderInSection: { dataSource, sectionIndex in
+                return dataSource[sectionIndex].model
+        }
+        )
+        viewModel
+            .rxData
+            .bind(to: tableView
+                .rx
+                .items(dataSource: dataSource as! RxTableViewSectionedReloadDataSource<SectionModel>))
+            .disposed(by: disposeBag)
+        viewModel
+            .rxData
+            .subscribe(onNext: { _ in
+                DispatchQueue.main.async { [weak self] in
+                    self?.refreshControl.endRefreshing()
+                }
+            }).disposed(by: disposeBag)
     }
 }
 
@@ -158,100 +170,15 @@ extension StreamListViewController {
     }
 
     @objc func refreshData(_ sender: AnyObject) {
-        viewModel.reloadData { result in
-            switch result {
-            case .success(let (upcoming, current, past)):
-                DispatchQueue.main.async { [weak self] in
-                    self?.refreshControl.endRefreshing()
-                    self?.present(content: (upcoming, current, past))
-                }
-            case .failure(let error):
-                DispatchQueue.main.async { [weak self] in
-                    self?.refreshControl.endRefreshing()
-                }
-                print(error.message())
-            }
-        }
+        viewModel.loadData()
     }
 }
 
 // MARK: UiTableView delegates
 
-extension StreamListViewController: UITableViewDelegate, UITableViewDataSource {
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
-    }
-
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return "Upcoming"
-        case 1:
-            return "Live now"
-        case 2:
-            return "Completed"
-        default:
-            assert(false, "Incorrect section number")
-        }
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return upcomingStreams.count
-        case 1:
-            return currentStreams.count
-        case 2:
-            return pastStreams.count
-        default:
-            return 0
-        }
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellName.StreamItemCell) as? StreamListTableViewCell
-        let stream = getStreamData(indexPath: indexPath)
-        cell?.beginLabel.text = stream.time
-        cell?.nameLabel.text = stream.name
-
-        return cell ?? UITableViewCell()
-    }
+extension StreamListViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.launchStream(indexPath: indexPath, viewController: self)
-    }
-}
-
-// MARK: - Private Methods
-
-extension StreamListViewController {
-    
-    private func loadData() {
-        viewModel.loadData { result in
-            switch result {
-            case .success(let (upcoming, current, past)):
-                DispatchQueue.main.async { [weak self] in
-                    self?.present(content: (upcoming, current, past))
-                }
-            case .failure(let error):
-                print(error.message())
-            }
-        }
-    }
-
-    private func getStreamData(indexPath: IndexPath) -> Stream {
-        var stream: Stream!
-        switch indexPath.section {
-        case 0:
-            stream =  self.upcomingStreams[indexPath.row]
-        case 1:
-            stream =  self.currentStreams[indexPath.row]
-        case 2:
-            stream =  self.pastStreams[indexPath.row]
-        default:
-            assert(false, "Incorrect section number")
-        }
-        return stream
     }
 }

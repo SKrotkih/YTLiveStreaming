@@ -15,6 +15,7 @@ target 'YouTubeLiveVideo' do
     
     pod 'RxSwift'
     pod 'RxCocoa'
+    pod 'RxDataSources'
     pod 'LFLiveKit'
     
 end

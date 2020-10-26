@@ -15,16 +15,8 @@ class StreamListViewModel {
 
     private let disposeBag = DisposeBag()
 
-    func loadData(_ completion: @escaping (Result<([Stream], [Stream], [Stream]), LVError>) -> Void) {
-        dataSource.loadData { (upcomingStreams, currentStreams, pastStreams)  in
-            completion(.success((upcomingStreams, currentStreams, pastStreams)))
-        }
-    }
-
-    func reloadData(_ completion: @escaping (Result<([Stream], [Stream], [Stream]), LVError>) -> Void) {
-        dataSource.reloadData { (upcomingStreams, currentStreams, pastStreams)  in
-            completion(.success((upcomingStreams, currentStreams, pastStreams)))
-        }
+    func loadData() {
+        dataSource.loadData()
     }
 
     func signOut() {
@@ -33,6 +25,10 @@ class StreamListViewModel {
     
     var rxSignOut: PublishSubject<Bool> {
         return self.signInViewModel.rxSignOut
+    }
+    
+    var rxData: PublishSubject<[SectionModel]> {
+        return self.dataSource.rxData
     }
     
     func closeView() {

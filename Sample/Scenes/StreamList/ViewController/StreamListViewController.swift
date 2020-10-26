@@ -16,7 +16,6 @@ struct Stream {
 class StreamListViewController: BaseViewController {
 
     var viewModel: StreamListViewModel!
-    var signInViewModel: GoogleSessionViewModel!
 
     internal struct CellName {
         static let StreamItemCell = "TableViewCell"
@@ -78,7 +77,7 @@ class StreamListViewController: BaseViewController {
     }
 
     private func close() {
-        AppDelegate.shared.appRouter.showSignInViewController()
+        viewModel.closeView()
     }
     
     private func didSignOut() {
@@ -87,7 +86,7 @@ class StreamListViewController: BaseViewController {
     }
     
     @objc private func signOut() {
-        self.signInViewModel.signOut()
+        self.viewModel.signOut()
     }
     
     private func bindUserActivity() {
@@ -99,17 +98,7 @@ class StreamListViewController: BaseViewController {
                 guard let `self` = self else { return }
                 self.viewModel.creadeBroadcast()
             }).disposed(by: disposeBag)
-        self.navigationItem
-            .leftBarButtonItem?
-            .rx
-            .tap
-            .debounce(.milliseconds(Constants.UiConstraints.debounce), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self]  _ in
-                guard let `self` = self else { return }
-                self.signInViewModel.signOut()
-                self.close()
-            }).disposed(by: disposeBag)
-        self.signInViewModel
+        viewModel
             .rxSignOut
             .subscribe(onNext: { [weak self] _ in
                 self?.didSignOut()

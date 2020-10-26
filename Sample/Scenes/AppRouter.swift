@@ -53,13 +53,13 @@ extension AppRouter {
 
         let signInInteractor = AppDelegate.shared.googleSignIn
         let signInViewModel = GoogleSessionViewModel(signInInteractor)
-        viewController.signInViewModel = signInViewModel
         
         let viewModel = StreamListViewModel()
         let dataSource = StreamListDataSource()
         let broadcastsAPI = YTLiveStreaming()
         dataSource.broadcastsAPI = broadcastsAPI
         viewModel.dataSource = dataSource
+        viewModel.signInViewModel = signInViewModel
         viewModel.broadcastsAPI = broadcastsAPI
         
         // Inbound Broadcast

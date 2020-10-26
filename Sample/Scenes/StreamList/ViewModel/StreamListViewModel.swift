@@ -11,6 +11,7 @@ class StreamListViewModel {
 
     var dataSource: StreamListDataSource!
     var broadcastsAPI: YTLiveStreaming!
+    var signInViewModel: GoogleSessionViewModel!
 
     private let disposeBag = DisposeBag()
 
@@ -26,6 +27,18 @@ class StreamListViewModel {
         }
     }
 
+    func signOut() {
+        self.signInViewModel.signOut()
+    }
+    
+    var rxSignOut: PublishSubject<Bool> {
+        return self.signInViewModel.rxSignOut
+    }
+    
+    func closeView() {
+        AppDelegate.shared.appRouter.showSignInViewController()
+    }
+    
     func creadeBroadcast() {
         Alert.sharedInstance.showConfirmCancel("YouTube Live Streaming API",
                                                message: "You realy want to create a new Live broadcast video?",

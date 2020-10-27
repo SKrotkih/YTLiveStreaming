@@ -17,8 +17,8 @@ public enum YTLiveVideoState: String {
 
 private let kOrderByPublishedAt = true
 
+
 public class YTLiveStreaming: NSObject {
-    
 }
 
 // MARK: Public methods interface

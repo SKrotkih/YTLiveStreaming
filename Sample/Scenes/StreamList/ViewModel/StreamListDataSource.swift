@@ -24,7 +24,7 @@ extension SectionModel: SectionModelType {
 
 class StreamListDataSource: NSObject {
 
-    var broadcastsAPI: YTLiveStreaming!
+    var broadcastsAPI: BroadcastsAPI!
     
     var rxData: PublishSubject<[SectionModel]> = PublishSubject<[SectionModel]>()
     

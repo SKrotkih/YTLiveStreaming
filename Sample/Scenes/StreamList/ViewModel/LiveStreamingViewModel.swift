@@ -11,7 +11,7 @@ import YTLiveStreaming
 class LiveStreamingViewModel: NSObject {
 
     // Dependebcies
-    var broadcastsAPI: YTLiveStreaming!
+    var broadcastsAPI: BroadcastsAPI!
     weak var liveViewController: LFLiveViewController!
 
     fileprivate var liveBroadcast: LiveBroadcastStreamModel?

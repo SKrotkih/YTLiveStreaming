@@ -9,11 +9,11 @@ import Foundation
 import YTLiveStreaming
 import RxSwift
 
-class StreamListViewModel {
+class StreamListViewModel: MainViewModel {
 
-    var dataSource: StreamListDataSource!
-    var broadcastsAPI: YTLiveStreaming!
-    var signInViewModel: GoogleSessionViewModel!
+    var dataSource: BroadcastsDataFetcher!
+    var broadcastsAPI: BroadcastsAPI!
+    var signInViewModel: SessionViewModel!
 
     private let disposeBag = DisposeBag()
 

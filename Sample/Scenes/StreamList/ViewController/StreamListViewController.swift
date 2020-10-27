@@ -18,7 +18,7 @@ struct Stream {
 
 class StreamListViewController: BaseViewController {
 
-    var viewModel: StreamListViewModel!
+    var viewModel: MainViewModel!
 
     enum CellIdentifier: String {
         case cell

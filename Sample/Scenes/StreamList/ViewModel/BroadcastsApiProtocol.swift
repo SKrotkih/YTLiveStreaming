@@ -54,6 +54,11 @@ protocol BroadcastsAPI {
         @param
         @return
      */
+    func deleteBroadcast(id: String, completion: @escaping (Bool) -> Void)
+    /**
+        @param
+        @return
+     */
     func transitionBroadcast(_ broadcast: LiveBroadcastStreamModel, toStatus: String, completion: @escaping (Bool) -> Void)
     /**
         @param

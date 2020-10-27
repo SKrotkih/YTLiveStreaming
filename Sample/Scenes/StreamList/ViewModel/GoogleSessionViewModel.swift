@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class GoogleSessionViewModel {
+class GoogleSessionViewModel: SessionViewModel {
     
     var interactor: GoogleSignInInteractor!
     let rxSignOut: PublishSubject<Bool> = PublishSubject()

@@ -22,7 +22,7 @@ extension SectionModel: SectionModelType {
     }
 }
 
-class StreamListDataSource: NSObject {
+class StreamListDataSource: NSObject, BroadcastsDataFetcher {
 
     var broadcastsAPI: BroadcastsAPI!
     

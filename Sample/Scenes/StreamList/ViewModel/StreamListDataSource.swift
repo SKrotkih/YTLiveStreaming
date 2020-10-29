@@ -34,17 +34,17 @@ class StreamListDataSource: NSObject, BroadcastsDataFetcher {
         SectionModel(model: "Completed", items: [])
     ]
 
-    func upcoming(_ index: Int) -> LiveBroadcastStreamModel {
+    func getUpcoming(for index: Int) -> LiveBroadcastStreamModel {
         assert(index < data[0].items.count, "Broadcast index is invalid")
         return self.data[0].items[index]
     }
     
-    func current(_ index: Int) -> LiveBroadcastStreamModel {
+    func getCurrent(for index: Int) -> LiveBroadcastStreamModel {
         assert(index < data[1].items.count, "Broadcast index is invalid")
         return self.data[1].items[index]
     }
     
-    func past(_ index: Int) -> LiveBroadcastStreamModel {
+    func getPast(for index: Int) -> LiveBroadcastStreamModel {
         assert(index < data[2].items.count, "Broadcast index is invalid")
         return self.data[2].items[index]
     }

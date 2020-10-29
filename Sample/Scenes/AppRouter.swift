@@ -8,6 +8,8 @@
 import Foundation
 import YTLiveStreaming
 
+let Router = AppDelegate.shared.appRouter
+
 struct AppRouter {
     
     enum StroyboadType: String, Iteratable {
@@ -44,7 +46,7 @@ extension AppRouter {
     /// Inject dependecncies in the GoogleSignInViewController
     ///
     private func signInDependencies(_ viewController: GoogleSignInViewController) {
-        let viewModel = GoogleSignInViewModel(viewController: viewController)
+        let viewModel = GoogleSignInViewModel()
         viewController.viewModel = viewModel
     }
     

@@ -24,9 +24,9 @@ extension LiveStreamingViewModel {
     private func startBroadcast(_ liveBroadcast: LiveBroadcastStreamModel) {
         self.liveBroadcast = liveBroadcast
 
-        print("Watch the live video: https://www.youtube.com/watch?v=\(liveBroadcast.id)")
+        print("Watch the live video here: https://www.youtube.com/watch?v=\(liveBroadcast.id)")
 
-        AppDelegate.shared.appRouter.showLiveVideoViewController()
+        Router.showLiveVideoViewController()
     }
 
     fileprivate func dismissVideoStreamViewController() {

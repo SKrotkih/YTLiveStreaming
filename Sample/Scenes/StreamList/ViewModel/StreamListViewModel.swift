@@ -34,7 +34,7 @@ class StreamListViewModel: MainViewModel {
     }
     
     func closeView() {
-        AppDelegate.shared.appRouter.showSignInViewController()
+        Router.showSignInViewController()
     }
     
     func creadeBroadcast() {
@@ -79,10 +79,10 @@ class StreamListViewModel: MainViewModel {
         case 0:
             assert(false, "Incorrect section number")
         case 1:
-            let broadcast = self.dataSource.current(indexPath.row)
+            let broadcast = self.dataSource.getCurrent(for: indexPath.row)
             YouTubePlayer.playYoutubeID(broadcast.id, viewController: viewController)
         case 2:
-            let broadcast = self.dataSource.past(indexPath.row)
+            let broadcast = self.dataSource.getPast(for: indexPath.row)
             YouTubePlayer.playYoutubeID(broadcast.id, viewController: viewController)
         default:
             assert(false, "Incorrect section number")

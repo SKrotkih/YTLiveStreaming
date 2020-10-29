@@ -13,6 +13,6 @@ import RxSwift
 protocol BroadcastsDataFetcher {
     var rxData: PublishSubject<[SectionModel]> { get set }
     func loadData()
-    func current(_ index: Int) -> LiveBroadcastStreamModel
-    func past(_ index: Int) -> LiveBroadcastStreamModel
+    func getCurrent(for index: Int) -> LiveBroadcastStreamModel
+    func getPast(for index: Int) -> LiveBroadcastStreamModel
 }

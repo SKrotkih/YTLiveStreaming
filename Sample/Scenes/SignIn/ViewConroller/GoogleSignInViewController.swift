@@ -12,7 +12,7 @@ import GoogleSignIn
 class GoogleSignInViewController: BaseViewController {
     // [END viewcontroller_interfaces]
 
-    var viewModel: GoogleSignInViewModel!
+    var viewModel: GoogleSignInProtocol!
 
     // [START viewcontroller_vars]
     @IBOutlet weak var signInButton: GIDSignInButton!
@@ -22,7 +22,7 @@ class GoogleSignInViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         startListeningToSignIn()
-        viewModel.configure()
+        viewModel.configureSignIn(for: self)
     }
     // [END viewdidload]
 
@@ -47,7 +47,7 @@ extension GoogleSignInViewController {
             .startListeningToSignIn { result in
             switch result {
             case .success:
-                AppDelegate.shared.appRouter.showMainViewController()
+                Router.showMainViewController()
             case .failure(let error):
                 switch error {
                 case .systemMessage(let code, let message):

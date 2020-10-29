@@ -9,6 +9,9 @@
 import Foundation
 import YTLiveStreaming
 
+///
+/// Facade for the YTLiveStreaming framework
+///
 protocol BroadcastsAPI {
     /**
         @param
@@ -78,5 +81,4 @@ protocol BroadcastsAPI {
 }
 
 extension YTLiveStreaming: BroadcastsAPI {
-    
 }

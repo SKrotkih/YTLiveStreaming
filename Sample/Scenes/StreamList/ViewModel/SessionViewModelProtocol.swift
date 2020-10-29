@@ -10,6 +10,16 @@ import Foundation
 import RxSwift
 
 protocol SessionViewModel {
+    /// Observable data lets know that the user is signed in
+    ///
+    /// - Parameters:
+    ///
+    /// - Returns:
     var rxSignOut: PublishSubject<Bool> { get }
+    /// The user wants to sign out
+    ///
+    /// - Parameters:
+    ///
+    /// - Returns:
     func signOut()
 }

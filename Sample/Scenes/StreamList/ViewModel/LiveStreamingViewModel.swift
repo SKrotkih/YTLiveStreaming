@@ -30,8 +30,8 @@ extension LiveStreamingViewModel {
     }
 
     fileprivate func dismissVideoStreamViewController() {
-        DispatchQueue.main.async {
-            self.liveViewController.dismiss(animated: true, completion: {
+        DispatchQueue.performUIUpdate { [weak self] in
+            self?.liveViewController.dismiss(animated: true, completion: {
             })
         }
     }

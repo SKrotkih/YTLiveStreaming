@@ -11,8 +11,30 @@ import YTLiveStreaming
 import RxSwift
 
 protocol BroadcastsDataFetcher {
-    var rxData: PublishSubject<[SectionModel]> { get set }
+    /// Observable data source for Broadcasts List
+    ///
+    /// - Parameters:
+    ///
+    /// - Returns:
+    var rxData: PublishSubject<[SectionModel]> { get }
+    /// send request to load source data for Broadcasts List
+    ///
+    /// - Parameters:
+    ///
+    /// - Returns:
     func loadData()
+    /// Get Current Broadcast
+    ///
+    /// - Parameters:
+    ///     - index of the Broadcast source data
+    ///
+    /// - Returns:
     func getCurrent(for index: Int) -> LiveBroadcastStreamModel
+    /// Get Completed  Broadcast
+    ///
+    /// - Parameters:
+    ///     - index of the Broadcast source data
+    ///
+    /// - Returns:
     func getPast(for index: Int) -> LiveBroadcastStreamModel
 }

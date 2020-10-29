@@ -57,13 +57,13 @@ class StreamListViewController: BaseViewController {
     }
     
     func startActivity() {
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.performUIUpdate { [weak self] in
             self?.activityIndicator.startAnimating()
         }
     }
 
     func stopActivity() {
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.performUIUpdate { [weak self] in
             self?.activityIndicator.stopAnimating()
         }
     }
@@ -119,7 +119,7 @@ class StreamListViewController: BaseViewController {
         viewModel
             .rxData
             .subscribe(onNext: { _ in
-                DispatchQueue.main.async { [weak self] in
+                DispatchQueue.performUIUpdate { [weak self] in
                     self?.refreshControl.endRefreshing()
                 }
             }).disposed(by: disposeBag)

@@ -15,9 +15,15 @@ class StreamListViewModel: MainViewModel {
     var broadcastsAPI: BroadcastsAPI!
     var signInViewModel: SessionViewModel!
 
+    var rxError = PublishSubject<String>()
+    
     private let disposeBag = DisposeBag()
 
+    init() {
+    }
+    
     func loadData() {
+        configure()
         dataSource.loadData()
     }
 
@@ -37,6 +43,22 @@ class StreamListViewModel: MainViewModel {
         Router.showSignInViewController()
     }
     
+    private func configure() {
+        self
+            .rxData
+            .subscribe(onNext: { data in
+                var message = ""
+                data.forEach { item in
+                    if let errorMessage = item.error {
+                        message += errorMessage + "\n"
+                    }
+                }
+                if !message.isEmpty {
+                    self.rxError.onNext(message)
+                }
+            }).disposed(by: disposeBag)
+    }
+
     func creadeBroadcast() {
         Alert.sharedInstance.showConfirmCancel("YouTube Live Streaming API",
                                                message: "You realy want to create a new Live broadcast video?",

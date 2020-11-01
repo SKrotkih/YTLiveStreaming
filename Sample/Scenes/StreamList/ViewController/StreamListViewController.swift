@@ -123,6 +123,17 @@ class StreamListViewController: BaseViewController {
                     self?.refreshControl.endRefreshing()
                 }
             }).disposed(by: disposeBag)
+        viewModel
+            .rxError
+            .subscribe(onNext: { message in
+                self.showError(message: message)
+            }).disposed(by: disposeBag)
+    }
+    
+    func showError(message: String) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            Alert.sharedInstance.showOk("Error", message: message)
+        }
     }
 }
 

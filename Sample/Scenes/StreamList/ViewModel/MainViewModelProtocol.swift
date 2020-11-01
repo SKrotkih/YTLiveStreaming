@@ -11,6 +11,7 @@ import RxSwift
 
 protocol MainViewModel {
     var rxSignOut: PublishSubject<Bool> { get }
+    var rxError: PublishSubject<String> { get }
     var rxData: PublishSubject<[SectionModel]> { get }
     func loadData()
     func closeView()

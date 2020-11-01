@@ -26,14 +26,17 @@ public class YTLiveStreaming: NSObject {
 extension YTLiveStreaming {
     
     public func getUpcomingBroadcasts(_ completion: @escaping (Result<[LiveBroadcastStreamModel], YTError>) -> Void) {
+        print("+\(#function)")
         getBroadcastList(.upcoming, completion)
     }
     
     public func getLiveNowBroadcasts(_ completion: @escaping (Result<[LiveBroadcastStreamModel], YTError>) -> Void) {
+        print("+\(#function)")
         getBroadcastList(.active, completion)
     }
     
     public func getCompletedBroadcasts(_ completion: @escaping (Result<[LiveBroadcastStreamModel], YTError>) -> Void) {
+        print("+\(#function)")
         getBroadcastList(.completed, completion)
     }
     

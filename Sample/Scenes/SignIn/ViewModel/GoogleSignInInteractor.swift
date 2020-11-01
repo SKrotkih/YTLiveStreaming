@@ -9,16 +9,17 @@ import UIKit
 import GoogleSignIn
 import YTLiveStreaming
 import RxSwift
-import PromiseKit
 
 public class GoogleSignInInteractor: NSObject {
-    let rxSignInResult: PublishSubject<Swift.Result<Void, LVError>> = PublishSubject()
+    let rxSignInResult: PublishSubject<Result<Void, LVError>> = PublishSubject()
     let rxSignOut: PublishSubject<Bool> = PublishSubject()
 
     var userStorage = UserStorage()
     private let worker = GoogleSignInWorker()
 
     fileprivate struct Auth {
+        // There are needed sensitive scopes to have ability to work properly
+        // Make sure they are presented in your app. Then send request on verification
         static let scope1 = "https://www.googleapis.com/auth/youtube"
         static let scope2 = "https://www.googleapis.com/auth/youtube.readonly"
         static let scope3 = "https://www.googleapis.com/auth/youtube.force-ssl"
@@ -86,27 +87,25 @@ extension GoogleSignInInteractor: GIDSignInDelegate {
     public func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
             if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
-                let message = "The user has not signed in before or they have since signed out."
+                let message = "The user has not signed in before or he has since signed out"
                 self.rxSignInResult.onNext(.failure(.systemMessage(401, message)))
             } else {
                 self.rxSignInResult.onNext(.failure(.message(error.localizedDescription)))
             }
+        } else if !areNeededScopesPresented(for: user) {
+            /**
+             I'm not sure do we have to send the request, so I escluded it for now
+             self.sendRequestToAddNeededScopes(for: user)
+             */
+            let message = "Please add scopes to have ability to manage your YouTube videos. The app will not work properly"
+            Alert.sharedInstance.showOk("Warning", message: message)
+        }
+        GoogleUser.save(user)
+        if let accessToken = self.accessToken {
+            GoogleOAuth2.sharedInstance.accessToken = accessToken
+            self.rxSignInResult.onNext(.success(Void()))
         } else {
-            if areNeededScopesPresented(for: user) {
-                GoogleUser.save(user)
-                if let accessToken = self.accessToken {
-                    GoogleOAuth2.sharedInstance.accessToken = accessToken
-                    self.rxSignInResult.onNext(.success(Void()))
-                } else {
-                    self.rxSignInResult.onNext(.failure(.message("access token is not presented")))
-                }
-            } else {
-                DispatchQueue.global().async { [weak self] in
-                    self?.sendRequestToAddNeededScopes(for: user)
-                }
-                let message = "Please add scopes to have ability to manage your YouTube videos"
-                self.rxSignInResult.onNext(.failure(.message(message)))
-            }
+            self.rxSignInResult.onNext(.failure(.message("Internal Error. The access token is not presented")))
         }
     }
     // [END signin_handler]
@@ -119,7 +118,7 @@ extension GoogleSignInInteractor: GIDSignInDelegate {
     // [END disconnect_handler]
 }
 
-// MARK: - Check/Add Scopes
+// MARK: - Check/Add the Scopes
 
 extension GoogleSignInInteractor {
 
@@ -137,8 +136,10 @@ extension GoogleSignInInteractor {
         guard let email = user.profile.email else {
             return
         }
-        GIDSignIn.sharedInstance().scopes.append(contentsOf: Auth.scopes)
-        GIDSignIn.sharedInstance().loginHint = email
-        GIDSignIn.sharedInstance().signIn()
+        DispatchQueue.global().async {
+            GIDSignIn.sharedInstance().scopes.append(contentsOf: Auth.scopes)
+            GIDSignIn.sharedInstance().loginHint = email
+            GIDSignIn.sharedInstance().signIn()
+        }
     }
 }

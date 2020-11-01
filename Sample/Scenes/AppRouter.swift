@@ -78,7 +78,6 @@ extension AppRouter {
         let broadcastsAPI = YTLiveStreaming()
 
         viewModel.broadcastsAPI = broadcastsAPI
-        viewModel.liveViewController = viewController
         viewController.viewModel = viewModel
     }
 }

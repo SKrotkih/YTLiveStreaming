@@ -157,6 +157,8 @@
 			isa = PBXGroup;
 			children = (
 				7FB8A42C1DD23F8400955C2D /* LFLiveViewController.swift */,
+				7F83E3491DBDD49100DE4102 /* LiveStreamingViewModel.swift */,
+				7F79C8AA254806DF0044CF81 /* YouTubeLiveVideoPublisher.swift */,
 				7FB8A4291DD23C3100955C2D /* LFLivePreview.h */,
 				7FB8A42A1DD23C3100955C2D /* LFLivePreview.m */,
 			);
@@ -278,8 +280,6 @@
 				7F39A88C2456FD0400C18130 /* GoogleSessionViewModel.swift */,
 				7F2439F524580FA500C1FB17 /* StreamListViewModel.swift */,
 				7F53B1B02030B38100E09CFA /* StreamListDataSource.swift */,
-				7F83E3491DBDD49100DE4102 /* LiveStreamingViewModel.swift */,
-				7F79C8AA254806DF0044CF81 /* YouTubeLiveVideoPublisher.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";

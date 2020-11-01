@@ -5,73 +5,76 @@
 //  Created by Sergey Krotkih
 //
 
-import UIKit
+import Foundation
 import YTLiveStreaming
+import RxSwift
 
 class LiveStreamingViewModel: NSObject {
-
+    
     // Dependebcies
     var broadcastsAPI: BroadcastsAPI!
-    weak var liveViewController: LFLiveViewController!
-
+    
+    var rxDidUserFinishWatchVideo = PublishSubject<Bool>()
+    var rxStateDescription = PublishSubject<String>()
+    
     fileprivate var liveBroadcast: LiveBroadcastStreamModel?
+
+    fileprivate func didUserFinishWatchVideo() {
+        rxDidUserFinishWatchVideo.onNext(true)
+    }
 }
 
 // MARK: -
 
 extension LiveStreamingViewModel {
-
+    
     private func startBroadcast(_ liveBroadcast: LiveBroadcastStreamModel) {
         self.liveBroadcast = liveBroadcast
-
+        
         print("Watch the live video here: https://www.youtube.com/watch?v=\(liveBroadcast.id)")
-
+        
         Router.showLiveVideoViewController()
     }
-
-    fileprivate func dismissVideoStreamViewController() {
-        DispatchQueue.performUIUpdate { [weak self] in
-            self?.liveViewController.dismiss(animated: true, completion: {
-            })
-        }
-    }
+    
 }
 
 // MARK: Live stream publishing output protocol
 
 extension LiveStreamingViewModel: YouTubeLiveVideoPublisher {
-
-    func startPublishing(completed: @escaping (String?, String?) -> Void) {
+    
+    func willStartPublishing(completed: @escaping (String?, NSDate?) -> Void) {
         guard let broadcast = self.liveBroadcast else {
-            assert(false, "Need Broadcast object for starting live video!")
+            assert(false, "Need a broadcast object to start live video!")
             return
         }
         guard let delegate = self as? LiveStreamTransitioning else {
+            assert(false, "The Model does not conform LiveStreamTransitioning protocol")
             return
         }
-        broadcastsAPI.startBroadcast(broadcast,
-                                               delegate: delegate,
-                                               completion: { streamName, streamUrl, scheduledStartTime in
-            if let streamName = streamName, let streamUrl = streamUrl, let scheduledStartTime = scheduledStartTime {
-                self.liveViewController.scheduledStartTime = scheduledStartTime as NSDate?
-                completed(streamUrl, streamName)
+        broadcastsAPI.startBroadcast(broadcast, delegate: delegate, completion: { streamName, streamUrl, scheduledStartTime in
+            if let streamName = streamName,
+                let streamUrl = streamUrl,
+                let scheduledStartTime = scheduledStartTime {
+                let streamUrl = "\(streamUrl)/\(streamName)"
+                let startTime = scheduledStartTime as NSDate?
+                completed(streamUrl, startTime)
             }
         })
     }
-
+    
     func finishPublishing() {
         guard let broadcast = self.liveBroadcast else {
-            self.dismissVideoStreamViewController()
+            self.didUserFinishWatchVideo()
             return
         }
         broadcastsAPI.completeBroadcast(broadcast, completion: { _ in
-            self.dismissVideoStreamViewController()
+            self.didUserFinishWatchVideo()
         })
     }
-
-    func cancelPublishing() {
+    
+    func didUserCancelPublishingVideo() {
         guard let broadcast = self.liveBroadcast else {
-            self.dismissVideoStreamViewController()
+            self.didUserFinishWatchVideo()
             return
         }
         broadcastsAPI.deleteBroadcast(id: broadcast.id, completion: { success in
@@ -81,21 +84,24 @@ extension LiveStreamingViewModel: YouTubeLiveVideoPublisher {
                 Alert.sharedInstance.showOk("Sorry, system detected error while deleting the video.",
                                             message: "Try to delete it in your YouTube account")
             }
-            self.dismissVideoStreamViewController()
+            self.didUserFinishWatchVideo()
         })
     }
 }
 
 extension LiveStreamingViewModel {
-
+    
     func didTransitionToLiveStatus() {
-        self.liveViewController.showCurrentStatus(currStatus: "● LIVE")
+        rxStateDescription.onNext("● LIVE")
     }
-
+    
     func didTransitionToStatus(broadcastStatus: String?, streamStatus: String?, healthStatus: String?) {
-        if let broadcastStatus = broadcastStatus, let streamStatus = streamStatus, let healthStatus = healthStatus {
+        if let broadcastStatus = broadcastStatus,
+            let streamStatus = streamStatus,
+            let healthStatus = healthStatus {
             let text = "status: \(broadcastStatus) [\(streamStatus);\(healthStatus)]"
-            self.liveViewController.showCurrentStatus(currStatus: text)
+            rxStateDescription.onNext(text)
         }
     }
 }
+

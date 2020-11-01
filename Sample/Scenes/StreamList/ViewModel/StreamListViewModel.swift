@@ -13,7 +13,7 @@ class StreamListViewModel: MainViewModelOutput {
 
     var dataSource: BroadcastsDataFetcher!
     var broadcastsAPI: BroadcastsAPI!
-    var signInViewModel: SessionViewModel!
+    var sessionManager: SessionManager!
 
     var rxError = PublishSubject<String>()
     
@@ -25,7 +25,7 @@ class StreamListViewModel: MainViewModelOutput {
     }
 
     func didSignOutAction() {
-        self.signInViewModel.signOut()
+        sessionManager.signOut()
     }
     
     func didCloseViewAction() {
@@ -105,7 +105,7 @@ class StreamListViewModel: MainViewModelOutput {
 
 extension StreamListViewModel: MainViewModelInput {
     var rxSignOut: PublishSubject<Bool> {
-        return self.signInViewModel.rxSignOut
+        return sessionManager.rxSignOut
     }
     
     var rxData: PublishSubject<[SectionModel]> {

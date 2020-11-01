@@ -22,3 +22,13 @@ protocol MainViewModelInput {
     var rxError: PublishSubject<String> { get }
     var rxData: PublishSubject<[SectionModel]> { get }
 }
+
+protocol SignInInteractor {
+    // Input
+    var rxSignOut: PublishSubject<Bool> { get }
+    // Output
+    func signOut()
+}
+
+extension GoogleSignInInteractor: SignInInteractor {
+}

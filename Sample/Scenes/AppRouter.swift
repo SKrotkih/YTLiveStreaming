@@ -56,14 +56,14 @@ extension AppRouter {
     private func streamingListDependencies(_ viewController: StreamListViewController) {
 
         let signInInteractor = AppDelegate.shared.googleSignIn
-        let signInViewModel = GoogleSessionViewModel(signInInteractor)
+        let googleSession = GoogleSessionManager(signInInteractor)
         
         let viewModel = StreamListViewModel()
         let dataSource = StreamListDataSource()
         let broadcastsAPI = YTLiveStreaming()
         dataSource.broadcastsAPI = broadcastsAPI
         viewModel.dataSource = dataSource
-        viewModel.signInViewModel = signInViewModel
+        viewModel.sessionManager = googleSession
         viewModel.broadcastsAPI = broadcastsAPI
         
         // Inbound Broadcast

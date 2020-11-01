@@ -11,6 +11,7 @@ import YTLiveStreaming
 import RxSwift
 
 public class GoogleSignInInteractor: NSObject {
+    
     let rxSignInResult: PublishSubject<Result<Void, LVError>> = PublishSubject()
     let rxSignOut: PublishSubject<Bool> = PublishSubject()
 

@@ -28,7 +28,7 @@
 		7F384BEC245873A6004C07EE /* MainNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F384BEA245873A5004C07EE /* MainNavController.swift */; };
 		7F384BEE24587498004C07EE /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F384BED24587498004C07EE /* Appearance.swift */; };
 		7F39A88A24569BF200C18130 /* GoogleSignInWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F39A88924569BF200C18130 /* GoogleSignInWorker.swift */; };
-		7F39A88D2456FD0400C18130 /* GoogleSessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F39A88C2456FD0400C18130 /* GoogleSessionViewModel.swift */; };
+		7F39A88D2456FD0400C18130 /* GoogleSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F39A88C2456FD0400C18130 /* GoogleSessionManager.swift */; };
 		7F53B1AA2030724200E09CFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F53B1A62030724200E09CFA /* LaunchScreen.storyboard */; };
 		7F53B1AB2030724200E09CFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F53B1A82030724200E09CFA /* Main.storyboard */; };
 		7F53B1B12030B38100E09CFA /* StreamListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F53B1B02030B38100E09CFA /* StreamListDataSource.swift */; };
@@ -93,7 +93,7 @@
 		7F384BEA245873A5004C07EE /* MainNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavController.swift; sourceTree = "<group>"; };
 		7F384BED24587498004C07EE /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		7F39A88924569BF200C18130 /* GoogleSignInWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInWorker.swift; sourceTree = "<group>"; };
-		7F39A88C2456FD0400C18130 /* GoogleSessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSessionViewModel.swift; sourceTree = "<group>"; };
+		7F39A88C2456FD0400C18130 /* GoogleSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSessionManager.swift; sourceTree = "<group>"; };
 		7F53B1A72030724200E09CFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7F53B1A92030724200E09CFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7F53B1B02030B38100E09CFA /* StreamListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamListDataSource.swift; sourceTree = "<group>"; };
@@ -277,7 +277,7 @@
 				7F79C8A3254802910044CF81 /* MainViewModelProtocol.swift */,
 				7F79C8A5254802FB0044CF81 /* BroadcastsDataFetcherProtocol.swift */,
 				7F79C8A12547F2910044CF81 /* BroadcastsApiProtocol.swift */,
-				7F39A88C2456FD0400C18130 /* GoogleSessionViewModel.swift */,
+				7F39A88C2456FD0400C18130 /* GoogleSessionManager.swift */,
 				7F2439F524580FA500C1FB17 /* StreamListViewModel.swift */,
 				7F53B1B02030B38100E09CFA /* StreamListDataSource.swift */,
 			);
@@ -549,7 +549,7 @@
 				7F2B6C13254D8B1F0081E007 /* SignInProtocol.swift in Sources */,
 				7F79C8A6254802FB0044CF81 /* BroadcastsDataFetcherProtocol.swift in Sources */,
 				7F53B1B12030B38100E09CFA /* StreamListDataSource.swift in Sources */,
-				7F39A88D2456FD0400C18130 /* GoogleSessionViewModel.swift in Sources */,
+				7F39A88D2456FD0400C18130 /* GoogleSessionManager.swift in Sources */,
 				7FB8A42D1DD23F8400955C2D /* LFLiveViewController.swift in Sources */,
 				7FA950032032C5750083B23B /* GoogleSignInInteractor.swift in Sources */,
 				7F384BEC245873A6004C07EE /* MainNavController.swift in Sources */,

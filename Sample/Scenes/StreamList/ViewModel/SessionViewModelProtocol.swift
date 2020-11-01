@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-protocol SessionViewModel {
+protocol SessionManager {
     /// Observable data lets know that the user is signed in
     ///
     /// - Parameters:

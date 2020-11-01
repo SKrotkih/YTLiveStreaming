@@ -22,6 +22,7 @@
 		7F1E96C42546B8BF00638965 /* EnumIteration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1E96B92546B8BF00638965 /* EnumIteration.swift */; };
 		7F1E96C72546B95A00638965 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1E96C62546B95A00638965 /* Constants.swift */; };
 		7F2439F624580FA500C1FB17 /* StreamListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2439F524580FA500C1FB17 /* StreamListViewModel.swift */; };
+		7F2B6C13254D8B1F0081E007 /* SignInProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2B6C12254D8B1F0081E007 /* SignInProtocol.swift */; };
 		7F2C3C3C2544187100CA9912 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2C3C3B2544187100CA9912 /* AppRouter.swift */; };
 		7F384BEB245873A6004C07EE /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F384BE9245873A5004C07EE /* BaseViewController.swift */; };
 		7F384BEC245873A6004C07EE /* MainNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F384BEA245873A5004C07EE /* MainNavController.swift */; };
@@ -86,6 +87,7 @@
 		7F1E96BA2546B8BF00638965 /* UIView+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YYAdd.h"; sourceTree = "<group>"; };
 		7F1E96C62546B95A00638965 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = SOURCE_ROOT; };
 		7F2439F524580FA500C1FB17 /* StreamListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamListViewModel.swift; sourceTree = "<group>"; };
+		7F2B6C12254D8B1F0081E007 /* SignInProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInProtocol.swift; sourceTree = "<group>"; };
 		7F2C3C3B2544187100CA9912 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		7F384BE9245873A5004C07EE /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7F384BEA245873A5004C07EE /* MainNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavController.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				7F0933CE24574FCB00FB5579 /* GoogleSignInViewModel.swift */,
+				7F2B6C12254D8B1F0081E007 /* SignInProtocol.swift */,
 				7FA950012032C5750083B23B /* GoogleSignInInteractor.swift */,
 				7F39A88924569BF200C18130 /* GoogleSignInWorker.swift */,
 			);
@@ -462,6 +465,7 @@
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/LFLiveKit/LFLiveKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
@@ -480,6 +484,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LFLiveKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
@@ -541,6 +546,7 @@
 				7F79C8A8254804320044CF81 /* SessionViewModelProtocol.swift in Sources */,
 				7F1E96C02546B8BF00638965 /* UIView+YYAdd.m in Sources */,
 				7F1E96C32546B8BF00638965 /* UIControl+YYAdd.m in Sources */,
+				7F2B6C13254D8B1F0081E007 /* SignInProtocol.swift in Sources */,
 				7F79C8A6254802FB0044CF81 /* BroadcastsDataFetcherProtocol.swift in Sources */,
 				7F53B1B12030B38100E09CFA /* StreamListDataSource.swift in Sources */,
 				7F39A88D2456FD0400C18130 /* GoogleSessionViewModel.swift in Sources */,

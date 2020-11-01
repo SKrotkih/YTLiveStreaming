@@ -9,18 +9,20 @@ import UIKit
 import GoogleSignIn
 import YTLiveStreaming
 import RxSwift
+import PromiseKit
 
 public class GoogleSignInInteractor: NSObject {
-    let rxSignInResult: PublishSubject<Result<Void, LVError>> = PublishSubject()
+    let rxSignInResult: PublishSubject<Swift.Result<Void, LVError>> = PublishSubject()
     let rxSignOut: PublishSubject<Bool> = PublishSubject()
 
     var userStorage = UserStorage()
     private let worker = GoogleSignInWorker()
 
     fileprivate struct Auth {
-        static let scope1: NSString = "https://www.googleapis.com/auth/youtube"
-        static let scope2: NSString = "https://www.googleapis.com/auth/youtube.readonly"
-        static let scope3: NSString = "https://www.googleapis.com/auth/youtube.force-ssl"
+        static let scope1 = "https://www.googleapis.com/auth/youtube"
+        static let scope2 = "https://www.googleapis.com/auth/youtube.readonly"
+        static let scope3 = "https://www.googleapis.com/auth/youtube.force-ssl"
+        static let scopes = [scope1, scope2, scope3]
     }
 
     fileprivate var mViewController: UIViewController?
@@ -74,25 +76,6 @@ public class GoogleSignInInteractor: NSObject {
     func disconnect() {
         GIDSignIn.sharedInstance().disconnect()
     }
-
-    func requestAdditionalScopes() -> Bool {
-        guard let currentUser = GIDSignIn.sharedInstance()?.currentUser, let email = UserStorage.user?.email else {
-            return false
-        }
-        if currentUser.grantedScopes.contains(where: { (object) -> Bool in
-            guard let scope = object as? String else {
-                return false
-            }
-            return scope == String(Auth.scope1) || scope == String(Auth.scope2) || scope == String(Auth.scope3)
-        }) {
-            return true
-        } else {
-            GIDSignIn.sharedInstance().scopes.append(contentsOf: [Auth.scope1, Auth.scope2, Auth.scope3])
-            GIDSignIn.sharedInstance().loginHint = email
-            GIDSignIn.sharedInstance().signIn()
-            return false
-        }
-    }
 }
 
 // MARK: - GIDSignInDelegate methods
@@ -109,15 +92,20 @@ extension GoogleSignInInteractor: GIDSignInDelegate {
                 self.rxSignInResult.onNext(.failure(.message(error.localizedDescription)))
             }
         } else {
-            GoogleUser.save(user)
-            if let accessToken = self.accessToken {
-
-                print("SCOPES=\(GIDSignIn.sharedInstance().scopes ?? [])")
-
-                GoogleOAuth2.sharedInstance.accessToken = accessToken
-                self.rxSignInResult.onNext(.success(Void()))
+            if areNeededScopesPresented(for: user) {
+                GoogleUser.save(user)
+                if let accessToken = self.accessToken {
+                    GoogleOAuth2.sharedInstance.accessToken = accessToken
+                    self.rxSignInResult.onNext(.success(Void()))
+                } else {
+                    self.rxSignInResult.onNext(.failure(.message("access token is not presented")))
+                }
             } else {
-                self.rxSignInResult.onNext(.failure(.message("access token is not presented")))
+                DispatchQueue.global().async { [weak self] in
+                    self?.sendRequestToAddNeededScopes(for: user)
+                }
+                let message = "Please add scopes to have ability to manage your YouTube videos"
+                self.rxSignInResult.onNext(.failure(.message(message)))
             }
         }
     }
@@ -129,4 +117,28 @@ extension GoogleSignInInteractor: GIDSignInDelegate {
         rxSignOut.onNext(true)
     }
     // [END disconnect_handler]
+}
+
+// MARK: - Check/Add Scopes
+
+extension GoogleSignInInteractor {
+
+    private func areNeededScopesPresented(for user: GIDGoogleUser) -> Bool {
+        let currentScopes = user.grantedScopes.compactMap { $0 }
+        
+        print("SCOPES=\(currentScopes)")
+        
+        return currentScopes.contains(where: { (scope) -> Bool in
+            return Auth.scopes.contains(scope as! String)
+        })
+    }
+    
+    private func sendRequestToAddNeededScopes(for user: GIDGoogleUser) {
+        guard let email = user.profile.email else {
+            return
+        }
+        GIDSignIn.sharedInstance().scopes.append(contentsOf: Auth.scopes)
+        GIDSignIn.sharedInstance().loginHint = email
+        GIDSignIn.sharedInstance().signIn()
+    }
 }

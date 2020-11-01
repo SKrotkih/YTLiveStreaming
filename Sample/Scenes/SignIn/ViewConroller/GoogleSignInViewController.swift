@@ -12,7 +12,7 @@ import GoogleSignIn
 class GoogleSignInViewController: BaseViewController {
     // [END viewcontroller_interfaces]
 
-    var viewModel: GoogleSignInProtocol!
+    var viewModel: SignInProtocol!
 
     // [START viewcontroller_vars]
     @IBOutlet weak var signInButton: GIDSignInButton!

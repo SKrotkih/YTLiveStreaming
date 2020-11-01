@@ -9,7 +9,7 @@ import Foundation
 import YTLiveStreaming
 import RxSwift
 
-class StreamListViewModel: MainViewModel {
+class StreamListViewModel: MainViewModelOutput {
 
     var dataSource: BroadcastsDataFetcher!
     var broadcastsAPI: BroadcastsAPI!
@@ -19,27 +19,16 @@ class StreamListViewModel: MainViewModel {
     
     private let disposeBag = DisposeBag()
 
-    init() {
-    }
-    
-    func loadData() {
+    func didOpenViewAction() {
         configure()
         dataSource.loadData()
     }
 
-    func signOut() {
+    func didSignOutAction() {
         self.signInViewModel.signOut()
     }
     
-    var rxSignOut: PublishSubject<Bool> {
-        return self.signInViewModel.rxSignOut
-    }
-    
-    var rxData: PublishSubject<[SectionModel]> {
-        return self.dataSource.rxData
-    }
-    
-    func closeView() {
+    func didCloseViewAction() {
         Router.showSignInViewController()
     }
     
@@ -59,7 +48,7 @@ class StreamListViewModel: MainViewModel {
             }).disposed(by: disposeBag)
     }
 
-    func creadeBroadcast() {
+    func didCreateBroadcastAction() {
         Alert.sharedInstance.showConfirmCancel("YouTube Live Streaming API",
                                                message: "You realy want to create a new Live broadcast video?",
                                                onConfirm: {
@@ -96,7 +85,7 @@ class StreamListViewModel: MainViewModel {
         })
     }
 
-    func launchStream(indexPath: IndexPath, viewController: UIViewController) {
+    func didLaunchStreamAction(indexPath: IndexPath, viewController: UIViewController) {
         switch indexPath.section {
         case 0:
             assert(false, "Incorrect section number")
@@ -109,5 +98,17 @@ class StreamListViewModel: MainViewModel {
         default:
             assert(false, "Incorrect section number")
         }
+    }
+}
+
+// MARK: - MainViewModelInput
+
+extension StreamListViewModel: MainViewModelInput {
+    var rxSignOut: PublishSubject<Bool> {
+        return self.signInViewModel.rxSignOut
+    }
+    
+    var rxData: PublishSubject<[SectionModel]> {
+        return self.dataSource.rxData
     }
 }

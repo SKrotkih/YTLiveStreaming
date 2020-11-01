@@ -16,6 +16,7 @@ class LiveStreamingViewModel: NSObject {
     
     var rxDidUserFinishWatchVideo = PublishSubject<Bool>()
     var rxStateDescription = PublishSubject<String>()
+    var rxError = PublishSubject<String>()
     
     fileprivate var liveBroadcast: LiveBroadcastStreamModel?
 
@@ -44,11 +45,11 @@ extension LiveStreamingViewModel: YouTubeLiveVideoPublisher {
     
     func willStartPublishing(completed: @escaping (String?, NSDate?) -> Void) {
         guard let broadcast = self.liveBroadcast else {
-            assert(false, "Need a broadcast object to start live video!")
+            rxError.onNext("Need a broadcast object to start live video!")
             return
         }
         guard let delegate = self as? LiveStreamTransitioning else {
-            assert(false, "The Model does not conform LiveStreamTransitioning protocol")
+            rxError.onNext("The Model does not conform LiveStreamTransitioning protocol")
             return
         }
         broadcastsAPI.startBroadcast(broadcast, delegate: delegate, completion: { streamName, streamUrl, scheduledStartTime in
@@ -81,8 +82,7 @@ extension LiveStreamingViewModel: YouTubeLiveVideoPublisher {
             if success {
                 print("Broadcast \"\(broadcast.id)\" was deleted!")
             } else {
-                Alert.sharedInstance.showOk("Sorry, system detected error while deleting the video.",
-                                            message: "Try to delete it in your YouTube account")
+                self.rxError.onNext("System detected error while deleting the video./nTry to delete it in your YouTube account")
             }
             self.didUserFinishWatchVideo()
         })

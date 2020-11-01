@@ -67,7 +67,8 @@ extension AppRouter {
         viewModel.broadcastsAPI = broadcastsAPI
         
         // Inbound Broadcast
-        viewController.viewModel = viewModel
+        viewController.output = viewModel
+        viewController.input = viewModel
     }
     
     ///

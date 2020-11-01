@@ -18,7 +18,8 @@ struct Stream {
 
 class StreamListViewController: BaseViewController {
 
-    var viewModel: MainViewModel!
+    var output: MainViewModelOutput!
+    var input: MainViewModelInput!
 
     enum CellIdentifier: String {
         case cell
@@ -53,7 +54,7 @@ class StreamListViewController: BaseViewController {
         setUpRefreshControl()
         bindUserActivity()
         bindData()
-        viewModel.loadData()
+        output.didOpenViewAction()
     }
     
     func startActivity() {
@@ -69,7 +70,7 @@ class StreamListViewController: BaseViewController {
     }
 
     private func close() {
-        viewModel.closeView()
+        output.didCloseViewAction()
     }
     
     private func didSignOut() {
@@ -78,7 +79,7 @@ class StreamListViewController: BaseViewController {
     }
     
     @objc private func signOut() {
-        self.viewModel.signOut()
+        output.didSignOutAction()
     }
     
     private func bindUserActivity() {
@@ -87,9 +88,9 @@ class StreamListViewController: BaseViewController {
             .tap
             .debounce(.milliseconds(Constants.UiConstraints.debounce), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
-                self?.viewModel.creadeBroadcast()
+                self?.output.didCreateBroadcastAction()
             }).disposed(by: disposeBag)
-        viewModel
+        input
             .rxSignOut
             .subscribe(onNext: { [weak self] _ in
                 self?.didSignOut()
@@ -110,20 +111,20 @@ class StreamListViewController: BaseViewController {
                 return dataSource[sectionIndex].model
         }
         )
-        viewModel
+        input
             .rxData
             .bind(to: tableView
                 .rx
                 .items(dataSource: dataSource as! RxTableViewSectionedReloadDataSource<SectionModel>))
             .disposed(by: disposeBag)
-        viewModel
+        input
             .rxData
             .subscribe(onNext: { _ in
                 DispatchQueue.performUIUpdate { [weak self] in
                     self?.refreshControl.endRefreshing()
                 }
             }).disposed(by: disposeBag)
-        viewModel
+        input
             .rxError
             .subscribe(onNext: { message in
                 self.showError(message: message)
@@ -183,7 +184,7 @@ extension StreamListViewController {
     }
 
     @objc func refreshData(_ sender: AnyObject) {
-        viewModel.loadData()
+        output.didOpenViewAction()
     }
 }
 
@@ -192,6 +193,6 @@ extension StreamListViewController {
 extension StreamListViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.launchStream(indexPath: indexPath, viewController: self)
+        output.didLaunchStreamAction(indexPath: indexPath, viewController: self)
     }
 }

@@ -15,4 +15,5 @@ protocol YouTubeLiveVideoPublisher: class {
     func didUserCancelPublishingVideo()
     var rxDidUserFinishWatchVideo: PublishSubject<Bool> { get }
     var rxStateDescription: PublishSubject<String> { get }
+    var rxError: PublishSubject<String> { get }
 }

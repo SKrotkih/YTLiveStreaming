@@ -9,13 +9,16 @@
 import Foundation
 import RxSwift
 
-protocol MainViewModel {
+protocol MainViewModelOutput {
+    func didOpenViewAction()
+    func didCloseViewAction()
+    func didSignOutAction()
+    func didCreateBroadcastAction()
+    func didLaunchStreamAction(indexPath: IndexPath, viewController: UIViewController)
+}
+
+protocol MainViewModelInput {
     var rxSignOut: PublishSubject<Bool> { get }
     var rxError: PublishSubject<String> { get }
     var rxData: PublishSubject<[SectionModel]> { get }
-    func loadData()
-    func closeView()
-    func signOut()
-    func creadeBroadcast()
-    func launchStream(indexPath: IndexPath, viewController: UIViewController)
 }

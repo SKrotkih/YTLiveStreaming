@@ -5,15 +5,15 @@
 //  Created by Sergey Krotkih
 //
 
-import UIKit
+import Foundation
 import GoogleSignIn
 import YTLiveStreaming
 import RxSwift
 
-public class GoogleSignInInteractor: NSObject {
+public class GoogleSignInInteractor: NSObject, SignInObservable {
     
     let rxSignInResult: PublishSubject<Result<Void, LVError>> = PublishSubject()
-    let rxSignOut: PublishSubject<Bool> = PublishSubject()
+    let rxSignOut = PublishSubject<Bool>()
 
     var userStorage = UserStorage()
     private let worker = GoogleSignInWorker()

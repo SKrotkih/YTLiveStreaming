@@ -69,13 +69,13 @@ class StreamListViewController: BaseViewController {
         }
     }
 
-    private func close() {
+    private func closeView() {
         output.didCloseViewAction()
     }
     
     private func didSignOut() {
         self.stopActivity()
-        self.close()
+        self.closeView()
     }
     
     @objc private func signOut() {

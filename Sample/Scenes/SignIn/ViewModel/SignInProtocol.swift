@@ -7,8 +7,14 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol SignInProtocol {
-    func configureSignIn(for viewController: UIViewController)
     func startListeningToSignIn(_ completion: @escaping (Result<Void, LVError>) -> Void)
 }
+
+protocol SignInObservable {
+    var rxSignInResult: PublishSubject<Result<Void, LVError>> { get }
+    func configure()
+}
+

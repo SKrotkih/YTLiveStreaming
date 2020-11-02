@@ -10,12 +10,13 @@ import GoogleSignIn
 import RxSwift
 
 class GoogleSignInViewModel: SignInProtocol {
-    private let interactor = AppDelegate.shared.googleSignIn
+    var interactor: SignInObservable!
     private let disposeBag = DisposeBag()
     
-    func configureSignIn(for viewController: UIViewController) {
+    required init(viewController: UIViewController, interactor: GoogleSignInInteractor) {
         GIDSignIn.sharedInstance()?.presentingViewController = viewController
-        interactor.configure()
+        self.interactor = interactor
+        self.interactor.configure()
     }
     
     func startListeningToSignIn(_ completion: @escaping (Result<Void, LVError>) -> Void) {

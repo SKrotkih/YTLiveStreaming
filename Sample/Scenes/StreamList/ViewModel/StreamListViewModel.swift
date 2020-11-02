@@ -101,7 +101,7 @@ class StreamListViewModel: MainViewModelOutput {
     }
 }
 
-// MARK: - MainViewModelInput
+// MARK: - MainViewModelInput protocol implementation
 
 extension StreamListViewModel: MainViewModelInput {
     var rxSignOut: PublishSubject<Bool> {

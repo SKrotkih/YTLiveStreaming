@@ -5,7 +5,7 @@
 //  Created by Sergey Krotkih
 //
 
-import UIKit
+import Foundation
 import YTLiveStreaming
 import RxDataSources
 import RxSwift

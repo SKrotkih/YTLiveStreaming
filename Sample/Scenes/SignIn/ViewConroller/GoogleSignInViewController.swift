@@ -21,28 +21,32 @@ class GoogleSignInViewController: BaseViewController {
     // [START viewdidload]
     override func viewDidLoad() {
         super.viewDidLoad()
-        startListeningToSignIn()
-        viewModel.configureSignIn(for: self)
+        bindInput()
     }
     // [END viewdidload]
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+
+        showNavBar(true, animated: animated)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        // Show the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+
+        showNavBar(false, animated: animated)
+    }
+    
+    private func showNavBar(_ show: Bool, animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(show, animated: animated)
     }
 }
 
 // MARK: - Private Methods
 
 extension GoogleSignInViewController {
-
-    private func startListeningToSignIn() {
+    
+    private func bindInput() {
         viewModel
             .startListeningToSignIn { result in
             switch result {

@@ -11,24 +11,15 @@ import RxSwift
 class GoogleSessionManager: SessionManager {
     
     var interactor: SignInInteractor!
-    let rxSignOut = PublishSubject<Bool>()
-    
-    private let disposeBag = DisposeBag()
+    var rxSignOut: PublishSubject<Bool> {
+        return interactor.rxSignOut
+    }
     
     init(_ interactor: GoogleSignInInteractor) {
         self.interactor = interactor
-        bindEvents()
     }
     
     func signOut() {
-        self.interactor.signOut()
-    }
-
-    private func bindEvents() {
-        interactor
-            .rxSignOut
-            .subscribe(onNext: { [weak self] _ in
-                self?.rxSignOut.onNext(true)
-            }).disposed(by: disposeBag)
+        interactor.signOut()
     }
 }

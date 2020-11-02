@@ -81,6 +81,10 @@ As an example used iOS app Live Events
 
 <img src="https://user-images.githubusercontent.com/2775621/36204258-42684ab8-1193-11e8-88c4-a7668f7de368.png" alt="Credentials" style="width: 690px;" />
 
+- Copy Sample/Config.plist.example.plist to Sample/Config.plist and edit it to insert your client ID and API key.
+
+- In Sample/YouTubeLiveVideo/Info.plist edit the CFBundleURLSchemes. Change the value that starts with "com.googleusercontent.apps." based on your API key. It should be set to the reversed API key. The API key has the format XXXXXXXX.apps.googleusercontent.com and the allowed URL should be com.googleusercontent.apps.XXXXXXXX
+
 ## User guide
 
 	import YTLiveStreaming

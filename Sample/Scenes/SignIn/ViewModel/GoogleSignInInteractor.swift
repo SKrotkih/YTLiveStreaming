@@ -85,28 +85,15 @@ public class GoogleSignInInteractor: NSObject, SignInObservable {
 extension GoogleSignInInteractor: GIDSignInDelegate {
 
     // [START signin_handler]
-    public func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+    public func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser?, withError error: Error?) {
         if let error = error {
-            if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
-                let message = "The user has not signed in before or he has since signed out"
-                self.rxSignInResult.onNext(.failure(.systemMessage(401, message)))
-            } else {
-                self.rxSignInResult.onNext(.failure(.message(error.localizedDescription)))
-            }
-        } else if !areNeededScopesPresented(for: user) {
-            /**
-             I'm not sure do we have to send the request, so I escluded it for now
-             self.sendRequestToAddNeededScopes(for: user)
-             */
-            let message = "Please add scopes to have ability to manage your YouTube videos. The app will not work properly"
-            Alert.sharedInstance.showOk("Warning", message: message)
-        }
-        GoogleUser.save(user)
-        if let accessToken = self.accessToken {
-            GoogleOAuth2.sharedInstance.accessToken = accessToken
-            self.rxSignInResult.onNext(.success(Void()))
+            errorSigedIn(error: error)
+        } else if user == nil {
+            errorUserIsUndefined()
+        } else if self.accessToken == nil {
+            errorAccessToken()
         } else {
-            self.rxSignInResult.onNext(.failure(.message("Internal Error. The access token is not presented")))
+            userDidSignIn(user: user!)
         }
     }
     // [END signin_handler]
@@ -114,24 +101,65 @@ extension GoogleSignInInteractor: GIDSignInDelegate {
     // [START disconnect_handler]
     public func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
         // Perform any operations when the user disconnects from app here.
-        rxSignOut.onNext(true)
+        userDidSignOut()
     }
     // [END disconnect_handler]
+    
+    // Handle the user sign in
+    
+    private func errorSigedIn(error: Error) {
+        if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
+            let message = "The user has not signed in before or he has since signed out"
+            self.rxSignInResult.onNext(.failure(.systemMessage(401, message)))
+        } else {
+            self.rxSignInResult.onNext(.failure(.message(error.localizedDescription)))
+        }
+    }
+    
+    private func errorUserIsUndefined() {
+        let message = "The user has not signed in before or he has since signed out"
+        self.rxSignInResult.onNext(.failure(.systemMessage(401, message)))
+    }
+    
+    private func errorAccessToken() {
+        self.rxSignInResult.onNext(.failure(.message("Internal Error. The access token is not presented")))
+    }
+    
+    private func userDidSignIn(user: GIDGoogleUser) {
+        checkYoutubePermissionScopes(for: user)
+        GoogleUser.save(user)
+        GoogleOAuth2.sharedInstance.accessToken = accessToken
+        self.rxSignInResult.onNext(.success(Void()))
+    }
+    
+    private func checkYoutubePermissionScopes(for user: GIDGoogleUser) {
+        
+        let currentScopes = user.grantedScopes.compactMap { $0 }
+        
+        print("SCOPES=\(currentScopes)")
+        
+        if currentScopes.contains(where: { (scope) -> Bool in
+            return Auth.scopes.contains(scope as! String)
+        }) {
+            
+        } else {
+            /**
+             I'm not sure do we have to send the request, so I escluded it for now
+             self.sendRequestToAddNeededScopes(for: user)
+             */
+            let message = "Please add scopes to have ability to manage your YouTube videos. The app will not work properly"
+            Alert.sharedInstance.showOk("Warning", message: message)
+        }
+    }
+    
+    private func userDidSignOut() {
+        rxSignOut.onNext(true)
+    }
 }
 
 // MARK: - Check/Add the Scopes
 
 extension GoogleSignInInteractor {
-
-    private func areNeededScopesPresented(for user: GIDGoogleUser) -> Bool {
-        let currentScopes = user.grantedScopes.compactMap { $0 }
-        
-        print("SCOPES=\(currentScopes)")
-        
-        return currentScopes.contains(where: { (scope) -> Bool in
-            return Auth.scopes.contains(scope as! String)
-        })
-    }
     
     private func sendRequestToAddNeededScopes(for user: GIDGoogleUser) {
         guard let email = user.profile.email else {

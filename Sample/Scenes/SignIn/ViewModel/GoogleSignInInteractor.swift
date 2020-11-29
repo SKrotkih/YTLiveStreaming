@@ -126,13 +126,13 @@ extension GoogleSignInInteractor: GIDSignInDelegate {
     }
     
     private func userDidSignIn(user: GIDGoogleUser) {
-        checkYoutubePermissionScopes(for: user)
+        let _ = checkYoutubePermissionScopes(for: user)
         GoogleUser.save(user)
         GoogleOAuth2.sharedInstance.accessToken = accessToken
         self.rxSignInResult.onNext(.success(Void()))
     }
     
-    private func checkYoutubePermissionScopes(for user: GIDGoogleUser) {
+    private func checkYoutubePermissionScopes(for user: GIDGoogleUser) -> Bool {
         
         let currentScopes = user.grantedScopes.compactMap { $0 }
         
@@ -141,7 +141,7 @@ extension GoogleSignInInteractor: GIDSignInDelegate {
         if currentScopes.contains(where: { (scope) -> Bool in
             return Auth.scopes.contains(scope as! String)
         }) {
-            
+            return true
         } else {
             /**
              I'm not sure do we have to send the request, so I escluded it for now
@@ -149,6 +149,7 @@ extension GoogleSignInInteractor: GIDSignInDelegate {
              */
             let message = "Please add scopes to have ability to manage your YouTube videos. The app will not work properly"
             Alert.sharedInstance.showOk("Warning", message: message)
+            return false
         }
     }
     

@@ -7,6 +7,12 @@
 //
 
 import XCTest
+import RxCocoa
+import RxSwift
+import RxTest
+import RxBlocking
+
+@testable import YouTubeLiveVideo
 
 class YouTubeLiveVideoTests: XCTestCase {
 

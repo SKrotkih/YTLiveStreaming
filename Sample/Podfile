@@ -18,5 +18,9 @@ target 'YouTubeLiveVideo' do
     pod 'RxDataSources'
     pod 'LFLiveKit'
     pod "PromiseKit/CorePromise", "~> 6.8"
-    
+
+    target 'YouTubeLiveVideoTests' do
+      pod 'RxTest'
+      pod 'RxBlocking'
+    end
 end

@@ -11,10 +11,9 @@ import YTLiveStreaming
 
 class LFLiveViewController: UIViewController {
     var viewModel: YouTubeLiveVideoPublisher!
-    
-    
+
     var scheduledStartTime: NSDate?
-    
+
     @IBOutlet weak var lfView: LFLivePreview!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var beautyButton: UIButton!
@@ -22,26 +21,26 @@ class LFLiveViewController: UIViewController {
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var startLiveButton: UIButton!
     @IBOutlet weak var currentStatusLabel: UILabel!
-    
+
     private let disposeBag = DisposeBag()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureView()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         lfView.prepareForUsing()
         startListeningToModelEvents()
     }
-    
+
     @IBAction func changeCameraPositionButtonPressed(_ sender: Any) {
         lfView.changeCameraPosition()
     }
-    
+
     @IBAction func changeBeautyButtonPressed(_ sender: Any) {
         beautyButton.isSelected = lfView.changeBeauty()
     }
@@ -49,7 +48,7 @@ class LFLiveViewController: UIViewController {
     @IBAction func onClickPublish(_ sender: Any) {
         handleClickOnPublishingButton()
     }
-    
+
     @IBAction func closeButtonPressed(_ sender: Any) {
         viewModel.didUserCancelPublishingVideo()
     }
@@ -59,7 +58,7 @@ class LFLiveViewController: UIViewController {
             self?.currentStatusLabel.text = currStatus
         }
     }
-    
+
     func showError(_ message: String) {
         DispatchQueue.performUIUpdate {
             Alert.sharedInstance.showOk("Warning", message: message)
@@ -74,14 +73,14 @@ class LFLiveViewController: UIViewController {
             stopPublishing()
         }
     }
-    
+
     private var isVideoInProcess: Bool = false {
         didSet {
             startLiveButton.isSelected = isVideoInProcess
             startLiveButton.setTitle(isVideoInProcess ? "Finish live broadcast" : "Start live broadcast", for: .normal)
         }
     }
-    
+
     private func startPublishing() {
         viewModel.willStartPublishing { streamUrl, scheduledStartTime in
             self.scheduledStartTime = scheduledStartTime
@@ -93,14 +92,14 @@ class LFLiveViewController: UIViewController {
         lfView.stopPublishing()
         viewModel.finishPublishing()
     }
-    
+
     private func configureView() {
         beautyButton.isExclusiveTouch = true
         cameraButton.isExclusiveTouch = true
         closeButton.isExclusiveTouch = true
         isVideoInProcess = false
     }
-    
+
     private func startListeningToModelEvents() {
         viewModel
             .rxDidUserFinishWatchVideo

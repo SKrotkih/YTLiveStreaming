@@ -70,7 +70,7 @@ public class GoogleSignInInteractor: NSObject, SignInObservable {
         GIDSignIn.sharedInstance().signOut()
         GoogleOAuth2.sharedInstance.clearToken()
         UserStorage.user = nil
-        
+
         // TODO: Find Out Why does not work callback, then remove it:
         rxSignOut.onNext(true)
     }
@@ -104,9 +104,9 @@ extension GoogleSignInInteractor: GIDSignInDelegate {
         userDidSignOut()
     }
     // [END disconnect_handler]
-    
+
     // Handle the user sign in
-    
+
     private func errorSigedIn(error: Error) {
         if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
             let message = "The user has not signed in before or he has since signed out"
@@ -115,31 +115,34 @@ extension GoogleSignInInteractor: GIDSignInDelegate {
             self.rxSignInResult.onNext(.failure(.message(error.localizedDescription)))
         }
     }
-    
+
     private func errorUserIsUndefined() {
         let message = "The user has not signed in before or he has since signed out"
         self.rxSignInResult.onNext(.failure(.systemMessage(401, message)))
     }
-    
+
     private func errorAccessToken() {
         self.rxSignInResult.onNext(.failure(.message("Internal Error. The access token is not presented")))
     }
-    
+
     private func userDidSignIn(user: GIDGoogleUser) {
-        let _ = checkYoutubePermissionScopes(for: user)
+        checkYoutubePermissionScopes(for: user)
         GoogleUser.save(user)
         GoogleOAuth2.sharedInstance.accessToken = accessToken
         self.rxSignInResult.onNext(.success(Void()))
     }
-    
-    private func checkYoutubePermissionScopes(for user: GIDGoogleUser) -> Bool {
-        
+
+    @discardableResult private func checkYoutubePermissionScopes(for user: GIDGoogleUser) -> Bool {
         let currentScopes = user.grantedScopes.compactMap { $0 }
-        
+
         print("SCOPES=\(currentScopes)")
-        
-        if currentScopes.contains(where: { (scope) -> Bool in
-            return Auth.scopes.contains(scope as! String)
+
+        if currentScopes.contains(where: {
+            if let scope = $0 as? String {
+                return Auth.scopes.contains(scope)
+            } else {
+                return false
+            }
         }) {
             return true
         } else {
@@ -152,7 +155,7 @@ extension GoogleSignInInteractor: GIDSignInDelegate {
             return false
         }
     }
-    
+
     private func userDidSignOut() {
         rxSignOut.onNext(true)
     }
@@ -161,7 +164,7 @@ extension GoogleSignInInteractor: GIDSignInDelegate {
 // MARK: - Check/Add the Scopes
 
 extension GoogleSignInInteractor {
-    
+
     private func sendRequestToAddNeededScopes(for user: GIDGoogleUser) {
         guard let email = user.profile.email else {
             return

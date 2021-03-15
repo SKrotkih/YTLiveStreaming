@@ -21,11 +21,11 @@ extension RawRepresentable where Self: RawRepresentable {
 }
 
 extension Iteratable where Self: RawRepresentable, Self: Hashable {
-    
+
     static func hashValues() -> AnyIterator<Self> {
         return iterateEnum(self)
     }
-    
+
     static func rawValues() -> [Self.RawValue] {
         return hashValues().map({$0.rawValue})
     }

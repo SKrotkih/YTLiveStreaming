@@ -1,0 +1,7 @@
+excluded:
+- Pods
+- Sample
+disabled_rules:
+- nesting
+- identifier_name
+- line_length

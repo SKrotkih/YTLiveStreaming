@@ -13,7 +13,7 @@ class GoogleSignInWorker {
     fileprivate let clientIDkey = "CLIENT_ID"
 
     var googleClientId: String {
-        if let _ = _clientID {
+        if _clientID != nil {
         } else if let clientID = getInfo(clientIDkey) {
             _clientID = clientID
         } else {

@@ -16,7 +16,6 @@ class StreamListViewModel: MainViewModelOutput {
     var sessionManager: SessionManager!
 
     var rxError = PublishSubject<String>()
-    
     private let disposeBag = DisposeBag()
 
     func didOpenViewAction() {
@@ -27,11 +26,11 @@ class StreamListViewModel: MainViewModelOutput {
     func didSignOutAction() {
         sessionManager.signOut()
     }
-    
+
     func didCloseViewAction() {
         Router.showSignInViewController()
     }
-    
+
     private func configure() {
         self
             .rxData
@@ -107,7 +106,7 @@ extension StreamListViewModel: MainViewModelInput {
     var rxSignOut: PublishSubject<Bool> {
         return sessionManager.rxSignOut
     }
-    
+
     var rxData: PublishSubject<[SectionModel]> {
         return self.dataSource.rxData
     }

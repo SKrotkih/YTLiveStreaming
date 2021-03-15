@@ -10,14 +10,13 @@ import YTLiveStreaming
 import RxSwift
 
 class LiveStreamingViewModel: NSObject {
-    
     // Dependebcies
     var broadcastsAPI: BroadcastsAPI!
-    
+
     var rxDidUserFinishWatchVideo = PublishSubject<Bool>()
     var rxStateDescription = PublishSubject<String>()
     var rxError = PublishSubject<String>()
-    
+
     fileprivate var liveBroadcast: LiveBroadcastStreamModel?
 
     fileprivate func didUserFinishWatchVideo() {
@@ -28,21 +27,18 @@ class LiveStreamingViewModel: NSObject {
 // MARK: -
 
 extension LiveStreamingViewModel {
-    
     private func startBroadcast(_ liveBroadcast: LiveBroadcastStreamModel) {
         self.liveBroadcast = liveBroadcast
-        
+
         print("Watch the live video here: https://www.youtube.com/watch?v=\(liveBroadcast.id)")
-        
+
         Router.showLiveVideoViewController()
     }
-    
 }
 
 // MARK: Live stream publishing output protocol
 
 extension LiveStreamingViewModel: YouTubeLiveVideoPublisher {
-    
     func willStartPublishing(completed: @escaping (String?, NSDate?) -> Void) {
         guard let broadcast = self.liveBroadcast else {
             rxError.onNext("Need a broadcast object to start live video!")
@@ -62,7 +58,7 @@ extension LiveStreamingViewModel: YouTubeLiveVideoPublisher {
             }
         })
     }
-    
+
     func finishPublishing() {
         guard let broadcast = self.liveBroadcast else {
             self.didUserFinishWatchVideo()
@@ -72,7 +68,7 @@ extension LiveStreamingViewModel: YouTubeLiveVideoPublisher {
             self.didUserFinishWatchVideo()
         })
     }
-    
+
     func didUserCancelPublishingVideo() {
         guard let broadcast = self.liveBroadcast else {
             self.didUserFinishWatchVideo()
@@ -90,11 +86,11 @@ extension LiveStreamingViewModel: YouTubeLiveVideoPublisher {
 }
 
 extension LiveStreamingViewModel {
-    
+
     func didTransitionToLiveStatus() {
         rxStateDescription.onNext("● LIVE")
     }
-    
+
     func didTransitionToStatus(broadcastStatus: String?, streamStatus: String?, healthStatus: String?) {
         if let broadcastStatus = broadcastStatus,
             let streamStatus = streamStatus,
@@ -104,4 +100,3 @@ extension LiveStreamingViewModel {
         }
     }
 }
-

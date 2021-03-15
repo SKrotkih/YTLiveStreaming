@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.frame = UIScreen.main.bounds
         window!.makeKeyAndVisible()
     }
-    
+
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         return googleSignIn.openURL(url)
     }

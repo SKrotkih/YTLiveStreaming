@@ -18,7 +18,7 @@ class GoogleSignInViewModel: SignInProtocol {
         self.interactor = interactor
         self.interactor.configure()
     }
-    
+
     func startListeningToSignIn(_ completion: @escaping (Result<Void, LVError>) -> Void) {
         interactor
             .rxSignInResult

@@ -59,7 +59,7 @@ public struct LiveStreamListModel {
       public let status: Status
       public let cdn: CDN
    }
-   
+
    public struct Snipped {
       public let title: String
       public let channelId: String
@@ -71,7 +71,7 @@ public struct LiveStreamListModel {
    public struct HealthStatus {
       public let status: String
    }
-   
+
    public struct Status {
       public let healthStatus: HealthStatus
       public let streamStatus: String
@@ -82,7 +82,7 @@ public struct LiveStreamListModel {
       public let ingestionAddress: String
       public let backupIngestionAddress: String
    }
-   
+
    public struct CDN {
       public let frameRate: String
       public let resolution: String
@@ -90,7 +90,7 @@ public struct LiveStreamListModel {
       public let ingestionType: String
       public let ingestionInfo: IngestionInfo
    }
-   
+
    public let etag: String
    public let kind: String
    public let items: [LiveStreamModel]
@@ -121,7 +121,7 @@ extension LiveStreamListModel.Item {
       let snippet = LiveStreamListModel.Snipped.decode(json["snippet"])
       let status = LiveStreamListModel.Status.decode(json["status"])
       let cdn = LiveStreamListModel.CDN.decode(json["cdn"])
-      let model = LiveStreamListModel.Item (
+      let model = LiveStreamListModel.Item(
          etag: json["etag"].stringValue,
          id: json["id"].stringValue,
          kind: json["kind"].stringValue,
@@ -135,7 +135,7 @@ extension LiveStreamListModel.Item {
 
 extension LiveStreamListModel.IngestionInfo {
    public static func decode(_ json: JSON) -> LiveStreamListModel.IngestionInfo {
-      let model = LiveStreamListModel.IngestionInfo (
+      let model = LiveStreamListModel.IngestionInfo(
          streamName: json["streamName"].stringValue,
          ingestionAddress: json["ingestionAddress"].stringValue,
          backupIngestionAddress: json["backupIngestionAddress"].stringValue
@@ -147,7 +147,7 @@ extension LiveStreamListModel.IngestionInfo {
 extension LiveStreamListModel.CDN {
    public static func decode(_ json: JSON) -> LiveStreamListModel.CDN {
       let ingestionInfo = LiveStreamListModel.IngestionInfo.decode(json["ingestionInfo"])
-      let model = LiveStreamListModel.CDN (
+      let model = LiveStreamListModel.CDN(
          frameRate: json["frameRate"].stringValue,
          resolution: json["resolution"].stringValue,
          format: json["format"].stringValue,
@@ -160,7 +160,7 @@ extension LiveStreamListModel.CDN {
 
 extension LiveStreamListModel.Snipped {
    public static func decode(_ json: JSON) -> LiveStreamListModel.Snipped {
-      let model = LiveStreamListModel.Snipped (
+      let model = LiveStreamListModel.Snipped(
          title: json["title"].stringValue,
          channelId: json["channelId"].stringValue,
          publishedAt: json["publishedAt"].stringValue,
@@ -174,7 +174,7 @@ extension LiveStreamListModel.Snipped {
 extension LiveStreamListModel.Status {
    public static func decode(_ json: JSON) -> LiveStreamListModel.Status {
       let healthStatus = LiveStreamListModel.HealthStatus.decode(json["healthStatus"])
-      let model = LiveStreamListModel.Status (
+      let model = LiveStreamListModel.Status(
          healthStatus: healthStatus,
          streamStatus: json["streamStatus"].stringValue
       )
@@ -184,7 +184,7 @@ extension LiveStreamListModel.Status {
 
 extension LiveStreamListModel.HealthStatus {
    public static func decode(_ json: JSON) -> LiveStreamListModel.HealthStatus {
-      let model = LiveStreamListModel.HealthStatus (
+      let model = LiveStreamListModel.HealthStatus(
          status: json["status"].stringValue
       )
       return model

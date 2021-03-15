@@ -17,4 +17,3 @@ protocol SignInObservable {
     var rxSignInResult: PublishSubject<Result<Void, LVError>> { get }
     func configure()
 }
-

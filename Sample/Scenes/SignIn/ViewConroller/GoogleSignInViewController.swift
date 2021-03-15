@@ -36,7 +36,7 @@ class GoogleSignInViewController: BaseViewController {
 
         showNavBar(false, animated: animated)
     }
-    
+
     private func showNavBar(_ show: Bool, animated: Bool) {
         self.navigationController?.setNavigationBarHidden(show, animated: animated)
     }
@@ -45,7 +45,6 @@ class GoogleSignInViewController: BaseViewController {
 // MARK: - Private Methods
 
 extension GoogleSignInViewController {
-    
     private func bindInput() {
         viewModel
             .startListeningToSignIn { result in

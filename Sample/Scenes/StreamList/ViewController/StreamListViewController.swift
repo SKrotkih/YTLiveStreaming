@@ -36,7 +36,7 @@ class StreamListViewController: BaseViewController {
     var dataSource: Any?
 
     private let disposeBag = DisposeBag()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
@@ -48,7 +48,7 @@ class StreamListViewController: BaseViewController {
         configureLeftBarButtonItem()
         configureRightBarButtonItem()
     }
-    
+
     private func configureView() {
         configureAddStreamButton()
         setUpRefreshControl()
@@ -56,7 +56,7 @@ class StreamListViewController: BaseViewController {
         bindData()
         output.didOpenViewAction()
     }
-    
+
     func startActivity() {
         DispatchQueue.performUIUpdate { [weak self] in
             self?.activityIndicator.startAnimating()
@@ -72,16 +72,16 @@ class StreamListViewController: BaseViewController {
     private func closeView() {
         output.didCloseViewAction()
     }
-    
+
     private func didSignOut() {
         self.stopActivity()
         self.closeView()
     }
-    
+
     @objc private func signOut() {
         output.didSignOutAction()
     }
-    
+
     private func bindUserActivity() {
         addNewStreamButton
             .rx
@@ -96,26 +96,29 @@ class StreamListViewController: BaseViewController {
                 self?.didSignOut()
             }).disposed(by: disposeBag)
     }
-    
+
     private func bindData() {
         tableView.register(StreamListTableViewCell.self, forCellReuseIdentifier: CellIdentifier.cell.rawValue)
         tableView.delegate = self
         dataSource = RxTableViewSectionedReloadDataSource<SectionModel>(
-            configureCell: { (_, tableView, indexPath, element) in
-                let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.cell.rawValue) as! StreamListTableViewCell
-                cell.beginLabel.text = "start: \(element.snipped.publishedAt)"
-                cell.nameLabel.text = element.snipped.title
-                return cell
-        },
+            configureCell: { (_, tableView, _, element) in
+                if let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.cell.rawValue) as? StreamListTableViewCell {
+                    cell.beginLabel.text = "start: \(element.snipped.publishedAt)"
+                    cell.nameLabel.text = element.snipped.title
+                    return cell
+                } else {
+                    return UITableViewCell()
+                }
+            },
             titleForHeaderInSection: { dataSource, sectionIndex in
                 return dataSource[sectionIndex].model
-        }
+            }
         )
         input
             .rxData
             .bind(to: tableView
-                .rx
-                .items(dataSource: dataSource as! RxTableViewSectionedReloadDataSource<SectionModel>))
+                    .rx
+                    .items(dataSource: dataSource as! RxTableViewSectionedReloadDataSource<SectionModel>))
             .disposed(by: disposeBag)
         input
             .rxData
@@ -130,7 +133,7 @@ class StreamListViewController: BaseViewController {
                 self.showError(message: message)
             }).disposed(by: disposeBag)
     }
-    
+
     func showError(message: String) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             Alert.sharedInstance.showOk("Error", message: message)
@@ -141,7 +144,7 @@ class StreamListViewController: BaseViewController {
 // MARK: - Configure View Items
 
 extension StreamListViewController {
-    
+
     private func configureLeftBarButtonItem() {
         let backButton = UIBarButtonItem.init(title: "Log Out",
                                               style: .plain,
@@ -149,7 +152,7 @@ extension StreamListViewController {
                                               action: #selector(signOut))
         self.navigationItem.leftBarButtonItem = backButton
     }
-    
+
     private func configureRightBarButtonItem() {
         let userNameLabel = UILabel(frame: CGRect.zero)
         userNameLabel.text = UserStorage.user?.fullName

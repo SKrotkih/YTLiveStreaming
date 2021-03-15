@@ -195,4 +195,6 @@ Changes history:
  -  build 0.2.17
  - Sample app was redesigned
  -  GoogleSignIn (used in the Sample app): up to 5.0.2
- 
+ 15-03-2021
+-  added Swiftlint 
+- fixed Swiftlint warnings

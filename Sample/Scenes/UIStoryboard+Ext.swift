@@ -8,11 +8,11 @@
 import UIKit
 
 extension UIStoryboard {
-    
+
     convenience init(_ storyboard: AppRouter.StroyboadType) {
         self.init(name: storyboard.filename, bundle: nil)
     }
-    
+
     /// Instantiates and returns the view controller with the specified identifier.
     ///
     /// - Parameter identifier: uniquely identifies equals to Class name
@@ -24,7 +24,7 @@ extension UIStoryboard {
         }
         return vc
     }
-    
+
     func segueToRootViewController<T>(_ configure: (T) -> Void) where T: UIViewController {
         let id = String(describing: T.self)
         if let viewController = self.instantiateViewController(withIdentifier: id) as? T {
@@ -34,23 +34,23 @@ extension UIStoryboard {
             assertionFailure("Failed to open \(id) screen")
         }
     }
-    
+
     private func setUpRootViewController(_ viewController: UIViewController?) {
         guard let window = AppDelegate.shared.window else {
             assertionFailure()
             return
         }
-        
+
         if let navController = window.rootViewController as? UINavigationController {
             navController.popToRootViewController(animated: false)
             navController.setViewControllers([], animated: false)
         }
         window.rootViewController = nil
-        
+
         let vc = viewController ?? self.instantiateInitialViewController()
         window.rootViewController = vc
     }
-    
+
     func segueToModalViewController<T>(_ configure: (T) -> Void) where T: UIViewController {
         guard let window = AppDelegate.shared.window else {
             assertionFailure()
@@ -65,7 +65,7 @@ extension UIStoryboard {
             assertionFailure("Failed to open \(id) screen")
         }
     }
-    
+
     func sequePushViewController<T>(_ configure: (T) -> Void) where T: UIViewController {
         guard let window = AppDelegate.shared.window else {
             assertionFailure()
@@ -94,4 +94,3 @@ extension UIStoryboard {
         return UIStoryboard(name: AppRouter.StroyboadType.main.rawValue, bundle: nil)
     }
 }
-

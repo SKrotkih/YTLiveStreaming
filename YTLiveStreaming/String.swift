@@ -1,11 +1,11 @@
 import Foundation
 
 public extension String {
-   
+
    func trim() -> String {
       return self.trimmingCharacters(in: CharacterSet.whitespaces)
    }
-   
+
    func indexOf(_ string: String) -> String.Index? {
       return range(of: string, options: .literal, range: nil, locale: nil)?.lowerBound
    }
@@ -14,10 +14,9 @@ public extension String {
       let encodedURL = self.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
       return encodedURL!
    }
-   
 }
 
-public func merge(one: [String: String]?, _ two: [String:String]?) -> [String: String]? {
+public func merge(one: [String: String]?, _ two: [String: String]?) -> [String: String]? {
    var dict: [String: String]?
    if let one = one {
       dict = one
@@ -31,4 +30,3 @@ public func merge(one: [String: String]?, _ two: [String:String]?) -> [String: S
    }
    return dict
 }
-

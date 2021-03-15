@@ -13,7 +13,7 @@ import RxSwift
 struct SectionModel {
     var model: String
     var items: [LiveBroadcastStreamModel]
-    var error: String? = nil
+    var error: String?
 }
 
 extension SectionModel: SectionModelType {
@@ -51,34 +51,34 @@ extension YTLiveVideoState {
 }
 
 class StreamListDataSource: NSObject, BroadcastsDataFetcher {
-    
+
     var broadcastsAPI: BroadcastsAPI!
-    
+
     let dispatchGroup = DispatchGroup()
-    
+
     var rxData: PublishSubject<[SectionModel]> = PublishSubject<[SectionModel]>()
-    
+
     private var data = [
         SectionModel(model: YTLiveVideoState.upcoming.description(), items: []),
         SectionModel(model: YTLiveVideoState.active.description(), items: []),
         SectionModel(model: YTLiveVideoState.completed.description(), items: [])
     ]
-    
+
     func getUpcoming(for index: Int) -> LiveBroadcastStreamModel {
         assert(index < data[YTLiveVideoState.upcoming.index].items.count, "Broadcast index is invalid")
         return self.data[YTLiveVideoState.upcoming.index].items[index]
     }
-    
+
     func getCurrent(for index: Int) -> LiveBroadcastStreamModel {
         assert(index < data[YTLiveVideoState.active.index].items.count, "Broadcast index is invalid")
         return self.data[YTLiveVideoState.active.index].items[index]
     }
-    
+
     func getPast(for index: Int) -> LiveBroadcastStreamModel {
         assert(index < data[YTLiveVideoState.completed.index].items.count, "Broadcast index is invalid")
         return self.data[YTLiveVideoState.completed.index].items[index]
     }
-    
+
     func loadData() {
         for i in 0..<data.count {
             data[i].items.removeAll()
@@ -123,4 +123,3 @@ class StreamListDataSource: NSObject, BroadcastsDataFetcher {
         }
     }
 }
-

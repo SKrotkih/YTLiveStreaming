@@ -20,7 +20,7 @@ enum LVError: Error {
             return "System error: \(code)\n\(message)"
         }
     }
-    
+
     func printDescription(_ comment: String? = nil,
                           _ file: String = #file,
                           _ function: String = #function,
@@ -32,4 +32,3 @@ enum LVError: Error {
         print(message)
     }
 }
-

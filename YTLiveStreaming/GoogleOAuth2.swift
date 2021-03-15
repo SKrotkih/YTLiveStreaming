@@ -18,17 +18,16 @@ import KeychainAccess
 // And https://developers.google.com/+/web/api/rest/oauth
 
 public class GoogleOAuth2: NSObject {
-
-   let keychain:  Keychain
+   let keychain: Keychain
    let kOAuth2AccessTokenService: String = "OAuth2AccessToken"
-   
+
    public class var sharedInstance: GoogleOAuth2 {
       struct Singleton {
          static let instance = GoogleOAuth2()
       }
       return Singleton.instance
    }
-   
+
    override init() {
       self.keychain = Keychain(service: LiveAPI.BaseURL)
       super.init()
@@ -47,7 +46,7 @@ public class GoogleOAuth2: NSObject {
    public func clearToken() {
       keychain[kOAuth2AccessTokenService] = nil
    }
-   
+
    func requestToken(_ completion: @escaping (String?) -> Void) {
       completion(accessToken)
    }

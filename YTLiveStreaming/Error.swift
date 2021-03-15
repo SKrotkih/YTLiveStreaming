@@ -8,7 +8,7 @@ import Foundation
 public enum YTError: Error {
     case message(String)
     case systemMessage(Int, String)
-    
+
     public func message() -> String {
         switch self {
         case .message(let message):

@@ -11,20 +11,20 @@ import YTLiveStreaming
 let Router = AppDelegate.shared.appRouter
 
 struct AppRouter {
-    
+
     enum StroyboadType: String, Iteratable {
         case main = "Main"
         var filename: String {
             return rawValue.capitalized
         }
     }
-    
+
     func showSignInViewController() {
         DispatchQueue.performUIUpdate {
             UIStoryboard.main.segueToRootViewController(self.signInDependencies)
         }
     }
-    
+
     func showMainViewController() {
         DispatchQueue.performUIUpdate {
             UIStoryboard.main.sequePushViewController(self.streamingListDependencies)
@@ -41,7 +41,6 @@ struct AppRouter {
 // MARK: - Dependencies Injection
 
 extension AppRouter {
-    
     ///
     /// Inject dependecncies in the GoogleSignInViewController
     ///
@@ -50,7 +49,7 @@ extension AppRouter {
         let viewModel = GoogleSignInViewModel(viewController: viewController, interactor: interactor)
         viewController.viewModel = viewModel
     }
-    
+
     ///
     /// Inject dependecncies in the StreamListViewController
     ///
@@ -58,7 +57,7 @@ extension AppRouter {
 
         let signInInteractor = AppDelegate.shared.googleSignIn
         let googleSession = GoogleSessionManager(signInInteractor)
-        
+
         let viewModel = StreamListViewModel()
         let dataSource = StreamListDataSource()
         let broadcastsAPI = YTLiveStreaming()
@@ -66,12 +65,12 @@ extension AppRouter {
         viewModel.dataSource = dataSource
         viewModel.sessionManager = googleSession
         viewModel.broadcastsAPI = broadcastsAPI
-        
+
         // Inbound Broadcast
         viewController.output = viewModel
         viewController.input = viewModel
     }
-    
+
     ///
     /// Inject dependecncies in the LFLiveViewController
     ///

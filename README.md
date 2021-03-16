@@ -1,7 +1,7 @@
 # YTLiveStreaming
 
-YTLiveStreaming is a framework for creating live broadcasts and video streams on YouTube using the YouTube Live Streaming API
-(YouTube Data API v3) in Swift 5.0
+YTLiveStreaming is an iOS framework which can be used for creating live broadcasts and video streams on YouTube using YouTube Live Streaming API
+(YouTube Data API v3)
 
 ## Requirements
 
@@ -46,7 +46,7 @@ To integrate YTLiveStreaming into your Xcode project using CocoaPods, specify it
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '11'
+platform :ios, '12.1'
 use_frameworks!
 
 target '<Your Target Name>' do
@@ -73,17 +73,17 @@ As an example used iOS app Live Events
 
 - Launch  `pod install`   
 
-- Open YouTubeLiveVideo.xcworkspace.
+- Open LiveEvents.xcworkspace.
 
-- Enter your bundle id
+- Change current bundle id on your
+
+- Create Config.plist. Copy content Config.plist.example.plist into new Config.plist. Change current values of the client ID and API key on yours.  
 
 - Put CLIENT_ID and API_KEY into the plist.info:
 
 <img src="https://user-images.githubusercontent.com/2775621/36204258-42684ab8-1193-11e8-88c4-a7668f7de368.png" alt="Credentials" style="width: 690px;" />
 
-- Copy Sample/Config.plist.example.plist to Sample/Config.plist and edit it to insert your client ID and API key.
-
-- In Sample/YouTubeLiveVideo/Info.plist edit the CFBundleURLSchemes. Change the value that starts with "com.googleusercontent.apps." based on your API key. It should be set to the reversed API key. The API key has the format XXXXXXXX.apps.googleusercontent.com and the allowed URL should be com.googleusercontent.apps.XXXXXXXX
+- In Sample/Info.plist edit the CFBundleURLSchemes. Change the value that starts with "com.googleusercontent.apps." based on your API key. It should be set to the reversed API key. The API key has the format XXXXXXXX.apps.googleusercontent.com and the allowed URL should be com.googleusercontent.apps.XXXXXXXX
 
 ## User guide
 
@@ -185,6 +185,7 @@ Note. Here were  used the following things:
 - Alamofire
 - RxSwift
 - Podspec ( https://guides.cocoapods.org/syntax/podspec.html )
+- Swiftlint
 
 Sergey Krotkih
 
@@ -196,5 +197,6 @@ Changes history:
  - Sample app was redesigned
  -  GoogleSignIn (used in the Sample app): up to 5.0.2
  15-03-2021
--  added Swiftlint 
+- added Swiftlint 
 - fixed Swiftlint warnings
+- Sample app was renamed to LiveEvents

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7F9274A71DBDCAD00051DE6B"
-               BuildableName = "YouTubeLiveVideo.app"
-               BlueprintName = "YouTubeLiveVideo"
-               ReferencedContainer = "container:YouTubeLiveVideo.xcodeproj">
+               BuildableName = "LiveEvents.app"
+               BlueprintName = "LiveEvents"
+               ReferencedContainer = "container:LiveEvents.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7F7D43672573A3AE00CC7642"
-               BuildableName = "YouTubeLiveVideoTests.xctest"
-               BlueprintName = "YouTubeLiveVideoTests"
-               ReferencedContainer = "container:YouTubeLiveVideo.xcodeproj">
+               BuildableName = "LiveEventsTests.xctest"
+               BlueprintName = "LiveEventsTests"
+               ReferencedContainer = "container:LiveEvents.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7F9274A71DBDCAD00051DE6B"
-            BuildableName = "YouTubeLiveVideo.app"
-            BlueprintName = "YouTubeLiveVideo"
-            ReferencedContainer = "container:YouTubeLiveVideo.xcodeproj">
+            BuildableName = "LiveEvents.app"
+            BlueprintName = "LiveEvents"
+            ReferencedContainer = "container:LiveEvents.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7F9274A71DBDCAD00051DE6B"
-            BuildableName = "YouTubeLiveVideo.app"
-            BlueprintName = "YouTubeLiveVideo"
-            ReferencedContainer = "container:YouTubeLiveVideo.xcodeproj">
+            BuildableName = "LiveEvents.app"
+            BlueprintName = "LiveEvents"
+            ReferencedContainer = "container:LiveEvents.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

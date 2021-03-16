@@ -1,6 +1,6 @@
 //
 //  Constants.swift
-//  YouTubeLiveVideo
+//  LiveEvents
 //
 
 import UIKit

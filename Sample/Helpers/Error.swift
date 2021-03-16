@@ -1,7 +1,7 @@
 //
 //  Error.swift
-//  YouTubeLiveVideo
-//  YouTubeLiveVideo
+//  LiveEvents
+//  LiveEvents
 //
 //  Created by Sergey Krotkih
 //

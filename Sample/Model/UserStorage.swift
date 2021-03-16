@@ -1,6 +1,6 @@
 //
 //  UserStorage.swift
-//  YouTubeLiveVideo
+//  LiveEvents
 //
 //  Created by Sergey Krotkih
 //
@@ -20,8 +20,8 @@ class DataStorageImpl: NSObject {
     static let sharingData = false
 
     enum DefaultKeyName {
-        static let fullName = "com.ytlivevideo.fullName"
-        static let token = "com.ytlivevideo.token"
+        static let fullName = "com.liveevents.fullName"
+        static let token = "com.liveevents.token"
     }
 
     var instance: UserDefaults {

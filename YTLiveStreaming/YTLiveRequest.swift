@@ -136,19 +136,18 @@ extension YTLiveRequest {
                 completion(.failure(.message("OAuth token is not presented")))
                 return
             }
-            let startDateFormatted = startDateTime.toJSONformat()
-            let jsonBody = "{\"snippet\": {\"title\": \"\(title)\",\"scheduledStartTime\": \"\(startDateFormatted)\"},\"status\": {\"privacyStatus\":\"public\"}}"
-            let encoder = JSONBodyStringEncoding(jsonBody: jsonBody)
+            let jsonBody = CreateLiveBroadcastBody(title: title, startDateTime: startDateTime)
+            guard let jsonData = try? JSONEncoder().encode(jsonBody),
+                  let jsonString = String(data: jsonData, encoding: .utf8) else {
+                completion(.failure(.message("Failed while preparing request")))
+                return
+            }
+            let encoder = JSONBodyStringEncoding(jsonBody: jsonString)
             let parameters = "liveBroadcasts?part=id,snippet,contentDetails,status&key=\(Credentials.APIkey)"
             let url = "\(LiveAPI.BaseURL)/\(parameters)"
             AF.request(url, method: .post, parameters: [:], encoding: encoder, headers: headers)
                 .validate()
                 .responseData { response in
-
-                    print("======RESPONSE========")
-                    print(response.debugDescription)
-                    print("======================")
-
                     switch response.result {
                     case .success:
                         guard let data = response.data else {
@@ -193,19 +192,13 @@ extension YTLiveRequest {
                 completion(.failure(.message("OAuth token is not presented")))
                 return
             }
-            let broadcastId = broadcast.id
-            let title = broadcast.snipped.title
-            let startTime = broadcast.snipped.scheduledStartTime.toJSONformat()
-            let privacyStatus = broadcast.status.privacyStatus
-            let enableMonitorStream = broadcast.contentDetails.monitorStream.enableMonitorStream
-            let broadcastStreamDelayMs = broadcast.contentDetails.monitorStream.broadcastStreamDelayMs
-            let enableDvr = broadcast.contentDetails.enableDvr
-            let enableContentEncryption = broadcast.contentDetails.enableContentEncryption
-            let enableEmbed = broadcast.contentDetails.enableEmbed
-            let recordFromStart = broadcast.contentDetails.recordFromStart
-            let startWithSlate = broadcast.contentDetails.startWithSlate
-            let jsonBody = "{\"id\":\"\(broadcastId)\",\"snippet\":{\"title\":\"\(title)\",\"scheduledStartTime\":\"\(startTime)\"},\"status\":{\"privacyStatus\":\"\(privacyStatus)\"},\"contentDetails\": {\"monitorStream\":{\"enableMonitorStream\":\(enableMonitorStream),\"broadcastStreamDelayMs\":\"\(broadcastStreamDelayMs)\"},\"enableDvr\":\(enableDvr),\"enableContentEncryption\":\(enableContentEncryption),\"enableEmbed\":\(enableEmbed),\"recordFromStart\":\(recordFromStart),\"startWithSlate\":\(startWithSlate)}}"
-            let encoder = JSONBodyStringEncoding(jsonBody: jsonBody)
+            let jsonBody = UpdateLiveBroadcastBody(broadcast: broadcast)
+            guard let jsonData = try? JSONEncoder().encode(jsonBody),
+                  let jsonString = String(data: jsonData, encoding: .utf8) else {
+                completion(.failure(.message("Failed while preparing request")))
+                return
+            }
+            let encoder = JSONBodyStringEncoding(jsonBody: jsonString)
             let parameters = "liveBroadcasts?part=id,snippet,contentDetails,status&key=\(Credentials.APIkey)"
             AF.request("\(LiveAPI.BaseURL)/\(parameters)",
                 method: .put,
@@ -364,9 +357,7 @@ extension YTLiveRequest {
 // A liveStream resource contains information about the video stream that you are transmitting to YouTube.
 // The stream provides the content that will be broadcast to YouTube users.
 // Once created, a liveStream resource can be bound to one or more liveBroadcast resources.
-
 extension YTLiveRequest {
-
     // Returns a list of video streams that match the API request parameters.
     // https://developers.google.com/youtube/v3/live/docs/liveStreams/list
     class func getLiveStream(_ liveStreamId: String, completion: @escaping (Result<LiveStreamModel, YTError>) -> Void) {
@@ -413,24 +404,7 @@ extension YTLiveRequest {
     // https://developers.google.com/youtube/v3/live/docs/liveStreams/insert
     // Creates a video stream. The stream enables you to send your video to YouTube,
     // which can then broadcast the video to your audience.
-    //
-    //   Request
-    //
     //   POST https://www.googleapis.com/youtube/v3/liveStreams?part=id%2Csnippet%2Ccdn%2Cstatus&key={YOUR_API_KEY}
-    //   {
-    //   "snippet": {
-    //   "title": "My First Live Video",
-    //   "description": "Description live video"
-    //   },
-    //   "cdn": {
-    //   "format": "1080p",
-    //   "ingestionType": "rtmp",
-    //   "ingestionInfo": {
-    //   "streamName": "stream name 1"
-    //   }
-    //   }
-    //   }
-
     class func createLiveStream(_ title: String,
                                 description: String,
                                 streamName: String,
@@ -440,11 +414,13 @@ extension YTLiveRequest {
                 completion(.failure(.message("OAuth token is not presented")))
                 return
             }
-            let resolution = LiveAPI.Resolution
-            let frameRate = LiveAPI.FrameRate
-            let ingestionType = LiveAPI.IngestionType
-            let jsonBody = "{\"snippet\": {\"title\": \"\(title)\",\"description\": \"\(description)\"},\"cdn\": {\"resolution\":\"\(resolution)\",\"frameRate\":\"\(frameRate)\",\"ingestionType\":\"\(ingestionType)\",\"ingestionInfo\":{\"streamName\":\"\(streamName)\"}}}"
-            let encoder = JSONBodyStringEncoding(jsonBody: jsonBody)
+            let jsonBody = CreateLiveStreamBody(title: title, description: description, streamName: streamName)
+            guard let jsonData = try? JSONEncoder().encode(jsonBody),
+                  let jsonString = String(data: jsonData, encoding: .utf8) else {
+                completion(.failure(.message("Failed while preparing request")))
+                return
+            }
+            let encoder = JSONBodyStringEncoding(jsonBody: jsonString)
             let url = "\(LiveAPI.BaseURL)/liveStreams?part=id,snippet,cdn,status&key=\(Credentials.APIkey)"
             AF.request(url, method: .post, parameters: [:], encoding: encoder, headers: headers)
                 .validate()
@@ -529,8 +505,13 @@ extension YTLiveRequest {
                 completion(.failure(.message("OAuth token is not presented")))
                 return
             }
-            let jsonBody = "{\"id\":\"\(liveStreamId)\",\"snippet\": {\"title\":\"\(title)\"},\"cdn\":{\"format\":\"\(format)\",\"ingestionType\":\"\(ingestionType)\"}}}"
-            let encoder = JSONBodyStringEncoding(jsonBody: jsonBody)
+            let jsonBody = UpdateLiveStreamBody(id: liveStreamId, title: title, format: format, ingestionType: ingestionType)
+            guard let jsonData = try? JSONEncoder().encode(jsonBody),
+                  let jsonString = String(data: jsonData, encoding: .utf8) else {
+                completion(.failure(.message("Failed while preparing request")))
+                return
+            }
+            let encoder = JSONBodyStringEncoding(jsonBody: jsonString)
             AF.request("\(LiveAPI.BaseURL)/liveStreams",
                 method: .put,
                 parameters: ["part": "id,snippet,cdn,status", "key": Credentials.APIkey],
@@ -566,23 +547,5 @@ extension YTLiveRequest {
                     print("\n====== REQUEST =======\n\(description)\n==============\n")
                 }
         }
-    }
-}
-
-struct JSONBodyStringEncoding: ParameterEncoding {
-    private let jsonBody: String
-
-    init(jsonBody: String) {
-        self.jsonBody = jsonBody
-    }
-
-    func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
-        var urlRequest = urlRequest.urlRequest
-        let dataBody = (jsonBody as NSString).data(using: String.Encoding.utf8.rawValue)
-        if urlRequest?.value(forHTTPHeaderField: "Content-Type") == nil {
-            urlRequest?.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        }
-        urlRequest?.httpBody = dataBody
-        return urlRequest!
     }
 }

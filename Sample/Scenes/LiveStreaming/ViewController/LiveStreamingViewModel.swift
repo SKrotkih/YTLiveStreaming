@@ -1,6 +1,6 @@
 //
 //  LiveStreamingViewModel.swift
-//  YouTubeLiveVideo
+//  LiveEvents
 //
 //  Created by Sergey Krotkih
 //

@@ -1,6 +1,6 @@
 //
 //  Color+Ext.swift
-//  YouTubeLiveVideo
+//  LiveEvents
 //
 
 import UIKit

@@ -1,6 +1,6 @@
 //
 //  StreamListDataSource.swift
-//  YouTubeLiveVideo
+//  LiveEvents
 //
 //  Created by Sergey Krotkih
 //

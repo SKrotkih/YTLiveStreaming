@@ -1,6 +1,6 @@
 //
 //  MainNavController.swift
-//  YouTubeLiveVideo
+//  LiveEvents
 //
 //  Created by Sergey Krotkih
 //

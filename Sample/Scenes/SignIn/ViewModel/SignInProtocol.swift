@@ -1,6 +1,6 @@
 //
 //  SignInProtocol.swift
-//  YouTubeLiveVideo
+//  LiveEvents
 //
 //  Created by Sergey Krotkih on 10/31/20.
 //  Copyright © 2020 Sergey Krotkih. All rights reserved.

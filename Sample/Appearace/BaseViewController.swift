@@ -1,6 +1,6 @@
 //
 //  BaseViewController.swift
-//  YouTubeLiveVideo
+//  LiveEvents
 //
 //  Created by Sergey Krotkih
 //

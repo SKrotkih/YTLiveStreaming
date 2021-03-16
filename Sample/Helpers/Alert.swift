@@ -11,7 +11,7 @@ class Alert: NSObject {
         }
         return SingletonWrapper.sharedInstance
     }
-    
+
     fileprivate override init() {
         let screenBounds = UIScreen.main.bounds
         popupWindow = UIWindow(frame: CGRect(x: 0, y: 0, width: screenBounds.width, height: screenBounds.height))

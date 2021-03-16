@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		07D4CF86D8F3C691683DCB72 /* Pods_YouTubeLiveVideo_YouTubeLiveVideoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 365770FD4C31A97786372905 /* Pods_YouTubeLiveVideo_YouTubeLiveVideoTests.framework */; };
-		62F6B577B430D78912B92163 /* Pods_YouTubeLiveVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D49C69C84C0F80F29371978 /* Pods_YouTubeLiveVideo.framework */; };
 		7F0933CD2457258300FB5579 /* GoogleSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0933CC2457258300FB5579 /* GoogleSignInViewController.swift */; };
 		7F0933CF24574FCB00FB5579 /* GoogleSignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0933CE24574FCB00FB5579 /* GoogleSignInViewModel.swift */; };
 		7F1E96BB2546B8BF00638965 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1E96AE2546B8BF00638965 /* Alert.swift */; };
@@ -39,7 +37,7 @@
 		7F79C8A6254802FB0044CF81 /* BroadcastsDataFetcherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79C8A5254802FB0044CF81 /* BroadcastsDataFetcherProtocol.swift */; };
 		7F79C8A8254804320044CF81 /* SessionViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79C8A7254804320044CF81 /* SessionViewModelProtocol.swift */; };
 		7F79C8AB254806DF0044CF81 /* YouTubeLiveVideoPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79C8AA254806DF0044CF81 /* YouTubeLiveVideoPublisher.swift */; };
-		7F7D436B2573A3AE00CC7642 /* YouTubeLiveVideoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7D436A2573A3AE00CC7642 /* YouTubeLiveVideoTests.swift */; };
+		7F7D436B2573A3AE00CC7642 /* LiveEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7D436A2573A3AE00CC7642 /* LiveEventsTests.swift */; };
 		7F83E3371DBDD35500DE4102 /* StreamListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E3361DBDD35500DE4102 /* StreamListTableViewCell.swift */; };
 		7F83E34D1DBDD49100DE4102 /* LiveStreamingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E3491DBDD49100DE4102 /* LiveStreamingViewModel.swift */; };
 		7F83E35B1DBDD58C00DE4102 /* YouTubePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E35A1DBDD58C00DE4102 /* YouTubePlayer.swift */; };
@@ -53,6 +51,8 @@
 		7FB8A42B1DD23C3100955C2D /* LFLivePreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8A42A1DD23C3100955C2D /* LFLivePreview.m */; };
 		7FB8A42D1DD23F8400955C2D /* LFLiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8A42C1DD23F8400955C2D /* LFLiveViewController.swift */; };
 		7FDCF9862546BF1400D5B492 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDCF9852546BF1400D5B492 /* Error.swift */; };
+		B9CC7E4719CFCD847E4A62A7 /* Pods_LiveEvents_LiveEventsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B30E5B8AAAEDC735322F3362 /* Pods_LiveEvents_LiveEventsTests.framework */; };
+		C730E8A1F1E53DDE85561021 /* Pods_LiveEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC305E81DB8C9398569AE585 /* Pods_LiveEvents.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,7 +82,7 @@
 		1D25A3DFDBD2707F0A23DDB9 /* Pods-YouTubeLiveVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTubeLiveVideo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YouTubeLiveVideo/Pods-YouTubeLiveVideo.release.xcconfig"; sourceTree = "<group>"; };
 		27E16880403E6FB1BBCB3749 /* Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.release.xcconfig"; sourceTree = "<group>"; };
 		2F6AF40A23D40D691D15F9E0 /* Pods-YouTubeLiveVideo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTubeLiveVideo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YouTubeLiveVideo/Pods-YouTubeLiveVideo.debug.xcconfig"; sourceTree = "<group>"; };
-		365770FD4C31A97786372905 /* Pods_YouTubeLiveVideo_YouTubeLiveVideoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YouTubeLiveVideo_YouTubeLiveVideoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		65A4996DDBF267DFE82ED9D5 /* Pods-LiveEvents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveEvents.release.xcconfig"; path = "Pods/Target Support Files/Pods-LiveEvents/Pods-LiveEvents.release.xcconfig"; sourceTree = "<group>"; };
 		7F0933CC2457258300FB5579 /* GoogleSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleSignInViewController.swift; sourceTree = "<group>"; };
 		7F0933CE24574FCB00FB5579 /* GoogleSignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInViewModel.swift; sourceTree = "<group>"; };
 		7F1E96AE2546B8BF00638965 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -110,7 +110,7 @@
 		7F53B1A92030724200E09CFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7F53B1B02030B38100E09CFA /* StreamListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamListDataSource.swift; sourceTree = "<group>"; };
 		7F53B1B32030B4B300E09CFA /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = SOURCE_ROOT; };
-		7F53B1B62030B4B400E09CFA /* YouTubeLiveVideo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YouTubeLiveVideo-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		7F53B1B62030B4B400E09CFA /* LiveEvents-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LiveEvents-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		7F678A8525FF499D00F5FB2C /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		7F678A8625FF4A0400F5FB2C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitignore; path = ../../.gitignore; sourceTree = "<group>"; };
 		7F79C8A12547F2910044CF81 /* BroadcastsApiProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastsApiProtocol.swift; sourceTree = "<group>"; };
@@ -118,15 +118,15 @@
 		7F79C8A5254802FB0044CF81 /* BroadcastsDataFetcherProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastsDataFetcherProtocol.swift; sourceTree = "<group>"; };
 		7F79C8A7254804320044CF81 /* SessionViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewModelProtocol.swift; sourceTree = "<group>"; };
 		7F79C8AA254806DF0044CF81 /* YouTubeLiveVideoPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeLiveVideoPublisher.swift; sourceTree = "<group>"; };
-		7F7D43682573A3AE00CC7642 /* YouTubeLiveVideoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YouTubeLiveVideoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F7D436A2573A3AE00CC7642 /* YouTubeLiveVideoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeLiveVideoTests.swift; sourceTree = "<group>"; };
+		7F7D43682573A3AE00CC7642 /* LiveEventsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiveEventsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F7D436A2573A3AE00CC7642 /* LiveEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveEventsTests.swift; sourceTree = "<group>"; };
 		7F7D436C2573A3AE00CC7642 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7F83E3361DBDD35500DE4102 /* StreamListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamListTableViewCell.swift; sourceTree = "<group>"; };
 		7F83E3491DBDD49100DE4102 /* LiveStreamingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveStreamingViewModel.swift; sourceTree = "<group>"; };
 		7F83E35A1DBDD58C00DE4102 /* YouTubePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubePlayer.swift; sourceTree = "<group>"; };
 		7F83E35C1DBDD5DB00DE4102 /* YoutubePlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubePlayerViewController.swift; sourceTree = "<group>"; };
 		7F8FD2A3245940530041CF36 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
-		7F9274A81DBDCAD00051DE6B /* YouTubeLiveVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouTubeLiveVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F9274A81DBDCAD00051DE6B /* LiveEvents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveEvents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F9274AD1DBDCAD00051DE6B /* StreamListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamListViewController.swift; sourceTree = "<group>"; };
 		7F9274B21DBDCAD00051DE6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7FA950002032C5750083B23B /* UserStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
@@ -137,7 +137,11 @@
 		7FB8A42C1DD23F8400955C2D /* LFLiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFLiveViewController.swift; sourceTree = "<group>"; };
 		7FDCF9852546BF1400D5B492 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		89F5B9C9A947F2EB63CB7301 /* Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.debug.xcconfig"; sourceTree = "<group>"; };
-		8D49C69C84C0F80F29371978 /* Pods_YouTubeLiveVideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YouTubeLiveVideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A144B4F6FBDD3317B5035D73 /* Pods-LiveEvents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveEvents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LiveEvents/Pods-LiveEvents.debug.xcconfig"; sourceTree = "<group>"; };
+		A44F9CE8429BD266A7AF37D0 /* Pods-LiveEvents-LiveEventsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveEvents-LiveEventsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LiveEvents-LiveEventsTests/Pods-LiveEvents-LiveEventsTests.release.xcconfig"; sourceTree = "<group>"; };
+		B30E5B8AAAEDC735322F3362 /* Pods_LiveEvents_LiveEventsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LiveEvents_LiveEventsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F39C606421D10E92A92EBF67 /* Pods-LiveEvents-LiveEventsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveEvents-LiveEventsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LiveEvents-LiveEventsTests/Pods-LiveEvents-LiveEventsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FC305E81DB8C9398569AE585 /* Pods_LiveEvents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LiveEvents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,7 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07D4CF86D8F3C691683DCB72 /* Pods_YouTubeLiveVideo_YouTubeLiveVideoTests.framework in Frameworks */,
+				B9CC7E4719CFCD847E4A62A7 /* Pods_LiveEvents_LiveEventsTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,7 +157,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62F6B577B430D78912B92163 /* Pods_YouTubeLiveVideo.framework in Frameworks */,
+				C730E8A1F1E53DDE85561021 /* Pods_LiveEvents.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,7 +284,7 @@
 				7F1E96C62546B95A00638965 /* Constants.swift */,
 				7FAF9E91246187B900C8B81B /* Config.plist */,
 				7F53B1B32030B4B300E09CFA /* AppDelegate.swift */,
-				7F53B1B62030B4B400E09CFA /* YouTubeLiveVideo-Bridging-Header.h */,
+				7F53B1B62030B4B400E09CFA /* LiveEvents-Bridging-Header.h */,
 				7F8FD2A3245940530041CF36 /* README.md */,
 				7F678A8625FF4A0400F5FB2C /* .gitignore */,
 				7F678A8525FF499D00F5FB2C /* .swiftlint.yml */,
@@ -289,13 +293,13 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		7F7D43692573A3AE00CC7642 /* YouTubeLiveVideoTests */ = {
+		7F7D43692573A3AE00CC7642 /* LiveEventsTests */ = {
 			isa = PBXGroup;
 			children = (
-				7F7D436A2573A3AE00CC7642 /* YouTubeLiveVideoTests.swift */,
+				7F7D436A2573A3AE00CC7642 /* LiveEventsTests.swift */,
 				7F7D436C2573A3AE00CC7642 /* Info.plist */,
 			);
-			path = YouTubeLiveVideoTests;
+			path = LiveEventsTests;
 			sourceTree = "<group>";
 		};
 		7F8FD2A524596D970041CF36 /* ViewController */ = {
@@ -334,8 +338,8 @@
 		7F92749F1DBDCAD00051DE6B = {
 			isa = PBXGroup;
 			children = (
-				7FCB1A501DD4F2AF0033145D /* YouTubeLiveVideo */,
-				7F7D43692573A3AE00CC7642 /* YouTubeLiveVideoTests */,
+				7FCB1A501DD4F2AF0033145D /* LiveEvents */,
+				7F7D43692573A3AE00CC7642 /* LiveEventsTests */,
 				7F9274A91DBDCAD00051DE6B /* Products */,
 				8D45835BEFA5D646E97921C6 /* Pods */,
 				FD1738076B36F560B35DA7B2 /* Frameworks */,
@@ -345,8 +349,8 @@
 		7F9274A91DBDCAD00051DE6B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7F9274A81DBDCAD00051DE6B /* YouTubeLiveVideo.app */,
-				7F7D43682573A3AE00CC7642 /* YouTubeLiveVideoTests.xctest */,
+				7F9274A81DBDCAD00051DE6B /* LiveEvents.app */,
+				7F7D43682573A3AE00CC7642 /* LiveEventsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -361,7 +365,7 @@
 			path = Scenes/SignIn;
 			sourceTree = SOURCE_ROOT;
 		};
-		7FCB1A501DD4F2AF0033145D /* YouTubeLiveVideo */ = {
+		7FCB1A501DD4F2AF0033145D /* LiveEvents */ = {
 			isa = PBXGroup;
 			children = (
 				7F8FD2A724597FEF0041CF36 /* Appearace */,
@@ -372,7 +376,7 @@
 				7F53B1A5203071F000E09CFA /* Resources */,
 				7F53B1B22030B43000E09CFA /* Supporting Files */,
 			);
-			name = YouTubeLiveVideo;
+			name = LiveEvents;
 			sourceTree = "<group>";
 		};
 		8D45835BEFA5D646E97921C6 /* Pods */ = {
@@ -382,6 +386,10 @@
 				1D25A3DFDBD2707F0A23DDB9 /* Pods-YouTubeLiveVideo.release.xcconfig */,
 				89F5B9C9A947F2EB63CB7301 /* Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.debug.xcconfig */,
 				27E16880403E6FB1BBCB3749 /* Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.release.xcconfig */,
+				A144B4F6FBDD3317B5035D73 /* Pods-LiveEvents.debug.xcconfig */,
+				65A4996DDBF267DFE82ED9D5 /* Pods-LiveEvents.release.xcconfig */,
+				F39C606421D10E92A92EBF67 /* Pods-LiveEvents-LiveEventsTests.debug.xcconfig */,
+				A44F9CE8429BD266A7AF37D0 /* Pods-LiveEvents-LiveEventsTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -389,8 +397,8 @@
 		FD1738076B36F560B35DA7B2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8D49C69C84C0F80F29371978 /* Pods_YouTubeLiveVideo.framework */,
-				365770FD4C31A97786372905 /* Pods_YouTubeLiveVideo_YouTubeLiveVideoTests.framework */,
+				FC305E81DB8C9398569AE585 /* Pods_LiveEvents.framework */,
+				B30E5B8AAAEDC735322F3362 /* Pods_LiveEvents_LiveEventsTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -398,9 +406,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7F7D43672573A3AE00CC7642 /* YouTubeLiveVideoTests */ = {
+		7F7D43672573A3AE00CC7642 /* LiveEventsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7F7D436F2573A3AE00CC7642 /* Build configuration list for PBXNativeTarget "YouTubeLiveVideoTests" */;
+			buildConfigurationList = 7F7D436F2573A3AE00CC7642 /* Build configuration list for PBXNativeTarget "LiveEventsTests" */;
 			buildPhases = (
 				06853B38B6AFBB2B6C3C7205 /* [CP] Check Pods Manifest.lock */,
 				7F7D43642573A3AE00CC7642 /* Sources */,
@@ -414,14 +422,14 @@
 			dependencies = (
 				7F7D436E2573A3AE00CC7642 /* PBXTargetDependency */,
 			);
-			name = YouTubeLiveVideoTests;
+			name = LiveEventsTests;
 			productName = YouTubeLiveVideoTests;
-			productReference = 7F7D43682573A3AE00CC7642 /* YouTubeLiveVideoTests.xctest */;
+			productReference = 7F7D43682573A3AE00CC7642 /* LiveEventsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		7F9274A71DBDCAD00051DE6B /* YouTubeLiveVideo */ = {
+		7F9274A71DBDCAD00051DE6B /* LiveEvents */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7F9274BA1DBDCAD00051DE6B /* Build configuration list for PBXNativeTarget "YouTubeLiveVideo" */;
+			buildConfigurationList = 7F9274BA1DBDCAD00051DE6B /* Build configuration list for PBXNativeTarget "LiveEvents" */;
 			buildPhases = (
 				212D28A20033C99140419B3A /* [CP] Check Pods Manifest.lock */,
 				7F9274A41DBDCAD00051DE6B /* Sources */,
@@ -436,9 +444,9 @@
 			);
 			dependencies = (
 			);
-			name = YouTubeLiveVideo;
+			name = LiveEvents;
 			productName = YouTubeLiveVideo;
-			productReference = 7F9274A81DBDCAD00051DE6B /* YouTubeLiveVideo.app */;
+			productReference = 7F9274A81DBDCAD00051DE6B /* LiveEvents.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -465,7 +473,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 7F9274A31DBDCAD00051DE6B /* Build configuration list for PBXProject "YouTubeLiveVideo" */;
+			buildConfigurationList = 7F9274A31DBDCAD00051DE6B /* Build configuration list for PBXProject "LiveEvents" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -478,8 +486,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7F9274A71DBDCAD00051DE6B /* YouTubeLiveVideo */,
-				7F7D43672573A3AE00CC7642 /* YouTubeLiveVideoTests */,
+				7F9274A71DBDCAD00051DE6B /* LiveEvents */,
+				7F7D43672573A3AE00CC7642 /* LiveEventsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -522,7 +530,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-LiveEvents-LiveEventsTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -535,7 +543,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-LiveEvents-LiveEventsTests/Pods-LiveEvents-LiveEventsTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
@@ -578,7 +586,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LiveEvents-LiveEventsTests/Pods-LiveEvents-LiveEventsTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		212D28A20033C99140419B3A /* [CP] Check Pods Manifest.lock */ = {
@@ -592,7 +600,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-YouTubeLiveVideo-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-LiveEvents-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -605,7 +613,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YouTubeLiveVideo/Pods-YouTubeLiveVideo-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-LiveEvents/Pods-LiveEvents-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
@@ -644,7 +652,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YouTubeLiveVideo/Pods-YouTubeLiveVideo-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LiveEvents/Pods-LiveEvents-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7853DD346448FB0999341CFA /* [CP] Copy Pods Resources */ = {
@@ -653,7 +661,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YouTubeLiveVideo/Pods-YouTubeLiveVideo-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-LiveEvents/Pods-LiveEvents-resources.sh",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -662,7 +670,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YouTubeLiveVideo/Pods-YouTubeLiveVideo-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LiveEvents/Pods-LiveEvents-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7F678A8225FF490200F5FB2C /* ShellScript */ = {
@@ -688,7 +696,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-LiveEvents-LiveEventsTests/Pods-LiveEvents-LiveEventsTests-resources.sh",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -697,7 +705,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LiveEvents-LiveEventsTests/Pods-LiveEvents-LiveEventsTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -707,7 +715,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F7D436B2573A3AE00CC7642 /* YouTubeLiveVideoTests.swift in Sources */,
+				7F7D436B2573A3AE00CC7642 /* LiveEventsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -761,7 +769,7 @@
 /* Begin PBXTargetDependency section */
 		7F7D436E2573A3AE00CC7642 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7F9274A71DBDCAD00051DE6B /* YouTubeLiveVideo */;
+			target = 7F9274A71DBDCAD00051DE6B /* LiveEvents */;
 			targetProxy = 7F7D436D2573A3AE00CC7642 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -788,7 +796,7 @@
 /* Begin XCBuildConfiguration section */
 		7F7D43702573A3AE00CC7642 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89F5B9C9A947F2EB63CB7301 /* Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.debug.xcconfig */;
+			baseConfigurationReference = F39C606421D10E92A92EBF67 /* Pods-LiveEvents-LiveEventsTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -808,23 +816,23 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N5B5T39W8Y;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = YouTubeLiveVideoTests/Info.plist;
+				INFOPLIST_FILE = LiveEventsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.skdevappleid.YouTubeLiveVideoTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skdevappleid.LiveEventsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YouTubeLiveVideo.app/YouTubeLiveVideo";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LiveEvents.app/LiveEvents";
 			};
 			name = Debug;
 		};
 		7F7D43712573A3AE00CC7642 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 27E16880403E6FB1BBCB3749 /* Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.release.xcconfig */;
+			baseConfigurationReference = A44F9CE8429BD266A7AF37D0 /* Pods-LiveEvents-LiveEventsTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -844,15 +852,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N5B5T39W8Y;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = YouTubeLiveVideoTests/Info.plist;
+				INFOPLIST_FILE = LiveEventsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.skdevappleid.YouTubeLiveVideoTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skdevappleid.LiveEventsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YouTubeLiveVideo.app/YouTubeLiveVideo";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LiveEvents.app/LiveEvents";
 			};
 			name = Release;
 		};
@@ -968,7 +976,7 @@
 		};
 		7F9274BB1DBDCAD00051DE6B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2F6AF40A23D40D691D15F9E0 /* Pods-YouTubeLiveVideo.debug.xcconfig */;
+			baseConfigurationReference = A144B4F6FBDD3317B5035D73 /* Pods-LiveEvents.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -984,11 +992,11 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.skdevappleid.FightFan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skdevappleid.liveevents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "iOS Development Wildcard";
-				SWIFT_OBJC_BRIDGING_HEADER = "YouTubeLiveVideo-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "LiveEvents-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.2;
@@ -997,7 +1005,7 @@
 		};
 		7F9274BC1DBDCAD00051DE6B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1D25A3DFDBD2707F0A23DDB9 /* Pods-YouTubeLiveVideo.release.xcconfig */;
+			baseConfigurationReference = 65A4996DDBF267DFE82ED9D5 /* Pods-LiveEvents.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1013,11 +1021,11 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.skdevappleid.FightFan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skdevappleid.liveevents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "iOS Development Wildcard";
-				SWIFT_OBJC_BRIDGING_HEADER = "YouTubeLiveVideo-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "LiveEvents-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.2;
 			};
@@ -1026,7 +1034,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7F7D436F2573A3AE00CC7642 /* Build configuration list for PBXNativeTarget "YouTubeLiveVideoTests" */ = {
+		7F7D436F2573A3AE00CC7642 /* Build configuration list for PBXNativeTarget "LiveEventsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7F7D43702573A3AE00CC7642 /* Debug */,
@@ -1035,7 +1043,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7F9274A31DBDCAD00051DE6B /* Build configuration list for PBXProject "YouTubeLiveVideo" */ = {
+		7F9274A31DBDCAD00051DE6B /* Build configuration list for PBXProject "LiveEvents" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7F9274B81DBDCAD00051DE6B /* Debug */,
@@ -1044,7 +1052,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7F9274BA1DBDCAD00051DE6B /* Build configuration list for PBXNativeTarget "YouTubeLiveVideo" */ = {
+		7F9274BA1DBDCAD00051DE6B /* Build configuration list for PBXNativeTarget "LiveEvents" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7F9274BB1DBDCAD00051DE6B /* Debug */,

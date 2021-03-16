@@ -1,5 +1,5 @@
 //  Appearance
-//  YouTubeLiveVideo
+//  LiveEvents
 //
 //  Created by Sergey Krotkih
 //
@@ -12,7 +12,7 @@ final class Appearance {
     }
 
     private static let CustomizeStatusBar = false
-    
+
     static func customize() {
         // Color file template should be added into the project.
         UIApplication.shared.keyWindow?.tintColor = .black

@@ -1,6 +1,6 @@
 //
-//  YouTubeLiveVideoTests.swift
-//  YouTubeLiveVideoTests
+//  LiveEventsTests.swift
+//  LiveEventsTests
 //
 //  Created by Sergey Krotkih on 29.11.2020.
 //  Copyright © 2020 Sergey Krotkih. All rights reserved.
@@ -14,7 +14,7 @@ import RxBlocking
 
 @testable import YouTubeLiveVideo
 
-class YouTubeLiveVideoTests: XCTestCase {
+class LiveEventsTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

@@ -1,6 +1,6 @@
 //
 //  GoogleSignInViewModel.swift
-//  YouTubeLiveVideo
+//  LiveEvents
 //
 //  Created by Sergey Krotkih
 //
@@ -12,7 +12,7 @@ import RxSwift
 class GoogleSignInViewModel: SignInProtocol {
     var interactor: SignInObservable!
     private let disposeBag = DisposeBag()
-    
+
     required init(viewController: UIViewController, interactor: GoogleSignInInteractor) {
         GIDSignIn.sharedInstance()?.presentingViewController = viewController
         self.interactor = interactor

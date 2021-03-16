@@ -1,8 +1,8 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-target 'YouTubeLiveVideo' do
+target 'LiveEvents' do
     
-    platform :ios, '11.2'
+    platform :ios, '12.1'
     use_frameworks!
     
     pod 'GoogleSignIn'
@@ -19,7 +19,7 @@ target 'YouTubeLiveVideo' do
     pod 'LFLiveKit'
     pod "PromiseKit/CorePromise", "~> 6.8"
 
-    target 'YouTubeLiveVideoTests' do
+    target 'LiveEventsTests' do
       pod 'RxTest'
       pod 'RxBlocking'
     end

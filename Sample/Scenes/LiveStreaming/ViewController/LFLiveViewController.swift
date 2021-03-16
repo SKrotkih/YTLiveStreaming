@@ -1,6 +1,6 @@
 //
 //  LFLiveViewController.swift
-//  YouTubeLiveVideo
+//  LiveEvents
 //
 //  Created by Sergey Krotkih on 11/8/16.
 //

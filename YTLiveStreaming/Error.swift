@@ -1,6 +1,6 @@
 //
 //  Error.swift
-//  YouTubeLiveVideo
+//  LiveEvents
 //
 
 import Foundation

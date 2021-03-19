@@ -16,7 +16,10 @@ extension DispatchQueue {
 	 - parameter block: Block to execute once.
 	 */
 	public class func once(token: String, block: () -> Void) {
-		objc_sync_enter(self); defer { objc_sync_exit(self) }
+		objc_sync_enter(self);
+        defer {
+            objc_sync_exit(self)
+        }
 
 		if _onceTracker.contains(token) {
 			return

@@ -11,7 +11,7 @@ target 'LiveEvents' do
     # But You can use the local copy just for development:
     pod 'YTLiveStreaming', :path => '../.'
 
-    pod "XCDYouTubeKit", "~> 2.5"
+    pod "XCDYouTubeKit", "~> 2.15"
     
     pod 'RxSwift'
     pod 'RxCocoa'

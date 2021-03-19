@@ -12,10 +12,9 @@ import RxSwift
 
 public class GoogleSignInInteractor: NSObject, SignInObservable {
     let rxSignInResult: PublishSubject<Result<Void, LVError>> = PublishSubject()
-    let rxSignOut = PublishSubject<Bool>()
+    let rxSignOut: PublishSubject<Bool> = PublishSubject()
 
-    var userStorage = UserStorage()
-    private let worker = GoogleSignInWorker()
+    private let worker = GoogleClientId()
 
     fileprivate struct Auth {
         // There are needed sensitive scopes to have ability to work properly
@@ -26,22 +25,20 @@ public class GoogleSignInInteractor: NSObject, SignInObservable {
         static let scopes = [scope1, scope2, scope3]
     }
 
-    fileprivate var mViewController: UIViewController?
-
     var currentUser: GIDGoogleUser? {
         return GIDSignIn.sharedInstance().currentUser
     }
 
+    var isConnected: Bool {
+        return currentUser != nil
+    }
+
     var currentUserInfo: String? {
-        if let user = currentUser {
-            return user.profile.givenName
+        if let currentUser = currentUser {
+            return currentUser.profile.givenName
         } else {
             return nil
         }
-    }
-
-    var isConnected: Bool {
-        return currentUser != nil
     }
 
     fileprivate var accessToken: String? {
@@ -68,7 +65,7 @@ public class GoogleSignInInteractor: NSObject, SignInObservable {
     func signOut() {
         GIDSignIn.sharedInstance().signOut()
         GoogleOAuth2.sharedInstance.clearToken()
-        UserStorage.user = nil
+        GoogleUser.signOut()
 
         // TODO: Find Out Why does not work callback, then remove it:
         rxSignOut.onNext(true)
@@ -84,7 +81,7 @@ public class GoogleSignInInteractor: NSObject, SignInObservable {
 extension GoogleSignInInteractor: GIDSignInDelegate {
 
     // [START signin_handler]
-    public func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser?, withError error: Error?) {
+    public func sign(_ signIn: GIDSignIn, didSignInFor user: GIDGoogleUser?, withError error: Error?) {
         if let error = error {
             errorSigedIn(error: error)
         } else if user == nil {
@@ -126,12 +123,14 @@ extension GoogleSignInInteractor: GIDSignInDelegate {
 
     private func userDidSignIn(user: GIDGoogleUser) {
         checkYoutubePermissionScopes(for: user)
-        GoogleUser.save(user)
-        GoogleOAuth2.sharedInstance.accessToken = accessToken
-        self.rxSignInResult.onNext(.success(Void()))
+        if GoogleUser.signIn(as: user) {
+            GoogleOAuth2.sharedInstance.accessToken = accessToken
+            self.rxSignInResult.onNext(.success(Void()))
+        }
     }
 
-    @discardableResult private func checkYoutubePermissionScopes(for user: GIDGoogleUser) -> Bool {
+    @discardableResult
+    private func checkYoutubePermissionScopes(for user: GIDGoogleUser) -> Bool {
         let currentScopes = user.grantedScopes.compactMap { $0 }
 
         print("SCOPES=\(currentScopes)")
@@ -150,7 +149,7 @@ extension GoogleSignInInteractor: GIDSignInDelegate {
              self.sendRequestToAddNeededScopes(for: user)
              */
             let message = "Please add scopes to have ability to manage your YouTube videos. The app will not work properly"
-            Alert.sharedInstance.showOk("Warning", message: message)
+            Alert.showOk("Warning", message: message)
             return false
         }
     }

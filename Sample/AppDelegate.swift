@@ -24,7 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        Appearance.customize()
+        Appearance.shared.customize.window()
+        Appearance.shared.customize.navigationBar()
+        Appearance.shared.customize.statusBar()
         setUpWindow()
         appRouter.showSignInViewController()
         return true

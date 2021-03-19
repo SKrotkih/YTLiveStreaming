@@ -12,7 +12,7 @@
 		7F1E96BB2546B8BF00638965 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1E96AE2546B8BF00638965 /* Alert.swift */; };
 		7F1E96BC2546B8BF00638965 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1E96AF2546B8BF00638965 /* Helpers.swift */; };
 		7F1E96BD2546B8BF00638965 /* StatusBarShowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1E96B02546B8BF00638965 /* StatusBarShowingViewController.swift */; };
-		7F1E96BE2546B8BF00638965 /* UIViewController+FullScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1E96B32546B8BF00638965 /* UIViewController+FullScreen.swift */; };
+		7F1E96BE2546B8BF00638965 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1E96B32546B8BF00638965 /* UIViewController+Ext.swift */; };
 		7F1E96BF2546B8BF00638965 /* UIStoryboard+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1E96B42546B8BF00638965 /* UIStoryboard+Ext.swift */; };
 		7F1E96C02546B8BF00638965 /* UIView+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F1E96B52546B8BF00638965 /* UIView+YYAdd.m */; };
 		7F1E96C12546B8BF00638965 /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1E96B62546B8BF00638965 /* Color+Ext.swift */; };
@@ -26,7 +26,7 @@
 		7F384BEB245873A6004C07EE /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F384BE9245873A5004C07EE /* BaseViewController.swift */; };
 		7F384BEC245873A6004C07EE /* MainNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F384BEA245873A5004C07EE /* MainNavController.swift */; };
 		7F384BEE24587498004C07EE /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F384BED24587498004C07EE /* Appearance.swift */; };
-		7F39A88A24569BF200C18130 /* GoogleSignInWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F39A88924569BF200C18130 /* GoogleSignInWorker.swift */; };
+		7F39A88A24569BF200C18130 /* GoogleClientId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F39A88924569BF200C18130 /* GoogleClientId.swift */; };
 		7F39A88D2456FD0400C18130 /* GoogleSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F39A88C2456FD0400C18130 /* GoogleSessionManager.swift */; };
 		7F53B1AA2030724200E09CFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F53B1A62030724200E09CFA /* LaunchScreen.storyboard */; };
 		7F53B1AB2030724200E09CFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F53B1A82030724200E09CFA /* Main.storyboard */; };
@@ -38,14 +38,18 @@
 		7F79C8A8254804320044CF81 /* SessionViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79C8A7254804320044CF81 /* SessionViewModelProtocol.swift */; };
 		7F79C8AB254806DF0044CF81 /* YouTubeLiveVideoPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79C8AA254806DF0044CF81 /* YouTubeLiveVideoPublisher.swift */; };
 		7F7D436B2573A3AE00CC7642 /* LiveEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7D436A2573A3AE00CC7642 /* LiveEventsTests.swift */; };
+		7F7D7D9C26087996005FAC3B /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7D7D9B26087996005FAC3B /* LocalStorage.swift */; };
 		7F83E3371DBDD35500DE4102 /* StreamListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E3361DBDD35500DE4102 /* StreamListTableViewCell.swift */; };
 		7F83E34D1DBDD49100DE4102 /* LiveStreamingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E3491DBDD49100DE4102 /* LiveStreamingViewModel.swift */; };
 		7F83E35B1DBDD58C00DE4102 /* YouTubePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E35A1DBDD58C00DE4102 /* YouTubePlayer.swift */; };
-		7F83E35D1DBDD5DB00DE4102 /* YoutubePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E35C1DBDD5DB00DE4102 /* YoutubePlayerViewController.swift */; };
+		7F83E35D1DBDD5DB00DE4102 /* XCDYouTubeVideoPlayer8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E35C1DBDD5DB00DE4102 /* XCDYouTubeVideoPlayer8.swift */; };
 		7F8FD2A4245940530041CF36 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7F8FD2A3245940530041CF36 /* README.md */; };
 		7F9274AE1DBDCAD00051DE6B /* StreamListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9274AD1DBDCAD00051DE6B /* StreamListViewController.swift */; };
 		7F9274B31DBDCAD00051DE6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F9274B21DBDCAD00051DE6B /* Assets.xcassets */; };
-		7FA950022032C5750083B23B /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA950002032C5750083B23B /* UserStorage.swift */; };
+		7F9A91D42609AAB90036CA0B /* YouTubeHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9A91D32609AAB90036CA0B /* YouTubeHelpers.swift */; };
+		7F9A91D82609AC170036CA0B /* YouTubeVideoPlayed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9A91D72609AC170036CA0B /* YouTubeVideoPlayed.swift */; };
+		7F9A92352609BE180036CA0B /* XCDYouTubeVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9A92342609BE180036CA0B /* XCDYouTubeVideoPlayer.swift */; };
+		7FA950022032C5750083B23B /* GoogleUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA950002032C5750083B23B /* GoogleUser.swift */; };
 		7FA950032032C5750083B23B /* GoogleSignInInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA950012032C5750083B23B /* GoogleSignInInteractor.swift */; };
 		7FAF9E92246187B900C8B81B /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FAF9E91246187B900C8B81B /* Config.plist */; };
 		7FB8A42B1DD23C3100955C2D /* LFLivePreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8A42A1DD23C3100955C2D /* LFLivePreview.m */; };
@@ -89,7 +93,7 @@
 		7F1E96AF2546B8BF00638965 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		7F1E96B02546B8BF00638965 /* StatusBarShowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarShowingViewController.swift; sourceTree = "<group>"; };
 		7F1E96B22546B8BF00638965 /* UIControl+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+YYAdd.h"; sourceTree = "<group>"; };
-		7F1E96B32546B8BF00638965 /* UIViewController+FullScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+FullScreen.swift"; sourceTree = "<group>"; };
+		7F1E96B32546B8BF00638965 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		7F1E96B42546B8BF00638965 /* UIStoryboard+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Ext.swift"; sourceTree = "<group>"; };
 		7F1E96B52546B8BF00638965 /* UIView+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YYAdd.m"; sourceTree = "<group>"; };
 		7F1E96B62546B8BF00638965 /* Color+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
@@ -104,7 +108,7 @@
 		7F384BE9245873A5004C07EE /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7F384BEA245873A5004C07EE /* MainNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavController.swift; sourceTree = "<group>"; };
 		7F384BED24587498004C07EE /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
-		7F39A88924569BF200C18130 /* GoogleSignInWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInWorker.swift; sourceTree = "<group>"; };
+		7F39A88924569BF200C18130 /* GoogleClientId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleClientId.swift; sourceTree = "<group>"; };
 		7F39A88C2456FD0400C18130 /* GoogleSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSessionManager.swift; sourceTree = "<group>"; };
 		7F53B1A72030724200E09CFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7F53B1A92030724200E09CFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -121,15 +125,19 @@
 		7F7D43682573A3AE00CC7642 /* LiveEventsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiveEventsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F7D436A2573A3AE00CC7642 /* LiveEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveEventsTests.swift; sourceTree = "<group>"; };
 		7F7D436C2573A3AE00CC7642 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7F7D7D9B26087996005FAC3B /* LocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
 		7F83E3361DBDD35500DE4102 /* StreamListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamListTableViewCell.swift; sourceTree = "<group>"; };
 		7F83E3491DBDD49100DE4102 /* LiveStreamingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveStreamingViewModel.swift; sourceTree = "<group>"; };
 		7F83E35A1DBDD58C00DE4102 /* YouTubePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubePlayer.swift; sourceTree = "<group>"; };
-		7F83E35C1DBDD5DB00DE4102 /* YoutubePlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubePlayerViewController.swift; sourceTree = "<group>"; };
+		7F83E35C1DBDD5DB00DE4102 /* XCDYouTubeVideoPlayer8.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCDYouTubeVideoPlayer8.swift; sourceTree = "<group>"; };
 		7F8FD2A3245940530041CF36 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		7F9274A81DBDCAD00051DE6B /* LiveEvents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveEvents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F9274AD1DBDCAD00051DE6B /* StreamListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamListViewController.swift; sourceTree = "<group>"; };
 		7F9274B21DBDCAD00051DE6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		7FA950002032C5750083B23B /* UserStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
+		7F9A91D32609AAB90036CA0B /* YouTubeHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeHelpers.swift; sourceTree = "<group>"; };
+		7F9A91D72609AC170036CA0B /* YouTubeVideoPlayed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeVideoPlayed.swift; sourceTree = "<group>"; };
+		7F9A92342609BE180036CA0B /* XCDYouTubeVideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCDYouTubeVideoPlayer.swift; sourceTree = "<group>"; };
+		7FA950002032C5750083B23B /* GoogleUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleUser.swift; sourceTree = "<group>"; };
 		7FA950012032C5750083B23B /* GoogleSignInInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleSignInInteractor.swift; sourceTree = "<group>"; };
 		7FAF9E91246187B900C8B81B /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Config.plist; sourceTree = SOURCE_ROOT; };
 		7FB8A4291DD23C3100955C2D /* LFLivePreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFLivePreview.h; sourceTree = "<group>"; };
@@ -164,35 +172,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7F1E96A72546B45900638965 /* ViewConroller */ = {
+		7F1E96A72546B45900638965 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				7F0933CC2457258300FB5579 /* GoogleSignInViewController.swift */,
 			);
-			path = ViewConroller;
+			path = View;
 			sourceTree = "<group>";
 		};
 		7F1E96A82546B46A00638965 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				7F7D7DA42608EE0A005FAC3B /* Protocols */,
 				7F0933CE24574FCB00FB5579 /* GoogleSignInViewModel.swift */,
-				7F2B6C12254D8B1F0081E007 /* SignInProtocol.swift */,
-				7FA950012032C5750083B23B /* GoogleSignInInteractor.swift */,
-				7F39A88924569BF200C18130 /* GoogleSignInWorker.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		7F1E96A92546B4EB00638965 /* ViewController */ = {
+		7F1E96A92546B4EB00638965 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				7FB8A42C1DD23F8400955C2D /* LFLiveViewController.swift */,
-				7F83E3491DBDD49100DE4102 /* LiveStreamingViewModel.swift */,
-				7F79C8AA254806DF0044CF81 /* YouTubeLiveVideoPublisher.swift */,
 				7FB8A4291DD23C3100955C2D /* LFLivePreview.h */,
 				7FB8A42A1DD23C3100955C2D /* LFLivePreview.m */,
 			);
-			path = ViewController;
+			path = View;
 			sourceTree = "<group>";
 		};
 		7F1E96AD2546B8BF00638965 /* Helpers */ = {
@@ -209,14 +213,12 @@
 		7F1E96B12546B8BF00638965 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				7F1E96B22546B8BF00638965 /* UIControl+YYAdd.h */,
-				7F1E96B32546B8BF00638965 /* UIViewController+FullScreen.swift */,
-				7F1E96B52546B8BF00638965 /* UIView+YYAdd.m */,
+				7FC7367C2605D9ED00F426A9 /* YYAdd */,
+				7F1E96B32546B8BF00638965 /* UIViewController+Ext.swift */,
+				7F1E96B42546B8BF00638965 /* UIStoryboard+Ext.swift */,
 				7F1E96B62546B8BF00638965 /* Color+Ext.swift */,
 				7F1E96B72546B8BF00638965 /* DispatchQueue+Ext.swift */,
-				7F1E96B82546B8BF00638965 /* UIControl+YYAdd.m */,
 				7F1E96B92546B8BF00638965 /* EnumIteration.swift */,
-				7F1E96BA2546B8BF00638965 /* UIView+YYAdd.h */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -225,7 +227,8 @@
 			isa = PBXGroup;
 			children = (
 				7F83E35A1DBDD58C00DE4102 /* YouTubePlayer.swift */,
-				7F83E35C1DBDD5DB00DE4102 /* YoutubePlayerViewController.swift */,
+				7F9A92342609BE180036CA0B /* XCDYouTubeVideoPlayer.swift */,
+				7F83E35C1DBDD5DB00DE4102 /* XCDYouTubeVideoPlayer8.swift */,
 			);
 			path = YouTubePlayer;
 			sourceTree = "<group>";
@@ -233,7 +236,9 @@
 		7F39A88B24569F3800C18130 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7FA950002032C5750083B23B /* UserStorage.swift */,
+				7FA950002032C5750083B23B /* GoogleUser.swift */,
+				7F7D7D9B26087996005FAC3B /* LocalStorage.swift */,
+				7F39A88924569BF200C18130 /* GoogleClientId.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -251,7 +256,6 @@
 		7F53B1AD203072EA00E09CFA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				7F1E96B42546B8BF00638965 /* UIStoryboard+Ext.swift */,
 				7F2C3C3B2544187100CA9912 /* AppRouter.swift */,
 				7FA94FFF2032C5750083B23B /* SignIn */,
 				7F53B1AF2030B15C00E09CFA /* StreamList */,
@@ -264,7 +268,9 @@
 		7F53B1AE2030733200E09CFA /* LiveStreaming */ = {
 			isa = PBXGroup;
 			children = (
-				7F1E96A92546B4EB00638965 /* ViewController */,
+				7F1E96A92546B4EB00638965 /* View */,
+				7F7D7DA92608EF09005FAC3B /* ViewModel */,
+				7F9A91D12609A9ED0036CA0B /* Helpers */,
 			);
 			path = LiveStreaming;
 			sourceTree = "<group>";
@@ -272,8 +278,9 @@
 		7F53B1AF2030B15C00E09CFA /* StreamList */ = {
 			isa = PBXGroup;
 			children = (
-				7F8FD2A524596D970041CF36 /* ViewController */,
+				7F8FD2A524596D970041CF36 /* View */,
 				7F8FD2A624596DB20041CF36 /* ViewModel */,
+				7F7D7DA82608EEC5005FAC3B /* Interactor */,
 			);
 			path = StreamList;
 			sourceTree = "<group>";
@@ -302,37 +309,86 @@
 			path = LiveEventsTests;
 			sourceTree = "<group>";
 		};
-		7F8FD2A524596D970041CF36 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				7F9274AD1DBDCAD00051DE6B /* StreamListViewController.swift */,
-				7F83E3361DBDD35500DE4102 /* StreamListTableViewCell.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		7F8FD2A624596DB20041CF36 /* ViewModel */ = {
+		7F7D7DA22608EAF0005FAC3B /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				7F79C8A7254804320044CF81 /* SessionViewModelProtocol.swift */,
 				7F79C8A3254802910044CF81 /* MainViewModelProtocol.swift */,
 				7F79C8A5254802FB0044CF81 /* BroadcastsDataFetcherProtocol.swift */,
 				7F79C8A12547F2910044CF81 /* BroadcastsApiProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		7F7D7DA42608EE0A005FAC3B /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				7F2B6C12254D8B1F0081E007 /* SignInProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		7F7D7DA62608EE4D005FAC3B /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
 				7F39A88C2456FD0400C18130 /* GoogleSessionManager.swift */,
-				7F2439F524580FA500C1FB17 /* StreamListViewModel.swift */,
+				7FA950012032C5750083B23B /* GoogleSignInInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		7F7D7DA82608EEC5005FAC3B /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
 				7F53B1B02030B38100E09CFA /* StreamListDataSource.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		7F7D7DA92608EF09005FAC3B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7F7D7DAA2608EF2E005FAC3B /* Protocols */,
+				7F83E3491DBDD49100DE4102 /* LiveStreamingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		7F8FD2A724597FEF0041CF36 /* Appearace */ = {
+		7F7D7DAA2608EF2E005FAC3B /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				7F79C8AA254806DF0044CF81 /* YouTubeLiveVideoPublisher.swift */,
+				7F9A91D72609AC170036CA0B /* YouTubeVideoPlayed.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		7F8FD2A524596D970041CF36 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7F9274AD1DBDCAD00051DE6B /* StreamListViewController.swift */,
+				7F83E3361DBDD35500DE4102 /* StreamListTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7F8FD2A624596DB20041CF36 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7F7D7DA22608EAF0005FAC3B /* Protocols */,
+				7F2439F524580FA500C1FB17 /* StreamListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7F8FD2A724597FEF0041CF36 /* Appearance */ = {
 			isa = PBXGroup;
 			children = (
 				7F384BED24587498004C07EE /* Appearance.swift */,
 				7F384BEA245873A5004C07EE /* MainNavController.swift */,
 				7F384BE9245873A5004C07EE /* BaseViewController.swift */,
 			);
-			path = Appearace;
+			path = Appearance;
 			sourceTree = "<group>";
 		};
 		7F92749F1DBDCAD00051DE6B = {
@@ -355,20 +411,40 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		7F9A91D12609A9ED0036CA0B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				7F9A91D32609AAB90036CA0B /* YouTubeHelpers.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		7FA94FFF2032C5750083B23B /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
-				7F1E96A72546B45900638965 /* ViewConroller */,
+				7F1E96A72546B45900638965 /* View */,
 				7F1E96A82546B46A00638965 /* ViewModel */,
+				7F7D7DA62608EE4D005FAC3B /* Interactor */,
 			);
 			name = SignIn;
 			path = Scenes/SignIn;
 			sourceTree = SOURCE_ROOT;
 		};
+		7FC7367C2605D9ED00F426A9 /* YYAdd */ = {
+			isa = PBXGroup;
+			children = (
+				7F1E96B22546B8BF00638965 /* UIControl+YYAdd.h */,
+				7F1E96B82546B8BF00638965 /* UIControl+YYAdd.m */,
+				7F1E96BA2546B8BF00638965 /* UIView+YYAdd.h */,
+				7F1E96B52546B8BF00638965 /* UIView+YYAdd.m */,
+			);
+			path = YYAdd;
+			sourceTree = "<group>";
+		};
 		7FCB1A501DD4F2AF0033145D /* LiveEvents */ = {
 			isa = PBXGroup;
 			children = (
-				7F8FD2A724597FEF0041CF36 /* Appearace */,
+				7F8FD2A724597FEF0041CF36 /* Appearance */,
 				7F1E96B12546B8BF00638965 /* Extensions */,
 				7F1E96AD2546B8BF00638965 /* Helpers */,
 				7F39A88B24569F3800C18130 /* Model */,
@@ -723,11 +799,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7FA950022032C5750083B23B /* UserStorage.swift in Sources */,
+				7FA950022032C5750083B23B /* GoogleUser.swift in Sources */,
 				7FB8A42B1DD23C3100955C2D /* LFLivePreview.m in Sources */,
 				7F1E96BC2546B8BF00638965 /* Helpers.swift in Sources */,
+				7F9A91D82609AC170036CA0B /* YouTubeVideoPlayed.swift in Sources */,
 				7F384BEB245873A6004C07EE /* BaseViewController.swift in Sources */,
 				7F83E3371DBDD35500DE4102 /* StreamListTableViewCell.swift in Sources */,
+				7F9A92352609BE180036CA0B /* XCDYouTubeVideoPlayer.swift in Sources */,
 				7F79C8AB254806DF0044CF81 /* YouTubeLiveVideoPublisher.swift in Sources */,
 				7F384BEE24587498004C07EE /* Appearance.swift in Sources */,
 				7F9274AE1DBDCAD00051DE6B /* StreamListViewController.swift in Sources */,
@@ -735,12 +813,13 @@
 				7F2439F624580FA500C1FB17 /* StreamListViewModel.swift in Sources */,
 				7F1E96C72546B95A00638965 /* Constants.swift in Sources */,
 				7F83E35B1DBDD58C00DE4102 /* YouTubePlayer.swift in Sources */,
-				7F1E96BE2546B8BF00638965 /* UIViewController+FullScreen.swift in Sources */,
+				7F1E96BE2546B8BF00638965 /* UIViewController+Ext.swift in Sources */,
 				7F1E96C12546B8BF00638965 /* Color+Ext.swift in Sources */,
 				7F79C8A4254802910044CF81 /* MainViewModelProtocol.swift in Sources */,
 				7F83E34D1DBDD49100DE4102 /* LiveStreamingViewModel.swift in Sources */,
 				7F0933CF24574FCB00FB5579 /* GoogleSignInViewModel.swift in Sources */,
-				7F83E35D1DBDD5DB00DE4102 /* YoutubePlayerViewController.swift in Sources */,
+				7F83E35D1DBDD5DB00DE4102 /* XCDYouTubeVideoPlayer8.swift in Sources */,
+				7F9A91D42609AAB90036CA0B /* YouTubeHelpers.swift in Sources */,
 				7FDCF9862546BF1400D5B492 /* Error.swift in Sources */,
 				7F53B1B72030B4B400E09CFA /* AppDelegate.swift in Sources */,
 				7F79C8A8254804320044CF81 /* SessionViewModelProtocol.swift in Sources */,
@@ -755,10 +834,11 @@
 				7F384BEC245873A6004C07EE /* MainNavController.swift in Sources */,
 				7F1E96BD2546B8BF00638965 /* StatusBarShowingViewController.swift in Sources */,
 				7F79C8A22547F2910044CF81 /* BroadcastsApiProtocol.swift in Sources */,
-				7F39A88A24569BF200C18130 /* GoogleSignInWorker.swift in Sources */,
+				7F39A88A24569BF200C18130 /* GoogleClientId.swift in Sources */,
 				7F1E96BF2546B8BF00638965 /* UIStoryboard+Ext.swift in Sources */,
 				7F1E96C22546B8BF00638965 /* DispatchQueue+Ext.swift in Sources */,
 				7F2C3C3C2544187100CA9912 /* AppRouter.swift in Sources */,
+				7F7D7D9C26087996005FAC3B /* LocalStorage.swift in Sources */,
 				7F1E96BB2546B8BF00638965 /* Alert.swift in Sources */,
 				7F1E96C42546B8BF00638965 /* EnumIteration.swift in Sources */,
 			);

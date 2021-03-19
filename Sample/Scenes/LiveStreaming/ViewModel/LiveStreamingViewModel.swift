@@ -36,7 +36,7 @@ extension LiveStreamingViewModel {
     }
 }
 
-// MARK: Live stream publishing output protocol
+// MARK: - Live stream publishing output protocol
 
 extension LiveStreamingViewModel: YouTubeLiveVideoPublisher {
     func willStartPublishing(completed: @escaping (String?, NSDate?) -> Void) {
@@ -86,7 +86,6 @@ extension LiveStreamingViewModel: YouTubeLiveVideoPublisher {
 }
 
 extension LiveStreamingViewModel {
-
     func didTransitionToLiveStatus() {
         rxStateDescription.onNext("● LIVE")
     }

@@ -61,7 +61,7 @@ class LFLiveViewController: UIViewController {
 
     func showError(_ message: String) {
         DispatchQueue.performUIUpdate {
-            Alert.sharedInstance.showOk("Warning", message: message)
+            Alert.showOk("Warning", message: message)
         }
     }
 

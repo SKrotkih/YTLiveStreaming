@@ -40,6 +40,7 @@ class StreamListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        bindInput()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -53,10 +54,33 @@ class StreamListViewController: BaseViewController {
         configureAddStreamButton()
         setUpRefreshControl()
         bindUserActivity()
-        bindData()
+        bindTableViewData()
         output.didOpenViewAction()
     }
 
+    private func closeView() {
+        output.didCloseViewAction()
+    }
+
+    private func didSignOut() {
+        stopActivity()
+        closeView()
+    }
+
+    @objc private func signOut() {
+        output.didSignOutAction()
+    }
+
+    func showError(message: String) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            Alert.showOk("Error", message: message)
+        }
+    }
+}
+
+// MARK: - Activity Indicator
+
+extension StreamListViewController {
     func startActivity() {
         DispatchQueue.performUIUpdate { [weak self] in
             self?.activityIndicator.startAnimating()
@@ -68,52 +92,12 @@ class StreamListViewController: BaseViewController {
             self?.activityIndicator.stopAnimating()
         }
     }
+}
 
-    private func closeView() {
-        output.didCloseViewAction()
-    }
+// MARK: - Bind Input/Output
 
-    private func didSignOut() {
-        self.stopActivity()
-        self.closeView()
-    }
-
-    @objc private func signOut() {
-        output.didSignOutAction()
-    }
-
-    private func bindUserActivity() {
-        addNewStreamButton
-            .rx
-            .tap
-            .debounce(.milliseconds(Constants.UiConstraints.debounce), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                self?.output.didCreateBroadcastAction()
-            }).disposed(by: disposeBag)
-        input
-            .rxSignOut
-            .subscribe(onNext: { [weak self] _ in
-                self?.didSignOut()
-            }).disposed(by: disposeBag)
-    }
-
-    private func bindData() {
-        tableView.register(StreamListTableViewCell.self, forCellReuseIdentifier: CellIdentifier.cell.rawValue)
-        tableView.delegate = self
-        dataSource = RxTableViewSectionedReloadDataSource<SectionModel>(
-            configureCell: { (_, tableView, _, element) in
-                if let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.cell.rawValue) as? StreamListTableViewCell {
-                    cell.beginLabel.text = "start: \(element.snipped.publishedAt)"
-                    cell.nameLabel.text = element.snipped.title
-                    return cell
-                } else {
-                    return UITableViewCell()
-                }
-            },
-            titleForHeaderInSection: { dataSource, sectionIndex in
-                return dataSource[sectionIndex].model
-            }
-        )
+extension StreamListViewController {
+    private func bindInput() {
         input
             .rxData
             .bind(to: tableView
@@ -132,19 +116,47 @@ class StreamListViewController: BaseViewController {
             .subscribe(onNext: { message in
                 self.showError(message: message)
             }).disposed(by: disposeBag)
+        input
+            .rxSignOut
+            .subscribe(onNext: { [weak self] _ in
+                self?.didSignOut()
+            }).disposed(by: disposeBag)
     }
 
-    func showError(message: String) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            Alert.sharedInstance.showOk("Error", message: message)
-        }
+    private func bindUserActivity() {
+        addNewStreamButton
+            .rx
+            .tap
+            .debounce(.milliseconds(Constants.UiConstraints.debounce), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                self.output.didCreateBroadcastAction()
+            }).disposed(by: disposeBag)
+    }
+
+    private func bindTableViewData() {
+        tableView.register(StreamListTableViewCell.self, forCellReuseIdentifier: CellIdentifier.cell.rawValue)
+        tableView.delegate = self
+        dataSource = RxTableViewSectionedReloadDataSource<SectionModel>(
+            configureCell: { (_, tableView, _, element) in
+                if let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.cell.rawValue) as? StreamListTableViewCell {
+                    cell.beginLabel.text = "start: \(element.snipped.publishedAt)"
+                    cell.nameLabel.text = element.snipped.title
+                    return cell
+                } else {
+                    return UITableViewCell()
+                }
+            },
+            titleForHeaderInSection: { dataSource, sectionIndex in
+                return dataSource[sectionIndex].model
+            }
+        )
     }
 }
 
 // MARK: - Configure View Items
 
 extension StreamListViewController {
-
     private func configureLeftBarButtonItem() {
         let backButton = UIBarButtonItem.init(title: "Log Out",
                                               style: .plain,
@@ -155,7 +167,7 @@ extension StreamListViewController {
 
     private func configureRightBarButtonItem() {
         let userNameLabel = UILabel(frame: CGRect.zero)
-        userNameLabel.text = UserStorage.user?.fullName
+        userNameLabel.text = GoogleUser.name
         userNameLabel.textColor = .white
         let rightBarButton = UIBarButtonItem(customView: userNameLabel)
         self.navigationItem.rightBarButtonItem = rightBarButton
@@ -176,8 +188,7 @@ extension StreamListViewController {
 // MARK: Refresh Controller
 
 extension StreamListViewController {
-
-    fileprivate func setUpRefreshControl() {
+    private func setUpRefreshControl() {
         self.refreshControl = UIRefreshControl()
         self.refreshControl.tintColor = UIColor.red
         self.refreshControl.addTarget(self,
@@ -194,7 +205,6 @@ extension StreamListViewController {
 // MARK: UiTableView delegates
 
 extension StreamListViewController: UITableViewDelegate {
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         output.didLaunchStreamAction(indexPath: indexPath, viewController: self)
     }

@@ -1,6 +1,4 @@
-//
-//  UIViewController+FullScreen.swift
-//  LiveEvents
+//  UIViewController+Ext.swift
 //  LiveEvents
 //
 //  Created by Sergey Krotkih
@@ -9,30 +7,27 @@
 import UIKit
 
 extension UIViewController {
-  public func addFullScreen(childViewController child: UIViewController) {
-    guard child.parent == nil else {
-      return
+    public func addChildViewController(_ child: UIViewController, autoResize: Bool = true) {
+        guard child.parent == nil else {
+            return
+        }
+        addChild(child)
+        view.addSubview(child.view)
+        if autoResize {
+            child.view.translatesAutoresizingMaskIntoConstraints = false
+            let constraints = [
+                view.leadingAnchor.constraint(equalTo: child.view.leadingAnchor),
+                view.trailingAnchor.constraint(equalTo: child.view.trailingAnchor),
+                view.topAnchor.constraint(equalTo: child.view.topAnchor),
+                view.bottomAnchor.constraint(equalTo: child.view.bottomAnchor)
+            ]
+            constraints.forEach { $0.isActive = true }
+            view.addConstraints(constraints)
+        }
+        child.didMove(toParent: self)
     }
-    addChild(child)
-    view.addSubview(child.view)
 
-    child.view.translatesAutoresizingMaskIntoConstraints = false
-    let constraints = [
-      view.leadingAnchor.constraint(equalTo: child.view.leadingAnchor),
-      view.trailingAnchor.constraint(equalTo: child.view.trailingAnchor),
-      view.topAnchor.constraint(equalTo: child.view.topAnchor),
-      view.bottomAnchor.constraint(equalTo: child.view.bottomAnchor)
-    ]
-    constraints.forEach { $0.isActive = true }
-    view.addConstraints(constraints)
-
-    child.didMove(toParent: self)
-  }
-
-  public func remove(childViewController child: UIViewController?) {
-    guard let child = child else {
-      return
-    }
+  public func removeChildViewController(_ child: UIViewController) {
     guard child.parent != nil else {
       return
     }

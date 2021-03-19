@@ -1,12 +1,13 @@
-//
 //  EnumIteration.swift
-//  KnowMe
+//  LiveEvents
+//
+//  Created by Sergey Krotkih
 //
 
 protocol Iteratable {}
 typealias Testable = Iteratable
 
-extension RawRepresentable where Self: RawRepresentable {
+extension RawRepresentable {
     static func iterateEnum<T: Hashable>(_: T.Type) -> AnyIterator<T> {
         var i = 0
         return AnyIterator {

@@ -21,6 +21,7 @@ class GoogleSignInViewController: BaseViewController {
     // [START viewdidload]
     override func viewDidLoad() {
         super.viewDidLoad()
+        GIDSignIn.sharedInstance()?.presentingViewController = self
         bindInput()
     }
     // [END viewdidload]
@@ -57,10 +58,10 @@ extension GoogleSignInViewController {
                         if code == 401 {
                             print(message)
                         } else {
-                            Alert.sharedInstance.showOk("", message: message)
+                            Alert.showOk("", message: message)
                         }
                 case .message(let message):
-                        Alert.sharedInstance.showOk("", message: message)
+                        Alert.showOk("", message: message)
                 }
             }
         }

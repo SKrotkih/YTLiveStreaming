@@ -1,6 +1,4 @@
-//
 //  Error.swift
-//  LiveEvents
 //  LiveEvents
 //
 //  Created by Sergey Krotkih
@@ -25,10 +23,8 @@ enum LVError: Error {
                           _ file: String = #file,
                           _ function: String = #function,
                           _ line: Int = #line) {
-        let message = self.message()
         #if DEBUG
-        print("💣 |E|\(file.fileName)):\(function):\(line):[\(Thread.current)]\(comment ?? ""):\(message)")
+        print("💣 |E|\(file.fileName)):\(function):\(line):[\(Thread.current)]\(comment ?? ""):\(self.message())")
         #endif
-        print(message)
     }
 }

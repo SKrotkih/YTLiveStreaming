@@ -46,7 +46,7 @@ extension AppRouter {
     ///
     private func signInDependencies(_ viewController: GoogleSignInViewController) {
         let interactor = AppDelegate.shared.googleSignIn
-        let viewModel = GoogleSignInViewModel(viewController: viewController, interactor: interactor)
+        let viewModel = GoogleSignInViewModel(interactor: interactor)
         viewController.viewModel = viewModel
     }
 

@@ -6,15 +6,13 @@
 //
 
 import Foundation
-import GoogleSignIn
 import RxSwift
 
 class GoogleSignInViewModel: SignInProtocol {
     var interactor: SignInObservable!
     private let disposeBag = DisposeBag()
 
-    required init(viewController: UIViewController, interactor: GoogleSignInInteractor) {
-        GIDSignIn.sharedInstance()?.presentingViewController = viewController
+    required init(interactor: GoogleSignInInteractor) {
         self.interactor = interactor
         self.interactor.configure()
     }

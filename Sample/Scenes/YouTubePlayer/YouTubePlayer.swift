@@ -1,21 +1,21 @@
+//  YouTubePlayer.swift
+//  LiveEvents
+//
+//  Created by Sergey Krotkih
+//
 import UIKit
 
-class YouTubePlayer: NSObject {
+struct YouTubePlayer {
+    var youtubeVideoPlayer: YouTubeVideoPlayed!
 
-   static var youtubePlayerViewController: YoutubePlayerViewController?
-   static var youtubePlayerDelegate: PlayerDelegate?
-
-   class func playYoutubeID(_ youtubeId: String, viewController: UIViewController) {
-      if self.youtubePlayerViewController == nil {
-         self.youtubePlayerViewController = YoutubePlayerViewController()
-         self.youtubePlayerDelegate = PlayerDelegate()
-         self.youtubePlayerViewController!.delegate = youtubePlayerDelegate
-      }
-      youtubePlayerViewController!.playVideo(youtubeId, viewController: viewController)
-   }
-}
-
-class PlayerDelegate: YoutubePlayerDelegate {
-   func playerDidFinish() {
-   }
+    func playYoutubeID(_ youtubeId: String, viewController: UIViewController) {
+        youtubeVideoPlayer.playVideo(youtubeId, viewController: viewController, { result in
+            switch result {
+            case .success:
+                print("Player has finished play video")
+            case .failure(let error):
+                Alert.showOk("Error", message: error.message())
+            }
+        })
+    }
 }

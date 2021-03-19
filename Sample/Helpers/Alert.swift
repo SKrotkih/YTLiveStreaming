@@ -1,13 +1,26 @@
+//  Alert.swift
+//  LiveEvents
+//
+//  Created by Sergey Krotkih
+//
+
 import UIKit
 
-class Alert: NSObject {
+let Alert = AlertController.sharedInstance
+
+class AlertController: NSObject {
+    struct Command {
+        let title: String
+        let message: String
+        let actions: [String: () -> Void]
+    }
 
     var popupWindow: UIWindow!
     var rootVC: UIViewController!
 
-    class var sharedInstance: Alert {
+    class var sharedInstance: AlertController {
         struct SingletonWrapper {
-            static let sharedInstance = Alert()
+            static let sharedInstance = AlertController()
         }
         return SingletonWrapper.sharedInstance
     }
@@ -27,148 +40,78 @@ class Alert: NSObject {
         popupWindow.isHidden = false
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { _ in
-            self.resignPopupWindow()
+            self.popupWindow.isHidden = true
             onComplete()
         }))
-
         rootVC.present(alert, animated: true, completion: nil)
     }
 
-    func showOkCancel(_ title: String, message: String, onComplete: (() -> Void)?, onCancel: (() -> Void)?) {
-        popupWindow.isHidden = false
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { _ in
-            self.resignPopupWindow()
-            onComplete?()
-        })
-        let cancelAction = UIAlertAction(title: "Close", style: UIAlertAction.Style.cancel, handler: { _ in
-            self.resignPopupWindow()
-            onCancel?()
-        })
-        alert.addAction(cancelAction)
-        alert.addAction(okAction)
-
-        rootVC.present(alert, animated: true, completion: nil)
+    func showOkCancel(_ title: String,
+                      message: String,
+                      onComplete: @escaping () -> Void = {},
+                      onCancel: @escaping () -> Void = {}) {
+        let command = Command(title: title, message: message, actions: ["Ok": onComplete, "Close": onCancel])
+        showAlert(command)
     }
 
     func showYesNo(_ title: String,
                    message: String,
                    onYes: @escaping () -> Void = {},
                    onNo: @escaping () -> Void = {}) {
-        popupWindow.isHidden = false
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        let okAction = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { _ in
-            self.resignPopupWindow()
-            onYes()
-        })
-        let cancelAction = UIAlertAction(title: "No", style: UIAlertAction.Style.default, handler: { _ in
-            self.resignPopupWindow()
-            onNo()
-        })
-        alert.addAction(cancelAction)
-        alert.addAction(okAction)
-
-        rootVC.present(alert, animated: true, completion: nil)
+        let command = Command(title: title, message: message, actions: ["Yes": onYes, "No": onNo])
+        showAlert(command)
     }
 
     func showConfirmCancel(_ title: String,
                            message: String,
                            onConfirm: @escaping () -> Void = {},
                            onCancel: @escaping () -> Void = {}) {
-        popupWindow.isHidden = false
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        let okAction = UIAlertAction(title: "Conform", style: UIAlertAction.Style.default, handler: { _ in
-            self.resignPopupWindow()
-            onConfirm()
-        })
-        let cancelAction = UIAlertAction(title: "Close", style: UIAlertAction.Style.default, handler: { _ in
-            self.resignPopupWindow()
-            onCancel()
-        })
-        alert.addAction(cancelAction)
-        alert.addAction(okAction)
-
-        rootVC.present(alert, animated: true, completion: nil)
+        let command = Command(title: title, message: message, actions: ["Confirm": onConfirm, "Close": onCancel])
+        showAlert(command)
     }
 
     func showConfirmChange(_ title: String,
                            message: String,
                            onConfirm: @escaping () -> Void = {},
                            onChange: @escaping () -> Void = {}) {
-        popupWindow.isHidden = false
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        let okAction = UIAlertAction(title: "Conform", style: UIAlertAction.Style.default, handler: { _ in
-            self.resignPopupWindow()
-            onConfirm()
-        })
-        let cancelAction = UIAlertAction(title: "Change", style: UIAlertAction.Style.default, handler: { _ in
-            self.resignPopupWindow()
-            onChange()
-        })
-        alert.addAction(cancelAction)
-        alert.addAction(okAction)
-
-        rootVC.present(alert, animated: true, completion: nil)
+        let command = Command(title: title, message: message, actions: ["Confirm": onConfirm, "Change": onChange])
+        showAlert(command)
     }
 
     func showOkChange(_ title: String,
                       message: String,
                       onOk: @escaping () -> Void = {},
                       onChange: @escaping () -> Void = {}) {
-        popupWindow.isHidden = false
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        let okAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in
-            self.resignPopupWindow()
-            onOk()
-        })
-        let cancelAction = UIAlertAction(title: "Change", style: UIAlertAction.Style.default, handler: { _ in
-            self.resignPopupWindow()
-            onChange()
-        })
-        alert.addAction(cancelAction)
-        alert.addAction(okAction)
-
-        rootVC.present(alert, animated: true, completion: nil)
+        let command = Command(title: title, message: message, actions: ["Ok": onOk, "Change": onChange])
+        showAlert(command)
     }
 
     func showLetsgoLater(_ title: String,
                          message: String,
                          onLetsGo: @escaping () -> Void = {},
                          onLater: @escaping () -> Void = {}) {
-        popupWindow.isHidden = false
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        let letsGoAction = UIAlertAction(title: "Go", style: UIAlertAction.Style.default, handler: { _ in
-            self.resignPopupWindow()
-            onLetsGo()
-        })
-        let laterAction = UIAlertAction(title: "Later", style: UIAlertAction.Style.default, handler: { _ in
-            self.resignPopupWindow()
-            onLater()
-        })
-        alert.addAction(laterAction)
-        alert.addAction(letsGoAction)
-
-        rootVC.present(alert, animated: true, completion: nil)
+        let command = Command(title: title, message: message, actions: ["Go": onLetsGo, "Later": onLater])
+        showAlert(command)
     }
 
-    func showOkNo(_ title: String, message: String, onOk: @escaping () -> Void = {}, onNo: @escaping () -> Void = {}) {
-        popupWindow.isHidden = false
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        let letsGoAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in
-            self.resignPopupWindow()
-            onOk()
-        })
-        let laterAction = UIAlertAction(title: "No", style: UIAlertAction.Style.default, handler: { _ in
-            self.resignPopupWindow()
-            onNo()
-        })
-        alert.addAction(laterAction)
-        alert.addAction(letsGoAction)
-
-        rootVC.present(alert, animated: true, completion: nil)
+    func showOkNo(_ title: String,
+                  message: String,
+                  onOk: @escaping () -> Void = {},
+                  onNo: @escaping () -> Void = {}) {
+        let command = Command(title: title, message: message, actions: ["Ok": onOk, "No": onNo])
+        showAlert(command)
     }
 
-    func resignPopupWindow() {
-        self.popupWindow.isHidden = true
+    private func showAlert(_ command: Command) {
+        popupWindow.isHidden = false
+        let alert = UIAlertController(title: command.title, message: command.message, preferredStyle: UIAlertController.Style.alert)
+        for (title, action) in command.actions {
+            let alertAction = UIAlertAction(title: title, style: UIAlertAction.Style.default, handler: { _ in
+                self.popupWindow.isHidden = true
+                action()
+            })
+            alert.addAction(alertAction)
+        }
+        rootVC.present(alert, animated: true, completion: nil)
     }
 }

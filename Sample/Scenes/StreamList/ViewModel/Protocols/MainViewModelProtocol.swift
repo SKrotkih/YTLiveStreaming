@@ -13,7 +13,12 @@ protocol MainViewModelOutput {
     func didOpenViewAction()
     func didCloseViewAction()
     func didSignOutAction()
-    func didCreateBroadcastAction()
+    func createBroadcast(
+        title: String,
+        description: String,
+        date startDate: Date,
+        _ completion: @escaping (Result<String, LVError>) -> Void
+    )
     func didLaunchStreamAction(indexPath: IndexPath, viewController: UIViewController)
 }
 

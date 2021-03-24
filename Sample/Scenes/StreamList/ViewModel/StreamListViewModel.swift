@@ -57,40 +57,21 @@ class StreamListViewModel: MainViewModelOutput {
             }).disposed(by: disposeBag)
     }
 
-    func didCreateBroadcastAction() {
-        Alert.showConfirmCancel("YouTube Live Streaming API",
-                                message: "You realy want to create a new Live broadcast video?",
-                                onConfirm: {
-                                    self.createBroadcast { error in
-                                        if let error = error {
-                                            Alert.showOk("Error",
-                                                         message: error.localizedDescription)
-                                        } else {
-                                            Alert.showOk("Done",
-                                                         message: "Please, refresh the table after pair seconds (pull down)")
-                                        }
-                                    }
-                                }
-        )
-    }
-
-    private func createBroadcast(title: String = "Live video",
-                                 description: String = "Test broadcast video",
-                                 _ completion: @escaping (Error?) -> Void) {
-        let startDate = Helpers.dateAfter(Date(), hour: 0, minute: 2, second: 0)
+    func createBroadcast(title: String,
+                         description: String,
+                         date startDate: Date,
+                         _ completion: @escaping (Result<String, LVError>) -> Void) {
         self.broadcastsAPI.createBroadcast(title, description: description, startTime: startDate, completion: { result in
             switch result {
             case .success(let broadcast):
-                print("Broadcast \(broadcast.snipped.title) was created successfully")
-                completion(nil)
+                completion(.success(broadcast.snipped.title))
             case .failure(let error):
                 switch error {
                 case .systemMessage(let code, let message):
-                    let err = NSError(domain: message, code: code, userInfo: nil)
-                    completion(err)
+                    let text = "\(code): \(message)"
+                    completion(.failure(.message(text)))
                 default:
-                    let err = NSError(domain: error.message(), code: -1, userInfo: nil)
-                    completion(err)
+                    completion(.failure(.message(error.message())))
                 }
             }
         })

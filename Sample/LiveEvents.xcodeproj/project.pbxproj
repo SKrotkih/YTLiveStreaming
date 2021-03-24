@@ -10,7 +10,7 @@
 		7F0933CD2457258300FB5579 /* GoogleSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0933CC2457258300FB5579 /* GoogleSignInViewController.swift */; };
 		7F0933CF24574FCB00FB5579 /* GoogleSignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0933CE24574FCB00FB5579 /* GoogleSignInViewModel.swift */; };
 		7F1E96BB2546B8BF00638965 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1E96AE2546B8BF00638965 /* Alert.swift */; };
-		7F1E96BC2546B8BF00638965 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1E96AF2546B8BF00638965 /* Helpers.swift */; };
+		7F1E96BC2546B8BF00638965 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1E96AF2546B8BF00638965 /* Date+Ext.swift */; };
 		7F1E96BD2546B8BF00638965 /* StatusBarShowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1E96B02546B8BF00638965 /* StatusBarShowingViewController.swift */; };
 		7F1E96BE2546B8BF00638965 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1E96B32546B8BF00638965 /* UIViewController+Ext.swift */; };
 		7F1E96BF2546B8BF00638965 /* UIStoryboard+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1E96B42546B8BF00638965 /* UIStoryboard+Ext.swift */; };
@@ -90,7 +90,7 @@
 		7F0933CC2457258300FB5579 /* GoogleSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleSignInViewController.swift; sourceTree = "<group>"; };
 		7F0933CE24574FCB00FB5579 /* GoogleSignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInViewModel.swift; sourceTree = "<group>"; };
 		7F1E96AE2546B8BF00638965 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
-		7F1E96AF2546B8BF00638965 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		7F1E96AF2546B8BF00638965 /* Date+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		7F1E96B02546B8BF00638965 /* StatusBarShowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarShowingViewController.swift; sourceTree = "<group>"; };
 		7F1E96B22546B8BF00638965 /* UIControl+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+YYAdd.h"; sourceTree = "<group>"; };
 		7F1E96B32546B8BF00638965 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
@@ -204,7 +204,6 @@
 			children = (
 				7F1E96AE2546B8BF00638965 /* Alert.swift */,
 				7FDCF9852546BF1400D5B492 /* Error.swift */,
-				7F1E96AF2546B8BF00638965 /* Helpers.swift */,
 				7F1E96B02546B8BF00638965 /* StatusBarShowingViewController.swift */,
 			);
 			path = Helpers;
@@ -217,6 +216,7 @@
 				7F1E96B32546B8BF00638965 /* UIViewController+Ext.swift */,
 				7F1E96B42546B8BF00638965 /* UIStoryboard+Ext.swift */,
 				7F1E96B62546B8BF00638965 /* Color+Ext.swift */,
+				7F1E96AF2546B8BF00638965 /* Date+Ext.swift */,
 				7F1E96B72546B8BF00638965 /* DispatchQueue+Ext.swift */,
 				7F1E96B92546B8BF00638965 /* EnumIteration.swift */,
 			);
@@ -801,7 +801,7 @@
 			files = (
 				7FA950022032C5750083B23B /* GoogleUser.swift in Sources */,
 				7FB8A42B1DD23C3100955C2D /* LFLivePreview.m in Sources */,
-				7F1E96BC2546B8BF00638965 /* Helpers.swift in Sources */,
+				7F1E96BC2546B8BF00638965 /* Date+Ext.swift in Sources */,
 				7F9A91D82609AC170036CA0B /* YouTubeVideoPlayed.swift in Sources */,
 				7F384BEB245873A6004C07EE /* BaseViewController.swift in Sources */,
 				7F83E3371DBDD35500DE4102 /* StreamListTableViewCell.swift in Sources */,

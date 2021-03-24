@@ -154,30 +154,7 @@ extension StreamListViewController {
     }
 
     private func toScheduleBroadcast() {
-        let title = "Live video"
-        let description = "Test broadcast video"
-        let date = Date().add(hours: 0, minutes: 2, seconds: 0)
-        Alert.showConfirmCancel(
-            "YouTube Live Streaming API",
-            message: "You realy want to create a new Live broadcast video?",
-            onConfirm: {
-                self.output.createBroadcast(
-                    title: title,
-                    description: description,
-                    date: date
-                ) { result in
-                    switch result {
-                    case .success(let broadcastTitle):
-                        print("Broadcast \(broadcastTitle) was created successfully")
-                    case .failure(let error):
-                        Alert.showOk(
-                            "Error",
-                            message: error.message()
-                        )
-                    }
-                }
-            }
-        )
+        self.output.createBroadcast()
     }
 }
 

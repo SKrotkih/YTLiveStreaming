@@ -31,9 +31,16 @@ struct AppRouter {
         }
     }
 
+    // Start Live Video
     func showLiveVideoViewController() {
         DispatchQueue.performUIUpdate {
             UIStoryboard.main.segueToModalViewController(self.liveVideoDependencies)
+        }
+    }
+
+    func showNewStreamViewController() {
+        DispatchQueue.performUIUpdate {
+            UIStoryboard.main.sequePushViewController(self.newStreamDependencies)
         }
     }
 }
@@ -64,7 +71,6 @@ extension AppRouter {
         dataSource.broadcastsAPI = broadcastsAPI
         viewModel.dataSource = dataSource
         viewModel.sessionManager = googleSession
-        viewModel.broadcastsAPI = broadcastsAPI
 
         // Inbound Broadcast
         viewController.output = viewModel
@@ -76,6 +82,16 @@ extension AppRouter {
     ///
     private func liveVideoDependencies(_ viewController: LFLiveViewController) {
         let viewModel = LiveStreamingViewModel()
+        let broadcastsAPI = YTLiveStreaming()
+
+        viewModel.broadcastsAPI = broadcastsAPI
+        viewController.viewModel = viewModel
+    }
+    ///
+    /// Inject dependecncies in the LFLiveViewController
+    ///
+    private func newStreamDependencies(_ viewController: NewStreamViewController) {
+        let viewModel = NewStreamViewModel()
         let broadcastsAPI = YTLiveStreaming()
 
         viewModel.broadcastsAPI = broadcastsAPI

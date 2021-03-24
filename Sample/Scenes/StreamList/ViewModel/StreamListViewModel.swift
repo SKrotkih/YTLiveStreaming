@@ -13,7 +13,6 @@ class StreamListViewModel: MainViewModelOutput {
     private static let useYTPlayerOldVersion = false
 
     var dataSource: BroadcastsDataFetcher!
-    var broadcastsAPI: BroadcastsAPI!
     var sessionManager: SessionManager!
 
     var rxError = PublishSubject<String>()
@@ -57,24 +56,8 @@ class StreamListViewModel: MainViewModelOutput {
             }).disposed(by: disposeBag)
     }
 
-    func createBroadcast(title: String,
-                         description: String,
-                         date startDate: Date,
-                         _ completion: @escaping (Result<String, LVError>) -> Void) {
-        self.broadcastsAPI.createBroadcast(title, description: description, startTime: startDate, completion: { result in
-            switch result {
-            case .success(let broadcast):
-                completion(.success(broadcast.snipped.title))
-            case .failure(let error):
-                switch error {
-                case .systemMessage(let code, let message):
-                    let text = "\(code): \(message)"
-                    completion(.failure(.message(text)))
-                default:
-                    completion(.failure(.message(error.message())))
-                }
-            }
-        })
+    func createBroadcast() {
+        Router.showNewStreamViewController()
     }
 
     func didLaunchStreamAction(indexPath: IndexPath, viewController: UIViewController) {

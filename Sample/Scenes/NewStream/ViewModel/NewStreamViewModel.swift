@@ -16,13 +16,17 @@ protocol NewStreamProtocol {
     var hours: String { get set }
     var minutes: String { get set }
     var secunds: String { get set }
+    var date: Date { get set }
+    var verification: Result<Void, LVError> { get }
     func createBroadcast()
     var rxOperationCompleted: PublishSubject<Bool> { get }
+    var rxStartDate: PublishSubject<String> { get }
 }
 
 class NewStreamViewModel: NewStreamProtocol {
     var broadcastsAPI: YTLiveStreaming!
     let rxOperationCompleted: PublishSubject<Bool> = PublishSubject()
+    let rxStartDate: PublishSubject<String> = PublishSubject()
 
     private var model = NewStream(
         title: "",
@@ -45,27 +49,50 @@ class NewStreamViewModel: NewStreamProtocol {
 
     var hours: String {
         get { model.hours }
-        set { model.hours = newValue }
+        set { model.hours = newValue; upateUi() }
     }
 
     var minutes: String {
         get { model.minutes }
-        set { model.minutes = newValue }
+        set { model.minutes = newValue; upateUi() }
     }
 
     var secunds: String {
         get { model.seconds }
-        set { model.seconds = newValue }
+        set { model.seconds = newValue; upateUi() }
     }
 
     var date: Date {
         get { model.date }
-        set { model.date = newValue }
+        set { model.date = newValue; upateUi() }
     }
 
+    var verification: Result<Void, LVError> { model.verification() }
+}
+
+// MARK: - Pesenter
+
+extension NewStreamViewModel {
+    private func upateUi() {
+        rxStartDate.onNext(dateFormatted(date: model.startStreaming))
+    }
+
+    private func dateFormatted(date: Date) -> String {
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        return df.string(from: date)
+    }
+}
+
+// MARK: - Interactor
+
+extension NewStreamViewModel {
+
     func createBroadcast() {
-        guard model.verification() else { return }
-        self.broadcastsAPI.createBroadcast(model.title, description: model.description, startTime: model.startStreaming, completion: { [weak self] result in
+        self.broadcastsAPI.createBroadcast(model.title,
+                                           description: model.description,
+                                           startTime: model.startStreaming,
+                                           completion: { [weak self] result in
             switch result {
             case .success(let broadcast):
                 Alert.showOk("Good job!", message: "You have scheduled a new broadcast with title '\(broadcast.snipped.title)'")

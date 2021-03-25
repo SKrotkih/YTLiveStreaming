@@ -16,8 +16,14 @@ struct NewStream {
     var seconds: String
     var date: Date
 
-    func verification() -> Bool {
-        return !title.isEmpty && startStreaming > Date()
+    func verification() -> Result<Void, LVError> {
+        if title.isEmpty {
+            return .failure(.message("The Live Event Title is empty"))
+        } else if startStreaming <= Date() {
+            return .failure(.message("Start Live Event time is wrong"))
+        } else {
+            return .success(Void())
+        }
     }
 
     var startStreaming: Date {

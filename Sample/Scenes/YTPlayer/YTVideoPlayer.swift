@@ -14,9 +14,8 @@ class YTVideoPlayer: YouTubeVideoPlayed {
 
         self.completion = completion
 
-        let playerViewController = YTPlayerViewController()
+        let playerViewController = YTPlayerViewController(youTubeId: youtubeId)
         viewController.present(playerViewController, animated: true, completion: nil)
-
 
     }
 }

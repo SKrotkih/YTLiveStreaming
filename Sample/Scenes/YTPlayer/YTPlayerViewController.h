@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YTPlayerViewController : UIViewController<YTPlayerViewDelegate>
 
+- (id) initWithYouTubeId: (NSString*) videoId;
+
 @property(nonatomic, strong) IBOutlet YTPlayerView *playerView;
 
 @property(nonatomic, weak) IBOutlet UIButton *playButton;

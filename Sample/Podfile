@@ -13,6 +13,8 @@ target 'LiveEvents' do
 
     pod "XCDYouTubeKit", "~> 2.15"
     
+    pod "youtube-ios-player-helper", "~> 1.0.3"
+    
     pod 'RxSwift'
     pod 'RxCocoa'
     pod 'RxDataSources'

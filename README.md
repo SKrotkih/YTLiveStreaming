@@ -200,3 +200,5 @@ Changes history:
 - added Swiftlint 
 - fixed Swiftlint warnings
 - Sample app was renamed to LiveEvents
+04-05-2021
+- add youtube-ios-player-helper as an video player

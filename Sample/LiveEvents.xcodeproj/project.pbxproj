@@ -39,6 +39,8 @@
 		7F79C8AB254806DF0044CF81 /* YouTubeLiveVideoPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79C8AA254806DF0044CF81 /* YouTubeLiveVideoPublisher.swift */; };
 		7F7D436B2573A3AE00CC7642 /* LiveEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7D436A2573A3AE00CC7642 /* LiveEventsTests.swift */; };
 		7F7D7D9C26087996005FAC3B /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7D7D9B26087996005FAC3B /* LocalStorage.swift */; };
+		7F809FC22641406C006C4B4E /* YTPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F809FC12641406C006C4B4E /* YTPlayerViewController.m */; };
+		7F809FC526414C4E006C4B4E /* YTVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F809FC426414C4E006C4B4E /* YTVideoPlayer.swift */; };
 		7F83E3371DBDD35500DE4102 /* StreamListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E3361DBDD35500DE4102 /* StreamListTableViewCell.swift */; };
 		7F83E34D1DBDD49100DE4102 /* LiveStreamingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E3491DBDD49100DE4102 /* LiveStreamingViewModel.swift */; };
 		7F83E35B1DBDD58C00DE4102 /* YouTubePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E35A1DBDD58C00DE4102 /* YouTubePlayer.swift */; };
@@ -129,6 +131,9 @@
 		7F7D436A2573A3AE00CC7642 /* LiveEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveEventsTests.swift; sourceTree = "<group>"; };
 		7F7D436C2573A3AE00CC7642 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7F7D7D9B26087996005FAC3B /* LocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
+		7F809FC02641406C006C4B4E /* YTPlayerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YTPlayerViewController.h; sourceTree = "<group>"; };
+		7F809FC12641406C006C4B4E /* YTPlayerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YTPlayerViewController.m; sourceTree = "<group>"; };
+		7F809FC426414C4E006C4B4E /* YTVideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YTVideoPlayer.swift; sourceTree = "<group>"; };
 		7F83E3361DBDD35500DE4102 /* StreamListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamListTableViewCell.swift; sourceTree = "<group>"; };
 		7F83E3491DBDD49100DE4102 /* LiveStreamingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveStreamingViewModel.swift; sourceTree = "<group>"; };
 		7F83E35A1DBDD58C00DE4102 /* YouTubePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubePlayer.swift; sourceTree = "<group>"; };
@@ -267,6 +272,7 @@
 				7F53B1AF2030B15C00E09CFA /* StreamList */,
 				7FA74D55260B3B2D0069DA8A /* NewStream */,
 				7F53B1AE2030733200E09CFA /* LiveStreaming */,
+				7F809FBF26414026006C4B4E /* YTPlayer */,
 				7F1E96C52546B91A00638965 /* YouTubePlayer */,
 			);
 			path = Scenes;
@@ -368,6 +374,16 @@
 				7F9A91D72609AC170036CA0B /* YouTubeVideoPlayed.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		7F809FBF26414026006C4B4E /* YTPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				7F809FC426414C4E006C4B4E /* YTVideoPlayer.swift */,
+				7F809FC02641406C006C4B4E /* YTPlayerViewController.h */,
+				7F809FC12641406C006C4B4E /* YTPlayerViewController.m */,
+			);
+			path = YTPlayer;
 			sourceTree = "<group>";
 		};
 		7F8FD2A524596D970041CF36 /* View */ = {
@@ -677,6 +693,7 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/XCDYouTubeKit/XCDYouTubeKit.framework",
 				"${BUILT_PRODUCTS_DIR}/YTLiveStreaming/YTLiveStreaming.framework",
+				"${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework",
 				"${BUILT_PRODUCTS_DIR}/RxBlocking/RxBlocking.framework",
 				"${BUILT_PRODUCTS_DIR}/RxTest/RxTest.framework",
 			);
@@ -698,6 +715,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCDYouTubeKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YTLiveStreaming.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/youtube_ios_player_helper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBlocking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxTest.framework",
 			);
@@ -747,6 +765,7 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/XCDYouTubeKit/XCDYouTubeKit.framework",
 				"${BUILT_PRODUCTS_DIR}/YTLiveStreaming/YTLiveStreaming.framework",
+				"${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -766,6 +785,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCDYouTubeKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YTLiveStreaming.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/youtube_ios_player_helper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -849,6 +869,7 @@
 				7F83E3371DBDD35500DE4102 /* StreamListTableViewCell.swift in Sources */,
 				7F9A92352609BE180036CA0B /* XCDYouTubeVideoPlayer.swift in Sources */,
 				7F79C8AB254806DF0044CF81 /* YouTubeLiveVideoPublisher.swift in Sources */,
+				7F809FC526414C4E006C4B4E /* YTVideoPlayer.swift in Sources */,
 				7F384BEE24587498004C07EE /* Appearance.swift in Sources */,
 				7F9274AE1DBDCAD00051DE6B /* StreamListViewController.swift in Sources */,
 				7F0933CD2457258300FB5579 /* GoogleSignInViewController.swift in Sources */,
@@ -858,6 +879,7 @@
 				7F1E96BE2546B8BF00638965 /* UIViewController+Ext.swift in Sources */,
 				7F1E96C12546B8BF00638965 /* Color+Ext.swift in Sources */,
 				7F79C8A4254802910044CF81 /* MainViewModelProtocol.swift in Sources */,
+				7F809FC22641406C006C4B4E /* YTPlayerViewController.m in Sources */,
 				7F83E34D1DBDD49100DE4102 /* LiveStreamingViewModel.swift in Sources */,
 				7F0933CF24574FCB00FB5579 /* GoogleSignInViewModel.swift in Sources */,
 				7F83E35D1DBDD5DB00DE4102 /* XCDYouTubeVideoPlayer8.swift in Sources */,

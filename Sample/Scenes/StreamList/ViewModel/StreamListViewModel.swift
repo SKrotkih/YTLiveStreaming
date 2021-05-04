@@ -9,8 +9,14 @@ import Foundation
 import YTLiveStreaming
 import RxSwift
 
+enum VideoPlayerType {
+    case oldVersionForIos8
+    case AVPlayerViewController
+    case YTPlayerViewController
+}
+
 class StreamListViewModel: MainViewModelOutput {
-    private static let useYTPlayerOldVersion = false
+    private static let playerType: VideoPlayerType = .YTPlayerViewController
 
     var dataSource: BroadcastsDataFetcher!
     var sessionManager: SessionManager!
@@ -21,10 +27,13 @@ class StreamListViewModel: MainViewModelOutput {
     private var videoPlayer = YouTubePlayer()
 
     var playerFactory: YouTubeVideoPlayed {
-        if StreamListViewModel.useYTPlayerOldVersion {
+        switch StreamListViewModel.playerType {
+        case .oldVersionForIos8:
             return XCDYouTubeVideoPlayer8()
-        } else {
+        case .AVPlayerViewController:
             return XCDYouTubeVideoPlayer()
+        case .YTPlayerViewController:
+            return YTVideoPlayer()
         }
     }
 

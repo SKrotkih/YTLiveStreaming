@@ -17,5 +17,4 @@ struct YouTubeHelpers {
             return nil
         }
     }
-    
 }

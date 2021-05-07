@@ -95,7 +95,7 @@ extension NewStreamViewModel {
                                            completion: { [weak self] result in
             switch result {
             case .success(let broadcast):
-                Alert.showOk("Good job!", message: "You have scheduled a new broadcast with title '\(broadcast.snipped.title)'")
+                Alert.showOk("Good job!", message: "You have scheduled a new broadcast with title '\(broadcast.snippet.title)'")
                 self?.rxOperationCompleted.onNext(true)
             case .failure(let error):
                 switch error {

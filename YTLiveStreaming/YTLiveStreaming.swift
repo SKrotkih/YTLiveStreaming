@@ -50,7 +50,7 @@ extension YTLiveStreaming {
                         var streamsLive = [LiveBroadcastStreamModel]()
                         var streamsComplete = [LiveBroadcastStreamModel]()
                         for item in streams {
-                            let lifeCycleStatus = item.status.lifeCycleStatus
+                            let lifeCycleStatus = item.status?.lifeCycleStatus ?? "complete"
                             switch lifeCycleStatus {
                             case "ready":
                                 streamsReady.append(item)
@@ -130,7 +130,7 @@ extension YTLiveStreaming {
                                delegate: LiveStreamTransitioning,
                                completion: @escaping (String?, String?, Date?) -> Void) {
         let broadcastId = broadcast.id
-        let liveStreamId = broadcast.contentDetails.boundStreamId
+        let liveStreamId = broadcast.contentDetails?.boundStreamId ?? ""
         if !broadcastId.isEmpty && !liveStreamId.isEmpty {
             YTLiveRequest.getLiveBroadcast(broadcastId: broadcastId) { result in
                 switch result {
@@ -140,10 +140,10 @@ extension YTLiveStreaming {
                         case .success(let liveStream):
                             let streamName = liveStream.cdn.ingestionInfo.streamName
                             let streamUrl = liveStream.cdn.ingestionInfo.ingestionAddress
-                            let scheduledStartTime = liveBroadcast.snipped.scheduledStartTime
+                            let scheduledStartTime = liveBroadcast.snippet.scheduledStartTime
 
                             let sreamId = liveStream.id
-                            let monitorStream = liveBroadcast.contentDetails.monitorStream.embedHtml
+                            let monitorStream = liveBroadcast.contentDetails?.monitorStream.embedHtml ?? ""
                             let streamTitle = liveStream.snipped.title
 
                             print("\n-BroadcastId=\(liveBroadcast.id);\n-Live stream id=\(sreamId); \n-title=\(streamTitle); \n-start=\(scheduledStartTime); \n-STREAM_URL=\(streamUrl)/STREAM_NAME=\(streamName): created!\n-MONITOR_STREAM=\(monitorStream)\n")
@@ -220,7 +220,7 @@ extension YTLiveStreaming {
         YTLiveRequest.getLiveBroadcast(broadcastId: broadcast.id, completion: { result in
             switch result {
             case .success(let broadcast):
-                let broadcastStatus = broadcast.status.lifeCycleStatus
+                let broadcastStatus = broadcast.status?.lifeCycleStatus ?? "complete"
 
                 // Valid values for this property are:
                 //  abandoned – This broadcast was never started.
@@ -320,12 +320,12 @@ extension YTLiveStreaming {
         let items = broadcasts.items
         if kOrderByPublishedAt {
             let sortedItems = items.sorted(by: {
-                $0.snipped.publishedAt.compare($1.snipped.publishedAt) == ComparisonResult.orderedDescending
+                $0.snippet.publishedAt.compare($1.snippet.publishedAt) == ComparisonResult.orderedDescending
             })
             completion(sortedItems)
         } else {
             let sortedItems = items.sorted(by: {
-                $0.snipped.scheduledStartTime.compare($1.snipped.scheduledStartTime) == ComparisonResult.orderedDescending
+                $0.snippet.scheduledStartTime.compare($1.snippet.scheduledStartTime) == ComparisonResult.orderedDescending
             })
             completion(sortedItems)
         }

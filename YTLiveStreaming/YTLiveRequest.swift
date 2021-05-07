@@ -104,14 +104,10 @@ extension YTLiveRequest {
                         let decoder = JSONDecoder()
                         let broadcastList = try decoder.decode(LiveBroadcastListModel.self, from: response.data)
                         let items = broadcastList.items
-                        var broadcast: LiveBroadcastStreamModel?
-                        for item in items where item.id == broadcastId {
-                            broadcast = item
-                        }
-                        if broadcast == nil {
-                            completion(.failure(.message("broadcast does not exist")))
+                        if let broadcast = items.first(where: { $0.id == broadcastId }) {
+                            completion(.success(broadcast))
                         } else {
-                            completion(.success(broadcast!))
+                            completion(.failure(.message("broadcast does not exist")))
                         }
                     }
                 } catch {

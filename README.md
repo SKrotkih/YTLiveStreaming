@@ -202,3 +202,4 @@ Changes history:
 - Sample app was renamed to LiveEvents
 04-05-2021
 - add youtube-ios-player-helper as an video player
+- add Xcode unit test 

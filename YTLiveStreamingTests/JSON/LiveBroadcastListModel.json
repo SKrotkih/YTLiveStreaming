@@ -1,0 +1,121 @@
+{
+    "etag": "I_8xdZu766_FSaexEaDXTIfEWc0/SN8GQwjsPoYTifHs6t68KKesjic",
+    "items": [{
+            "etag": "I_8xdZu766_FSaexEaDXTIfEWc0/jI_VrrBo5bhpU24nvct4fYITSn8",
+            "id": "GalQUodF5-o",
+            "kind": "youtube//liveBroadcast",
+            "snippet": {
+                "channelId": "UCm4xprzPvVL8Uravaneq7CA",
+                "description": "",
+                "isDefaultBroadcast": false,
+                "publishedAt": "2016-10-16T05:04:46.000Z",
+                "scheduledStartTime": "2016-10-16T05:09:44.000Z",
+                "thumbnails": {
+                    "default": {
+                        "height": 90,
+                        "url": "https://i.ytimg.com/vi/GalQUodF5-o/default_live.jpg",
+                        "width": 120
+                    },
+                    "high":                     {
+                        "height": 360,
+                        "url": "https://i.ytimg.com/vi/GalQUodF5-o/hqdefault_live.jpg",
+                        "width": 480
+                    },
+                    "medium":                     {
+                        "height": 180,
+                        "url": "https://i.ytimg.com/vi/GalQUodF5-o/mqdefault_live.jpg",
+                        "width": 320
+                    }
+                },
+                "title": "My test live broadcast",
+                "liveChatId" : "Cg0KC3NHQ1lpWi15Y0s4"
+            },
+            "status" : {
+                "lifeCycleStatus" : "created",
+                "recordingStatus" : "notRecording",
+                "privacyStatus" : "public"
+            },
+            "contentDetails" : {
+                "startWithSlate" : false,
+                "recordFromStart" : true,
+                "closedCaptionsType" : "closedCaptionsDisabled",
+                "enableLowLatency" : false,
+                "enableClosedCaptions" : false,
+                "enableContentEncryption" : false,
+                "enableEmbed" : true,
+                "projection" : "rectangular",
+                "enableDvr" : true,
+                "monitorStream" : {
+                    "enableMonitorStream" : true,
+                    "broadcastStreamDelayMs" : 0,
+                    "embedHtml" : "<iframe width=\"425\" height=\"344\" src=\"https:\/\/www.youtube.com\/embed\/sGCYiZ-ycK8?autoplay=1&livemonitor=1\" frameborder=\"0\" allowfullscreen><\/iframe>"
+                }
+            }
+        },
+                {
+            "etag": "I_8xdZu766_FSaexEaDXTIfEWc0/8pnvseMzc_o1h2WI8B-0SJAcDR4",
+            "id": "sGCYiZ-ycK8",
+            "kind": "youtube//liveBroadcast",
+            "snippet": {
+                "channelId": "UCm4xprzPvVL8Uravaneq7CA",
+                "description": "",
+                "isDefaultBroadcast": false,
+                "publishedAt": "2016-10-15T18:04:47.000Z",
+                "scheduledStartTime": "2016-10-15T18:09:46.000Z",
+                "thumbnails": {
+                    "default": {
+                        "height": 90,
+                        "url": "https://i.ytimg.com/vi/sGCYiZ-ycK8/default_live.jpg",
+                        "width": 120
+                    },
+                    "high": {
+                        "height": 360,
+                        "url": "https://i.ytimg.com/vi/sGCYiZ-ycK8/hqdefault_live.jpg",
+                        "width": 480
+                    },
+                    "medium": {
+                        "height": 180,
+                        "url": "https://i.ytimg.com/vi/sGCYiZ-ycK8/mqdefault_live.jpg",
+                        "width": 320
+                    }
+                },
+                "title": "Broadcast"
+            }
+        },
+                {
+            "etag": "I_8xdZu766_FSaexEaDXTIfEWc0/MHL4lOvtbXAqX4bpuC9k_fFzJyA",
+            "id": "U8O8er6neBY",
+            "kind": "youtube//liveBroadcast",
+            "snippet": {
+                "channelId": "UCm4xprzPvVL8Uravaneq7CA",
+                "description": "",
+                "isDefaultBroadcast": false,
+                "publishedAt": "2016-10-15T17:56:57.000Z",
+                "scheduledStartTime": "2016-10-15T18:01:24.000Z",
+                "thumbnails": {
+                    "default": {
+                        "height": 90,
+                        "url": "https://i.ytimg.com/vi/U8O8er6neBY/default_live.jpg",
+                        "width": 120
+                    },
+                    "high": {
+                        "height": 360,
+                        "url": "https://i.ytimg.com/vi/U8O8er6neBY/hqdefault_live.jpg",
+                        "width": 480
+                    },
+                    "medium": {
+                        "height": 180,
+                        "url": "https://i.ytimg.com/vi/U8O8er6neBY/mqdefault_live.jpg",
+                        "width": 320
+                    }
+                },
+                "title": "Broadcast"
+            }
+        }
+    ],
+    "kind": "youtube//liveBroadcastListResponse",
+    "pageInfo": {
+        "resultsPerPage": 5,
+        "totalResults": 3
+    }
+}

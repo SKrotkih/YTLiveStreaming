@@ -12,7 +12,7 @@ import RxSwift
 import RxTest
 import RxBlocking
 
-@testable import YouTubeLiveVideo
+@testable import LiveEvents
 
 class LiveEventsTests: XCTestCase {
 

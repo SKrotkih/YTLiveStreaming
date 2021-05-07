@@ -27,8 +27,11 @@
 		7F101EA91E0FBD8A003EAF3F /* YTLiveStreaming.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 7F101EA81E0FBD8A003EAF3F /* YTLiveStreaming.podspec */; };
 		7F101EAB1E0FBDA5003EAF3F /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7F101EAA1E0FBDA5003EAF3F /* LICENSE */; };
 		7F117F291E0E816C000D0745 /* LiveLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F117F281E0E816C000D0745 /* LiveLauncher.swift */; };
+		7F863D61264513E6003C1775 /* LiveBroadcastListModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F863D60264513E6003C1775 /* LiveBroadcastListModel.json */; };
+		7F863D68264516D3003C1775 /* LiveBroadcastListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F863D59264513BE003C1775 /* LiveBroadcastListTests.swift */; };
 		7F8FD2CC2459AA860041CF36 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8FD2CB2459AA860041CF36 /* Error.swift */; };
 		7FA999B91DD6C81C0061AF0C /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA999B81DD6C81C0061AF0C /* Credentials.swift */; };
+		7FB346C2264666E100687A2F /* UpdateLiveBroadcastBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB346C1264666E100687A2F /* UpdateLiveBroadcastBody.swift */; };
 		7FECA28C2601187F008F2A4A /* HttpBodyEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FECA28B2601187F008F2A4A /* HttpBodyEncoding.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,8 +70,11 @@
 		7F101EAA1E0FBDA5003EAF3F /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		7F117F281E0E816C000D0745 /* LiveLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveLauncher.swift; sourceTree = "<group>"; };
 		7F678A6225FF3C1C00F5FB2C /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
+		7F863D59264513BE003C1775 /* LiveBroadcastListTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveBroadcastListTests.swift; sourceTree = "<group>"; };
+		7F863D60264513E6003C1775 /* LiveBroadcastListModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LiveBroadcastListModel.json; sourceTree = "<group>"; };
 		7F8FD2CB2459AA860041CF36 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		7FA999B81DD6C81C0061AF0C /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		7FB346C1264666E100687A2F /* UpdateLiveBroadcastBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateLiveBroadcastBody.swift; sourceTree = "<group>"; };
 		7FDB95211DD6042700498305 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		7FECA28B2601187F008F2A4A /* HttpBodyEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpBodyEncoding.swift; sourceTree = "<group>"; };
 		8E99A8A7F06BCB520FF235F8 /* Pods-YTLiveStreaming.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YTLiveStreaming.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YTLiveStreaming/Pods-YTLiveStreaming.debug.xcconfig"; sourceTree = "<group>"; };
@@ -143,6 +149,7 @@
 				7F0478A51DD5973A00AB6211 /* LiveBroadcastErrorModel.swift */,
 				7F0478A61DD5973A00AB6211 /* LiveBroadcastListModel.swift */,
 				7F0478A71DD5973A00AB6211 /* LiveBroadcastStreamModel.swift */,
+				7FB346C1264666E100687A2F /* UpdateLiveBroadcastBody.swift */,
 				7F0478A81DD5973A00AB6211 /* LiveStreamListModel.swift */,
 				7F0478A91DD5973A00AB6211 /* LiveStreamModel.swift */,
 				7F0478931DD596BF00AB6211 /* Constants.swift */,
@@ -163,7 +170,9 @@
 		7F0478861DD5962C00AB6211 /* YTLiveStreamingTests */ = {
 			isa = PBXGroup;
 			children = (
+				7F863D5F264513C4003C1775 /* JSON */,
 				7F0478871DD5962C00AB6211 /* YTLiveStreamingTests.swift */,
+				7F863D59264513BE003C1775 /* LiveBroadcastListTests.swift */,
 				7F0478891DD5962C00AB6211 /* Info.plist */,
 			);
 			path = YTLiveStreamingTests;
@@ -177,6 +186,14 @@
 				7F101EA81E0FBD8A003EAF3F /* YTLiveStreaming.podspec */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		7F863D5F264513C4003C1775 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				7F863D60264513E6003C1775 /* LiveBroadcastListModel.json */,
+			);
+			path = JSON;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,6 +306,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F863D61264513E6003C1775 /* LiveBroadcastListModel.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +386,7 @@
 				7F0478A21DD5970100AB6211 /* String.swift in Sources */,
 				7F0478A41DD5972700AB6211 /* Decodable.swift in Sources */,
 				7FA999B91DD6C81C0061AF0C /* Credentials.swift in Sources */,
+				7FB346C2264666E100687A2F /* UpdateLiveBroadcastBody.swift in Sources */,
 				7F04789C1DD596BF00AB6211 /* YTLiveStreaming.swift in Sources */,
 				7F0478991DD596BF00AB6211 /* GoogleOAuth2.swift in Sources */,
 				7F117F291E0E816C000D0745 /* LiveLauncher.swift in Sources */,
@@ -379,6 +398,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F0478881DD5962C00AB6211 /* YTLiveStreamingTests.swift in Sources */,
+				7F863D68264516D3003C1775 /* LiveBroadcastListTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,6 +599,7 @@
 				DEVELOPMENT_TEAM = N5B5T39W8Y;
 				INFOPLIST_FILE = YTLiveStreamingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.skappledev.YTLiveStreamingTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -595,6 +616,7 @@
 				DEVELOPMENT_TEAM = N5B5T39W8Y;
 				INFOPLIST_FILE = YTLiveStreamingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.skappledev.YTLiveStreamingTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

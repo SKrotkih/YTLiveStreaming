@@ -12,12 +12,12 @@ import RxSwift
 enum VideoPlayerType {
     case oldVersionForIos8
     case AVPlayerViewController
-    case YTPlayerViewController
+    case VideoPlayerViewController
 }
 
 class StreamListViewModel: MainViewModelOutput {
     // Default value of the used video player
-    private static let playerType: VideoPlayerType = .YTPlayerViewController
+    private static let playerType: VideoPlayerType = .VideoPlayerViewController
 
     var dataSource: BroadcastsDataFetcher!
     var sessionManager: SessionManager!
@@ -33,7 +33,7 @@ class StreamListViewModel: MainViewModelOutput {
             return XCDYouTubeVideoPlayer8()
         case .AVPlayerViewController:
             return XCDYouTubeVideoPlayer()
-        case .YTPlayerViewController:
+        case .VideoPlayerViewController:
             return YTVideoPlayer()
         }
     }

@@ -39,7 +39,6 @@
 		7F79C8AB254806DF0044CF81 /* YouTubeLiveVideoPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79C8AA254806DF0044CF81 /* YouTubeLiveVideoPublisher.swift */; };
 		7F7D436B2573A3AE00CC7642 /* LiveEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7D436A2573A3AE00CC7642 /* LiveEventsTests.swift */; };
 		7F7D7D9C26087996005FAC3B /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7D7D9B26087996005FAC3B /* LocalStorage.swift */; };
-		7F809FC22641406C006C4B4E /* YTPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F809FC12641406C006C4B4E /* YTPlayerViewController.m */; };
 		7F809FC526414C4E006C4B4E /* YTVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F809FC426414C4E006C4B4E /* YTVideoPlayer.swift */; };
 		7F83E3371DBDD35500DE4102 /* StreamListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E3361DBDD35500DE4102 /* StreamListTableViewCell.swift */; };
 		7F83E34D1DBDD49100DE4102 /* LiveStreamingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E3491DBDD49100DE4102 /* LiveStreamingViewModel.swift */; };
@@ -62,6 +61,7 @@
 		7FCF0A2D2642BB6100B4E551 /* LiveBroadcastListModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 7FCF0A2C2642BB6100B4E551 /* LiveBroadcastListModel.json */; };
 		7FCF0A302642BC0400B4E551 /* LiveBroadcastListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCF0A2F2642BC0400B4E551 /* LiveBroadcastListTests.swift */; };
 		7FDCF9862546BF1400D5B492 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDCF9852546BF1400D5B492 /* Error.swift */; };
+		7FE263C5264AB95000892251 /* VideoPlayerViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7FE263C4264AB95000892251 /* VideoPlayerViewController.mm */; };
 		7FE331DE2647A42700D412AE /* LiveBroadcastListModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 7FCF0A2C2642BB6100B4E551 /* LiveBroadcastListModel.json */; };
 		7FE331E22647B33F00D412AE /* MockBroadcastList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE331E12647B33F00D412AE /* MockBroadcastList.swift */; };
 		B9CC7E4719CFCD847E4A62A7 /* Pods_LiveEvents_LiveEventsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B30E5B8AAAEDC735322F3362 /* Pods_LiveEvents_LiveEventsTests.framework */; };
@@ -135,8 +135,6 @@
 		7F7D436A2573A3AE00CC7642 /* LiveEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveEventsTests.swift; sourceTree = "<group>"; };
 		7F7D436C2573A3AE00CC7642 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7F7D7D9B26087996005FAC3B /* LocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
-		7F809FC02641406C006C4B4E /* YTPlayerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YTPlayerViewController.h; sourceTree = "<group>"; };
-		7F809FC12641406C006C4B4E /* YTPlayerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YTPlayerViewController.m; sourceTree = "<group>"; };
 		7F809FC426414C4E006C4B4E /* YTVideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YTVideoPlayer.swift; sourceTree = "<group>"; };
 		7F83E3361DBDD35500DE4102 /* StreamListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamListTableViewCell.swift; sourceTree = "<group>"; };
 		7F83E3491DBDD49100DE4102 /* LiveStreamingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveStreamingViewModel.swift; sourceTree = "<group>"; };
@@ -161,6 +159,8 @@
 		7FCF0A2C2642BB6100B4E551 /* LiveBroadcastListModel.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LiveBroadcastListModel.json; sourceTree = "<group>"; };
 		7FCF0A2F2642BC0400B4E551 /* LiveBroadcastListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveBroadcastListTests.swift; sourceTree = "<group>"; };
 		7FDCF9852546BF1400D5B492 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		7FE263C3264AB95000892251 /* VideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerViewController.h; sourceTree = "<group>"; };
+		7FE263C4264AB95000892251 /* VideoPlayerViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VideoPlayerViewController.mm; sourceTree = "<group>"; };
 		7FE331E12647B33F00D412AE /* MockBroadcastList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBroadcastList.swift; sourceTree = "<group>"; };
 		89F5B9C9A947F2EB63CB7301 /* Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A144B4F6FBDD3317B5035D73 /* Pods-LiveEvents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveEvents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LiveEvents/Pods-LiveEvents.debug.xcconfig"; sourceTree = "<group>"; };
@@ -390,8 +390,8 @@
 			isa = PBXGroup;
 			children = (
 				7F809FC426414C4E006C4B4E /* YTVideoPlayer.swift */,
-				7F809FC02641406C006C4B4E /* YTPlayerViewController.h */,
-				7F809FC12641406C006C4B4E /* YTPlayerViewController.m */,
+				7FE263C3264AB95000892251 /* VideoPlayerViewController.h */,
+				7FE263C4264AB95000892251 /* VideoPlayerViewController.mm */,
 			);
 			path = YTPlayer;
 			sourceTree = "<group>";
@@ -896,6 +896,7 @@
 				7F384BEB245873A6004C07EE /* BaseViewController.swift in Sources */,
 				7FA74D5D260B3BF50069DA8A /* NewStreamViewModel.swift in Sources */,
 				7F83E3371DBDD35500DE4102 /* StreamListTableViewCell.swift in Sources */,
+				7FE263C5264AB95000892251 /* VideoPlayerViewController.mm in Sources */,
 				7F9A92352609BE180036CA0B /* XCDYouTubeVideoPlayer.swift in Sources */,
 				7F79C8AB254806DF0044CF81 /* YouTubeLiveVideoPublisher.swift in Sources */,
 				7F809FC526414C4E006C4B4E /* YTVideoPlayer.swift in Sources */,
@@ -909,7 +910,6 @@
 				7F1E96BE2546B8BF00638965 /* UIViewController+Ext.swift in Sources */,
 				7F1E96C12546B8BF00638965 /* Color+Ext.swift in Sources */,
 				7F79C8A4254802910044CF81 /* MainViewModelProtocol.swift in Sources */,
-				7F809FC22641406C006C4B4E /* YTPlayerViewController.m in Sources */,
 				7F83E34D1DBDD49100DE4102 /* LiveStreamingViewModel.swift in Sources */,
 				7F0933CF24574FCB00FB5579 /* GoogleSignInViewModel.swift in Sources */,
 				7F83E35D1DBDD5DB00DE4102 /* XCDYouTubeVideoPlayer8.swift in Sources */,

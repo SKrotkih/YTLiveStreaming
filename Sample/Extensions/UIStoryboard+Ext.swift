@@ -51,18 +51,18 @@ extension UIStoryboard {
         window.rootViewController = vc
     }
 
-    func segueToModalViewController<T>(_ configure: (T) -> Void) where T: UIViewController {
+    func segueToModalViewController<T>(_ configure: (T, Any?) -> Void, optional: Any? = nil) where T: UIViewController {
         guard let window = AppDelegate.shared.window else {
             assertionFailure()
             return
         }
         let id = String(describing: T.self)
         if let viewController = self.instantiateViewController(withIdentifier: id) as? T {
-            configure(viewController)
+            configure(viewController, optional)
             window.rootViewController?.present(viewController, animated: false, completion: {
             })
         } else {
-            assertionFailure("Failed to open \(id) screen")
+            assertionFailure("Failed to open \(id) view controller")
         }
     }
 
@@ -81,7 +81,7 @@ extension UIStoryboard {
                 configure(viewController)
                 navController.pushViewController(viewController, animated: false)
             } else {
-                assertionFailure("Failed to open \(id) screen")
+                assertionFailure("Failed to open \(id) view controller")
             }
         } else {
             assertionFailure("Failed to open screen")

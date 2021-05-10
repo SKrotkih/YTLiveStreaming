@@ -1,31 +1,28 @@
 //
-//  YTPlayerViewController.m
+//  VideoPlayerViewController.m
 //  LiveEvents
 //
-//  Created by Сергей Кротких on 04.05.2021.
-//  Copyright © 2021 Sergey Krotkih. All rights reserved.
-//
 
-#import "YTPlayerViewController.h"
+#import "VideoPlayerViewController.h"
 
-@interface YTPlayerViewController ()
-    @property(nonatomic, strong) NSString *videoId;
-@end
-
-@implementation YTPlayerViewController
-
-- (id) initWithYouTubeId: (NSString*) videoId
-{
-    if (self = [super init])
-    {
-        self.videoId = videoId;
-    }
-    return self;
-}
+@implementation VideoPlayerViewController
 
 - (void) viewDidLoad {
     [super viewDidLoad];
     
+    [self configureView];
+    [self playVdeo];
+}
+
+- (void) configureView {
+    self.playerView.delegate = self;
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(receivedPlaybackStartedNotification:)
+                                                 name: @"Playback started"
+                                               object: nil];
+}
+
+- (void) playVdeo {
     // For a full list of player parameters, see the documentation for the HTML5 player
     // at: https://developers.google.com/youtube/player_parameters?playerVersion=HTML5
     NSDictionary *playerVars = @{
@@ -35,29 +32,27 @@
         @"showinfo": @0,
         @"modestbranding": @1
     };
-    self.playerView.delegate = self;
     [self.playerView loadWithVideoId: self.videoId
                           playerVars: playerVars];
-    
-    [[NSNotificationCenter defaultCenter] addObserver: self
-                                             selector: @selector(receivedPlaybackStartedNotification:)
-                                                 name: @"Playback started"
-                                               object: nil];
 }
 
-- (void)playerView: (YTPlayerView *) ytPlayerView
-  didChangeToState: (YTPlayerState) state {
+// MARK: - YTPlayerViewDelegate protocol implementation
+
+- (void) playerView: (YTPlayerView *) ytPlayerView
+   didChangeToState: (YTPlayerState) state {
     NSString *message = [NSString stringWithFormat: @"Player state changed: %ld\n", (long) state];
-    [self appendStatusText:message];
+    [self appendStatusText: message];
 }
 
-- (void)playerView: (YTPlayerView *) playerView
-       didPlayTime: (float)playTime {
+- (void) playerView: (YTPlayerView *) playerView
+        didPlayTime: (float)playTime {
     [self.playerView duration: ^(double result, NSError * _Nullable error) {
         float progress = playTime/result;
         [self.slider setValue: progress];
     }];
 }
+
+// MARK: - User actions handlers
 
 - (IBAction) onSliderChange: (id) sender {
     [self.playerView duration: ^(double result, NSError * _Nullable error) {
@@ -98,6 +93,12 @@
     }
 }
 
+- (IBAction) closePressed: (id) sender {
+    [self dismissViewControllerAnimated: true completion: nil];
+}
+
+// MARK: - Private methods
+
 - (void) receivedPlaybackStartedNotification: (NSNotification *) notification {
     if ([notification.name isEqual: @"Playback started"] && notification.object != self) {
         [self.playerView pauseVideo];
@@ -110,7 +111,7 @@
  * @param status a string describing current player state
  */
 - (void) appendStatusText: (NSString *) status {
-    [self.statusTextView setText:[self.statusTextView.text stringByAppendingString:status]];
+    [self.statusTextView setText: [self.statusTextView.text stringByAppendingString: status]];
     NSRange range = NSMakeRange(self.statusTextView.text.length - 1, 1);
     
     // To avoid dizzying scrolling on appending latest status.

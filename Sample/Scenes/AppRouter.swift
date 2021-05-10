@@ -34,13 +34,20 @@ struct AppRouter {
     // Start Live Video
     func showLiveVideoViewController() {
         DispatchQueue.performUIUpdate {
-            UIStoryboard.main.segueToModalViewController(self.liveVideoDependencies)
+            UIStoryboard.main.segueToModalViewController(liveVideoDependencies, optional: nil)
+        }
+    }
+
+    // Start Live Video
+    func showYouTubeVideoPlayer(videoId: String) {
+        DispatchQueue.performUIUpdate {
+            UIStoryboard.main.segueToModalViewController(youTubeVideoPlayer, optional: videoId)
         }
     }
 
     func showNewStreamViewController() {
         DispatchQueue.performUIUpdate {
-            UIStoryboard.main.sequePushViewController(self.newStreamDependencies)
+            UIStoryboard.main.sequePushViewController(newStreamDependencies)
         }
     }
 }
@@ -80,7 +87,7 @@ extension AppRouter {
     ///
     /// Inject dependecncies in the LFLiveViewController
     ///
-    private func liveVideoDependencies(_ viewController: LFLiveViewController) {
+    private func liveVideoDependencies(_ viewController: LFLiveViewController, _ optional: Any?) {
         let viewModel = LiveStreamingViewModel()
         let broadcastsAPI = YTLiveStreaming()
 
@@ -96,5 +103,13 @@ extension AppRouter {
 
         viewModel.broadcastsAPI = broadcastsAPI
         viewController.viewModel = viewModel
+    }
+    ///
+    /// Inject dependecncies in the VideoPlayerViewController
+    ///
+    private func youTubeVideoPlayer(_ viewController: VideoPlayerViewController, _ optional: Any?) {
+        if let videoId = optional as? String {
+            viewController.videoId = videoId
+        }
     }
 }

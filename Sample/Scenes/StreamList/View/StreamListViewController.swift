@@ -135,13 +135,13 @@ extension StreamListViewController {
     }
 
     private func bindTableViewData() {
-        tableView.register(StreamListTableViewCell.self, forCellReuseIdentifier: CellIdentifier.cell.rawValue)
         tableView.delegate = self
         dataSource = RxTableViewSectionedReloadDataSource<SectionModel>(
             configureCell: { (_, tableView, _, element) in
                 if let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.cell.rawValue) as? StreamListTableViewCell {
-                    cell.beginLabel.text = "start: \(element.snippet.publishedAt)"
                     cell.nameLabel.text = element.snippet.title
+                    let publishedAt = element.snippet.publishedAt
+                    cell.beginLabel.text = "start: \(publishedAt)"
                     return cell
                 } else {
                     return UITableViewCell()

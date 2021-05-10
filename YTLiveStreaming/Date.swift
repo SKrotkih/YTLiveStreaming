@@ -37,13 +37,11 @@ extension Date {
    }
 }
 
-func convertJSONtoDate(json: String) -> Date {
-   let dateFormatterDate = DateFormatter()
-   dateFormatterDate.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSz"
-   let timeZone: TimeZone = TimeZone(secondsFromGMT: 0)!
-   dateFormatterDate.timeZone = timeZone
-   let calendar = Calendar(identifier: .gregorian)
-   dateFormatterDate.calendar = calendar
-   let date = dateFormatterDate.date(from: json)
-   return date!
+func convertJSONtoDate(date: String) -> Date? {
+    let formatter = DateFormatter()
+    formatter.locale = Locale(identifier: "en_US_POSIX")
+    formatter.timeZone = TimeZone(secondsFromGMT: 0)
+    formatter.calendar = Calendar(identifier: .iso8601)
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.sssZ"
+    return formatter.date(from: date)
 }

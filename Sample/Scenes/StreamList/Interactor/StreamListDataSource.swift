@@ -89,37 +89,64 @@ class StreamListDataSource: NSObject, BroadcastsDataFetcher {
             self.dispatchGroup.leave()
         }
         dispatchGroup.enter()
+        getUpcomingBroadcasts {
+            self.dispatchGroup.leave()
+        }
+        dispatchGroup.enter()
+        getLiveNowBroadcasts {
+            self.dispatchGroup.leave()
+        }
+        dispatchGroup.enter()
+        getCompletedBroadcasts {
+            self.dispatchGroup.leave()
+        }
+        dispatchGroup.notify(queue: .main) {
+            self.rxData.onNext(self.data)
+        }
+    }
+
+    private func getUpcomingBroadcasts(completed: @escaping () -> Void) {
         self.broadcastsAPI.getUpcomingBroadcasts { result in
             switch result {
             case .success(let streams):
                 self.data[YTLiveVideoState.upcoming.index].items += streams
             case .failure(let error):
-                self.data[YTLiveVideoState.upcoming.index].error =  YTLiveVideoState.upcoming.description() + ":\n" + error.message()
+                let errMessage = YTLiveVideoState.upcoming.description() + ":\n" + error.message()
+                (self.data[YTLiveVideoState.upcoming.index].error,
+                 self.data[YTLiveVideoState.upcoming.index].items) =
+                MockBroadcastList.mockDataIfNeeded(state: YTLiveVideoState.upcoming, errMessage: errMessage)
             }
-            self.dispatchGroup.leave()
+            completed()
         }
-        dispatchGroup.enter()
+    }
+
+    private func getLiveNowBroadcasts(completed: @escaping () -> Void) {
         self.broadcastsAPI.getLiveNowBroadcasts { result in
             switch result {
             case .success(let streams):
                 self.data[YTLiveVideoState.active.index].items += streams
             case .failure(let error):
-                self.data[YTLiveVideoState.active.index].error = YTLiveVideoState.active.description() + ":\n" + error.message()
+                let errMessage = YTLiveVideoState.active.description() + ":\n" + error.message()
+                (self.data[YTLiveVideoState.active.index].error,
+                 self.data[YTLiveVideoState.active.index].items) =
+                MockBroadcastList.mockDataIfNeeded(state: YTLiveVideoState.active, errMessage: errMessage)
             }
-            self.dispatchGroup.leave()
+            completed()
         }
-        dispatchGroup.enter()
+    }
+
+    private func getCompletedBroadcasts(completed: @escaping () -> Void) {
         self.broadcastsAPI.getCompletedBroadcasts { result in
             switch result {
             case .success(let streams):
                 self.data[YTLiveVideoState.completed.index].items += streams
             case .failure(let error):
-                self.data[YTLiveVideoState.completed.index].error =  YTLiveVideoState.completed.description() + ":\n" + error.message()
+                let errMessage = YTLiveVideoState.completed.description() + ":\n" + error.message()
+                (self.data[YTLiveVideoState.completed.index].error,
+                 self.data[YTLiveVideoState.completed.index].items) =
+                MockBroadcastList.mockDataIfNeeded(state: YTLiveVideoState.completed, errMessage: errMessage)
             }
-            self.dispatchGroup.leave()
-        }
-        dispatchGroup.notify(queue: .main) {
-            self.rxData.onNext(self.data)
+            completed()
         }
     }
 }

@@ -16,6 +16,7 @@ enum VideoPlayerType {
 }
 
 class StreamListViewModel: MainViewModelOutput {
+    // Default value of the used video player
     private static let playerType: VideoPlayerType = .YTPlayerViewController
 
     var dataSource: BroadcastsDataFetcher!
@@ -76,10 +77,10 @@ class StreamListViewModel: MainViewModelOutput {
         case 0:
             assert(false, "Incorrect section number")
         case 1:
-            let broadcast = self.dataSource.getCurrent(for: indexPath.row)
+            let broadcast = dataSource.getCurrent(for: indexPath.row)
             videoPlayer.playYoutubeID(broadcast.id, viewController: viewController)
         case 2:
-            let broadcast = self.dataSource.getPast(for: indexPath.row)
+            let broadcast = dataSource.getPast(for: indexPath.row)
             videoPlayer.playYoutubeID(broadcast.id, viewController: viewController)
         default:
             assert(false, "Incorrect section number")

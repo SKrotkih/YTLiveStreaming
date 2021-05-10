@@ -39,12 +39,12 @@ public struct LiveBroadcastStreamModel: Codable {
         }
 
         public var publishedAt: Date {
-            return convertJSONtoDate(json: _publishedAt)
+            return convertJSONtoDate(date: _publishedAt) ?? Date()
         }
 
         public var scheduledStartTime: Date {
             get {
-                return convertJSONtoDate(json: _scheduledStartTime)
+                return convertJSONtoDate(date: _scheduledStartTime) ?? Date()
             }
             set {
                 _scheduledStartTime = newValue.toJSONformat()

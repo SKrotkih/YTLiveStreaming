@@ -41,7 +41,17 @@ struct AppRouter {
     // Start Live Video
     func showYouTubeVideoPlayer(videoId: String) {
         DispatchQueue.performUIUpdate {
-            UIStoryboard.main.segueToModalViewController(youTubeVideoPlayer, optional: videoId)
+            if #available(iOS 13.0, *) {
+                // Use the Video player UI designed with using SwiftUI
+                if let window = AppDelegate.shared.window {
+                    let viewController = SwiftUiVideoPlayerViewController()
+                    swiftUiVideoPlayerDependencies(viewController, videoId)
+                    window.rootViewController?.present(viewController, animated: false, completion: {})
+                }
+            } else {
+                // Use the Video player UI designed with using UIKit
+                UIStoryboard.main.segueToModalViewController(videoPlayerDependencies, optional: videoId)
+            }
         }
     }
 
@@ -105,11 +115,28 @@ extension AppRouter {
         viewController.viewModel = viewModel
     }
     ///
-    /// Inject dependecncies in the VideoPlayerViewController
+    /// Inject dependecncies in the (UIKit) VideoPlayerViewController
     ///
-    private func youTubeVideoPlayer(_ viewController: VideoPlayerViewController, _ optional: Any?) {
-        if let videoId = optional as? String {
-            viewController.videoId = videoId
+    private func videoPlayerDependencies(_ viewController: VideoPlayerViewController, _ optional: Any?) {
+        guard let videoId = optional as? String else {
+            return
         }
+        viewController.interactor = VideoPlayerInteractor(videoId: videoId)
+    }
+    ///
+    /// Inject dependecncies in the (SwiftUI version of the VideoPlayerViewController) SwiftUiVideoPlayerViewController
+    ///
+    private func swiftUiVideoPlayerDependencies(_ viewController: SwiftUiVideoPlayerViewController, _ optional: Any?) {
+        guard let videoId = optional as? String else {
+            return
+        }
+        viewController.interactor = VideoPlayerInteractor(videoId: videoId)
+        viewController.playerView = PlayerViewRepresentable()
+    }
+}
+
+extension AppRouter {
+    func closeModal(viewController: UIViewController) {
+        viewController.dismiss(animated: true, completion: nil)
     }
 }

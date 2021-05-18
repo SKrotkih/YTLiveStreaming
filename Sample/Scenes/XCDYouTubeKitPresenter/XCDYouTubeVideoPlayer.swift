@@ -34,7 +34,7 @@ class XCDYouTubeVideoPlayer: NSObject, YouTubeVideoPlayed {
                 streamURLs[YTVideoQuality.small240] {
                 playerViewController?.player = AVPlayer(url: streamURL)
                 playerViewController?.player?.play()
-                playerViewController?.delegate = self
+                 playerViewController?.delegate = self
             } else {
                 viewController.dismiss(animated: true, completion: nil)
                 let errorMessage = error?.localizedDescription ?? "Faled gettng Youtube Video via ID"

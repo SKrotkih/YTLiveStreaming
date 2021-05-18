@@ -186,6 +186,8 @@ Note. Here were  used the following things:
 - RxSwift
 - Podspec ( https://guides.cocoapods.org/syntax/podspec.html )
 - Swiftlint
+- Xcode unit tests
+- Objective-C + Swift code example
 
 Sergey Krotkih
 
@@ -203,3 +205,5 @@ Changes history:
 04-05-2021
 - add youtube-ios-player-helper as an video player
 - add Xcode unit test 
+18-05-2021
+- add SwuftUI based content view for the YouTube video player 

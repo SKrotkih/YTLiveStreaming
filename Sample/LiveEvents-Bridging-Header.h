@@ -3,5 +3,4 @@
 //
 
 #import "LFLivePreview.h"
-#import "VideoPlayerViewController.h"
- 
+#import "VideoPlayer.h"

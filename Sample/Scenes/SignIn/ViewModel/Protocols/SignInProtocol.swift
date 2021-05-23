@@ -2,8 +2,8 @@
 //  SignInProtocol.swift
 //  LiveEvents
 //
-//  Created by Sergey Krotkih on 10/31/20.
-//  Copyright © 2020 Sergey Krotkih. All rights reserved.
+//  Created by Serhii Krotkykh on 10/31/20.
+//  Copyright © 2020 Serhii Krotkykh. All rights reserved.
 //
 
 import Foundation

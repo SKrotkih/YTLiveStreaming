@@ -2,8 +2,8 @@
 //  GoogleOAuth2.swift
 //  YTLiveStreaming
 //
-//  Created by Sergey Krotkih on 10/28/16.
-//  Copyright © 2016 Sergey Krotkih. All rights reserved.
+//  Created by Serhii Krotkykh on 10/28/16.
+//  Copyright © 2016 Serhii Krotkykh. All rights reserved.
 //
 
 import Foundation

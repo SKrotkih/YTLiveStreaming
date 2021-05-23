@@ -2,8 +2,8 @@
 //  MockBroadcastList.swift
 //  LiveEvents
 //
-//  Created by Сергей Кротких on 09.05.2021.
-//  Copyright © 2021 Sergey Krotkih. All rights reserved.
+//  Created by Serhii Krotkykh on 09.05.2021.
+//  Copyright © 2021 Serhii Krotkykh. All rights reserved.
 //
 import Foundation
 import YTLiveStreaming
@@ -15,27 +15,17 @@ class MockBroadcastList {
 
     static func mockDataIfNeeded(state: YTLiveVideoState, errMessage: String) -> (String?, [LiveBroadcastStreamModel]) {
         if useMocks {
-            let data = getMockBroadcastList()
-            var broadcastList = [LiveBroadcastStreamModel]()
-            broadcastList = data?.items ?? []
-            return (nil, broadcastList)
+            switch DecodeData.loadMockData("LiveBroadcastListModel.json", as: LiveBroadcastListModel.self) {
+            case .success(let model):
+                print(model)
+                var broadcastList = [LiveBroadcastStreamModel]()
+                broadcastList = model.items
+                return (nil, broadcastList)
+            case .failure(let error):
+                return (error.message(), [])
+            }
         } else {
             return (errMessage, [])
-        }
-    }
-
-    private static func getMockBroadcastList() -> LiveBroadcastListModel? {
-        let bundle = Bundle(for: MockBroadcastList.self)
-        guard let jsonFileURL = bundle.url(forResource: "LiveBroadcastListModel", withExtension: "json") else {
-            return nil
-        }
-        do {
-            let data = try Data(contentsOf: jsonFileURL)
-            let decoder = JSONDecoder()
-            let model = try decoder.decode(LiveBroadcastListModel.self, from: data)
-            return model
-        } catch {
-            return nil
         }
     }
 }

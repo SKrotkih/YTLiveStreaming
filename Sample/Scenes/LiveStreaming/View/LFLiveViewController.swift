@@ -2,7 +2,7 @@
 //  LFLiveViewController.swift
 //  LiveEvents
 //
-//  Created by Sergey Krotkih on 11/8/16.
+//  Created by Serhii Krotkykh on 11/8/16.
 //
 
 import UIKit

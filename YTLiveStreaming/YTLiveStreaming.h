@@ -2,8 +2,8 @@
 //  YTLiveStreaming.h
 //  YTLiveStreaming
 //
-//  Created by Sergey Krotkih on 11/11/16.
-//  Copyright © 2016 Sergey Krotkih. All rights reserved.
+//  Created by Serhii Krotkykh on 11/11/16.
+//  Copyright © 2016 Serhii Krotkykh. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

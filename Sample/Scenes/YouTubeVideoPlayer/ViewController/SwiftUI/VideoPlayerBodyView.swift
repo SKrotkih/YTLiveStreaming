@@ -2,16 +2,17 @@
 //  VideoPlayerBodyView.swift
 //  LiveEvents
 //
-//  Created by Sergey Krotkih
+//  Created by Serhii Krotkykh
 //
 
 import SwiftUI
 
-typealias PlayerInteractor = VideoPlayerControlled & RouterControlled
+typealias PlayerInteractor = VideoPlayerControlled
 
 /// SwiftUI content view for the YouTube video player
 struct VideoPlayerBodyView: View {
     var interactor: PlayerInteractor
+    var navigateController: NavicationObservable
     var playerView: PlayerViewRepresentable
 
     @State private var seekToSeconds: Float = 0.0
@@ -23,7 +24,7 @@ struct VideoPlayerBodyView: View {
 
     var body: some View {
         VStack {
-            Button("Close") { interactor.closeView() }
+            Button("Close") { navigateController.closeView() }
             .foregroundColor(.gray)
             playerView
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
@@ -70,7 +71,10 @@ struct VideoPlayerBodyView: View {
 
 struct VideoPlayerContentView_Previews: PreviewProvider {
     static var previews: some View {
-        VideoPlayerBodyView(interactor: VideoPlayerInteractor(videoId: "M7lc1UVf-VE"),
-                            playerView: PlayerViewRepresentable())
+        let videoPlayer = VideoPlayer(videoId: "M7lc1UVf-VE")
+        let interactor = VideoPlayerInteractor(videoPlayer: videoPlayer!)
+        VideoPlayerBodyView(interactor: interactor,
+                            navigateController: NavicationObservable(),
+                            playerView: PlayerViewRepresentable(playerView: videoPlayer!.playerView))
     }
 }

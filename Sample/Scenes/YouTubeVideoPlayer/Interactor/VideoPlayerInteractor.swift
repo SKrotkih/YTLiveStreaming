@@ -2,10 +2,11 @@
 //  VideoPlayerInteractor.swift
 //  LiveEvents
 //
-//  Created by Sergey Krotkih
+//  Created by Serhii Krotkykh
 //
 
 import Foundation
+import RxSwift
 
 protocol VideoPlayerControlled {
     func play()
@@ -17,15 +18,11 @@ protocol VideoPlayerControlled {
     func seekToSeconds(_ seconds: Float)
 }
 
-protocol RouterControlled {
-    func closeView()
-}
-
 final class VideoPlayerInteractor: VideoPlayerControlled {
     var videoPlayer: VideoPlayer
 
-    init(videoId: String) {
-        videoPlayer = VideoPlayer(videoId: videoId)
+    init(videoPlayer: VideoPlayer) {
+        self.videoPlayer = videoPlayer
     }
 
     func play() {
@@ -57,7 +54,11 @@ final class VideoPlayerInteractor: VideoPlayerControlled {
     }
 }
 
-extension VideoPlayerInteractor: RouterControlled {
+final class NavicationObservable: ObservableObject {
+
+    var rxViewClosed: PublishSubject<Bool> = PublishSubject()
+
     func closeView() {
+        rxViewClosed.onNext(true)
     }
 }

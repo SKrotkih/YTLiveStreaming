@@ -34,11 +34,14 @@
 		7F53B1B12030B38100E09CFA /* StreamListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F53B1B02030B38100E09CFA /* StreamListDataSource.swift */; };
 		7F53B1B72030B4B400E09CFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F53B1B32030B4B300E09CFA /* AppDelegate.swift */; };
 		7F73C8E92654D66900715F9A /* VideoPlayerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C8E82654D66900715F9A /* VideoPlayerInteractor.swift */; };
+		7F79B472265A340800D69012 /* VideoPlayerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79B471265A340800D69012 /* VideoPlayerConfigurator.swift */; };
+		7F79B475265A342900D69012 /* SwiftUIVideoPlayerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79B474265A342900D69012 /* SwiftUIVideoPlayerConfigurator.swift */; };
 		7F79C8A22547F2910044CF81 /* BroadcastsApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79C8A12547F2910044CF81 /* BroadcastsApiProtocol.swift */; };
 		7F79C8A4254802910044CF81 /* MainViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79C8A3254802910044CF81 /* MainViewModelProtocol.swift */; };
 		7F79C8A6254802FB0044CF81 /* BroadcastsDataFetcherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79C8A5254802FB0044CF81 /* BroadcastsDataFetcherProtocol.swift */; };
 		7F79C8A8254804320044CF81 /* SessionViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79C8A7254804320044CF81 /* SessionViewModelProtocol.swift */; };
 		7F79C8AB254806DF0044CF81 /* YouTubeLiveVideoPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79C8AA254806DF0044CF81 /* YouTubeLiveVideoPublisher.swift */; };
+		7F79FE42265E6BB1002FA510 /* loadMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79FE41265E6BB1002FA510 /* loadMockData.swift */; };
 		7F7D436B2573A3AE00CC7642 /* LiveEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7D436A2573A3AE00CC7642 /* LiveEventsTests.swift */; };
 		7F7D7D9C26087996005FAC3B /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7D7D9B26087996005FAC3B /* LocalStorage.swift */; };
 		7F7E9FBC26563A0000D82B60 /* PlayerViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7E9FBB26563A0000D82B60 /* PlayerViewRepresentable.swift */; };
@@ -134,11 +137,14 @@
 		7F678A8525FF499D00F5FB2C /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		7F678A8625FF4A0400F5FB2C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitignore; path = ../../.gitignore; sourceTree = "<group>"; };
 		7F73C8E82654D66900715F9A /* VideoPlayerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerInteractor.swift; sourceTree = "<group>"; };
+		7F79B471265A340800D69012 /* VideoPlayerConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerConfigurator.swift; sourceTree = "<group>"; };
+		7F79B474265A342900D69012 /* SwiftUIVideoPlayerConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIVideoPlayerConfigurator.swift; sourceTree = "<group>"; };
 		7F79C8A12547F2910044CF81 /* BroadcastsApiProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastsApiProtocol.swift; sourceTree = "<group>"; };
 		7F79C8A3254802910044CF81 /* MainViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelProtocol.swift; sourceTree = "<group>"; };
 		7F79C8A5254802FB0044CF81 /* BroadcastsDataFetcherProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastsDataFetcherProtocol.swift; sourceTree = "<group>"; };
 		7F79C8A7254804320044CF81 /* SessionViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewModelProtocol.swift; sourceTree = "<group>"; };
 		7F79C8AA254806DF0044CF81 /* YouTubeLiveVideoPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeLiveVideoPublisher.swift; sourceTree = "<group>"; };
+		7F79FE41265E6BB1002FA510 /* loadMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadMockData.swift; sourceTree = "<group>"; };
 		7F7D43682573A3AE00CC7642 /* LiveEventsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiveEventsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F7D436A2573A3AE00CC7642 /* LiveEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveEventsTests.swift; sourceTree = "<group>"; };
 		7F7D436C2573A3AE00CC7642 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -235,6 +241,7 @@
 				7F1E96AE2546B8BF00638965 /* Alert.swift */,
 				7FDCF9852546BF1400D5B492 /* Error.swift */,
 				7F1E96B02546B8BF00638965 /* StatusBarShowingViewController.swift */,
+				7F79FE41265E6BB1002FA510 /* loadMockData.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -437,6 +444,7 @@
 		7F85372926577C7700C21921 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				7F79B471265A340800D69012 /* VideoPlayerConfigurator.swift */,
 				7F286C752657FA2100419B9C /* VideoPlayerViewController.swift */,
 			);
 			path = UIKit;
@@ -445,6 +453,7 @@
 		7F85372A26577C8400C21921 /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				7F79B474265A342900D69012 /* SwiftUIVideoPlayerConfigurator.swift */,
 				7FBC71722653D993001DDAE7 /* SwiftUiVideoPlayerViewController.swift */,
 				7FBC71782653DB9B001DDAE7 /* VideoPlayerBodyView.swift */,
 				7F286C7E26580A7F00419B9C /* ViewRepresentable */,
@@ -682,18 +691,19 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 1240;
-				ORGANIZATIONNAME = "Sergey Krotkih";
+				ORGANIZATIONNAME = "Serhii Krotkykh";
 				TargetAttributes = {
 					7F7D43672573A3AE00CC7642 = {
 						CreatedOnToolsVersion = 12.2;
 						DevelopmentTeam = N5B5T39W8Y;
+						LastSwiftMigration = 1240;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 7F9274A71DBDCAD00051DE6B;
 					};
 					7F9274A71DBDCAD00051DE6B = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = N5B5T39W8Y;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1240;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -956,7 +966,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FA950022032C5750083B23B /* GoogleUser.swift in Sources */,
+				7F79B475265A342900D69012 /* SwiftUIVideoPlayerConfigurator.swift in Sources */,
 				7FB8A42B1DD23C3100955C2D /* LFLivePreview.m in Sources */,
+				7F79FE42265E6BB1002FA510 /* loadMockData.swift in Sources */,
 				7F1E96BC2546B8BF00638965 /* Date+Ext.swift in Sources */,
 				7F9A91D82609AC170036CA0B /* YouTubeVideoPlayed.swift in Sources */,
 				7F384BEB245873A6004C07EE /* BaseViewController.swift in Sources */,
@@ -994,6 +1006,7 @@
 				7F286C762657FA2100419B9C /* VideoPlayerViewController.swift in Sources */,
 				7F7E9FBC26563A0000D82B60 /* PlayerViewRepresentable.swift in Sources */,
 				7F39A88D2456FD0400C18130 /* GoogleSessionManager.swift in Sources */,
+				7F79B472265A340800D69012 /* VideoPlayerConfigurator.swift in Sources */,
 				7FB8A42D1DD23F8400955C2D /* LFLiveViewController.swift in Sources */,
 				7F8221C7265646AD005A6015 /* VideoPlayer.mm in Sources */,
 				7FA950032032C5750083B23B /* GoogleSignInInteractor.swift in Sources */,
@@ -1072,7 +1085,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.skdevappleid.LiveEventsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LiveEvents.app/LiveEvents";
 			};
@@ -1106,7 +1119,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.skdevappleid.LiveEventsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LiveEvents.app/LiveEvents";
 			};
@@ -1249,7 +1262,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "LiveEvents-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1279,7 +1292,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "iOS Development Wildcard";
 				SWIFT_OBJC_BRIDGING_HEADER = "LiveEvents-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

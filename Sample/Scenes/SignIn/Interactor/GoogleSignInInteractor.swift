@@ -2,7 +2,7 @@
 //  GoogleSignInInteractor.swift
 //  YTLiveStreaming
 //
-//  Created by Sergey Krotkih
+//  Created by Serhii Krotkykh
 //
 
 import Foundation

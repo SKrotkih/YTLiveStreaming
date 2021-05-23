@@ -2,7 +2,7 @@
 //  VideoPlayer.h
 //  LiveEvents
 //
-//  Created by Sergey Krotkih
+//  Created by Serhii Krotkykh
 //
 
 #import <UIKit/UIKit.h>

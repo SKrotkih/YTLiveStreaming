@@ -2,7 +2,7 @@
 //  Thumbnails.swift
 //  LiveEvents
 //
-//  Created by Сергей Кротких
+//  Created by Serhii Krotkykh
 //
 
 import Foundation

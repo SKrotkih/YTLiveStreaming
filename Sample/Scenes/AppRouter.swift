@@ -2,7 +2,7 @@
 //  AppRouter.swift
 //  LiveEvents
 //
-//  Created by Sergey Krotkih
+//  Created by Serhii Krotkykh
 //
 
 import Foundation
@@ -114,24 +114,17 @@ extension AppRouter {
         viewModel.broadcastsAPI = broadcastsAPI
         viewController.viewModel = viewModel
     }
-    ///
-    /// Inject dependecncies in the (UIKit) VideoPlayerViewController
+    /// UIKit:
+    /// Inject dependecncies in to the VideoPlayerViewController
     ///
     private func videoPlayerDependencies(_ viewController: VideoPlayerViewController, _ optional: Any?) {
-        guard let videoId = optional as? String else {
-            return
-        }
-        viewController.interactor = VideoPlayerInteractor(videoId: videoId)
+        VideoPlayerConfigurator.configure(viewController, optional)
     }
-    ///
-    /// Inject dependecncies in the (SwiftUI version of the VideoPlayerViewController) SwiftUiVideoPlayerViewController
+    /// SwiftUI:
+    /// Inject dependecncies in to the (SwiftUI version of the VideoPlayerViewController) SwiftUiVideoPlayerViewController
     ///
     private func swiftUiVideoPlayerDependencies(_ viewController: SwiftUiVideoPlayerViewController, _ optional: Any?) {
-        guard let videoId = optional as? String else {
-            return
-        }
-        viewController.interactor = VideoPlayerInteractor(videoId: videoId)
-        viewController.playerView = PlayerViewRepresentable()
+        SwiftUIVideoPlayerConfigurator.configure(viewController, optional)
     }
 }
 

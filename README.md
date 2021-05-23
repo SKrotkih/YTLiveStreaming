@@ -189,7 +189,7 @@ Note. Here were  used the following things:
 - Xcode unit tests
 - Objective-C + Swift code example
 
-Sergey Krotkih
+Serhii Krotkykh
 
 11-11-2016
 

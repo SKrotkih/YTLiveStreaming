@@ -2,8 +2,8 @@
 //  HttpBodyEncoding.swift
 //  YTLiveStreaming
 //
-//  Created by Sergey Krotkih on 16.03.2021.
-//  Copyright © 2021 Sergey Krotkih. All rights reserved.
+//  Created by Serhii Krotkykh on 16.03.2021.
+//  Copyright © 2021 Serhii Krotkykh. All rights reserved.
 //
 
 import Alamofire

@@ -2,8 +2,8 @@
 //  LiveEventsTests.swift
 //  LiveEventsTests
 //
-//  Created by Sergey Krotkih on 29.11.2020.
-//  Copyright © 2020 Sergey Krotkih. All rights reserved.
+//  Created by Serhii Krotkykh on 29.11.2020.
+//  Copyright © 2020 Serhii Krotkykh. All rights reserved.
 //
 
 import XCTest

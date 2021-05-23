@@ -2,31 +2,45 @@
 //  SwiftUiVideoPlayerViewController.swift
 //  LiveEvents
 //
-//  Created by Sergey Krotkih
+//  Created by Serhii Krotkykh
 //
 
 import UIKit
+import RxSwift
 
 class SwiftUiVideoPlayerViewController: UIViewController {
 
     // Dependencies
     var interactor: PlayerInteractor!
+    var navigateController: NavicationObservable!
     var playerView: PlayerViewRepresentable!
+
+    private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        addSwiftUIView()
+        addBodyView()
+        subscribeOnActivity()
     }
 
-    private func addSwiftUIView() {
+    private func addBodyView() {
         let bodyView = VideoPlayerBodyView(interactor: interactor,
+                                           navigateController: navigateController,
                                              playerView: playerView)
         addSubSwiftUIView(bodyView, to: view)
-        // TODO: Subscribe on close view press button
     }
 
-    func closeView() {
+    private func subscribeOnActivity() {
+        navigateController
+            .rxViewClosed
+            .subscribe(onNext: { [weak self] _ in
+                self?.closeView()
+            })
+            .disposed(by: disposeBag)
+    }
+
+    private func closeView() {
         Router.closeModal(viewController: self)
     }
 }

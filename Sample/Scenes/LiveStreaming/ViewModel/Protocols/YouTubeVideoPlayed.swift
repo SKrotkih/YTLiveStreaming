@@ -2,8 +2,8 @@
 //  YouTubeVideoPlayed.swift
 //  LiveEvents
 //
-//  Created by Сергей Кротких on 23.03.2021.
-//  Copyright © 2021 Sergey Krotkih. All rights reserved.
+//  Created by Serhii Krotkykh on 23.03.2021.
+//  Copyright © 2021 Serhii Krotkykh. All rights reserved.
 //
 
 import Foundation

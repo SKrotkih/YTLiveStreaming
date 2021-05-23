@@ -1,7 +1,7 @@
 //  XCDYouTubeVideoPlayer8.swift
 //  LiveEvents
 //
-//  Created by Sergey Krotkih
+//  Created by Serhii Krotkykh
 //
 import UIKit
 import XCDYouTubeKit

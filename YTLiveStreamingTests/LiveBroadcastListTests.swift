@@ -2,12 +2,10 @@
 //  LiveBroadcastListTests.swift
 //  YTLiveStreamingTests
 //
-//  Created by Сергей Кротких on 05.05.2021.
-//  Copyright © 2021 Sergey Krotkih. All rights reserved.
-//
+//  Created by Serhii Krotkykh on 05.05.2021.
+//  Copyright © 2021 Serhii Krotkykh. All rights reserved.
 
 @testable import YTLiveStreaming
-import SwiftyJSON
 import XCTest
 
 class LiveBroadcastListTestCase: XCTestCase {
@@ -35,19 +33,11 @@ class LiveBroadcastListTestCase: XCTestCase {
 private class BroadcastListMockDataProvider {
     func getBroadcastList() -> LiveBroadcastListModel? {
         let bundle = Bundle(for: BroadcastListMockDataProvider.self)
-        guard let jsonFileURL = bundle.url(forResource: "LiveBroadcastListModel", withExtension: "json") else {
-            XCTFail("Couldn't find LiveBroadcastListModel.json")
-
-            return nil
-        }
-        do {
-            let data = try Data(contentsOf: jsonFileURL)
-            let decoder = JSONDecoder()
-            let model = try decoder.decode(LiveBroadcastListModel.self, from: data)
-            print(model)
+        switch DecodeData.load(bundle, "LiveBroadcastListModel.json", as: LiveBroadcastListModel.self) {
+        case .success(let model):
             return model
-        } catch {
-            XCTFail("Failed to parse. Error: \(error)")
+        case .failure(let error):
+            XCTFail("Failed to parse. Error: \(error.message())")
             return nil
         }
     }

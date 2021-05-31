@@ -1,11 +1,17 @@
-target 'YTLiveStreaming' do
-    
-    platform :ios, '12.1'
+platform :ios, '12.1'
 
-    use_frameworks!
-    
-    pod 'Moya', '~> 14.0'
-    pod 'SwiftyJSON'
-    pod 'KeychainAccess'
-    
+def shared
+  use_frameworks!
+  
+  pod 'Moya', '~> 14.0'
+  pod 'SwiftyJSON'
+  pod 'KeychainAccess'
+end
+
+target 'YTLiveStreaming' do
+  shared
+end
+
+target 'YTLiveStreamingTests' do
+  shared
 end

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		633CAFE2408EE161762B8DFE /* Pods_YTLiveStreaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56C6D331A07B4994BE24765 /* Pods_YTLiveStreaming.framework */; };
+		78A58406C37AB17795096129 /* Pods_YTLiveStreamingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACCB10CA407E55362DC63E4 /* Pods_YTLiveStreamingTests.framework */; };
 		7F0478831DD5962C00AB6211 /* YTLiveStreaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F0478791DD5962C00AB6211 /* YTLiveStreaming.framework */; };
 		7F0478881DD5962C00AB6211 /* YTLiveStreamingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0478871DD5962C00AB6211 /* YTLiveStreamingTests.swift */; };
 		7F04788A1DD5962C00AB6211 /* YTLiveStreaming.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F04787C1DD5962C00AB6211 /* YTLiveStreaming.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -24,6 +25,7 @@
 		7F0478AC1DD5973A00AB6211 /* LiveBroadcastStreamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0478A71DD5973A00AB6211 /* LiveBroadcastStreamModel.swift */; };
 		7F0478AD1DD5973A00AB6211 /* LiveStreamListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0478A81DD5973A00AB6211 /* LiveStreamListModel.swift */; };
 		7F0478AE1DD5973A00AB6211 /* LiveStreamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0478A91DD5973A00AB6211 /* LiveStreamModel.swift */; };
+		7F0DF5A22664C6A70046706F /* loadMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0DF5A12664C6A70046706F /* loadMockData.swift */; };
 		7F101EA91E0FBD8A003EAF3F /* YTLiveStreaming.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 7F101EA81E0FBD8A003EAF3F /* YTLiveStreaming.podspec */; };
 		7F101EAB1E0FBDA5003EAF3F /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7F101EAA1E0FBDA5003EAF3F /* LICENSE */; };
 		7F117F291E0E816C000D0745 /* LiveLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F117F281E0E816C000D0745 /* LiveLauncher.swift */; };
@@ -47,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		26D18BB0B0E41F4706947120 /* Pods-YTLiveStreaming.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YTLiveStreaming.release.xcconfig"; path = "Pods/Target Support Files/Pods-YTLiveStreaming/Pods-YTLiveStreaming.release.xcconfig"; sourceTree = "<group>"; };
+		7A3F0067FF7238ECB3ED4C0B /* Pods-YTLiveStreamingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YTLiveStreamingTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YTLiveStreamingTests/Pods-YTLiveStreamingTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7F0478791DD5962C00AB6211 /* YTLiveStreaming.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YTLiveStreaming.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F04787C1DD5962C00AB6211 /* YTLiveStreaming.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YTLiveStreaming.h; sourceTree = "<group>"; };
 		7F04787D1DD5962C00AB6211 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -66,6 +69,7 @@
 		7F0478A71DD5973A00AB6211 /* LiveBroadcastStreamModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveBroadcastStreamModel.swift; sourceTree = "<group>"; };
 		7F0478A81DD5973A00AB6211 /* LiveStreamListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveStreamListModel.swift; sourceTree = "<group>"; };
 		7F0478A91DD5973A00AB6211 /* LiveStreamModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveStreamModel.swift; sourceTree = "<group>"; };
+		7F0DF5A12664C6A70046706F /* loadMockData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loadMockData.swift; sourceTree = "<group>"; };
 		7F101EA81E0FBD8A003EAF3F /* YTLiveStreaming.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = YTLiveStreaming.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		7F101EAA1E0FBDA5003EAF3F /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		7F117F281E0E816C000D0745 /* LiveLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveLauncher.swift; sourceTree = "<group>"; };
@@ -78,6 +82,8 @@
 		7FDB95211DD6042700498305 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		7FECA28B2601187F008F2A4A /* HttpBodyEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpBodyEncoding.swift; sourceTree = "<group>"; };
 		8E99A8A7F06BCB520FF235F8 /* Pods-YTLiveStreaming.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YTLiveStreaming.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YTLiveStreaming/Pods-YTLiveStreaming.debug.xcconfig"; sourceTree = "<group>"; };
+		AACCB10CA407E55362DC63E4 /* Pods_YTLiveStreamingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YTLiveStreamingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB2CA28D95320B6CDC1BC8AD /* Pods-YTLiveStreamingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YTLiveStreamingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YTLiveStreamingTests/Pods-YTLiveStreamingTests.release.xcconfig"; sourceTree = "<group>"; };
 		E56C6D331A07B4994BE24765 /* Pods_YTLiveStreaming.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YTLiveStreaming.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -95,6 +101,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F0478831DD5962C00AB6211 /* YTLiveStreaming.framework in Frameworks */,
+				78A58406C37AB17795096129 /* Pods_YTLiveStreamingTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				E56C6D331A07B4994BE24765 /* Pods_YTLiveStreaming.framework */,
+				AACCB10CA407E55362DC63E4 /* Pods_YTLiveStreamingTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -114,6 +122,8 @@
 			children = (
 				8E99A8A7F06BCB520FF235F8 /* Pods-YTLiveStreaming.debug.xcconfig */,
 				26D18BB0B0E41F4706947120 /* Pods-YTLiveStreaming.release.xcconfig */,
+				7A3F0067FF7238ECB3ED4C0B /* Pods-YTLiveStreamingTests.debug.xcconfig */,
+				BB2CA28D95320B6CDC1BC8AD /* Pods-YTLiveStreamingTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -173,6 +183,7 @@
 				7F863D5F264513C4003C1775 /* JSON */,
 				7F0478871DD5962C00AB6211 /* YTLiveStreamingTests.swift */,
 				7F863D59264513BE003C1775 /* LiveBroadcastListTests.swift */,
+				7F0DF5A12664C6A70046706F /* loadMockData.swift */,
 				7F0478891DD5962C00AB6211 /* Info.plist */,
 			);
 			path = YTLiveStreamingTests;
@@ -234,10 +245,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7F0478901DD5962C00AB6211 /* Build configuration list for PBXNativeTarget "YTLiveStreamingTests" */;
 			buildPhases = (
+				4998C24199F453FAA0146B99 /* [CP] Check Pods Manifest.lock */,
 				7F04787E1DD5962C00AB6211 /* Sources */,
 				7F04787F1DD5962C00AB6211 /* Frameworks */,
 				7F0478801DD5962C00AB6211 /* Resources */,
 				7F678A5225FF3AB500F5FB2C /* ShellScript */,
+				6A5207558F5945AECAE68976 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -331,6 +344,52 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		4998C24199F453FAA0146B99 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YTLiveStreamingTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6A5207558F5945AECAE68976 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YTLiveStreamingTests/Pods-YTLiveStreamingTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YTLiveStreamingTests/Pods-YTLiveStreamingTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7F678A4F25FF3AA500F5FB2C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -397,6 +456,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F0DF5A22664C6A70046706F /* loadMockData.swift in Sources */,
 				7F0478881DD5962C00AB6211 /* YTLiveStreamingTests.swift in Sources */,
 				7F863D68264516D3003C1775 /* LiveBroadcastListTests.swift in Sources */,
 			);
@@ -593,6 +653,7 @@
 		};
 		7F0478911DD5962C00AB6211 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A3F0067FF7238ECB3ED4C0B /* Pods-YTLiveStreamingTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Manual;
@@ -610,6 +671,7 @@
 		};
 		7F0478921DD5962C00AB6211 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB2CA28D95320B6CDC1BC8AD /* Pods-YTLiveStreamingTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Manual;

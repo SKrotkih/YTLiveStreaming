@@ -1,7 +1,8 @@
 Pod::Spec.new do |s|
 
   s.platform     = :ios
-  s.ios.deployment_target = '11.2'
+  s.ios.deployment_target = '12.1'
+  s.swift_versions = "5.0"
   s.name         = "YTLiveStreaming"
   s.description  = <<-DESC
      YTLiveStreaming is a framework which lets create live broadcasts and video streams on YouTube using the YouTube Live Streaming API.
@@ -9,7 +10,7 @@ Pod::Spec.new do |s|
   s.summary      = "YTLiveStreaming is an YouTube Live Streaming Framework"
   s.requires_arc = true
 
-  s.version      = "0.2.19"
+  s.version      = "0.2.20"
 
   # Initialize
   # Check podspec

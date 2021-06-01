@@ -188,9 +188,12 @@ Note. Here were  used the following things:
 - Swiftlint
 - Xcode unit tests
 - Objective-C + Swift code example
+- SwiftUI in the sample project
 
+Author
 Serhii Krotkykh
 
+The project was created
 11-11-2016
 
 Changes history:
@@ -203,7 +206,7 @@ Changes history:
 - fixed Swiftlint warnings
 - Sample app was renamed to LiveEvents
 04-05-2021
-- add youtube-ios-player-helper as an video player
-- add Xcode unit test 
+- added youtube-ios-player-helper as an video player
+- added Xcode unit test 
 18-05-2021
-- add SwuftUI based content view for the YouTube video player 
+- added SwuftUI based content view for the YouTube video player 

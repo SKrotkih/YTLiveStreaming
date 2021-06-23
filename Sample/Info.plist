@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string></string>
+	<string>AIzaSyAmeEwjm6SAOjRj1j_Rld4MPm2A35U5gw8</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -29,14 +29,14 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.1052952934375-blc4e3c9vv4puqls7ujnpmb3b6vij35j</string>
+				<string>com.googleusercontent.apps.553813139343-auvgu7bvp5u1majsou1j63omndhr2uim</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>CLIENT_ID</key>
-	<string></string>
+	<string>553813139343-auvgu7bvp5u1majsou1j63omndhr2uim.apps.googleusercontent.com</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>

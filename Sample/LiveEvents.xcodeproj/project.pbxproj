@@ -63,7 +63,6 @@
 		7FA74D60260B3C0E0069DA8A /* NewStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA74D5F260B3C0E0069DA8A /* NewStream.swift */; };
 		7FA950022032C5750083B23B /* GoogleUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA950002032C5750083B23B /* GoogleUser.swift */; };
 		7FA950032032C5750083B23B /* GoogleSignInInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA950012032C5750083B23B /* GoogleSignInInteractor.swift */; };
-		7FAF9E92246187B900C8B81B /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FAF9E91246187B900C8B81B /* Config.plist */; };
 		7FB8A42B1DD23C3100955C2D /* LFLivePreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8A42A1DD23C3100955C2D /* LFLivePreview.m */; };
 		7FB8A42D1DD23F8400955C2D /* LFLiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8A42C1DD23F8400955C2D /* LFLiveViewController.swift */; };
 		7FBC71732653D993001DDAE7 /* SwiftUiVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBC71722653D993001DDAE7 /* SwiftUiVideoPlayerViewController.swift */; };
@@ -96,6 +95,15 @@
 			files = (
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA38D6682682E11300BA439F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -170,7 +178,6 @@
 		7FA74D5F260B3C0E0069DA8A /* NewStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStream.swift; sourceTree = "<group>"; };
 		7FA950002032C5750083B23B /* GoogleUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleUser.swift; sourceTree = "<group>"; };
 		7FA950012032C5750083B23B /* GoogleSignInInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleSignInInteractor.swift; sourceTree = "<group>"; };
-		7FAF9E91246187B900C8B81B /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Config.plist; sourceTree = SOURCE_ROOT; };
 		7FB8A4291DD23C3100955C2D /* LFLivePreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFLivePreview.h; sourceTree = "<group>"; };
 		7FB8A42A1DD23C3100955C2D /* LFLivePreview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFLivePreview.m; sourceTree = "<group>"; };
 		7FB8A42C1DD23F8400955C2D /* LFLiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFLiveViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +191,7 @@
 		A144B4F6FBDD3317B5035D73 /* Pods-LiveEvents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveEvents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LiveEvents/Pods-LiveEvents.debug.xcconfig"; sourceTree = "<group>"; };
 		A44F9CE8429BD266A7AF37D0 /* Pods-LiveEvents-LiveEventsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveEvents-LiveEventsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LiveEvents-LiveEventsTests/Pods-LiveEvents-LiveEventsTests.release.xcconfig"; sourceTree = "<group>"; };
 		B30E5B8AAAEDC735322F3362 /* Pods_LiveEvents_LiveEventsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LiveEvents_LiveEventsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA38D6C02682E3D800BA439F /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		F39C606421D10E92A92EBF67 /* Pods-LiveEvents-LiveEventsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveEvents-LiveEventsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LiveEvents-LiveEventsTests/Pods-LiveEvents-LiveEventsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FC305E81DB8C9398569AE585 /* Pods_LiveEvents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LiveEvents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -346,12 +354,12 @@
 			isa = PBXGroup;
 			children = (
 				7F1E96C62546B95A00638965 /* Constants.swift */,
-				7FAF9E91246187B900C8B81B /* Config.plist */,
 				7F53B1B32030B4B300E09CFA /* AppDelegate.swift */,
 				7F53B1B62030B4B400E09CFA /* LiveEvents-Bridging-Header.h */,
 				7F8FD2A3245940530041CF36 /* README.md */,
 				7F678A8625FF4A0400F5FB2C /* .gitignore */,
 				7F678A8525FF499D00F5FB2C /* .swiftlint.yml */,
+				BA38D6C02682E3D800BA439F /* Config.plist */,
 			);
 			name = "Supporting Files";
 			path = Resources;
@@ -673,6 +681,7 @@
 				7F0478C11DD599DD00AB6211 /* Embed Frameworks */,
 				7853DD346448FB0999341CFA /* [CP] Copy Pods Resources */,
 				7F678A8225FF490200F5FB2C /* ShellScript */,
+				BA38D6682682E11300BA439F /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -702,9 +711,9 @@
 					};
 					7F9274A71DBDCAD00051DE6B = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = N5B5T39W8Y;
+						DevelopmentTeam = 57NQC2SA65;
 						LastSwiftMigration = 1240;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -743,7 +752,6 @@
 				7F53B1AB2030724200E09CFA /* Main.storyboard in Resources */,
 				7F9274B31DBDCAD00051DE6B /* Assets.xcassets in Resources */,
 				7F8FD2A4245940530041CF36 /* README.md in Resources */,
-				7FAF9E92246187B900C8B81B /* Config.plist in Resources */,
 				7F53B1AA2030724200E09CFA /* LaunchScreen.storyboard in Resources */,
 				7FE331DE2647A42700D412AE /* LiveBroadcastListModel.json in Resources */,
 			);
@@ -1244,12 +1252,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 6;
-				DEVELOPMENT_TEAM = N5B5T39W8Y;
+				DEVELOPMENT_TEAM = 57NQC2SA65;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1258,7 +1267,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.skdevappleid.liveevents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "iOS Development Wildcard";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "LiveEvents-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
@@ -1275,12 +1284,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 6;
-				DEVELOPMENT_TEAM = N5B5T39W8Y;
+				DEVELOPMENT_TEAM = 57NQC2SA65;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1289,7 +1299,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.skdevappleid.liveevents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "iOS Development Wildcard";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "LiveEvents-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 5.0;

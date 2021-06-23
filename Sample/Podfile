@@ -2,7 +2,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'LiveEvents' do
     
-    platform :ios, '12.1'
+    platform :ios, '10.0'
     use_frameworks!
     
     pod 'GoogleSignIn'

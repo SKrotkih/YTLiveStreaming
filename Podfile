@@ -1,4 +1,4 @@
-platform :ios, '12.1'
+platform :ios, '10.0'
 
 def shared
   use_frameworks!

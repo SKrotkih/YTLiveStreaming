@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.platform     = :ios
-  s.ios.deployment_target = '12.1'
+  s.ios.deployment_target = '10.0'
   s.swift_versions = "5.0"
   s.name         = "YTLiveStreaming"
   s.description  = <<-DESC

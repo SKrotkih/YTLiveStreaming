@@ -46,7 +46,7 @@ To integrate YTLiveStreaming into your Xcode project using CocoaPods, specify it
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '12.1'
+platform :ios, '10.0'
 use_frameworks!
 
 target '<Your Target Name>' do

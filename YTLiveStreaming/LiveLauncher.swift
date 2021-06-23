@@ -7,7 +7,7 @@
 
 import Foundation
 
-@objc public protocol LiveStreamTransitioning: class {
+@objc public protocol LiveStreamTransitioning: AnyObject {
    @objc optional func didTransitionToLiveStatus()
    @objc optional func didTransitionTo(broadcastStatus: String?, streamStatus: String?, healthStatus: String?)
 }

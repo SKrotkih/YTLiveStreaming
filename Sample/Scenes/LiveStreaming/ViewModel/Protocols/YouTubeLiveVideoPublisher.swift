@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-protocol YouTubeLiveVideoPublisher: class {
+protocol YouTubeLiveVideoPublisher: AnyObject {
     func willStartPublishing(completed: @escaping (String?, NSDate?) -> Void)
     func finishPublishing()
     func didUserCancelPublishingVideo()

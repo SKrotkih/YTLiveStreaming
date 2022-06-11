@@ -6,16 +6,21 @@
 //
 
 import Foundation
+import GoogleSignIn
 
-class GoogleClientId {
+protocol SignInConfigurator {
+    var signInConfig: GIDConfiguration { get }
+}
+
+class GoogleSignInConfigurator: SignInConfigurator {
+
+    var signInConfig: GIDConfiguration {
+        return GIDConfiguration(clientID: clientID)
+    }
 
     lazy fileprivate var clientID: String = {
         return getClentID()
     }()
-
-    var googleClientId: String {
-        return clientID
-    }
 
     private func getClentID() -> String {
         let key = "CLIENT_ID"

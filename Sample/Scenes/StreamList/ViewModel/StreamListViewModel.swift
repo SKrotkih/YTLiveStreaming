@@ -19,8 +19,8 @@ class StreamListViewModel: MainViewModelOutput {
     // Default value of the used video player
     private static let playerType: VideoPlayerType = .VideoPlayerViewController
 
-    var dataSource: BroadcastsDataFetcher!
-    var sessionManager: SessionManager!
+    @Lateinit var dataSource: BroadcastsDataFetcher
+    @Lateinit var sessionManager: SessionManager
 
     var rxError = PublishSubject<String>()
     private let disposeBag = DisposeBag()

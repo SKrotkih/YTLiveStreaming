@@ -26,9 +26,9 @@ YTLiveStreaming is an iOS framework which can be used for creating live broadcas
 
 - fill Application Homepage link and Application Privacy Policy link. Submit for verification
 
-- as result you will have API_KEY and CLIENT_ID which will be used in info.plist your iOS app later.
+- as result you will have API_KEY and CLIENT_ID which will be used in Config.plist your iOS app later.
 
-<img src="https://user-images.githubusercontent.com/2775621/36204190-e80344a6-1192-11e8-9431-e18ad4bff9a3.png" alt="Google API Manager" style="width: 690px;" />
+<img src="https://user-images.githubusercontent.com/2775621/173214138-adc9ca4b-33d6-4781-9f9b-d6ba6038527d.png" alt="Credentials compatible with the Youtube Data API" style="width: 690px;" />
 
 ## Installation
 
@@ -79,11 +79,13 @@ As an example used iOS app Live Events
 
 - Create Config.plist. Copy content Config.plist.example.plist into new Config.plist. Change current values of the client ID and API key on yours.  
 
-- Put CLIENT_ID and API_KEY into the plist.info:
+- Put [CLIENT_ID](https://developers.google.com/identity/sign-in/ios/start-integrating#get_an_oauth_client_id) and API_KEY into the plist.info:
 
-<img src="https://user-images.githubusercontent.com/2775621/36204258-42684ab8-1193-11e8-88c4-a7668f7de368.png" alt="Credentials" style="width: 690px;" />
+<img src="https://user-images.githubusercontent.com/2775621/173193901-cbdc8653-76c8-4aea-b0d9-0f9d4391fba3.png" alt="Config.plist" style="width: 690px;" />
 
-- In Sample/Info.plist edit the CFBundleURLSchemes. Change the value that starts with "com.googleusercontent.apps." based on your API key. It should be set to the reversed API key. The API key has the format XXXXXXXX.apps.googleusercontent.com and the allowed URL should be com.googleusercontent.apps.XXXXXXXX
+- In Sample/Info.plist edit the CFBundleURLSchemes. Change the value that starts with "com.googleusercontent.apps." based on your API key. It should be set to the reversed API key. The API key has the format XXXXXXXX.apps.googleusercontent.com and the allowed URL should be com.googleusercontent.apps.XXXXXXXX :
+
+<img src="https://user-images.githubusercontent.com/2775621/173220142-003b05e9-3903-4959-b88a-7f1181c1c010.png" alt="Info.plist Example" style="width: 690px;" />
 
 ## User guide
 

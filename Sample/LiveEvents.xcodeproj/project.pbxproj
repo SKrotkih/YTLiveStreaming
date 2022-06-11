@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7F0933CD2457258300FB5579 /* GoogleSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0933CC2457258300FB5579 /* GoogleSignInViewController.swift */; };
-		7F0933CF24574FCB00FB5579 /* GoogleSignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0933CE24574FCB00FB5579 /* GoogleSignInViewModel.swift */; };
+		7F0933CD2457258300FB5579 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0933CC2457258300FB5579 /* SignInViewController.swift */; };
+		7F0933CF24574FCB00FB5579 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0933CE24574FCB00FB5579 /* SignInViewModel.swift */; };
 		7F1E96BB2546B8BF00638965 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1E96AE2546B8BF00638965 /* Alert.swift */; };
 		7F1E96BC2546B8BF00638965 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1E96AF2546B8BF00638965 /* Date+Ext.swift */; };
 		7F1E96BD2546B8BF00638965 /* StatusBarShowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1E96B02546B8BF00638965 /* StatusBarShowingViewController.swift */; };
@@ -22,13 +22,15 @@
 		7F1E96C72546B95A00638965 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1E96C62546B95A00638965 /* Constants.swift */; };
 		7F2439F624580FA500C1FB17 /* StreamListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2439F524580FA500C1FB17 /* StreamListViewModel.swift */; };
 		7F286C762657FA2100419B9C /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F286C752657FA2100419B9C /* VideoPlayerViewController.swift */; };
-		7F2B6C13254D8B1F0081E007 /* SignInProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2B6C12254D8B1F0081E007 /* SignInProtocol.swift */; };
+		7F2B6C13254D8B1F0081E007 /* SignInProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2B6C12254D8B1F0081E007 /* SignInProtocols.swift */; };
 		7F2C3C3C2544187100CA9912 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2C3C3B2544187100CA9912 /* AppRouter.swift */; };
 		7F384BEB245873A6004C07EE /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F384BE9245873A5004C07EE /* BaseViewController.swift */; };
 		7F384BEC245873A6004C07EE /* MainNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F384BEA245873A5004C07EE /* MainNavController.swift */; };
 		7F384BEE24587498004C07EE /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F384BED24587498004C07EE /* Appearance.swift */; };
-		7F39A88A24569BF200C18130 /* GoogleClientId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F39A88924569BF200C18130 /* GoogleClientId.swift */; };
+		7F39A88A24569BF200C18130 /* GoogleSignInConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F39A88924569BF200C18130 /* GoogleSignInConfigurator.swift */; };
 		7F39A88D2456FD0400C18130 /* GoogleSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F39A88C2456FD0400C18130 /* GoogleSessionManager.swift */; };
+		7F5296332857649800548281 /* LateInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5296322857649800548281 /* LateInit.swift */; };
+		7F52963628582F5C00548281 /* SignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F52963528582F5C00548281 /* SignInModel.swift */; };
 		7F53B1AA2030724200E09CFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F53B1A62030724200E09CFA /* LaunchScreen.storyboard */; };
 		7F53B1AB2030724200E09CFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F53B1A82030724200E09CFA /* Main.storyboard */; };
 		7F53B1B12030B38100E09CFA /* StreamListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F53B1B02030B38100E09CFA /* StreamListDataSource.swift */; };
@@ -61,7 +63,6 @@
 		7FA74D5A260B3BD70069DA8A /* NewStreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA74D59260B3BD70069DA8A /* NewStreamViewController.swift */; };
 		7FA74D5D260B3BF50069DA8A /* NewStreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA74D5C260B3BF50069DA8A /* NewStreamViewModel.swift */; };
 		7FA74D60260B3C0E0069DA8A /* NewStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA74D5F260B3C0E0069DA8A /* NewStream.swift */; };
-		7FA950022032C5750083B23B /* GoogleUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA950002032C5750083B23B /* GoogleUser.swift */; };
 		7FA950032032C5750083B23B /* GoogleSignInInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA950012032C5750083B23B /* GoogleSignInInteractor.swift */; };
 		7FAF9E92246187B900C8B81B /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FAF9E91246187B900C8B81B /* Config.plist */; };
 		7FB8A42B1DD23C3100955C2D /* LFLivePreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8A42A1DD23C3100955C2D /* LFLivePreview.m */; };
@@ -73,6 +74,8 @@
 		7FDCF9862546BF1400D5B492 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDCF9852546BF1400D5B492 /* Error.swift */; };
 		7FE331DE2647A42700D412AE /* LiveBroadcastListModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 7FCF0A2C2642BB6100B4E551 /* LiveBroadcastListModel.json */; };
 		7FE331E22647B33F00D412AE /* MockBroadcastList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE331E12647B33F00D412AE /* MockBroadcastList.swift */; };
+		7FF255152856DA63008A7390 /* WindowCustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF255142856DA63008A7390 /* WindowCustomizer.swift */; };
+		7FF255172856DDA8008A7390 /* GoogleSignInDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF255162856DDA8008A7390 /* GoogleSignInDelegate.swift */; };
 		B9CC7E4719CFCD847E4A62A7 /* Pods_LiveEvents_LiveEventsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B30E5B8AAAEDC735322F3362 /* Pods_LiveEvents_LiveEventsTests.framework */; };
 		C730E8A1F1E53DDE85561021 /* Pods_LiveEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC305E81DB8C9398569AE585 /* Pods_LiveEvents.framework */; };
 /* End PBXBuildFile section */
@@ -105,8 +108,8 @@
 		27E16880403E6FB1BBCB3749 /* Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.release.xcconfig"; sourceTree = "<group>"; };
 		2F6AF40A23D40D691D15F9E0 /* Pods-YouTubeLiveVideo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTubeLiveVideo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YouTubeLiveVideo/Pods-YouTubeLiveVideo.debug.xcconfig"; sourceTree = "<group>"; };
 		65A4996DDBF267DFE82ED9D5 /* Pods-LiveEvents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveEvents.release.xcconfig"; path = "Pods/Target Support Files/Pods-LiveEvents/Pods-LiveEvents.release.xcconfig"; sourceTree = "<group>"; };
-		7F0933CC2457258300FB5579 /* GoogleSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleSignInViewController.swift; sourceTree = "<group>"; };
-		7F0933CE24574FCB00FB5579 /* GoogleSignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInViewModel.swift; sourceTree = "<group>"; };
+		7F0933CC2457258300FB5579 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		7F0933CE24574FCB00FB5579 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		7F1E96AE2546B8BF00638965 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		7F1E96AF2546B8BF00638965 /* Date+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		7F1E96B02546B8BF00638965 /* StatusBarShowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarShowingViewController.swift; sourceTree = "<group>"; };
@@ -122,13 +125,15 @@
 		7F1E96C62546B95A00638965 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = SOURCE_ROOT; };
 		7F2439F524580FA500C1FB17 /* StreamListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamListViewModel.swift; sourceTree = "<group>"; };
 		7F286C752657FA2100419B9C /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
-		7F2B6C12254D8B1F0081E007 /* SignInProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInProtocol.swift; sourceTree = "<group>"; };
+		7F2B6C12254D8B1F0081E007 /* SignInProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInProtocols.swift; sourceTree = "<group>"; };
 		7F2C3C3B2544187100CA9912 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		7F384BE9245873A5004C07EE /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7F384BEA245873A5004C07EE /* MainNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavController.swift; sourceTree = "<group>"; };
 		7F384BED24587498004C07EE /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
-		7F39A88924569BF200C18130 /* GoogleClientId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleClientId.swift; sourceTree = "<group>"; };
+		7F39A88924569BF200C18130 /* GoogleSignInConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInConfigurator.swift; sourceTree = "<group>"; };
 		7F39A88C2456FD0400C18130 /* GoogleSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSessionManager.swift; sourceTree = "<group>"; };
+		7F5296322857649800548281 /* LateInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LateInit.swift; sourceTree = "<group>"; };
+		7F52963528582F5C00548281 /* SignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModel.swift; sourceTree = "<group>"; };
 		7F53B1A72030724200E09CFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7F53B1A92030724200E09CFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7F53B1B02030B38100E09CFA /* StreamListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamListDataSource.swift; sourceTree = "<group>"; };
@@ -168,7 +173,6 @@
 		7FA74D59260B3BD70069DA8A /* NewStreamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStreamViewController.swift; sourceTree = "<group>"; };
 		7FA74D5C260B3BF50069DA8A /* NewStreamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStreamViewModel.swift; sourceTree = "<group>"; };
 		7FA74D5F260B3C0E0069DA8A /* NewStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStream.swift; sourceTree = "<group>"; };
-		7FA950002032C5750083B23B /* GoogleUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleUser.swift; sourceTree = "<group>"; };
 		7FA950012032C5750083B23B /* GoogleSignInInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleSignInInteractor.swift; sourceTree = "<group>"; };
 		7FAF9E91246187B900C8B81B /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Config.plist; sourceTree = SOURCE_ROOT; };
 		7FB8A4291DD23C3100955C2D /* LFLivePreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFLivePreview.h; sourceTree = "<group>"; };
@@ -180,6 +184,8 @@
 		7FCF0A2F2642BC0400B4E551 /* LiveBroadcastListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveBroadcastListTests.swift; sourceTree = "<group>"; };
 		7FDCF9852546BF1400D5B492 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		7FE331E12647B33F00D412AE /* MockBroadcastList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBroadcastList.swift; sourceTree = "<group>"; };
+		7FF255142856DA63008A7390 /* WindowCustomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowCustomizer.swift; sourceTree = "<group>"; };
+		7FF255162856DDA8008A7390 /* GoogleSignInDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInDelegate.swift; sourceTree = "<group>"; };
 		89F5B9C9A947F2EB63CB7301 /* Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A144B4F6FBDD3317B5035D73 /* Pods-LiveEvents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveEvents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LiveEvents/Pods-LiveEvents.debug.xcconfig"; sourceTree = "<group>"; };
 		A44F9CE8429BD266A7AF37D0 /* Pods-LiveEvents-LiveEventsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveEvents-LiveEventsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LiveEvents-LiveEventsTests/Pods-LiveEvents-LiveEventsTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -211,7 +217,7 @@
 		7F1E96A72546B45900638965 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7F0933CC2457258300FB5579 /* GoogleSignInViewController.swift */,
+				7F0933CC2457258300FB5579 /* SignInViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -220,7 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				7F7D7DA42608EE0A005FAC3B /* Protocols */,
-				7F0933CE24574FCB00FB5579 /* GoogleSignInViewModel.swift */,
+				7F0933CE24574FCB00FB5579 /* SignInViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -255,6 +261,7 @@
 				7F1E96B62546B8BF00638965 /* Color+Ext.swift */,
 				7F1E96AF2546B8BF00638965 /* Date+Ext.swift */,
 				7F1E96B72546B8BF00638965 /* DispatchQueue+Ext.swift */,
+				7F5296322857649800548281 /* LateInit.swift */,
 				7F1E96B92546B8BF00638965 /* EnumIteration.swift */,
 			);
 			path = Extensions;
@@ -291,9 +298,16 @@
 		7F39A88B24569F3800C18130 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7FA950002032C5750083B23B /* GoogleUser.swift */,
 				7F7D7D9B26087996005FAC3B /* LocalStorage.swift */,
-				7F39A88924569BF200C18130 /* GoogleClientId.swift */,
+				7F39A88924569BF200C18130 /* GoogleSignInConfigurator.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7F52963428582F3D00548281 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7F52963528582F5C00548281 /* SignInModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -312,6 +326,8 @@
 			isa = PBXGroup;
 			children = (
 				7F2C3C3B2544187100CA9912 /* AppRouter.swift */,
+				7FF255142856DA63008A7390 /* WindowCustomizer.swift */,
+				7FF255162856DDA8008A7390 /* GoogleSignInDelegate.swift */,
 				7FA94FFF2032C5750083B23B /* SignIn */,
 				7F53B1AF2030B15C00E09CFA /* StreamList */,
 				7FA74D55260B3B2D0069DA8A /* NewStream */,
@@ -391,7 +407,7 @@
 		7F7D7DA42608EE0A005FAC3B /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				7F2B6C12254D8B1F0081E007 /* SignInProtocol.swift */,
+				7F2B6C12254D8B1F0081E007 /* SignInProtocols.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -567,6 +583,7 @@
 				7F1E96A72546B45900638965 /* View */,
 				7F1E96A82546B46A00638965 /* ViewModel */,
 				7F7D7DA62608EE4D005FAC3B /* Interactor */,
+				7F52963428582F3D00548281 /* Model */,
 			);
 			name = SignIn;
 			path = Scenes/SignIn;
@@ -649,7 +666,6 @@
 				7F7D43652573A3AE00CC7642 /* Frameworks */,
 				7F7D43662573A3AE00CC7642 /* Resources */,
 				08A85AB03E4466A86B699C1E /* [CP] Embed Pods Frameworks */,
-				A9C0D1BAFB9942A98FED26C1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -671,7 +687,6 @@
 				7F9274A61DBDCAD00051DE6B /* Resources */,
 				25E870AD25798A32FC9B1529 /* [CP] Embed Pods Frameworks */,
 				7F0478C11DD599DD00AB6211 /* Embed Frameworks */,
-				7853DD346448FB0999341CFA /* [CP] Copy Pods Resources */,
 				7F678A8225FF490200F5FB2C /* ShellScript */,
 			);
 			buildRules = (
@@ -786,6 +801,8 @@
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMAppAuth/GTMAppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleSignIn/GoogleSignIn.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleSignInSwiftSupport/GoogleSignInSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/LFLiveKit/LFLiveKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
@@ -808,6 +825,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMAppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleSignIn.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleSignInSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LFLiveKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
@@ -858,6 +877,8 @@
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMAppAuth/GTMAppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleSignIn/GoogleSignIn.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleSignInSwiftSupport/GoogleSignInSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/LFLiveKit/LFLiveKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
@@ -878,6 +899,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMAppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleSignIn.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleSignInSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LFLiveKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
@@ -894,24 +917,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LiveEvents/Pods-LiveEvents-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7853DD346448FB0999341CFA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LiveEvents/Pods-LiveEvents-resources.sh",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LiveEvents/Pods-LiveEvents-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7F678A8225FF490200F5FB2C /* ShellScript */ = {
@@ -931,24 +936,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		A9C0D1BAFB9942A98FED26C1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LiveEvents-LiveEventsTests/Pods-LiveEvents-LiveEventsTests-resources.sh",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LiveEvents-LiveEventsTests/Pods-LiveEvents-LiveEventsTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -965,11 +952,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7FA950022032C5750083B23B /* GoogleUser.swift in Sources */,
 				7F79B475265A342900D69012 /* SwiftUIVideoPlayerConfigurator.swift in Sources */,
 				7FB8A42B1DD23C3100955C2D /* LFLivePreview.m in Sources */,
 				7F79FE42265E6BB1002FA510 /* loadMockData.swift in Sources */,
 				7F1E96BC2546B8BF00638965 /* Date+Ext.swift in Sources */,
+				7FF255172856DDA8008A7390 /* GoogleSignInDelegate.swift in Sources */,
+				7FF255152856DA63008A7390 /* WindowCustomizer.swift in Sources */,
 				7F9A91D82609AC170036CA0B /* YouTubeVideoPlayed.swift in Sources */,
 				7F384BEB245873A6004C07EE /* BaseViewController.swift in Sources */,
 				7FA74D5D260B3BF50069DA8A /* NewStreamViewModel.swift in Sources */,
@@ -980,7 +968,7 @@
 				7F384BEE24587498004C07EE /* Appearance.swift in Sources */,
 				7FE331E22647B33F00D412AE /* MockBroadcastList.swift in Sources */,
 				7F9274AE1DBDCAD00051DE6B /* StreamListViewController.swift in Sources */,
-				7F0933CD2457258300FB5579 /* GoogleSignInViewController.swift in Sources */,
+				7F0933CD2457258300FB5579 /* SignInViewController.swift in Sources */,
 				7FBC71792653DB9B001DDAE7 /* VideoPlayerBodyView.swift in Sources */,
 				7F2439F624580FA500C1FB17 /* StreamListViewModel.swift in Sources */,
 				7F73C8E92654D66900715F9A /* VideoPlayerInteractor.swift in Sources */,
@@ -990,17 +978,19 @@
 				7F1E96C12546B8BF00638965 /* Color+Ext.swift in Sources */,
 				7F79C8A4254802910044CF81 /* MainViewModelProtocol.swift in Sources */,
 				7F83E34D1DBDD49100DE4102 /* LiveStreamingViewModel.swift in Sources */,
-				7F0933CF24574FCB00FB5579 /* GoogleSignInViewModel.swift in Sources */,
+				7F0933CF24574FCB00FB5579 /* SignInViewModel.swift in Sources */,
 				7F83E35D1DBDD5DB00DE4102 /* XCDYouTubeVideoPlayer8.swift in Sources */,
 				7FA74D5A260B3BD70069DA8A /* NewStreamViewController.swift in Sources */,
 				7F9A91D42609AAB90036CA0B /* YouTubeHelpers.swift in Sources */,
+				7F5296332857649800548281 /* LateInit.swift in Sources */,
 				7FDCF9862546BF1400D5B492 /* Error.swift in Sources */,
 				7F53B1B72030B4B400E09CFA /* AppDelegate.swift in Sources */,
 				7F853734265796BF00C21921 /* TextViewRepresentable.swift in Sources */,
 				7F79C8A8254804320044CF81 /* SessionViewModelProtocol.swift in Sources */,
 				7F1E96C02546B8BF00638965 /* UIView+YYAdd.m in Sources */,
 				7F1E96C32546B8BF00638965 /* UIControl+YYAdd.m in Sources */,
-				7F2B6C13254D8B1F0081E007 /* SignInProtocol.swift in Sources */,
+				7F52963628582F5C00548281 /* SignInModel.swift in Sources */,
+				7F2B6C13254D8B1F0081E007 /* SignInProtocols.swift in Sources */,
 				7F79C8A6254802FB0044CF81 /* BroadcastsDataFetcherProtocol.swift in Sources */,
 				7F53B1B12030B38100E09CFA /* StreamListDataSource.swift in Sources */,
 				7F286C762657FA2100419B9C /* VideoPlayerViewController.swift in Sources */,
@@ -1014,7 +1004,7 @@
 				7FBC71732653D993001DDAE7 /* SwiftUiVideoPlayerViewController.swift in Sources */,
 				7F1E96BD2546B8BF00638965 /* StatusBarShowingViewController.swift in Sources */,
 				7F79C8A22547F2910044CF81 /* BroadcastsApiProtocol.swift in Sources */,
-				7F39A88A24569BF200C18130 /* GoogleClientId.swift in Sources */,
+				7F39A88A24569BF200C18130 /* GoogleSignInConfigurator.swift in Sources */,
 				7F1E96BF2546B8BF00638965 /* UIStoryboard+Ext.swift in Sources */,
 				7F1E96C22546B8BF00638965 /* DispatchQueue+Ext.swift in Sources */,
 				7F2C3C3C2544187100CA9912 /* AppRouter.swift in Sources */,

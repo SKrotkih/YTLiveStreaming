@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Dp0-Ym-GUw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21179.7" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Dp0-Ym-GUw">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21169.4"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,10 +22,10 @@
             </objects>
             <point key="canvasLocation" x="-1258" y="615"/>
         </scene>
-        <!--Google Sign In View Controller-->
+        <!--Sign In View Controller-->
         <scene sceneID="9qC-sI-G38">
             <objects>
-                <viewController storyboardIdentifier="GoogleSignInViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pph-nD-yos" customClass="GoogleSignInViewController" customModule="LiveEvents" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pph-nD-yos" customClass="SignInViewController" customModule="LiveEvents" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cPr-2u-Zg8"/>
                         <viewControllerLayoutGuide type="bottom" id="mxb-aJ-Pgs"/>
@@ -48,6 +48,9 @@
                                     <constraint firstAttribute="width" constant="160" id="7sB-VR-a9u"/>
                                     <constraint firstAttribute="height" constant="49" id="xGR-ZS-uAx"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="signIn:" destination="pph-nD-yos" eventType="touchUpInside" id="7DX-W6-J2r"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -84,7 +87,7 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="a7S-E4-yLG" customClass="StreamListTableViewCell" customModule="LiveEvents" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a7S-E4-yLG" id="2fp-wF-sbL">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

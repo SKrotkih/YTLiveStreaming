@@ -18,8 +18,9 @@ struct Stream {
 
 class StreamListViewController: BaseViewController {
 
-    var output: MainViewModelOutput!
-    var input: MainViewModelInput!
+    @Lateinit var output: MainViewModelOutput
+    @Lateinit var input: MainViewModelInput
+    @Lateinit var userProfile: UserProfile
 
     enum CellIdentifier: String {
         case cell
@@ -171,7 +172,7 @@ extension StreamListViewController {
 
     private func configureRightBarButtonItem() {
         let userNameLabel = UILabel(frame: CGRect.zero)
-        userNameLabel.text = GoogleUser.name
+        userNameLabel.text = userProfile.userName
         userNameLabel.textColor = .white
         let rightBarButton = UIBarButtonItem(customView: userNameLabel)
         self.navigationItem.rightBarButtonItem = rightBarButton

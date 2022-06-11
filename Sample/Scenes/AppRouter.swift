@@ -10,7 +10,7 @@ import YTLiveStreaming
 
 let Router = AppDelegate.shared.appRouter
 
-struct AppRouter {
+class AppRouter: NSObject {
 
     enum StroyboadType: String, Iteratable {
         case main = "Main"
@@ -34,7 +34,7 @@ struct AppRouter {
     // Start Live Video
     func showLiveVideoViewController() {
         DispatchQueue.performUIUpdate {
-            UIStoryboard.main.segueToModalViewController(liveVideoDependencies, optional: nil)
+            UIStoryboard.main.segueToModalViewController(self.liveVideoDependencies, optional: nil)
         }
     }
 
@@ -45,19 +45,19 @@ struct AppRouter {
                 // Use the Video player UI designed with using SwiftUI
                 if let window = AppDelegate.shared.window {
                     let viewController = SwiftUiVideoPlayerViewController()
-                    swiftUiVideoPlayerDependencies(viewController, videoId)
+                    self.swiftUiVideoPlayerDependencies(viewController, videoId)
                     window.rootViewController?.present(viewController, animated: false, completion: {})
                 }
             } else {
                 // Use the Video player UI designed with using UIKit
-                UIStoryboard.main.segueToModalViewController(videoPlayerDependencies, optional: videoId)
+                UIStoryboard.main.segueToModalViewController(self.videoPlayerDependencies, optional: videoId)
             }
         }
     }
 
     func showNewStreamViewController() {
         DispatchQueue.performUIUpdate {
-            UIStoryboard.main.sequePushViewController(newStreamDependencies)
+            UIStoryboard.main.sequePushViewController(self.newStreamDependencies)
         }
     }
 }
@@ -66,10 +66,13 @@ struct AppRouter {
 
 extension AppRouter {
     ///
-    /// Inject dependecncies in the GoogleSignInViewController
+    /// Inject dependecncies in the SignInViewController
     ///
-    private func signInDependencies(_ viewController: GoogleSignInViewController) {
-        let interactor = AppDelegate.shared.googleSignIn
+    private func signInDependencies(_ viewController: SignInViewController) {
+        let interactor = GoogleSignInInteractor()
+        interactor.configurator = GoogleSignInConfigurator()
+        interactor.presenter = viewController
+        interactor.model = SignInModel()
         let viewModel = GoogleSignInViewModel(interactor: interactor)
         viewController.viewModel = viewModel
     }
@@ -78,9 +81,12 @@ extension AppRouter {
     /// Inject dependecncies in the StreamListViewController
     ///
     private func streamingListDependencies(_ viewController: StreamListViewController) {
-
-        let signInInteractor = AppDelegate.shared.googleSignIn
-        let googleSession = GoogleSessionManager(signInInteractor)
+        let interactor = GoogleSignInInteractor()
+        let signInModel = SignInModel()
+        interactor.configurator = GoogleSignInConfigurator()
+        interactor.presenter = viewController
+        interactor.model = signInModel
+        let googleSession = GoogleSessionManager(interactor)
 
         let viewModel = StreamListViewModel()
         let dataSource = StreamListDataSource()
@@ -92,6 +98,7 @@ extension AppRouter {
         // Inbound Broadcast
         viewController.output = viewModel
         viewController.input = viewModel
+        viewController.userProfile = signInModel
     }
 
     ///
@@ -131,5 +138,13 @@ extension AppRouter {
 extension AppRouter {
     func closeModal(viewController: UIViewController) {
         viewController.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension AppRouter: UIApplicationDelegate {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        showSignInViewController()
+        return true
     }
 }

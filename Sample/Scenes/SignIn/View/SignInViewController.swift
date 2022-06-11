@@ -1,5 +1,5 @@
 //
-//  GoogleSignInViewController.swift
+//  SignInViewController.swift
 //  LiveEvents
 //
 //  Created by Serhii Krotkykh
@@ -9,10 +9,10 @@ import UIKit
 import GoogleSignIn
 
 // [START viewcontroller_interfaces]
-class GoogleSignInViewController: BaseViewController {
+class SignInViewController: BaseViewController {
     // [END viewcontroller_interfaces]
 
-    var viewModel: SignInProtocol!
+    @Lateinit var viewModel: SignInViewModel
 
     // [START viewcontroller_vars]
     @IBOutlet weak var signInButton: GIDSignInButton!
@@ -21,10 +21,14 @@ class GoogleSignInViewController: BaseViewController {
     // [START viewdidload]
     override func viewDidLoad() {
         super.viewDidLoad()
-        GIDSignIn.sharedInstance()?.presentingViewController = self
-        bindInput()
+        customizeSignInButtonAppearance()
+        bindSignInOutput()
     }
     // [END viewdidload]
+
+    @IBAction func signIn(_ sender: Any) {
+        launchSignIn()
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -45,10 +49,19 @@ class GoogleSignInViewController: BaseViewController {
 
 // MARK: - Private Methods
 
-extension GoogleSignInViewController {
-    private func bindInput() {
+extension SignInViewController {
+    private func customizeSignInButtonAppearance() {
+        signInButton.style = .standard
+        signInButton.colorScheme = .dark
+    }
+
+    private func launchSignIn() {
+        viewModel.signIn()
+    }
+
+    private func bindSignInOutput() {
         viewModel
-            .startListeningToSignIn { result in
+            .signInOutputObserver { result in
             switch result {
             case .success:
                 Router.showMainViewController()

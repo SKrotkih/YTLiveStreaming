@@ -29,8 +29,11 @@
 		7F384BEE24587498004C07EE /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F384BED24587498004C07EE /* Appearance.swift */; };
 		7F39A88A24569BF200C18130 /* GoogleSignInConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F39A88924569BF200C18130 /* GoogleSignInConfigurator.swift */; };
 		7F39A88D2456FD0400C18130 /* GoogleSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F39A88C2456FD0400C18130 /* GoogleSessionManager.swift */; };
+		7F4E3D392858D549009DA9F8 /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7F4E3D382858D541009DA9F8 /* GoogleSignIn.bundle */; };
 		7F5296332857649800548281 /* LateInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5296322857649800548281 /* LateInit.swift */; };
 		7F52963628582F5C00548281 /* SignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F52963528582F5C00548281 /* SignInModel.swift */; };
+		7F5296382858A17F00548281 /* SignInBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5296372858A17F00548281 /* SignInBodyView.swift */; };
+		7F52963C2858AF6D00548281 /* SwiftUISignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F52963B2858AF6C00548281 /* SwiftUISignInViewController.swift */; };
 		7F53B1AA2030724200E09CFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F53B1A62030724200E09CFA /* LaunchScreen.storyboard */; };
 		7F53B1AB2030724200E09CFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F53B1A82030724200E09CFA /* Main.storyboard */; };
 		7F53B1B12030B38100E09CFA /* StreamListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F53B1B02030B38100E09CFA /* StreamListDataSource.swift */; };
@@ -54,7 +57,6 @@
 		7F83E35B1DBDD58C00DE4102 /* YouTubePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E35A1DBDD58C00DE4102 /* YouTubePlayer.swift */; };
 		7F83E35D1DBDD5DB00DE4102 /* XCDYouTubeVideoPlayer8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83E35C1DBDD5DB00DE4102 /* XCDYouTubeVideoPlayer8.swift */; };
 		7F853734265796BF00C21921 /* TextViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F853733265796BF00C21921 /* TextViewRepresentable.swift */; };
-		7F8FD2A4245940530041CF36 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7F8FD2A3245940530041CF36 /* README.md */; };
 		7F9274AE1DBDCAD00051DE6B /* StreamListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9274AD1DBDCAD00051DE6B /* StreamListViewController.swift */; };
 		7F9274B31DBDCAD00051DE6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F9274B21DBDCAD00051DE6B /* Assets.xcassets */; };
 		7F9A91D42609AAB90036CA0B /* YouTubeHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9A91D32609AAB90036CA0B /* YouTubeHelpers.swift */; };
@@ -104,9 +106,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1D25A3DFDBD2707F0A23DDB9 /* Pods-YouTubeLiveVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTubeLiveVideo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YouTubeLiveVideo/Pods-YouTubeLiveVideo.release.xcconfig"; sourceTree = "<group>"; };
-		27E16880403E6FB1BBCB3749 /* Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.release.xcconfig"; sourceTree = "<group>"; };
-		2F6AF40A23D40D691D15F9E0 /* Pods-YouTubeLiveVideo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTubeLiveVideo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YouTubeLiveVideo/Pods-YouTubeLiveVideo.debug.xcconfig"; sourceTree = "<group>"; };
 		65A4996DDBF267DFE82ED9D5 /* Pods-LiveEvents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveEvents.release.xcconfig"; path = "Pods/Target Support Files/Pods-LiveEvents/Pods-LiveEvents.release.xcconfig"; sourceTree = "<group>"; };
 		7F0933CC2457258300FB5579 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		7F0933CE24574FCB00FB5579 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
@@ -132,8 +131,11 @@
 		7F384BED24587498004C07EE /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		7F39A88924569BF200C18130 /* GoogleSignInConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInConfigurator.swift; sourceTree = "<group>"; };
 		7F39A88C2456FD0400C18130 /* GoogleSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSessionManager.swift; sourceTree = "<group>"; };
+		7F4E3D382858D541009DA9F8 /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
 		7F5296322857649800548281 /* LateInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LateInit.swift; sourceTree = "<group>"; };
 		7F52963528582F5C00548281 /* SignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModel.swift; sourceTree = "<group>"; };
+		7F5296372858A17F00548281 /* SignInBodyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInBodyView.swift; sourceTree = "<group>"; };
+		7F52963B2858AF6C00548281 /* SwiftUISignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUISignInViewController.swift; sourceTree = "<group>"; };
 		7F53B1A72030724200E09CFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7F53B1A92030724200E09CFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7F53B1B02030B38100E09CFA /* StreamListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamListDataSource.swift; sourceTree = "<group>"; };
@@ -186,7 +188,6 @@
 		7FE331E12647B33F00D412AE /* MockBroadcastList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBroadcastList.swift; sourceTree = "<group>"; };
 		7FF255142856DA63008A7390 /* WindowCustomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowCustomizer.swift; sourceTree = "<group>"; };
 		7FF255162856DDA8008A7390 /* GoogleSignInDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInDelegate.swift; sourceTree = "<group>"; };
-		89F5B9C9A947F2EB63CB7301 /* Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests/Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A144B4F6FBDD3317B5035D73 /* Pods-LiveEvents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveEvents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LiveEvents/Pods-LiveEvents.debug.xcconfig"; sourceTree = "<group>"; };
 		A44F9CE8429BD266A7AF37D0 /* Pods-LiveEvents-LiveEventsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveEvents-LiveEventsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LiveEvents-LiveEventsTests/Pods-LiveEvents-LiveEventsTests.release.xcconfig"; sourceTree = "<group>"; };
 		B30E5B8AAAEDC735322F3362 /* Pods_LiveEvents_LiveEventsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LiveEvents_LiveEventsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,7 +218,8 @@
 		7F1E96A72546B45900638965 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7F0933CC2457258300FB5579 /* SignInViewController.swift */,
+				7F5296392858A4A000548281 /* UIKit */,
+				7F52963A2858A4B100548281 /* SwiftUI */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -312,6 +314,23 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		7F5296392858A4A000548281 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				7F0933CC2457258300FB5579 /* SignInViewController.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		7F52963A2858A4B100548281 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				7F52963B2858AF6C00548281 /* SwiftUISignInViewController.swift */,
+				7F5296372858A17F00548281 /* SignInBodyView.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
 		7F53B1A5203071F000E09CFA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -364,6 +383,7 @@
 				7F1E96C62546B95A00638965 /* Constants.swift */,
 				7FAF9E91246187B900C8B81B /* Config.plist */,
 				7F53B1B32030B4B300E09CFA /* AppDelegate.swift */,
+				7F4E3D382858D541009DA9F8 /* GoogleSignIn.bundle */,
 				7F53B1B62030B4B400E09CFA /* LiveEvents-Bridging-Header.h */,
 				7F8FD2A3245940530041CF36 /* README.md */,
 				7F678A8625FF4A0400F5FB2C /* .gitignore */,
@@ -633,10 +653,6 @@
 		8D45835BEFA5D646E97921C6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2F6AF40A23D40D691D15F9E0 /* Pods-YouTubeLiveVideo.debug.xcconfig */,
-				1D25A3DFDBD2707F0A23DDB9 /* Pods-YouTubeLiveVideo.release.xcconfig */,
-				89F5B9C9A947F2EB63CB7301 /* Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.debug.xcconfig */,
-				27E16880403E6FB1BBCB3749 /* Pods-YouTubeLiveVideo-YouTubeLiveVideoTests.release.xcconfig */,
 				A144B4F6FBDD3317B5035D73 /* Pods-LiveEvents.debug.xcconfig */,
 				65A4996DDBF267DFE82ED9D5 /* Pods-LiveEvents.release.xcconfig */,
 				F39C606421D10E92A92EBF67 /* Pods-LiveEvents-LiveEventsTests.debug.xcconfig */,
@@ -757,9 +773,9 @@
 			files = (
 				7F53B1AB2030724200E09CFA /* Main.storyboard in Resources */,
 				7F9274B31DBDCAD00051DE6B /* Assets.xcassets in Resources */,
-				7F8FD2A4245940530041CF36 /* README.md in Resources */,
 				7FAF9E92246187B900C8B81B /* Config.plist in Resources */,
 				7F53B1AA2030724200E09CFA /* LaunchScreen.storyboard in Resources */,
+				7F4E3D392858D549009DA9F8 /* GoogleSignIn.bundle in Resources */,
 				7FE331DE2647A42700D412AE /* LiveBroadcastListModel.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -970,6 +986,7 @@
 				7F9274AE1DBDCAD00051DE6B /* StreamListViewController.swift in Sources */,
 				7F0933CD2457258300FB5579 /* SignInViewController.swift in Sources */,
 				7FBC71792653DB9B001DDAE7 /* VideoPlayerBodyView.swift in Sources */,
+				7F52963C2858AF6D00548281 /* SwiftUISignInViewController.swift in Sources */,
 				7F2439F624580FA500C1FB17 /* StreamListViewModel.swift in Sources */,
 				7F73C8E92654D66900715F9A /* VideoPlayerInteractor.swift in Sources */,
 				7F1E96C72546B95A00638965 /* Constants.swift in Sources */,
@@ -990,6 +1007,7 @@
 				7F1E96C02546B8BF00638965 /* UIView+YYAdd.m in Sources */,
 				7F1E96C32546B8BF00638965 /* UIControl+YYAdd.m in Sources */,
 				7F52963628582F5C00548281 /* SignInModel.swift in Sources */,
+				7F5296382858A17F00548281 /* SignInBodyView.swift in Sources */,
 				7F2B6C13254D8B1F0081E007 /* SignInProtocols.swift in Sources */,
 				7F79C8A6254802FB0044CF81 /* BroadcastsDataFetcherProtocol.swift in Sources */,
 				7F53B1B12030B38100E09CFA /* StreamListDataSource.swift in Sources */,

@@ -25,7 +25,25 @@ class GoogleSignInViewModel: SignInViewModel {
         interactor
             .rxSignInResult
             .subscribe(onNext: { result in
-                completion(result)
+                self.parse(result)
             }).disposed(by: disposeBag)
+    }
+
+    private func parse(_ result: Result<Void, LVError>) {
+        switch result {
+        case .success:
+            Router.showMainViewController()
+        case .failure(let error):
+            switch error {
+            case .systemMessage(let code, let message):
+                if code == 401 {
+                    print(message)
+                } else {
+                    Alert.showOk("", message: message)
+                }
+            case .message(let message):
+                Alert.showOk("", message: message)
+            }
+        }
     }
 }

@@ -21,7 +21,20 @@ class AppRouter: NSObject {
 
     func showSignInViewController() {
         DispatchQueue.performUIUpdate {
-            UIStoryboard.main.segueToRootViewController(self.signInDependencies)
+            DispatchQueue.performUIUpdate {
+                if #available(iOS 13.0, *) {
+//                    if let window = AppDelegate.shared.window {
+//                        let viewController = SwiftUISignInViewController()
+//                        self.swuftUiSignInDependencies(viewController)
+                        
+                        UIStoryboard.main.segueToRootViewController(self.swuftUiSignInDependencies)
+                        
+//                        window.rootViewController = viewController // ?.present(viewController, animated: false, completion: {})
+//                    }
+                } else {
+                    UIStoryboard.main.segueToRootViewController(self.signInDependencies)
+                }
+            }
         }
     }
 
@@ -69,12 +82,19 @@ extension AppRouter {
     /// Inject dependecncies in the SignInViewController
     ///
     private func signInDependencies(_ viewController: SignInViewController) {
+        viewController.viewModel = signInSetUpViewModelDependencies(viewController)
+    }
+
+    private func swuftUiSignInDependencies(_ viewController: SwiftUISignInViewController) {
+        viewController.viewModel = signInSetUpViewModelDependencies(viewController)
+    }
+
+    private func signInSetUpViewModelDependencies(_ viewController: UIViewController) -> GoogleSignInViewModel {
         let interactor = GoogleSignInInteractor()
         interactor.configurator = GoogleSignInConfigurator()
         interactor.presenter = viewController
         interactor.model = SignInModel()
-        let viewModel = GoogleSignInViewModel(interactor: interactor)
-        viewController.viewModel = viewModel
+        return GoogleSignInViewModel(interactor: interactor)
     }
 
     ///

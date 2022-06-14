@@ -11,9 +11,9 @@ import RxSwift
 class SwiftUiVideoPlayerViewController: UIViewController {
 
     // Dependencies
-    var interactor: PlayerInteractor!
-    var navigateController: NavicationObservable!
-    var playerView: PlayerViewRepresentable!
+    @Lateinit var interactor: PlayerInteractor
+    @Lateinit var navigateController: NavicationObservable
+    @Lateinit var playerView: PlayerViewRepresentable
 
     private let disposeBag = DisposeBag()
 

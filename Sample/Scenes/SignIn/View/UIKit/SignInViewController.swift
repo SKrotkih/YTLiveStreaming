@@ -21,8 +21,8 @@ class SignInViewController: BaseViewController {
     // [START viewdidload]
     override func viewDidLoad() {
         super.viewDidLoad()
+
         customizeSignInButtonAppearance()
-        bindSignInOutput()
     }
     // [END viewdidload]
 
@@ -57,26 +57,5 @@ extension SignInViewController {
 
     private func launchSignIn() {
         viewModel.signIn()
-    }
-
-    private func bindSignInOutput() {
-        viewModel
-            .signInOutputObserver { result in
-            switch result {
-            case .success:
-                Router.showMainViewController()
-            case .failure(let error):
-                switch error {
-                case .systemMessage(let code, let message):
-                        if code == 401 {
-                            print(message)
-                        } else {
-                            Alert.showOk("", message: message)
-                        }
-                case .message(let message):
-                        Alert.showOk("", message: message)
-                }
-            }
-        }
     }
 }

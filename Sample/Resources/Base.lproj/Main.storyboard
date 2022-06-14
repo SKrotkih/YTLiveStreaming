@@ -22,6 +22,25 @@
             </objects>
             <point key="canvasLocation" x="-1258" y="615"/>
         </scene>
+        <!--SwiftUI Sign In View Controller-->
+        <scene sceneID="OYS-Ni-TUv">
+            <objects>
+                <viewController storyboardIdentifier="SwiftUISignInViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9jU-58-C9i" customClass="SwiftUISignInViewController" customModule="LiveEvents" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yHa-8i-v3O"/>
+                        <viewControllerLayoutGuide type="bottom" id="dV8-NG-STo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JnP-Cn-gIj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9Y8-2g-JG4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4d7-TJ-GZw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-610.39999999999998" y="614.84257871064472"/>
+        </scene>
         <!--Sign In View Controller-->
         <scene sceneID="9qC-sI-G38">
             <objects>

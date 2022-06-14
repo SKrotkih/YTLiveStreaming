@@ -5,7 +5,7 @@ YTLiveStreaming is an iOS framework which can be used for creating live broadcas
 
 ## Requirements
 
-- Xcode 11+
+- Xcode 12+
 - Swift 5.0
 
 ## Introduction
@@ -46,7 +46,7 @@ To integrate YTLiveStreaming into your Xcode project using CocoaPods, specify it
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '12.1'
+platform :ios, '13.0'
 use_frameworks!
 
 target '<Your Target Name>' do
@@ -181,7 +181,7 @@ And some other public methods of the YTLiveStreaming class
 - Moya
 
 Note. Here were  used the following things:
-- Goggle Sign-In for iOS ( https://developers.google.com/identity/sign-in/ios/ ) 
+- Goggle Sign-In for iOS ( https://developers.google.com/identity/sign-in/ios/start-integrating ) 
 - VIPER architect (Clean for iOS) ( https://www.objc.io/issues/13-architecture/viper/ )
 - Moya 10
 - Alamofire
@@ -190,7 +190,7 @@ Note. Here were  used the following things:
 - Swiftlint
 - Xcode unit tests
 - Objective-C + Swift code example
-- SwiftUI in the sample project
+- SwiftUI used for the sample project
 
 Author
 Serhii Krotkykh
@@ -199,16 +199,18 @@ The project was created
 11-11-2016
 
 Changes history:
-29-04-2020 
- -  build 0.2.17
- - Sample app was redesigned
- -  GoogleSignIn (used in the Sample app): up to 5.0.2
+14-06-2022
+ - update Google Sign-In according actual framework version
+18-05-2021
+- added SwuftUI based content view for the YouTube video player 
+04-05-2021
+- added youtube-ios-player-helper as an video player
+- added Xcode unit test 
  15-03-2021
 - added Swiftlint 
 - fixed Swiftlint warnings
 - Sample app was renamed to LiveEvents
-04-05-2021
-- added youtube-ios-player-helper as an video player
-- added Xcode unit test 
-18-05-2021
-- added SwuftUI based content view for the YouTube video player 
+29-04-2020 
+ -  build 0.2.17
+ - Sample app was redesigned
+ -  GoogleSignIn (used in the Sample app): up to 5.0.2

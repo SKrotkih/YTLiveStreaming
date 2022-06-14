@@ -34,16 +34,11 @@ class GoogleSignInDelegate: NSObject, UIApplicationDelegate {
 
         // source from https://developers.google.com/identity/sign-in/ios/sign-in#ios_uiapplicationdelegate
 
-        var handled: Bool
-
-        handled = GIDSignIn.sharedInstance.handle(url)
-        if handled {
+        if GIDSignIn.sharedInstance.handle(url) {
             return true
+        } else {
+            // Handle other custom URL types.
+            return false
         }
-
-        // Handle other custom URL types.
-
-        // If not handled by this app, return false.
-        return false
     }
 }

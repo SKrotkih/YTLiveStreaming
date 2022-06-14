@@ -27,7 +27,8 @@ public class GoogleSignInInteractor: NSObject, SignInSupportable {
     // Retrieving user information
     func signIn() {
         // https://developers.google.com/identity/sign-in/ios/people#retrieving_user_information
-        GIDSignIn.sharedInstance.signIn(with: configurator.signInConfig, presenting: presenter) { [weak self] user, error in
+        GIDSignIn.sharedInstance.signIn(with: configurator.signInConfig,
+                                        presenting: presenter) { [weak self] user, error in
             guard let `self` = self else { return }
             do {
                 try self.parseSignInResult(user, error)
@@ -41,10 +42,8 @@ public class GoogleSignInInteractor: NSObject, SignInSupportable {
             } catch SignInError.userIsUndefined {
                 self.rxSignInResult.onNext(.failure(.systemMessage(401, "The user has not signed in before or he has since signed out")))
             } catch SignInError.permissionsError {
-                /**
-                 I'm not sure do we have to send the request, so I escluded it for now
-                 self.sendRequestToAddNeededScopes(for: user)
-                 */
+                // I'm not sure do we have to send the request, so I escluded it for now
+                // self.sendRequestToAddNeededScopes(for: user)
                 self.rxSignInResult.onNext(.failure(.message("Please add scopes to have ability to manage your YouTube videos. The app will not work properly")))
             } catch {
                 fatalError("Unexpected exception")
@@ -54,11 +53,8 @@ public class GoogleSignInInteractor: NSObject, SignInSupportable {
 
     func signOut() {
         GIDSignIn.sharedInstance.signOut()
-
         GoogleOAuth2.sharedInstance.clearToken()
-
         model.didUserSignOut()
-
         rxSignOut.onNext(true)
     }
 

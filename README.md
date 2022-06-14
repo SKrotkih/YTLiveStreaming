@@ -1,11 +1,11 @@
 # YTLiveStreaming
 
-YTLiveStreaming is an iOS framework which can be used for creating live broadcasts and video streams on YouTube using YouTube Live Streaming API
+YTLiveStreaming is an open source iOS framework to create live broadcasts and video streams on YouTube using YouTube Live Streaming API
 (YouTube Data API v3)
 
 ## Requirements
 
-- Xcode 12+
+- Xcode 13+
 - Swift 5.0
 
 ## Introduction
@@ -59,33 +59,6 @@ Then, run the following command:
 ```bash
 $ pod install
 ```
-
-## Prepare and launch an example
-
-As an example used iOS app Live Events
-
-<img src="https://user-images.githubusercontent.com/2775621/80704225-e826e700-8aec-11ea-875a-7971b76e40da.png" alt="Live Events Logo" style="width: 690px;" />
-
-
-- Download or clone the repository.
-
-- Select Sample folder
-
-- Launch  `pod install`   
-
-- Open LiveEvents.xcworkspace.
-
-- Change current bundle id on your
-
-- Create Config.plist. Copy content Config.plist.example.plist into new Config.plist. Change current values of the client ID and API key on yours.  
-
-- Put [CLIENT_ID](https://developers.google.com/identity/sign-in/ios/start-integrating#get_an_oauth_client_id) and API_KEY into the plist.info:
-
-<img src="https://user-images.githubusercontent.com/2775621/173193901-cbdc8653-76c8-4aea-b0d9-0f9d4391fba3.png" alt="Config.plist" style="width: 690px;" />
-
-- In Sample/Info.plist edit the CFBundleURLSchemes. Change the value that starts with "com.googleusercontent.apps." based on your API key. It should be set to the reversed API key. The API key has the format XXXXXXXX.apps.googleusercontent.com and the allowed URL should be com.googleusercontent.apps.XXXXXXXX :
-
-<img src="https://user-images.githubusercontent.com/2775621/173220142-003b05e9-3903-4959-b88a-7f1181c1c010.png" alt="Info.plist Example" style="width: 690px;" />
 
 ## User guide
 
@@ -172,6 +145,10 @@ As an example used iOS app Live Events
 
 And some other public methods of the YTLiveStreaming class  
 
+## Example of using YTLiveStreaming Framework
+
+[LiveEvents](https://github.com/SKrotkih/LiveEvents) is an example of using the framework 
+
 ## Libraries Used
 
 - GoogleSignIn
@@ -199,8 +176,11 @@ The project was created
 11-11-2016
 
 Changes history:
+29-06-2022 Example project (LiveEvents) was removed from the project into separate repo
 14-06-2022
- - update Google Sign-In according actual framework version
+ - added Combine based method apart from RxSwift publisher subject to handle Google Sign-in results;
+ - updated Google Sign-In according actual framework version;
+ - implemented Google SignIn screen with using SwiftUI.
 18-05-2021
 - added SwuftUI based content view for the YouTube video player 
 04-05-2021

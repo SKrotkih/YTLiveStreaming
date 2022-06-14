@@ -42,8 +42,6 @@ public class GoogleSignInInteractor: NSObject, SignInSupportable {
             } catch SignInError.userIsUndefined {
                 self.rxSignInResult.onNext(.failure(.systemMessage(401, "The user has not signed in before or he has since signed out")))
             } catch SignInError.permissionsError {
-                // I'm not sure do we have to send the request, so I escluded it for now
-                // self.sendRequestToAddNeededScopes(for: user)
                 self.rxSignInResult.onNext(.failure(.message("Please add scopes to have ability to manage your YouTube videos. The app will not work properly")))
             } catch {
                 fatalError("Unexpected exception")
@@ -72,19 +70,6 @@ public class GoogleSignInInteractor: NSObject, SignInSupportable {
     }
 }
 
-// MARK: - Deprecated
-
-extension GoogleSignInInteractor {
-    fileprivate struct Auth {
-        // There are needed sensitive scopes to have ability to work properly
-        // Make sure they are presented in your app. Then send request on verification
-        static let scope1 = "https://www.googleapis.com/auth/youtube"
-        static let scope2 = "https://www.googleapis.com/auth/youtube.readonly"
-        static let scope3 = "https://www.googleapis.com/auth/youtube.force-ssl"
-        static let scopes = [scope1, scope2, scope3]
-    }
-}
-
 // MARK: - Google Sign In Handler
 
 extension GoogleSignInInteractor {
@@ -99,6 +84,7 @@ extension GoogleSignInInteractor {
                 // GoogleOAuth2.sharedInstance.accessToken = model.authAccessToken
             }
         } else {
+            sendRequestToAddNeededScopes(for: user!)
             throw SignInError.permissionsError
         }
     }
@@ -115,13 +101,19 @@ extension GoogleSignInInteractor {
 // MARK: - Check/Add the Scopes
 
 extension GoogleSignInInteractor {
+    fileprivate struct Auth {
+        // There are needed sensitive scopes to have ability to work properly
+        // Make sure they are presented in your app. Then send request on verification
+        static let scope1 = "https://www.googleapis.com/auth/youtube"
+        static let scope2 = "https://www.googleapis.com/auth/youtube.readonly"
+        static let scope3 = "https://www.googleapis.com/auth/youtube.force-ssl"
+        static let scopes = [scope1, scope2, scope3]
+    }
 
     private func sendRequestToAddNeededScopes(for user: GIDGoogleUser) {
-        // guard let email = user.profile?.email else { return }
         DispatchQueue.global().async {
             GIDSignIn.sharedInstance.addScopes(Auth.scopes, presenting: self.presenter)
-            // GIDSignIn.sharedInstance.loginHint = email
-            self.signIn()
+            // self.signIn()
         }
     }
 }

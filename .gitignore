@@ -24,4 +24,7 @@ DerivedData
 Pods/
 Podfile.lock
 
+# Swift PM
+.build
+
 Sample/Config.plist

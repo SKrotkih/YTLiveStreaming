@@ -54,6 +54,12 @@ target '<Your Target Name>' do
 end
 ```
 
+Then, run the following command:
+
+```bash
+$ pod install
+```
+
 ### Swift Package Manager
 
 To integrate YTLiveStreaming package using Apple's Swift package manager
@@ -66,12 +72,6 @@ To integrate YTLiveStreaming package using Apple's Swift package manager
 - Xcode creates 'Package Pependencies' group with YTLiveStreaming package with last version 
 - open your Xcode project settings - PROJECT section on the Package Dependencies tab
 - make sure the YTLiveStreaming package name is presented there 
-
-Then, run the following command:
-
-```bash
-$ pod install
-```
 
 ## User guide
 

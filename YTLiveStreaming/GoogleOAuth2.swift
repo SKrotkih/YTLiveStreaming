@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 import KeychainAccess
 
 // Developer console

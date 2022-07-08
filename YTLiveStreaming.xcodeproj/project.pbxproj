@@ -81,6 +81,7 @@
 		7FB346C1264666E100687A2F /* UpdateLiveBroadcastBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateLiveBroadcastBody.swift; sourceTree = "<group>"; };
 		7FDB95211DD6042700498305 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		7FECA28B2601187F008F2A4A /* HttpBodyEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpBodyEncoding.swift; sourceTree = "<group>"; };
+		7FF026EA2877DD0F008ACFD0 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		8E99A8A7F06BCB520FF235F8 /* Pods-YTLiveStreaming.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YTLiveStreaming.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YTLiveStreaming/Pods-YTLiveStreaming.debug.xcconfig"; sourceTree = "<group>"; };
 		AACCB10CA407E55362DC63E4 /* Pods_YTLiveStreamingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YTLiveStreamingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB2CA28D95320B6CDC1BC8AD /* Pods-YTLiveStreamingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YTLiveStreamingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YTLiveStreamingTests/Pods-YTLiveStreamingTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -131,6 +132,9 @@
 		7F04786F1DD5962C00AB6211 = {
 			isa = PBXGroup;
 			children = (
+				7FDB95211DD6042700498305 /* README.md */,
+				7FF026EA2877DD0F008ACFD0 /* Package.swift */,
+				7F101EAA1E0FBDA5003EAF3F /* LICENSE */,
 				7F04787B1DD5962C00AB6211 /* YTLiveStreaming */,
 				7F101EA71E0FBD6F003EAF3F /* Podspec Metadata */,
 				7F0478861DD5962C00AB6211 /* YTLiveStreamingTests */,
@@ -192,8 +196,6 @@
 		7F101EA71E0FBD6F003EAF3F /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				7F101EAA1E0FBDA5003EAF3F /* LICENSE */,
-				7FDB95211DD6042700498305 /* README.md */,
 				7F101EA81E0FBD8A003EAF3F /* YTLiveStreaming.podspec */,
 			);
 			name = "Podspec Metadata";

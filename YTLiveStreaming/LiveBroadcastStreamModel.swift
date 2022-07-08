@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 
 public struct LiveBroadcastStreamModel: Codable {
     public let etag: String

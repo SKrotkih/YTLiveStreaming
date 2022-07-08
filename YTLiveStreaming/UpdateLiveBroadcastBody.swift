@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 
 struct UpdateLiveBroadcastBody: Codable {
     struct Status: Codable {

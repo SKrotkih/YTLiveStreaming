@@ -54,6 +54,19 @@ target '<Your Target Name>' do
 end
 ```
 
+### Swift Package Manager
+
+To integrate YTLiveStreaming package using Apple's Swift package manager
+- open your Xcode project for iOS
+- select File-Add packages...
+- in the Apple Swift Packages screen select 'Search or Enter Package URL'
+- enter https://github.com/SKrotkih/YTLiveStreaming.git
+- make sure YTLiveStreaming is opened
+- press 'Add Package' 
+- Xcode creates 'Package Pependencies' group with YTLiveStreaming package with last version 
+- open your Xcode project settings - PROJECT section on the Package Dependencies tab
+- make sure the YTLiveStreaming package name is presented there 
+
 Then, run the following command:
 
 ```bash
@@ -176,6 +189,7 @@ The project was created
 11-11-2016
 
 Changes history:
+08-07-2022 Make ability to integrate the framework using Applw's Swift package manager, not just Cocoapods
 29-06-2022 Example project (LiveEvents) was removed from the project into separate repo
 14-06-2022
  - added Combine based method apart from RxSwift publisher subject to handle Google Sign-in results;

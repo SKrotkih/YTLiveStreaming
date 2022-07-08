@@ -6,7 +6,7 @@
 //  Copyright © 2016 Serhii Krotkykh. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 public enum YTLiveVideoState: String {
     case upcoming

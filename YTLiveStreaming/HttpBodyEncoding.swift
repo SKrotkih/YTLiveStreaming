@@ -6,6 +6,7 @@
 //  Copyright © 2021 Serhii Krotkykh. All rights reserved.
 //
 
+import Foundation
 import Alamofire
 
 struct JSONBodyStringEncoding: ParameterEncoding {

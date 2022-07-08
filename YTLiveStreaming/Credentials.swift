@@ -3,7 +3,7 @@
 //  YTLiveStreaming
 //
 
-import UIKit
+import Foundation
 
 final class Credentials: NSObject {
     private static var _clientID: String?

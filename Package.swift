@@ -31,7 +31,8 @@ let package = Package(
             path: "YTLiveStreaming"),
         .testTarget(
             name: "YTLiveStreamingTests",
-            dependencies: [.product(name: "SwiftyJSON", package: "SwiftyJSON"),
+            dependencies: ["YTLiveStreaming",
+                           .product(name: "SwiftyJSON", package: "SwiftyJSON"),
                            .product(name: "Alamofire", package: "Alamofire")],
             path: "YTLiveStreamingTests")
     ]

@@ -16,7 +16,7 @@ YTLiveStreaming is an open source iOS framework to create live broadcasts and vi
 - Go to the new application
 - Select Library
 - Select "YouTube Data API v3"
-- Select Credetials
+- Select Credentials
 - Create Api key (API_KEY) ; In Key restriction select iOS, enter your iOS app bundle id; Save
 - Create Oauth 2.0 Cient ID (CLIENT_ID)
 
@@ -63,8 +63,8 @@ $ pod install
 ### Swift Package Manager
 
 To integrate YTLiveStreaming package using Apple's Swift package manager
-- open your Xcode project for iOS
-- select File-Add packages...
+- open your Xcode project
+- select File - Add packages...
 - in the Apple Swift Packages screen select 'Search or Enter Package URL'
 - enter https://github.com/SKrotkih/YTLiveStreaming.git
 - make sure YTLiveStreaming is opened
@@ -164,33 +164,22 @@ And some other public methods of the YTLiveStreaming class
 
 ## Libraries Used
 
-- GoogleSignIn
-- LFLiveKit (https://github.com/LaiFengiOS/LFLiveKit)
-- Alamofire
 - SwiftyJSON
 - Moya
+- KeychainAccess
 
 Note. Here were  used the following things:
-- Goggle Sign-In for iOS ( https://developers.google.com/identity/sign-in/ios/start-integrating ) 
-- VIPER architect (Clean for iOS) ( https://www.objc.io/issues/13-architecture/viper/ )
-- Moya 10
-- Alamofire
-- RxSwift
 - Podspec ( https://guides.cocoapods.org/syntax/podspec.html )
 - Swiftlint
 - Xcode unit tests
 - Objective-C + Swift code example
-- SwiftUI used for the sample project
-
-Author
-Serhii Krotkykh
 
 The project was created
 11-11-2016
 
 Changes history:
 08-07-2022 Make ability to integrate the framework using Applw's Swift package manager, not just Cocoapods
-29-06-2022 Example project (LiveEvents) was removed from the project into separate repo
+29-06-2022 Example project (LiveEvents) was removed from the project into a separate repo
 14-06-2022
  - added Combine based method apart from RxSwift publisher subject to handle Google Sign-in results;
  - updated Google Sign-In according actual framework version;

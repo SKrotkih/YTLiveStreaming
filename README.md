@@ -178,6 +178,9 @@ The project was created
 11-11-2016
 
 Changes history:
+16-07-2022
+- build 0.2.26
+- package.swift was added
 08-07-2022 Add ability to integrate the framework as a package
 29-06-2022 Example project (LiveEvents) was removed from the project into a separate repo
 14-06-2022

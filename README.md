@@ -178,6 +178,8 @@ The project was created
 11-11-2016
 
 Changes history:
+25-07-2022 
+- build 0.2.27
 16-07-2022
 - build 0.2.26
 - package.swift was added

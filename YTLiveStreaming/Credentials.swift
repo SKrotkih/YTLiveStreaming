@@ -5,7 +5,7 @@
 
 import Foundation
 
-final class Credentials: NSObject {
+public final class Credentials: NSObject {
     private static var _clientID: String?
     private static var _APIkey: String?
     private static let plistKeyClientID = "CLIENT_ID"

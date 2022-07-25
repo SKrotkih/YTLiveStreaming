@@ -72,19 +72,19 @@ struct CreateLiveBroadcastBody: Codable {
     struct Snipped: Codable {
         var title: String
         var scheduledStartTime: String
-        var status: Status
 
         init(title: String, startDateTime: Date) {
             self.title = title
             scheduledStartTime = startDateTime.toJSONformat()
-            status = Status(privacyStatus: "public")
         }
     }
 
     let snippet: Snipped
+    let status: Status
 
     init(title: String, startDateTime: Date) {
         snippet = Snipped(title: title, startDateTime: startDateTime)
+        status = Status(privacyStatus: "public")
     }
 }
 

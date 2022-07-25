@@ -13,7 +13,7 @@ public struct LiveBroadcastStreamModel: Codable {
     public let id: String
     public let kind: String
     public var snippet: Snippet
-    public let contentDetails: ContentDetails?
+    public var contentDetails: ContentDetails?
     public var status: Status?
 
     public struct Snippet: Codable {
@@ -81,6 +81,7 @@ public struct LiveBroadcastStreamModel: Codable {
         public let enableDvr: Bool
         public let monitorStream: MonitorStream
         public let boundStreamId: String?
+        public var enableAutoStop: Bool?
     }
 
     public struct MonitorStream: Codable {

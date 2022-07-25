@@ -80,13 +80,19 @@ struct CreateLiveBroadcastBody: Codable {
             scheduledStartTime = startDateTime.toJSONformat()
         }
     }
+    
+    struct ContentDetails: Codable {
+        var enableAutoStop: Bool
+    }
 
     let snippet: Snipped
     let status: Status
+    let contentDetails: ContentDetails
 
-    init(title: String, startDateTime: Date) {
+    init(title: String, startDateTime: Date, privacy: String? = nil, enableAutoStop: Bool? = nil) {
         snippet = Snipped(title: title, startDateTime: startDateTime)
-        status = Status(privacyStatus: "public")
+        status = Status(privacyStatus: privacy ?? "public")
+        contentDetails = ContentDetails(enableAutoStop: enableAutoStop ?? false)
     }
 }
 

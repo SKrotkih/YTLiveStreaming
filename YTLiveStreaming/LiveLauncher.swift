@@ -86,6 +86,9 @@ class LiveLauncher: NSObject {
    }
 
    fileprivate func statusRequest(completion: @escaping (Bool) -> Void) {
+      guard !self.isLiveStreaming else {
+         return
+      }
       guard let liveBroadcast = self.liveBroadcast else {
          return
       }

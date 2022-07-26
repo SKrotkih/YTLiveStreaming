@@ -69,6 +69,7 @@ struct UpdateLiveBroadcastBody: Codable {
 struct CreateLiveBroadcastBody: Codable {
     struct Status: Codable {
         var privacyStatus: String
+        var selfDeclaredMadeForKids: Bool
     }
 
     struct Snipped: Codable {
@@ -91,7 +92,7 @@ struct CreateLiveBroadcastBody: Codable {
 
     init(title: String, startDateTime: Date, privacy: String? = nil, enableAutoStop: Bool? = nil) {
         snippet = Snipped(title: title, startDateTime: startDateTime)
-        status = Status(privacyStatus: privacy ?? "public")
+        status = Status(privacyStatus: privacy ?? "public", selfDeclaredMadeForKids: false)
         contentDetails = ContentDetails(enableAutoStop: enableAutoStop ?? false)
     }
 }

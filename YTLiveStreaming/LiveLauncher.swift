@@ -13,7 +13,7 @@ import Foundation
 }
 
 class LiveLauncher: NSObject {
-   let askStatusStreamFrequencyInSeconds = 3.0
+   let askStatusStreamFrequencyInSeconds = 5.0
    fileprivate var liveBroadcast: LiveBroadcastStreamModel?
    fileprivate var liveStream: LiveStreamModel?
    fileprivate var _isLiveStreaming: Bool = false

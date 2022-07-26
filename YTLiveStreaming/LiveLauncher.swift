@@ -106,8 +106,6 @@ class LiveLauncher: NSObject {
                )
                completion(false)
             }
-         } else {
-            completion(false)
          }
       })
    }

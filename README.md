@@ -22,7 +22,7 @@ YTLiveStreaming is an open source iOS framework to create live broadcasts and vi
 
 - add three scopes for Google APIs: "https://www.googleapis.com/auth/youtube", "https://www.googleapis.com/auth/youtube.readonly",  "https://www.googleapis.com/auth/youtube.force-ssl"
 
-<img src="https://user-images.githubusercontent.com/2775621/80702066-23271b80-8ae9-11ea-99e8-314ee1ae1c27.png" alt="OAuth consent screen" style="width: 690px;" />
+![](Assets/80702066-23271b80-8ae9-11ea-99e8-314ee1ae1c27.png)
 
 - fill Application Homepage link and Application Privacy Policy link. Submit for verification
 
@@ -168,7 +168,7 @@ And some other public methods of the YTLiveStreaming class
 - Moya
 - KeychainAccess
 
-Note. Here were  used the following things:
+Note. Here were used the following things:
 - Podspec ( https://guides.cocoapods.org/syntax/podspec.html )
 - Swiftlint
 - Xcode unit tests

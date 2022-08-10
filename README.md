@@ -28,7 +28,7 @@ YTLiveStreaming is an open source iOS framework to create live broadcasts and vi
 
 - as result you will have API_KEY and CLIENT_ID which will be used in Config.plist your iOS app later.
 
-<img src="https://user-images.githubusercontent.com/2775621/173214138-adc9ca4b-33d6-4781-9f9b-d6ba6038527d.png" alt="Credentials compatible with the Youtube Data API" style="width: 690px;" />
+![](Assets/173214138-adc9ca4b-33d6-4781-9f9b-d6ba6038527d.png)
 
 ## Installation
 

@@ -74,26 +74,29 @@ struct CreateLiveBroadcastBody: Codable {
 
     struct Snipped: Codable {
         var title: String
+        var description: String
         var scheduledStartTime: String
 
-        init(title: String, startDateTime: Date) {
+        init(title: String, description: String, startDateTime: Date) {
             self.title = title
+            self.description = description
             scheduledStartTime = startDateTime.toJSONformat()
         }
     }
     
     struct ContentDetails: Codable {
         var enableAutoStop: Bool
+        var enableEmbed: Bool
     }
 
     let snippet: Snipped
     let status: Status
     let contentDetails: ContentDetails
 
-    init(title: String, startDateTime: Date, privacy: String? = nil, enableAutoStop: Bool? = nil) {
-        snippet = Snipped(title: title, startDateTime: startDateTime)
+    init(title: String, description: String, startDateTime: Date, privacy: String? = nil, enableAutoStop: Bool? = nil, enableEmbed: Bool? = nil) {
+        snippet = Snipped(title: title, description: description, startDateTime: startDateTime)
         status = Status(privacyStatus: privacy ?? "public", selfDeclaredMadeForKids: false)
-        contentDetails = ContentDetails(enableAutoStop: enableAutoStop ?? false)
+        contentDetails = ContentDetails(enableAutoStop: enableAutoStop ?? false, enableEmbed: enableEmbed ?? false)
     }
 }
 

@@ -79,10 +79,11 @@ extension YTLiveStreaming {
                                 startTime: Date,
                                 privacy: String? = nil,
                                 enableAutoStop: Bool? = nil,
+                                enableEmbed: Bool? = nil,
                                 completion: @escaping (Result<LiveBroadcastStreamModel, YTError>) -> Void) {
         let liveStreamDescription = description ?? "This stream was created by the YTLiveStreaming iOS framework"
         let liveStreamName = "YTLiveStreaming"
-        YTLiveRequest.createLiveBroadcast(title, startDateTime: startTime, privacy: privacy, enableAutoStop: enableAutoStop, completion: { result in
+        YTLiveRequest.createLiveBroadcast(title, liveStreamDescription, startDateTime: startTime, privacy: privacy, enableAutoStop: enableAutoStop, enableEmbed: enableEmbed, completion: { result in
             switch result {
             case .success(let liveBroadcast):
                 // Create Live stream

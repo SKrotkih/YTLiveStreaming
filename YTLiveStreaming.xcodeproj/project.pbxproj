@@ -278,13 +278,13 @@
 				TargetAttributes = {
 					7F0478781DD5962C00AB6211 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = N5B5T39W8Y;
+						DevelopmentTeam = JSC5562A3R;
 						LastSwiftMigration = 1030;
 						ProvisioningStyle = Manual;
 					};
 					7F0478811DD5962C00AB6211 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = N5B5T39W8Y;
+						DevelopmentTeam = JSC5562A3R;
 						LastSwiftMigration = 1030;
 						ProvisioningStyle = Manual;
 					};
@@ -608,6 +608,8 @@
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = N5B5T39W8Y;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = JSC5562A3R;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = JSC5562A3R;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -637,6 +639,8 @@
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = N5B5T39W8Y;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = JSC5562A3R;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = JSC5562A3R;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -662,6 +666,8 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N5B5T39W8Y;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = JSC5562A3R;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = JSC5562A3R;
 				INFOPLIST_FILE = YTLiveStreamingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
@@ -680,6 +686,8 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N5B5T39W8Y;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = JSC5562A3R;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = JSC5562A3R;
 				INFOPLIST_FILE = YTLiveStreamingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;

@@ -23,21 +23,30 @@ public class YTLiveStreaming: NSObject {
 // MARK: Public methods interface
 
 extension YTLiveStreaming {
+    ///
+    ///
+    ///
     public func getUpcomingBroadcasts(_ completion: @escaping (Result<[LiveBroadcastStreamModel], YTError>) -> Void) {
         print("+\(#function)")
         getBroadcastList(.upcoming, completion)
     }
-
+    ///
+    ///
+    ///
     public func getLiveNowBroadcasts(_ completion: @escaping (Result<[LiveBroadcastStreamModel], YTError>) -> Void) {
         print("+\(#function)")
         getBroadcastList(.active, completion)
     }
-
+    ///
+    ///
+    ///
     public func getCompletedBroadcasts(_ completion: @escaping (Result<[LiveBroadcastStreamModel], YTError>) -> Void) {
         print("+\(#function)")
         getBroadcastList(.completed, completion)
     }
-
+    ///
+    ///
+    ///
     public func getAllBroadcasts(
         _ completion: @escaping ([LiveBroadcastStreamModel]?, [LiveBroadcastStreamModel]?, [LiveBroadcastStreamModel]?
         ) -> Void) {
@@ -73,21 +82,47 @@ extension YTLiveStreaming {
             }
         }
     }
-
+    ///
+    ///
+    ///
     public func createBroadcast(_ title: String,
                                 description: String?,
                                 startTime: Date,
+                                isReusable: Bool,
+                                endDateTime: Date,
+                                selfDeclaredMadeForKids: String,
+                                enableAutoStart: Bool,
+                                enableAutoStop: Bool,
+                                enableClosedCaptions: Bool,
+                                enableDvr: Bool,
+                                enableEmbed: Bool,
+                                recordFromStart: Bool,
+                                enableMonitorStream: Bool,
+                                broadcastStreamDelayMs: Int,
                                 completion: @escaping (Result<LiveBroadcastStreamModel, YTError>) -> Void) {
         let liveStreamDescription = description ?? "This stream was created by the YTLiveStreaming iOS framework"
         let liveStreamName = "YTLiveStreaming"
-        YTLiveRequest.createLiveBroadcast(title, startDateTime: startTime, completion: { result in
+        YTLiveRequest.createLiveBroadcast(title,
+                                          startDateTime: startTime,
+                                          description: liveStreamDescription,
+                                          endDateTime: endDateTime,
+                                          selfDeclaredMadeForKids: selfDeclaredMadeForKids,
+                                          enableAutoStart: enableAutoStart,
+                                          enableAutoStop: enableAutoStop,
+                                          enableClosedCaptions: enableClosedCaptions,
+                                          enableDvr: enableDvr,
+                                          enableEmbed: enableEmbed,
+                                          recordFromStart: recordFromStart,
+                                          enableMonitorStream: enableMonitorStream,
+                                          broadcastStreamDelayMs: broadcastStreamDelayMs) { result in
             switch result {
             case .success(let liveBroadcast):
                 // Create Live stream
                 YTLiveRequest.createLiveStream(
                     title,
                     description: liveStreamDescription,
-                    streamName: liveStreamName
+                    streamName: liveStreamName,
+                    isReusable: isReusable
                 ) { result in
                     switch result {
                     case .success(let liveStream):
@@ -111,9 +146,11 @@ extension YTLiveStreaming {
             case .failure(let error):
                 completion(.failure(error))
             }
-        })
+        }
     }
-
+    ///
+    ///
+    ///
     public func updateBroadcast(_ broadcast: LiveBroadcastStreamModel, completion: @escaping (Bool) -> Void) {
         YTLiveRequest.updateLiveBroadcast(broadcast) { result in
             switch result {
@@ -125,7 +162,9 @@ extension YTLiveStreaming {
             }
         }
     }
-
+    ///
+    ///
+    ///
     public func startBroadcast(_ broadcast: LiveBroadcastStreamModel,
                                delegate: LiveStreamTransitioning,
                                completion: @escaping (String?, String?, Date?) -> Void) {
@@ -168,7 +207,9 @@ extension YTLiveStreaming {
             completion(nil, nil, nil)
         }
     }
-
+    ///
+    ///
+    ///
     public func completeBroadcast(_ broadcast: LiveBroadcastStreamModel, completion: @escaping (Bool) -> Void) {
         LiveLauncher.sharedInstance.stopBroadcast()
         // complete – The broadcast is over. YouTube stops transmitting video.
@@ -182,7 +223,9 @@ extension YTLiveStreaming {
             }
         }
     }
-
+    ///
+    ///
+    ///
     public func deleteBroadcast(id: String, completion: @escaping (Bool) -> Void) {
         YTLiveRequest.deleteLiveBroadcast(broadcastId: id) { result in
             switch result {
@@ -194,7 +237,9 @@ extension YTLiveStreaming {
             }
         }
     }
-
+    ///
+    ///
+    ///
     public func transitionBroadcast(_ broadcast: LiveBroadcastStreamModel,
                                     toStatus: String,
                                     completion: @escaping (Bool) -> Void) {
@@ -213,7 +258,9 @@ extension YTLiveStreaming {
             }
         }
     }
-
+    ///
+    ///
+    ///
     public func getStatusBroadcast(_ broadcast: LiveBroadcastStreamModel,
                                    stream: LiveStreamModel,
                                    completion: @escaping (String?, String?, String?) -> Void) {
@@ -268,7 +315,9 @@ extension YTLiveStreaming {
             }
         })
     }
-
+    ///
+    ///
+    ///
     public func transitionBroadcastToLiveState(liveBroadcast: LiveBroadcastStreamModel,
                                                liveState: @escaping (Bool) -> Void) {
         self.transitionBroadcast(liveBroadcast, toStatus: "live") { success in
@@ -286,7 +335,9 @@ extension YTLiveStreaming {
             }
         }
     }
-
+    ///
+    ///
+    ///
     public func isYouTubeAvailable() -> Bool {
         return GoogleOAuth2.sharedInstance.isAccessTokenPresented
     }
@@ -368,12 +419,16 @@ extension YTLiveStreaming {
     func testUpdateLiveStream() {
         let liveStreamId = "0"
         let title = "Live Stream"
-        let format = "1080p"    // 1080p 1440p 240p 360p 480p 720p
+        let description = "Live Stream created with YTLiveStreaming framework"
+        let frameRate = ""
         let ingestionType = "rtmp" // dash rtmp
+        let resolution = "1080p"
         YTLiveRequest.updateLiveStream(liveStreamId,
                                        title: title,
-                                       format: format,
+                                       description: description,
+                                       frameRate: frameRate,
                                        ingestionType: ingestionType,
+                                       resolution: resolution,
                                        completion: { result in
             switch result {
             case .success:

@@ -8,38 +8,13 @@
 
 import Foundation
 import SwiftyJSON
-
-//                        {
-//
-//                           "kind": "youtube#liveStream",
-//                           "etag": "\"I_8xdZu766_FSaexEaDXTIfEWc0/trdCzFsxkNp91WcZP8dcOA9tjMU\"",
-//                           "id": "m4xprzPvVL8Uravaneq7CA1476422506176336",
-//                           "snippet": {
-//                              "publishedAt": "2016-10-14T05:21:46.000Z",
-//                              "channelId": "UCm4xprzPvVL8Uravaneq7CA",
-//                              "title": "My First Live Video",
-//                              "description": "Description live video",
-//                              "isDefaultStream": false
-//                           },
-//                           "cdn": {
-//                              "format": "1080p",
-//                              "ingestionType": "rtmp",
-//                              "ingestionInfo": {
-//                                 "streamName": "m4r0-xg07-9x0q-4dpk",
-//                                 "ingestionAddress": "rtmp://a.rtmp.youtube.com/live2",
-//                                 "backupIngestionAddress": "rtmp://b.rtmp.youtube.com/live2?backup=1"
-//                              },
-//                              "resolution": "1080p",
-//                              "frameRate": "30fps"
-//                           },
-//                           "status": {
-//                              "streamStatus": "ready",
-//                              "healthStatus": {
-//                                 "status": "noData"
-//                              }
-//                           }
-//                        }
-
+///
+///  Docs:
+/// https://developers.google.com/youtube/v3/live/docs/liveStreams
+///
+///   liveStreams resource.
+/// Discuss
+///   it is items filed of response GET https://www.googleapis.com/youtube/v3/liveStreams request
 public struct LiveStreamModel {
     // The snippet object contains basic details about the stream, including its channel, title, and description.
     public struct Snipped {
@@ -71,19 +46,12 @@ public struct LiveStreamModel {
     // The cdn object defines the live stream's content delivery network (CDN) settings.
     // These settings provide details about the manner in which you stream your content to YouTube.
     public struct CDN {
-        public let format: String   // This property has been deprecated as of April 18, 2016.
-                                    // Instead, please use the cdn.frameRate and cdn.resolution
-                                    // properties to specify the frame rate and resolution separately.
         public let ingestionType: String     // The method or protocol used to transmit the video stream. (dash or rtmp)
         // The ingestionInfo object contains information that YouTube provides
         // that you need to transmit your stream to YouTube.
         public let ingestionInfo: IngestionInfo
         public let resolution: String     // The resolution of the inbound video data.
         public let frameRate: String      // The frame rate of the inbound video data.
-    }
-
-    public struct HealthStatus {
-        public let status: String
     }
 
     public struct Status {
@@ -98,29 +66,50 @@ public struct LiveStreamModel {
                                                 // diagnose, and resolve streaming problems.
     }
 
+    public struct HealthStatus {
+        public let status: String
+        public let lastUpdateTimeSeconds: Int
+        public let configurationIssues: [ConfigurationIssues]
+    }
+
+    public struct ConfigurationIssues {
+        public let type: String
+        public let severity: String
+        public let reason: String
+        public let description: String
+    }
+
+    public struct ContentDetails {
+        public let closedCaptionsIngestionUrl: String
+        public let isReusable: Bool
+    }
+    
     public let kind: String        // Identifies the API resource's type. The value will be youtube#liveStream.
     public let etag: String        // The Etag of this resource.
     public let id: String          // The ID that YouTube assigns to uniquely identify the stream.
     public let snipped: Snipped
     public let cdn: CDN
     public let status: Status
+    public let contentDetails: ContentDetails
 }
 
-// MARK: - Decodable
+// MARK: - Decode to LiveStreamModel
 
 extension LiveStreamModel: Decodable {
     public static func decode(_ json: JSON) -> LiveStreamModel {
         let snippet = LiveStreamModel.Snipped.decode(json["snippet"])
         let cdn = LiveStreamModel.CDN.decode(json["cdn"])
         let status = LiveStreamModel.Status.decode(json["status"])
-
+        let contentDetails = LiveStreamModel.ContentDetails.decode(json["contentDetails"])
+        
         let model = LiveStreamModel(
             kind: json["kind"].stringValue,
             etag: json["etag"].stringValue,
             id: json["id"].stringValue,
             snipped: snippet,
             cdn: cdn,
-            status: status
+            status: status,
+            contentDetails: contentDetails
         )
         return model
     }
@@ -143,7 +132,6 @@ extension LiveStreamModel.CDN {
     public static func decode(_ json: JSON) -> LiveStreamModel.CDN {
         let ingestionInfo = LiveStreamModel.IngestionInfo.decode(json["ingestionInfo"])
         let model = LiveStreamModel.CDN(
-            format: json["format"].stringValue,
             ingestionType: json["ingestionType"].stringValue,
             ingestionInfo: ingestionInfo,
             resolution: json["resolution"].stringValue,
@@ -177,8 +165,33 @@ extension LiveStreamModel.Status {
 
 extension LiveStreamModel.HealthStatus {
     public static func decode(_ json: JSON) -> LiveStreamModel.HealthStatus {
+        let configurationIssues: [LiveStreamModel.ConfigurationIssues] = []
         let model = LiveStreamModel.HealthStatus(
-            status: json["status"].stringValue
+            status: json["status"].stringValue,
+            lastUpdateTimeSeconds: json["lastUpdateTimeSeconds"].intValue,
+            configurationIssues: configurationIssues
+        )
+        return model
+    }
+}
+
+extension LiveStreamModel.ConfigurationIssues {
+    public static func decode(_ json: JSON) -> LiveStreamModel.ConfigurationIssues {
+        let model = LiveStreamModel.ConfigurationIssues(
+            type: json["type"].stringValue,
+            severity: json["severity"].stringValue,
+            reason: json["reason"].stringValue,
+            description: json["description"].stringValue
+        )
+        return model
+    }
+}
+
+extension LiveStreamModel.ContentDetails {
+    public static func decode(_ json: JSON) -> LiveStreamModel.ContentDetails {
+        let model = LiveStreamModel.ContentDetails(
+            closedCaptionsIngestionUrl: json["closedCaptionsIngestionUrl"].stringValue,
+            isReusable: json["isReusable"].boolValue
         )
         return model
     }

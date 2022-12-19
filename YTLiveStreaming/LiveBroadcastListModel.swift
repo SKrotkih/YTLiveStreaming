@@ -7,15 +7,24 @@
 //
 
 import Foundation
-
+/// Request:
+///  GET https://www.googleapis.com/youtube/v3/liveBroadcasts
+/// Scope:
+///  https://www.googleapis.com/auth/youtube.readonly
+///  https://www.googleapis.com/auth/youtube
+///  https://www.googleapis.com/auth/youtube.force-ssl
+/// Responce body:
 public struct LiveBroadcastListModel: Codable {
-    public let etag: String
-    public let items: [LiveBroadcastStreamModel]
-    public let kind: String
+    public let kind: String // "youtube#liveBroadcastListResponse"
+    public let etag: String // The Etag of this resource.
+    public let nextPageToken: String    // The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
+    public let prevPageToken: String    // The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
     public let pageInfo: PageInfo
+    public let items: [LiveBroadcastStreamModel]    // A list of broadcasts that match the request criteria.
 
+    // The pageInfo object encapsulates paging information for the result set.
     public struct PageInfo: Codable {
-        public let resultsPerPage: Int
-        public let totalResults: Int
+        public let totalResults: Int    // he total number of results in the result set
+        public let resultsPerPage: Int  // The number of results included in the API response.
     }
 }

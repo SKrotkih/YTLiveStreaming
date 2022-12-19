@@ -5,25 +5,25 @@
 //  Created by Serhii Krotkykh on 10/24/16.
 //  Copyright © 2016 Serhii Krotkykh. All rights reserved.
 //
-
 import Foundation
 import Alamofire
 import SwiftyJSON
 
-class YTLiveRequest: NSObject {
-    // Set up broadcast on your Youtube account:
-    // https://www.youtube.com/my_live_events
-    // https://www.youtube.com/live_dashboard
-    // Errors:
-    // https://support.google.com/youtube/answer/3006768?hl=ru
+/// Set up broadcast on your Youtube account:
+/// https://www.youtube.com/my_live_events
+/// https://www.youtube.com/live_dashboard
+/// Errors:
+/// https://support.google.com/youtube/answer/3006768?hl=ru
 
-    // Developer console
-    // https://console.developers.google.com/apis/credentials/key/0?project=fightnights-143711
+/// Developer console
+/// https://console.developers.google.com/apis/credentials/key/0?project=fightnights-143711
+class YTLiveRequest: NSObject {
 }
 
 // MARK: LiveBroatcasts requests
-// https://developers.google.com/youtube/v3/live/docs/liveBroadcasts
-
+///
+/// https://developers.google.com/youtube/v3/live/docs/liveBroadcasts
+//
 extension YTLiveRequest {
 
     class func getHeaders(_ completion: @escaping (HTTPHeaders?) -> Void) {
@@ -39,13 +39,13 @@ extension YTLiveRequest {
         }
     }
 
-    // Returns a list of YouTube broadcasts that match the API request parameters.
-    // broadcastStatus:
-    // Acceptable values are:
-    // active – Return current live broadcasts.
-    // all – Return all broadcasts.
-    // completed – Return broadcasts that have already ended.
-    // upcoming – Return broadcasts that have not yet started.
+    /// Returns a list of YouTube broadcasts that match the API request parameters.
+    /// broadcastStatus:
+    /// Acceptable values are:
+    /// active – Return current live broadcasts.
+    /// all – Return all broadcasts.
+    /// completed – Return broadcasts that have already ended.
+    /// upcoming – Return broadcasts that have not yet started.
     class func listBroadcasts(_ status: YTLiveVideoState,
                               completion: @escaping (Result<LiveBroadcastListModel, YTError>) -> Void) {
         let parameters: [String: AnyObject] = [
@@ -122,17 +122,40 @@ extension YTLiveRequest {
         }
     }
 
-    // https://developers.google.com/youtube/v3/live/docs/liveBroadcasts/insert
-    // Creates a broadcast.
+    /// https://developers.google.com/youtube/v3/live/docs/liveBroadcasts/insert
+    /// Creates a broadcast.
     class func createLiveBroadcast(_ title: String,
                                    startDateTime: Date,
+                                   description: String,
+                                   endDateTime: Date,
+                                   selfDeclaredMadeForKids: String,
+                                   enableAutoStart: Bool,
+                                   enableAutoStop: Bool,
+                                   enableClosedCaptions: Bool,
+                                   enableDvr: Bool,
+                                   enableEmbed: Bool,
+                                   recordFromStart: Bool,
+                                   enableMonitorStream: Bool,
+                                   broadcastStreamDelayMs: Int,
                                    completion: @escaping (Result<LiveBroadcastStreamModel, YTError>) -> Void) {
         getHeaders { headers in
             guard let headers = headers else {
                 completion(.failure(.message("OAuth token is not presented")))
                 return
             }
-            let jsonBody = CreateLiveBroadcastBody(title: title, startDateTime: startDateTime)
+            let jsonBody = CreateLiveBroadcastBody(title: title,
+                                                   description: description,
+                                                   startDateTime: startDateTime,
+                                                   endDateTime: endDateTime,
+                                                   selfDeclaredMadeForKids: selfDeclaredMadeForKids,
+                                                   enableAutoStart: enableAutoStart,
+                                                   enableAutoStop: enableAutoStop,
+                                                   enableClosedCaptions: enableClosedCaptions,
+                                                   enableDvr: enableDvr,
+                                                   enableEmbed: enableEmbed,
+                                                   recordFromStart: recordFromStart,
+                                                   enableMonitorStream: enableMonitorStream,
+                                                   broadcastStreamDelayMs: broadcastStreamDelayMs)
             guard let jsonData = try? JSONEncoder().encode(jsonBody),
                   let jsonString = String(data: jsonData, encoding: .utf8) else {
                 completion(.failure(.message("Failed while preparing request")))
@@ -177,10 +200,10 @@ extension YTLiveRequest {
         }
     }
 
-    // Updates a broadcast. For example, you could modify the broadcast settings defined
-    // in the liveBroadcast resource's contentDetails object.
-    // https://developers.google.com/youtube/v3/live/docs/liveBroadcasts/update
-    // PUT https://www.googleapis.com/youtube/v3/liveBroadcasts
+    /// Updates a broadcast. For example, you could modify the broadcast settings defined
+    /// in the liveBroadcast resource's contentDetails object.
+    /// https://developers.google.com/youtube/v3/live/docs/liveBroadcasts/update
+    /// PUT https://www.googleapis.com/youtube/v3/liveBroadcasts
     class func updateLiveBroadcast(_ broadcast: LiveBroadcastStreamModel,
                                    completion: @escaping (Result<Void, YTError>) -> Void) {
         getHeaders { headers in
@@ -232,11 +255,11 @@ extension YTLiveRequest {
         }
     }
 
-    // POST https://www.googleapis.com/youtube/v3/liveBroadcasts/transition
-    // Changes the status of a YouTube live broadcast and initiates any processes associated with the new status.
-    // For example, when you transition a broadcast's status to testing, YouTube starts to transmit video
-    // to that broadcast's monitor stream. Before calling this method, you should confirm that the value of the
-    // status.streamStatus property for the stream bound to your broadcast is active.
+    /// POST https://www.googleapis.com/youtube/v3/liveBroadcasts/transition
+    /// Changes the status of a YouTube live broadcast and initiates any processes associated with the new status.
+    /// For example, when you transition a broadcast's status to testing, YouTube starts to transmit video
+    /// to that broadcast's monitor stream. Before calling this method, you should confirm that the value of the
+    /// status.streamStatus property for the stream bound to your broadcast is active.
     class func transitionLiveBroadcast(_ boadcastId: String,
                                        broadcastStatus: String,
                                        completion: @escaping (Result<LiveBroadcastStreamModel, YTError>) -> Void) {
@@ -276,8 +299,8 @@ extension YTLiveRequest {
         }
     }
 
-    // Deletes a broadcast.
-    // DELETE https://www.googleapis.com/youtube/v3/liveBroadcasts
+    /// Deletes a broadcast.
+    /// DELETE https://www.googleapis.com/youtube/v3/liveBroadcasts
     class func deleteLiveBroadcast(broadcastId: String, completion: @escaping (Result<Void, YTError>) -> Void) {
         let parameters: [String: AnyObject] = [
             "id": broadcastId as AnyObject,
@@ -307,9 +330,9 @@ extension YTLiveRequest {
         }
     }
 
-    // Binds a YouTube broadcast to a stream or removes an existing binding between a broadcast and a stream.
-    // A broadcast can only be bound to one video stream, though a video stream may be bound to more than one broadcast.
-    // POST https://www.googleapis.com/youtube/v3/liveBroadcasts/bind
+    /// Binds a YouTube broadcast to a stream or removes an existing binding between a broadcast and a stream.
+    /// A broadcast can only be bound to one video stream, though a video stream may be bound to more than one broadcast.
+    /// POST https://www.googleapis.com/youtube/v3/liveBroadcasts/bind
     class func bindLiveBroadcast(broadcastId: String,
                                  liveStreamId streamId: String,
                                  completion: @escaping (Result<LiveBroadcastStreamModel, YTError>) -> Void) {
@@ -348,14 +371,14 @@ extension YTLiveRequest {
     }
 }
 
-// MARK: LiveStreams requests
-// https://developers.google.com/youtube/v3/live/docs/liveStreams
-// A liveStream resource contains information about the video stream that you are transmitting to YouTube.
-// The stream provides the content that will be broadcast to YouTube users.
-// Once created, a liveStream resource can be bound to one or more liveBroadcast resources.
+/// MARK: LiveStreams requests
+/// https://developers.google.com/youtube/v3/live/docs/liveStreams
+/// A liveStream resource contains information about the video stream that you are transmitting to YouTube.
+/// The stream provides the content that will be broadcast to YouTube users.
+/// Once created, a liveStream resource can be bound to one or more liveBroadcast resources.
 extension YTLiveRequest {
-    // Returns a list of video streams that match the API request parameters.
-    // https://developers.google.com/youtube/v3/live/docs/liveStreams/list
+    /// Returns a list of video streams that match the API request parameters.
+    /// https://developers.google.com/youtube/v3/live/docs/liveStreams/list
     class func getLiveStream(_ liveStreamId: String, completion: @escaping (Result<LiveStreamModel, YTError>) -> Void) {
         let parameters: [String: AnyObject] = [
             "part": "id,snippet,cdn,status" as AnyObject,
@@ -397,20 +420,21 @@ extension YTLiveRequest {
         }
     }
 
-    // https://developers.google.com/youtube/v3/live/docs/liveStreams/insert
-    // Creates a video stream. The stream enables you to send your video to YouTube,
-    // which can then broadcast the video to your audience.
-    //   POST https://www.googleapis.com/youtube/v3/liveStreams?part=id%2Csnippet%2Ccdn%2Cstatus&key={YOUR_API_KEY}
+    /// https://developers.google.com/youtube/v3/live/docs/liveStreams/insert
+    /// Creates a video stream. The stream enables you to send your video to YouTube,
+    /// which can then broadcast the video to your audience.
+    ///   POST https://www.googleapis.com/youtube/v3/liveStreams?part=id%2Csnippet%2Ccdn%2Cstatus&key={YOUR_API_KEY}
     class func createLiveStream(_ title: String,
                                 description: String,
                                 streamName: String,
+                                isReusable: Bool,
                                 completion: @escaping (Result<LiveStreamModel, YTError>) -> Void) {
         getHeaders { headers in
             guard let headers = headers else {
                 completion(.failure(.message("OAuth token is not presented")))
                 return
             }
-            let jsonBody = CreateLiveStreamBody(title: title, description: description, streamName: streamName)
+            let jsonBody = CreateLiveStreamBody(title: title, description: description, streamName: streamName, isReusable: isReusable)
             guard let jsonData = try? JSONEncoder().encode(jsonBody),
                   let jsonString = String(data: jsonData, encoding: .utf8) else {
                 completion(.failure(.message("Failed while preparing request")))
@@ -452,9 +476,9 @@ extension YTLiveRequest {
         }
     }
 
-    // Deletes a video stream
-    // Request:
-    // DELETE https://www.googleapis.com/youtube/v3/liveStreams
+    /// Deletes a video stream
+    /// Request:
+    /// DELETE https://www.googleapis.com/youtube/v3/liveStreams
     class func deleteLiveStream(_ liveStreamId: String, completion: @escaping (Result<Void, YTError>) -> Void) {
         let parameters: [String: AnyObject] = [
             "id": liveStreamId as AnyObject,
@@ -484,24 +508,41 @@ extension YTLiveRequest {
             }
         }
     }
-
-    // Updates a video stream. If the properties that you want to change cannot be updated,
-    // then you need to create a new stream with the proper settings.
-    // Request:
-    // PUT https://www.googleapis.com/youtube/v3/liveStreams
-    // format = 1080p 1440p 240p 360p 480p 720p
-    // ingestionType = dash rtmp
+    /// Updates a video stream. If the properties that you want to change cannot be updated,
+    /// then you need to create a new stream with the proper settings.
+    /// Request:
+    /// PUT https://www.googleapis.com/youtube/v3/liveStreams
+    ///  frameRate = The frame rate of the inbound video data.
+    ///    Valid values for this property are:
+    ///     30fps
+    ///     60fps
+    ///     variable: Use this setting to indicate that YouTube should automatically detect the frame rate of your streamed video. You must also set cdn.resolution to variable.
+    ///     See the YouTube Help Center for recommended encoder settings.
+    ///  ingestionType = dash rtmp
+    ///   reslution = The resolution of the inbound video data.
+    ///    Valid values for this property are:
+    ///     240p
+    ///     360p
+    ///     480p
+    ///     720p
+    ///     1080p
+    ///     1440p
+    ///     2160p
+    ///     variable: Use this setting to indicate that YouTube should automatically detect the resolution of your streamed video. You must also set cdn.frameRate to variable.
+    ///     See the YouTube Help Center for recommended encoder settings.
     class func updateLiveStream(_ liveStreamId: String,
                                 title: String,
-                                format: String,
+                                description: String,
+                                frameRate: String,
                                 ingestionType: String,
+                                resolution: String,
                                 completion: @escaping (Result<Void, YTError>) -> Void) {
         getHeaders { headers in
             guard let headers = headers else {
                 completion(.failure(.message("OAuth token is not presented")))
                 return
             }
-            let jsonBody = UpdateLiveStreamBody(id: liveStreamId, title: title, format: format, ingestionType: ingestionType)
+            let jsonBody = UpdateLiveStreamBody(id: liveStreamId, title: title, description: description, frameRate: frameRate, ingestionType: ingestionType, resolution: resolution)
             guard let jsonData = try? JSONEncoder().encode(jsonBody),
                   let jsonString = String(data: jsonData, encoding: .utf8) else {
                 completion(.failure(.message("Failed while preparing request")))

@@ -9,46 +9,15 @@
 import Foundation
 import SwiftyJSON
 
-// {
-//   "etag" : "\"I_8xdZu766_FSaexEaDXTIfEWc0\/VMmvFScihZJoETVMe17uR2H6SXQ\"",
-//   "kind" : "youtube//liveStreamListResponse",
-//   "items" : [
-//     {
-//       "snippet" : {
-//         "title" : "Live Stream",
-//         "channelId" : "UCm4xprzPvVL8Uravaneq7CA",
-//         "publishedAt" : "2016-10-17T10:45:32.000Z",
-//         "description" : "Live Stream Description",
-//         "isDefaultStream" : false
-//       },
-//       "etag" : "\"I_8xdZu766_FSaexEaDXTIfEWc0\/hxXAbPuAg4p-VmJHqKBp5Q38lPY\"",
-//       "id" : "m4xprzPvVL8Uravaneq7CA1476701132194106",
-//       "status" : {
-//         "healthStatus" : {
-//           "status" : "noData"
-//         },
-//         "streamStatus" : "ready"
-//       },
-//       "cdn" : {
-//         "frameRate" : "60fps",
-//         "ingestionInfo" : {
-//           "backupIngestionAddress" : "rtmp:\/\/b.rtmp.youtube.com\/live2?backup=1",
-//           "ingestionAddress" : "rtmp:\/\/a.rtmp.youtube.com\/live2",
-//           "streamName" : "h8jh-dkhk-cjcm-0p18"
-//         },
-//         "resolution" : "720p",
-//         "format" : "720p_hfr",
-//         "ingestionType" : "rtmp"
-//       },
-//       "kind" : "youtube//liveStream"
-//     }
-//   ],
-//   "pageInfo" : {
-//     "totalResults" : 0,
-//     "resultsPerPage" : 5
-//   }
-// }
-
+/// Request
+///  GET https://www.googleapis.com/youtube/v3/liveStreams
+///
+/// Scope
+///  https://www.googleapis.com/auth/youtube.readonly
+///  https://www.googleapis.com/auth/youtube
+///  https://www.googleapis.com/auth/youtube.force-ssl
+///
+/// If successful, this method returns a response body with the following structure:
 public struct LiveStreamListModel {
 
    public struct Item {

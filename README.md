@@ -75,6 +75,8 @@ To integrate YTLiveStreaming package using Apple's Swift package manager
 
 ## User guide
 
+    [YouTube Live Streaming API Reference](https://developers.google.com/youtube/v3/live/docs) 
+
 	import YTLiveStreaming
 
 	...
@@ -178,6 +180,10 @@ The project was created
 11-11-2016
 
 Changes history:
+19-12-2022
+- build 0.2.28
+- up to date all data structures
+- add descriptions for fields, requests, responses
 25-07-2022 
 - build 0.2.27
 16-07-2022

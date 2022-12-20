@@ -5,15 +5,18 @@
 //  Created by Serhii Krotkykh on 10/24/16.
 //  Copyright © 2016 Serhii Krotkykh. All rights reserved.
 //
-
 import Foundation
-/// Request:
-///  GET https://www.googleapis.com/youtube/v3/liveBroadcasts
-/// Scope:
-///  https://www.googleapis.com/auth/youtube.readonly
-///  https://www.googleapis.com/auth/youtube
-///  https://www.googleapis.com/auth/youtube.force-ssl
-/// Responce body:
+/**
+ Responce body of a list of YouTube broadcasts that match the API request parameters.
+  Request:
+   GET https://www.googleapis.com/youtube/v3/liveBroadcasts
+  Scope:
+   https://www.googleapis.com/auth/youtube.readonly
+   https://www.googleapis.com/auth/youtube
+   https://www.googleapis.com/auth/youtube.force-ssl
+ @param
+ @return
+ */
 public struct LiveBroadcastListModel: Codable {
     public let kind: String // "youtube#liveBroadcastListResponse"
     public let etag: String // The Etag of this resource.

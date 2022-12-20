@@ -7,12 +7,15 @@
 //
 
 import Foundation
-///
-/// YouTube -> Live Streaming API
-/// https://developers.google.com/youtube/v3/live/docs/liveBroadcasts
-///  liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.
-/// Discuss:
-///   We get it in items field response of  GET https://www.googleapis.com/youtube/v3/liveBroadcasts request
+/**
+ YouTube -> Live Streaming API Docs
+  https://developers.google.com/youtube/v3/live/docs/liveBroadcasts
+ liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.
+ Note:
+  We get it in the items field response of the  GET https://www.googleapis.com/youtube/v3/liveBroadcasts request
+ @param
+ @return
+ **/
 public struct LiveBroadcastStreamModel: Codable {
     public let etag: String     // The Etag of this resource.
     public let id: String       // The ID that YouTube assigns to uniquely identify the broadcast.
@@ -88,13 +91,14 @@ public struct LiveBroadcastStreamModel: Codable {
             }
         }
     }
-
-///
-/// Valid key values are:
-/// default – The default thumbnail image. The default thumbnail for a video – or a resource that refers to a video, such as a playlist item or search result – is 120px wide and 90px tall. The default thumbnail for a channel is 88px wide and 88px tall.
-/// medium – A higher resolution version of the thumbnail image. For a video (or a resource that refers to a video), this image is 320px wide and 180px tall. For a channel, this image is 240px wide and 240px tall.
-/// high – A high resolution version of the thumbnail image. For a video (or a resource that refers to a video), this image is 480px wide and 360px tall. For a channel, this image is 800px wide and 800px tall.
-///
+    /**
+      Valid key values are:
+      - default – The default thumbnail image. The default thumbnail for a video – or a resource that refers to a video, such as a playlist item or search result is 120px wide and 90px tall. The default thumbnail for a channel is 88px wide and 88px tall.
+      - medium – A higher resolution version of the thumbnail image. For a video (or a resource that refers to a video), this image is 320px wide and 180px tall. For a channel, this image is 240px wide and 240px tall.
+      - high – A high resolution version of the thumbnail image. For a video (or a resource that refers to a video), this image is 480px wide and 360px tall. For a channel, this image is 800px wide and 800px tall.
+     @param
+     @return
+     **/
     public struct Thumbnails: Codable {
         public let def: Thumbnail
         public let height: Thumbnail

@@ -8,15 +8,13 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
-
 /// Set up broadcast on your Youtube account:
 /// https://www.youtube.com/my_live_events
 /// https://www.youtube.com/live_dashboard
 /// Errors:
 /// https://support.google.com/youtube/answer/3006768?hl=ru
-
 /// Developer console
-/// https://console.developers.google.com/apis/credentials/key/0?project=fightnights-143711
+/// https://console.developers.google.com
 class YTLiveRequest: NSObject {
 }
 
@@ -25,7 +23,6 @@ class YTLiveRequest: NSObject {
 /// https://developers.google.com/youtube/v3/live/docs/liveBroadcasts
 //
 extension YTLiveRequest {
-
     class func getHeaders(_ completion: @escaping (HTTPHeaders?) -> Void) {
         GoogleOAuth2.sharedInstance.requestToken { token in
             if let token = token {
@@ -38,14 +35,17 @@ extension YTLiveRequest {
             }
         }
     }
-
-    /// Returns a list of YouTube broadcasts that match the API request parameters.
-    /// broadcastStatus:
-    /// Acceptable values are:
-    /// active – Return current live broadcasts.
-    /// all – Return all broadcasts.
-    /// completed – Return broadcasts that have already ended.
-    /// upcoming – Return broadcasts that have not yet started.
+    /**
+     Returns a list of YouTube broadcasts that match the API request parameters.
+     @param
+     broadcastStatus:
+     Acceptable values are:
+     active – Return current live broadcasts.
+     all – Return all broadcasts.
+     completed – Return broadcasts that have already ended.
+     upcoming – Return broadcasts that have not yet started.
+     @return
+     */
     class func listBroadcasts(_ status: YTLiveVideoState,
                               completion: @escaping (Result<LiveBroadcastListModel, YTError>) -> Void) {
         let parameters: [String: AnyObject] = [
@@ -121,9 +121,26 @@ extension YTLiveRequest {
             }
         }
     }
-
-    /// https://developers.google.com/youtube/v3/live/docs/liveBroadcasts/insert
-    /// Creates a broadcast.
+    /**
+     Insert a new Broadcast Request
+     @param
+     - title:
+     - startDateTime:
+     - description:
+     - endDateTime:
+     - selfDeclaredMadeForKids:
+     - enableAutoStart:
+     - enableAutoStop:
+     - enableClosedCaptions
+     - enableDvr:
+     - enableEmbed:
+     - recordFromStart:
+     - enableMonitorStream:
+     - broadcastStreamDelayMs:
+     @return
+     - LiveBroadcastStreamModel
+     - YTError
+     */
     class func createLiveBroadcast(_ title: String,
                                    startDateTime: Date,
                                    description: String,
@@ -199,11 +216,19 @@ extension YTLiveRequest {
                 }
         }
     }
-
-    /// Updates a broadcast. For example, you could modify the broadcast settings defined
-    /// in the liveBroadcast resource's contentDetails object.
-    /// https://developers.google.com/youtube/v3/live/docs/liveBroadcasts/update
-    /// PUT https://www.googleapis.com/youtube/v3/liveBroadcasts
+    /**
+     Update a broadcast. For example, you could modify the broadcast settings defined
+     in the liveBroadcast resource's contentDetails object
+     Docs
+      https://developers.google.com/youtube/v3/live/docs/liveBroadcasts/update
+     Request
+      PUT https://www.googleapis.com/youtube/v3/liveBroadcasts
+     @param
+     - LiveBroadcastStreamModel
+     @return
+     - success
+     - YTError
+     */
     class func updateLiveBroadcast(_ broadcast: LiveBroadcastStreamModel,
                                    completion: @escaping (Result<Void, YTError>) -> Void) {
         getHeaders { headers in
@@ -254,12 +279,20 @@ extension YTLiveRequest {
             }
         }
     }
-
-    /// POST https://www.googleapis.com/youtube/v3/liveBroadcasts/transition
-    /// Changes the status of a YouTube live broadcast and initiates any processes associated with the new status.
-    /// For example, when you transition a broadcast's status to testing, YouTube starts to transmit video
-    /// to that broadcast's monitor stream. Before calling this method, you should confirm that the value of the
-    /// status.streamStatus property for the stream bound to your broadcast is active.
+    /**
+     Changes the status of a YouTube live broadcast and initiates any processes associated with the new status.
+     For example, when you transition a broadcast's status to testing, YouTube starts to transmit video
+     to that broadcast's monitor stream. Before calling this method, you should confirm that the value of the
+     status.streamStatus property for the stream bound to your broadcast is active.
+     Request
+      POST https://www.googleapis.com/youtube/v3/liveBroadcasts/transition
+     @param
+     - broadcast ID
+     - broadcast Status
+     @return
+     - LiveBroadcastStreamModel
+     - YTError
+     */
     class func transitionLiveBroadcast(_ boadcastId: String,
                                        broadcastStatus: String,
                                        completion: @escaping (Result<LiveBroadcastStreamModel, YTError>) -> Void) {
@@ -298,9 +331,16 @@ extension YTLiveRequest {
             }
         }
     }
-
-    /// Deletes a broadcast.
-    /// DELETE https://www.googleapis.com/youtube/v3/liveBroadcasts
+    /**
+     Deletes a broadcast
+     Request
+      DELETE https://www.googleapis.com/youtube/v3/liveBroadcasts
+     @param
+     - broadcast ID
+     @return
+     - success
+     - YTError
+     */
     class func deleteLiveBroadcast(broadcastId: String, completion: @escaping (Result<Void, YTError>) -> Void) {
         let parameters: [String: AnyObject] = [
             "id": broadcastId as AnyObject,
@@ -329,10 +369,18 @@ extension YTLiveRequest {
             }
         }
     }
-
-    /// Binds a YouTube broadcast to a stream or removes an existing binding between a broadcast and a stream.
-    /// A broadcast can only be bound to one video stream, though a video stream may be bound to more than one broadcast.
-    /// POST https://www.googleapis.com/youtube/v3/liveBroadcasts/bind
+    /**
+     Binds a YouTube broadcast to a stream or removes an existing binding between a broadcast and a stream.
+     A broadcast can only be bound to one video stream, though a video stream may be bound to more than one broadcast.
+     Request
+      POST https://www.googleapis.com/youtube/v3/liveBroadcasts/bind
+     @param
+     - broadcast ID
+     - stream ID
+     @return
+     - LiveBroadcastStreamModel
+     - YTError
+     */
     class func bindLiveBroadcast(broadcastId: String,
                                  liveStreamId streamId: String,
                                  completion: @escaping (Result<LiveBroadcastStreamModel, YTError>) -> Void) {
@@ -370,15 +418,25 @@ extension YTLiveRequest {
         }
     }
 }
-
-/// MARK: LiveStreams requests
-/// https://developers.google.com/youtube/v3/live/docs/liveStreams
-/// A liveStream resource contains information about the video stream that you are transmitting to YouTube.
-/// The stream provides the content that will be broadcast to YouTube users.
-/// Once created, a liveStream resource can be bound to one or more liveBroadcast resources.
+/**
+ LiveStreams requests
+ https://developers.google.com/youtube/v3/live/docs/liveStreams
+ A liveStream resource contains information about the video stream that you are transmitting to YouTube.
+ The stream provides the content that will be broadcast to YouTube users.
+ Once created, a liveStream resource can be bound to one or more liveBroadcast resources.
+ @param
+ @return
+ */
 extension YTLiveRequest {
-    /// Returns a list of video streams that match the API request parameters.
-    /// https://developers.google.com/youtube/v3/live/docs/liveStreams/list
+    /**
+     Return a list of video streams that match the API request parameters.
+      https://developers.google.com/youtube/v3/live/docs/liveStreams/list
+     @param
+     - livestream ID
+     @return
+     - LiveStreamModel
+     - YTError
+     */
     class func getLiveStream(_ liveStreamId: String, completion: @escaping (Result<LiveStreamModel, YTError>) -> Void) {
         let parameters: [String: AnyObject] = [
             "part": "id,snippet,cdn,status" as AnyObject,
@@ -419,11 +477,15 @@ extension YTLiveRequest {
             }
         }
     }
-
-    /// https://developers.google.com/youtube/v3/live/docs/liveStreams/insert
-    /// Creates a video stream. The stream enables you to send your video to YouTube,
-    /// which can then broadcast the video to your audience.
-    ///   POST https://www.googleapis.com/youtube/v3/liveStreams?part=id%2Csnippet%2Ccdn%2Cstatus&key={YOUR_API_KEY}
+    /**
+     https://developers.google.com/youtube/v3/live/docs/liveStreams/insert
+     Create a video stream. The stream enables you to send your video to YouTube,
+     which can then broadcast the video to your audience.
+     Request
+     POST https://www.googleapis.com/youtube/v3/liveStreams?part=id%2Csnippet%2Ccdn%2Cstatus&key={YOUR_API_KEY}
+     @param
+     @return
+     */
     class func createLiveStream(_ title: String,
                                 description: String,
                                 streamName: String,
@@ -475,10 +537,16 @@ extension YTLiveRequest {
             }
         }
     }
-
-    /// Deletes a video stream
-    /// Request:
-    /// DELETE https://www.googleapis.com/youtube/v3/liveStreams
+    /**
+     Delete a video stream
+     Request:
+      DELETE https://www.googleapis.com/youtube/v3/liveStreams
+     @param
+     - livestream ID
+     @return
+     - success
+     - YTError
+     */
     class func deleteLiveStream(_ liveStreamId: String, completion: @escaping (Result<Void, YTError>) -> Void) {
         let parameters: [String: AnyObject] = [
             "id": liveStreamId as AnyObject,
@@ -508,28 +576,32 @@ extension YTLiveRequest {
             }
         }
     }
-    /// Updates a video stream. If the properties that you want to change cannot be updated,
-    /// then you need to create a new stream with the proper settings.
-    /// Request:
-    /// PUT https://www.googleapis.com/youtube/v3/liveStreams
-    ///  frameRate = The frame rate of the inbound video data.
-    ///    Valid values for this property are:
-    ///     30fps
-    ///     60fps
-    ///     variable: Use this setting to indicate that YouTube should automatically detect the frame rate of your streamed video. You must also set cdn.resolution to variable.
-    ///     See the YouTube Help Center for recommended encoder settings.
-    ///  ingestionType = dash rtmp
-    ///   reslution = The resolution of the inbound video data.
-    ///    Valid values for this property are:
-    ///     240p
-    ///     360p
-    ///     480p
-    ///     720p
-    ///     1080p
-    ///     1440p
-    ///     2160p
-    ///     variable: Use this setting to indicate that YouTube should automatically detect the resolution of your streamed video. You must also set cdn.frameRate to variable.
-    ///     See the YouTube Help Center for recommended encoder settings.
+    /**
+     Update a video stream. If the properties that you want to change cannot be updated,
+     then you need to create a new stream with the proper settings.
+     Request:
+     PUT https://www.googleapis.com/youtube/v3/liveStreams
+     @param
+       - frameRate = The frame rate of the inbound video data.
+         Valid values for this property are:
+          30fps
+          60fps
+          variable: Use this setting to indicate that YouTube should automatically detect the frame rate of your streamed video. You must also set cdn.resolution to variable.
+          See the YouTube Help Center for recommended encoder settings.
+       - ingestionType = dash rtmp
+       - reslution = The resolution of the inbound video data.
+         Valid values for this property are:
+          240p
+          360p
+          480p
+          720p
+          1080p
+          1440p
+          2160p
+          variable: Use this setting to indicate that YouTube should automatically detect the resolution of your streamed video. You must also set cdn.frameRate to variable.
+          See the YouTube Help Center for recommended encoder settings.
+     @return
+     */
     class func updateLiveStream(_ liveStreamId: String,
                                 title: String,
                                 description: String,

@@ -41,7 +41,7 @@ public struct LiveBroadcastErrorModel {
 
 // MARK: - Decodable
 
-extension LiveBroadcastErrorModel: Decodable {
+extension LiveBroadcastErrorModel: Deserializable {
    public static func decode(_ json: JSON) -> LiveBroadcastErrorModel {
       let model = LiveBroadcastErrorModel(
          code: json["code"].intValue,

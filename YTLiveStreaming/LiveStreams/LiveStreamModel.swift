@@ -5,16 +5,21 @@
 //  Created by Serhii Krotkykh on 10/24/16.
 //  Copyright © 2016 Serhii Krotkykh. All rights reserved.
 //
-
 import Foundation
 import SwiftyJSON
-///
-///  Docs:
-/// https://developers.google.com/youtube/v3/live/docs/liveStreams
-///
-///   liveStreams resource.
-/// Discuss
-///   it is items filed of response GET https://www.googleapis.com/youtube/v3/liveStreams request
+
+public protocol Deserializable {
+  static func decode(_ json: JSON) -> Self
+}
+/**
+ liveStreams resource.
+ Docs:
+  https://developers.google.com/youtube/v3/live/docs/liveStreams
+ Note
+  it is the items filed of response GET https://www.googleapis.com/youtube/v3/liveStreams request
+ @param
+ @return
+ **/
 public struct LiveStreamModel {
     // The snippet object contains basic details about the stream, including its channel, title, and description.
     public struct Snipped {
@@ -95,7 +100,7 @@ public struct LiveStreamModel {
 
 // MARK: - Decode to LiveStreamModel
 
-extension LiveStreamModel: Decodable {
+extension LiveStreamModel: Deserializable {
     public static func decode(_ json: JSON) -> LiveStreamModel {
         let snippet = LiveStreamModel.Snipped.decode(json["snippet"])
         let cdn = LiveStreamModel.CDN.decode(json["cdn"])
@@ -115,7 +120,7 @@ extension LiveStreamModel: Decodable {
     }
 }
 
-extension LiveStreamModel.Snipped {
+extension LiveStreamModel.Snipped: Deserializable {
     public static func decode(_ json: JSON) -> LiveStreamModel.Snipped {
         let model = LiveStreamModel.Snipped(
             publishedAt: json["publishedAt"].stringValue,
@@ -128,7 +133,7 @@ extension LiveStreamModel.Snipped {
     }
 }
 
-extension LiveStreamModel.CDN {
+extension LiveStreamModel.CDN: Deserializable {
     public static func decode(_ json: JSON) -> LiveStreamModel.CDN {
         let ingestionInfo = LiveStreamModel.IngestionInfo.decode(json["ingestionInfo"])
         let model = LiveStreamModel.CDN(
@@ -141,7 +146,7 @@ extension LiveStreamModel.CDN {
     }
 }
 
-extension LiveStreamModel.IngestionInfo {
+extension LiveStreamModel.IngestionInfo: Deserializable {
     public static func decode(_ json: JSON) -> LiveStreamModel.IngestionInfo {
         let model = LiveStreamModel.IngestionInfo(
             streamName: json["streamName"].stringValue,
@@ -152,7 +157,7 @@ extension LiveStreamModel.IngestionInfo {
     }
 }
 
-extension LiveStreamModel.Status {
+extension LiveStreamModel.Status: Deserializable {
     public static func decode(_ json: JSON) -> LiveStreamModel.Status {
         let healthStatus = LiveStreamModel.HealthStatus.decode(json["healthStatus"])
         let model = LiveStreamModel.Status(
@@ -163,7 +168,7 @@ extension LiveStreamModel.Status {
     }
 }
 
-extension LiveStreamModel.HealthStatus {
+extension LiveStreamModel.HealthStatus: Deserializable {
     public static func decode(_ json: JSON) -> LiveStreamModel.HealthStatus {
         let configurationIssues: [LiveStreamModel.ConfigurationIssues] = []
         let model = LiveStreamModel.HealthStatus(
@@ -175,7 +180,7 @@ extension LiveStreamModel.HealthStatus {
     }
 }
 
-extension LiveStreamModel.ConfigurationIssues {
+extension LiveStreamModel.ConfigurationIssues: Deserializable {
     public static func decode(_ json: JSON) -> LiveStreamModel.ConfigurationIssues {
         let model = LiveStreamModel.ConfigurationIssues(
             type: json["type"].stringValue,
@@ -187,7 +192,7 @@ extension LiveStreamModel.ConfigurationIssues {
     }
 }
 
-extension LiveStreamModel.ContentDetails {
+extension LiveStreamModel.ContentDetails: Deserializable {
     public static func decode(_ json: JSON) -> LiveStreamModel.ContentDetails {
         let model = LiveStreamModel.ContentDetails(
             closedCaptionsIngestionUrl: json["closedCaptionsIngestionUrl"].stringValue,

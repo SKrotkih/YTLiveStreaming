@@ -5,19 +5,19 @@
 //  Created by Serhii Krotkykh on 10/24/16.
 //  Copyright © 2016 Serhii Krotkykh. All rights reserved.
 //
-
 import Foundation
 import SwiftyJSON
-
-/// Request
-///  GET https://www.googleapis.com/youtube/v3/liveStreams
-///
-/// Scope
-///  https://www.googleapis.com/auth/youtube.readonly
-///  https://www.googleapis.com/auth/youtube
-///  https://www.googleapis.com/auth/youtube.force-ssl
-///
-/// If successful, this method returns a response body with the following structure:
+/**
+  Request
+   GET https://www.googleapis.com/youtube/v3/liveStreams
+  Scope
+   https://www.googleapis.com/auth/youtube.readonly
+   https://www.googleapis.com/auth/youtube
+   https://www.googleapis.com/auth/youtube.force-ssl
+  If successful, this method returns a response body with LiveStreamListModel structure:
+ @param
+ @return
+ **/
 public struct LiveStreamListModel {
 
    public struct Item {
@@ -65,9 +65,9 @@ public struct LiveStreamListModel {
    public let items: [LiveStreamModel]
 }
 
-// MARK: - Decodable
+// MARK: - Deserialize from JSON to Object
 
-extension LiveStreamListModel: Decodable {
+extension LiveStreamListModel: Deserializable {
    public static func decode(_ json: JSON) -> LiveStreamListModel {
       var items: [LiveStreamModel] = []
       if let content = json["items"].array {

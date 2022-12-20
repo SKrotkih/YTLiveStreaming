@@ -180,6 +180,10 @@ The project was created
 11-11-2016
 
 Changes history:
+20-12-2022
+- build 0.2.29
+- update the project structure
+- add methods descriptions
 19-12-2022
 - build 0.2.28
 - up to date all data structures

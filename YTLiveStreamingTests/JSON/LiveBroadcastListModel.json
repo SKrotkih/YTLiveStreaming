@@ -10,6 +10,9 @@
                 "isDefaultBroadcast": false,
                 "publishedAt": "2016-10-16T05:04:46.000Z",
                 "scheduledStartTime": "2016-10-16T05:09:44.000Z",
+                "scheduledEndTime": "2016-10-16T05:04:46.000Z",
+                "actualStartTime": "2016-10-16T05:04:46.000Z",
+                "actualEndTime": "2016-10-16T05:04:46.000Z",
                 "thumbnails": {
                     "default": {
                         "height": 90,
@@ -33,10 +36,13 @@
             "status" : {
                 "lifeCycleStatus" : "created",
                 "recordingStatus" : "notRecording",
-                "privacyStatus" : "public"
+                "privacyStatus" : "public",
+                "madeForKids": "",
+                "selfDeclaredMadeForKids": ""
             },
             "contentDetails" : {
-                "startWithSlate" : false,
+                "boundStreamId": "0",
+                "boundStreamLastUpdateTimeMs": 0,
                 "recordFromStart" : true,
                 "closedCaptionsType" : "closedCaptionsDisabled",
                 "enableLowLatency" : false,
@@ -49,7 +55,11 @@
                     "enableMonitorStream" : true,
                     "broadcastStreamDelayMs" : 0,
                     "embedHtml" : "<iframe width=\"425\" height=\"344\" src=\"https:\/\/www.youtube.com\/embed\/sGCYiZ-ycK8?autoplay=1&livemonitor=1\" frameborder=\"0\" allowfullscreen><\/iframe>"
-                }
+                },
+                "enableLowLatency": false,
+                "latencyPreference": false,
+                "enableAutoStart": false,
+                "enableAutoStop": false
             }
         },
                 {
@@ -62,6 +72,9 @@
                 "isDefaultBroadcast": false,
                 "publishedAt": "2016-10-15T18:04:47.000Z",
                 "scheduledStartTime": "2016-10-15T18:09:46.000Z",
+                "scheduledEndTime": "2016-10-16T05:04:46.000Z",
+                "actualStartTime": "2016-10-16T05:04:46.000Z",
+                "actualEndTime": "2016-10-16T05:04:46.000Z",
                 "thumbnails": {
                     "default": {
                         "height": 90,
@@ -92,6 +105,9 @@
                 "isDefaultBroadcast": false,
                 "publishedAt": "2016-10-15T17:56:57.000Z",
                 "scheduledStartTime": "2016-10-15T18:01:24.000Z",
+                "scheduledEndTime": "2016-10-16T05:04:46.000Z",
+                "actualStartTime": "2016-10-16T05:04:46.000Z",
+                "actualEndTime": "2016-10-16T05:04:46.000Z",
                 "thumbnails": {
                     "default": {
                         "height": 90,
@@ -114,6 +130,8 @@
         }
     ],
     "kind": "youtube//liveBroadcastListResponse",
+    "nextPageToken": "0000",
+    "prevPageToken": "1111",
     "pageInfo": {
         "resultsPerPage": 5,
         "totalResults": 3

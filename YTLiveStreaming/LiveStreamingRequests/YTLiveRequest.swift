@@ -54,7 +54,7 @@ extension YTLiveRequest {
             "maxResults": LiveRequest.MaxResultObjects as AnyObject,
             "key": Credentials.APIkey as AnyObject
         ]
-        youTubeLiveVideoProvider.request(LiveStreamingAPI.listBroadcasts(parameters), completion: { result in
+        youTubeLiveVideoProvider.request(.listBroadcasts(parameters), completion: { result in
             switch result {
             case let .success(response):
                 do {
@@ -91,7 +91,7 @@ extension YTLiveRequest {
                 "id": broadcastId as AnyObject,
                 "key": Credentials.APIkey as AnyObject
             ]
-        youTubeLiveVideoProvider.request(LiveStreamingAPI.liveBroadcast(parameters)) { result in
+        youTubeLiveVideoProvider.request(.liveBroadcast(parameters)) { result in
             switch result {
             case let .success(response):
                 do {
@@ -303,7 +303,7 @@ extension YTLiveRequest {
             "part": "id,snippet,contentDetails,status" as AnyObject,
             "key": Credentials.APIkey as AnyObject
         ]
-        youTubeLiveVideoProvider.request(LiveStreamingAPI.transitionLiveBroadcast(parameters)) { result in
+        youTubeLiveVideoProvider.request(.transitionLiveBroadcast(parameters)) { result in
             switch result {
             case let .success(response):
                 do {
@@ -338,7 +338,7 @@ extension YTLiveRequest {
      @param
      - broadcast ID
      @return
-     - success
+     - success(Void)
      - YTError
      */
     class func deleteLiveBroadcast(broadcastId: String, completion: @escaping (Result<Void, YTError>) -> Void) {
@@ -346,7 +346,7 @@ extension YTLiveRequest {
             "id": broadcastId as AnyObject,
             "key": Credentials.APIkey as AnyObject
         ]
-        youTubeLiveVideoProvider.request(LiveStreamingAPI.deleteLiveBroadcast(parameters)) { result in
+        youTubeLiveVideoProvider.request(.deleteLiveBroadcast(parameters)) { result in
             switch result {
             case let .success(response):
                 do {
@@ -370,7 +370,7 @@ extension YTLiveRequest {
         }
     }
     /**
-     Binds a YouTube broadcast to a stream or removes an existing binding between a broadcast and a stream.
+     Bind a YouTube broadcast to a stream or remove an existing binding between a broadcast and a stream.
      A broadcast can only be bound to one video stream, though a video stream may be bound to more than one broadcast.
      Request
       POST https://www.googleapis.com/youtube/v3/liveBroadcasts/bind
@@ -390,7 +390,7 @@ extension YTLiveRequest {
             "part": "id,snippet,contentDetails,status" as AnyObject,
             "key": Credentials.APIkey as AnyObject
         ]
-        youTubeLiveVideoProvider.request(LiveStreamingAPI.bindLiveBroadcast(parameters)) { result in
+        youTubeLiveVideoProvider.request(.bindLiveBroadcast(parameters)) { result in
             switch result {
             case let .success(response):
                 do {
@@ -443,7 +443,7 @@ extension YTLiveRequest {
             "id": liveStreamId as AnyObject,
             "key": Credentials.APIkey as AnyObject
         ]
-        youTubeLiveVideoProvider.request(LiveStreamingAPI.liveStream(parameters)) { result in
+        youTubeLiveVideoProvider.request(.liveStream(parameters)) { result in
             switch result {
             case let .success(response):
                 do {
@@ -552,7 +552,7 @@ extension YTLiveRequest {
             "id": liveStreamId as AnyObject,
             "key": Credentials.APIkey as AnyObject
         ]
-        youTubeLiveVideoProvider.request(LiveStreamingAPI.deleteLiveStream(parameters)) { result in
+        youTubeLiveVideoProvider.request(.deleteLiveStream(parameters)) { result in
             switch result {
             case let .success(response):
                 do {
@@ -657,4 +657,47 @@ extension YTLiveRequest {
                 }
         }
     }
+}
+
+// MARK: - Error Field Parser
+
+struct LiveBroadcastErrorModel {
+    /**
+      {
+        "error" : {
+          "errors" : [
+            {
+              "domain" : "global",
+              "reason" : "required",
+              "locationType" : "header",
+              "location" : "Authorization",
+              "message" : "Login Required"
+            }
+          ],
+          "code" : 401,
+          "message" : "Login Required"
+        }
+      }
+     */
+    struct Item {
+      public let domain: String
+      public let reason: String
+      public let locationType: String
+      public let location: String
+      public let message: String
+   }
+   let code: Int?
+   let message: String?
+}
+
+// MARK: - Deserialize the error filed
+
+extension LiveBroadcastErrorModel: Deserializable {
+   static func decode(_ json: JSON) -> LiveBroadcastErrorModel {
+      let model = LiveBroadcastErrorModel(
+         code: json["code"].intValue,
+         message: json["message"].stringValue
+      )
+      return model
+   }
 }

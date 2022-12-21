@@ -5,23 +5,16 @@
 //  Created by Serhii Krotkykh on 10/28/16.
 //  Copyright © 2016 Serhii Krotkykh. All rights reserved.
 //
-
 import Foundation
 import Moya
 
-private func JSONResponseDataFormatter(_ data: Data) -> Data {
-    do {
-        let dataAsJSON = try JSONSerialization.jsonObject(with: data, options: [])
-        let prettyData =  try JSONSerialization.data(withJSONObject: dataAsJSON, options: .prettyPrinted)
-        return prettyData
-    } catch {
-        return data // fallback to original data if it cant be serialized
-    }
-}
+let youTubeLiveVideoProvider = MoyaProvider<LiveStreamingAPI>(
+    requestClosure: requestClosure, plugins: [NetworkLoggerPlugin()]
+)
 
-let requestClosure = { (endpoint: Moya.Endpoint, done: @escaping MoyaProvider<LiveStreamingAPI>.RequestResultClosure) in
+fileprivate let requestClosure = { (endpoint: Moya.Endpoint, done: @escaping MoyaProvider<LiveStreamingAPI>.RequestResultClosure) in
     GoogleOAuth2.sharedInstance.requestToken { token in
-        if let token = token {
+        if let token {
             do {
                 var request = try endpoint.urlRequest() as URLRequest
                 request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
@@ -48,10 +41,6 @@ let requestClosure = { (endpoint: Moya.Endpoint, done: @escaping MoyaProvider<Li
         }
     }
 }
-
-let youTubeLiveVideoProvider = MoyaProvider<LiveStreamingAPI>(
-    requestClosure: requestClosure, plugins: [NetworkLoggerPlugin()]
-)
 
 enum LiveStreamingAPI {
     case listBroadcasts([String: AnyObject])
@@ -105,41 +94,25 @@ extension LiveStreamingAPI: TargetType {
     }
 
     public var task: Task {
-        switch self {
-        case .listBroadcasts(let parameters):
-            return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
-        case .liveBroadcast(let parameters):
-            return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
-        case .transitionLiveBroadcast(let parameters):
-            return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
-        case .deleteLiveBroadcast(let parameters):
-            return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
-        case .bindLiveBroadcast(let parameters):
-            return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
-        case .liveStream(let parameters):
-            return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
-        case .deleteLiveStream(let parameters):
-            return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
-        }
-    }
-
-    public var parameters: [String: Any]? {
-        switch self {
-        case .listBroadcasts(let parameters):
-            return parameters
-        case .liveBroadcast(let parameters):
-            return parameters
-        case .transitionLiveBroadcast(let parameters):
-            return parameters
-        case .deleteLiveBroadcast(let parameters):
-            return parameters
-        case .bindLiveBroadcast(let parameters):
-            return parameters
-        case .liveStream(let parameters):
-            return parameters
-        case .deleteLiveStream(let parameters):
-            return parameters
-        }
+        let parameters = {
+            switch self {
+            case .listBroadcasts(let parameters):
+                return parameters
+            case .liveBroadcast(let parameters):
+                return parameters
+            case .transitionLiveBroadcast(let parameters):
+                return parameters
+            case .deleteLiveBroadcast(let parameters):
+                return parameters
+            case .bindLiveBroadcast(let parameters):
+                return parameters
+            case .liveStream(let parameters):
+                return parameters
+            case .deleteLiveStream(let parameters):
+                return parameters
+            }
+        }()
+        return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
     }
 
     public var sampleData: Data {

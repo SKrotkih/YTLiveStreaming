@@ -130,7 +130,6 @@
         }
     ],
     "kind": "youtube//liveBroadcastListResponse",
-    "nextPageToken": "0000",
     "prevPageToken": "1111",
     "pageInfo": {
         "resultsPerPage": 5,

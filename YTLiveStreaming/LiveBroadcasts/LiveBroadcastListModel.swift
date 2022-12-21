@@ -20,8 +20,8 @@ import Foundation
 public struct LiveBroadcastListModel: Codable {
     public let kind: String // "youtube#liveBroadcastListResponse"
     public let etag: String // The Etag of this resource.
-    public let nextPageToken: String    // The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
-    public let prevPageToken: String    // The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
+    public let nextPageToken: String?    // The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
+    public let prevPageToken: String?    // The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
     public let pageInfo: PageInfo
     public let items: [LiveBroadcastStreamModel]    // A list of broadcasts that match the request criteria.
 

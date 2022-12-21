@@ -160,3 +160,15 @@ public struct LiveBroadcastStreamModel: Codable {
         public let selfDeclaredMadeForKids: Bool
     }
 }
+
+/// Of the filed lifeCycleStatus values
+public enum LifiCycleStatus: String, CaseIterable {
+    case complete   // – The broadcast is finished.
+    case created    // – The broadcast has incomplete settings, so it is not ready to transition to a live or testing status, but it has been created and is otherwise valid.
+    case live       // – The broadcast is active.
+    case liveStarting // – The broadcast is in the process of transitioning to live status.
+    case ready      // – The broadcast settings are complete and the broadcast can transition to a live or testing status.
+    case revoked    // – This broadcast was removed by an admin action.
+    case testStarting // – The broadcast is in the process of transitioning to testing status.
+    case testing    // – The broadcast is only visible to the partner.
+}

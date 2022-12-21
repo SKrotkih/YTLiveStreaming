@@ -29,10 +29,10 @@ public struct LiveBroadcastStreamModel: Codable {
         public let description: String      // The broadcast's description. As with the title, you can set this field by modifying the broadcast resource or by setting the description field of the corresponding video resource.
         public let isDefaultBroadcast: Bool // This property will be deprecated on or after September 1, 2020. At that time, YouTube will stop creating a default stream and default broadcast when a channel is enabled for live streaming. Please see the deprecation announcement for more details.
         private var _publishedAt: String    // The date and time that the broadcast was added to YouTube's live broadcast schedule. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
-        private var _scheduledStartTime: String // The date and time that the broadcast is scheduled to start. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format. Creator Studio supports the ability to create a broadcast without scheduling a start time. In this case, the broadcast starts whenever the channel owner starts streaming. For these broadcasts, the datetime value corresponds to UNIX time zero, and this value cannot be changed via the API or in Creator Studio.
-        private var _scheduledEndTime: String   // The date and time that the broadcast is scheduled to end. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format. If a liveBroadcast resource does not specify a value for this property, then the broadcast is scheduled to continue indefinitely. Similarly, if you do not specify a value for this property, then YouTube treats the broadcast as if it will go on indefinitely.
-        private var _actualStartTime: String    // The date and time that the broadcast actually started. This information is only available once the broadcast's state is live. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
-        private var _actualEndTime: String      // The date and time that the broadcast actually ended. This information is only available once the broadcast's state is complete. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
+        private var _scheduledStartTime: String? // The date and time that the broadcast is scheduled to start. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format. Creator Studio supports the ability to create a broadcast without scheduling a start time. In this case, the broadcast starts whenever the channel owner starts streaming. For these broadcasts, the datetime value corresponds to UNIX time zero, and this value cannot be changed via the API or in Creator Studio.
+        private var _scheduledEndTime: String?   // The date and time that the broadcast is scheduled to end. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format. If a liveBroadcast resource does not specify a value for this property, then the broadcast is scheduled to continue indefinitely. Similarly, if you do not specify a value for this property, then YouTube treats the broadcast as if it will go on indefinitely.
+        private var _actualStartTime: String?    // The date and time that the broadcast actually started. This information is only available once the broadcast's state is live. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
+        private var _actualEndTime: String?      // The date and time that the broadcast actually ended. This information is only available once the broadcast's state is complete. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
         public let thumbnails: Thumbnails   // A map of thumbnail images associated with the broadcast. For each nested object in this object, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.
         public var title: String            // The broadcast's title. Note that the broadcast represents exactly one YouTube video. You can set this field by modifying the broadcast resource or by setting the title field of the corresponding video resource.
         public let liveChatId: String?  // The ID for the broadcast's YouTube live chat. With this ID, you can use the liveChatMessage resource's methods to retrieve, insert, or delete chat messages. You can also add or remove chat moderators, ban users from participating in live chats, or remove existing bans
@@ -54,40 +54,53 @@ public struct LiveBroadcastStreamModel: Codable {
         public var publishedAt: Date {
             return convertJSONtoDate(date: _publishedAt) ?? Date()
         }
-
-        public var scheduledStartTime: Date {
+        
+        public var scheduledStartTime: Date? {
             get {
-                return convertJSONtoDate(date: _scheduledStartTime) ?? Date()
+                getDate(for: _scheduledStartTime)
             }
             set {
-                _scheduledStartTime = newValue.toJSONformat()
+                _scheduledStartTime = setDate(for: newValue)
             }
         }
 
-        public var scheduledEndTime: Date {
+        public var scheduledEndTime: Date? {
             get {
-                return convertJSONtoDate(date: _scheduledStartTime) ?? Date()
+                getDate(for: _scheduledEndTime)
             }
             set {
-                _scheduledStartTime = newValue.toJSONformat()
+                _scheduledStartTime = setDate(for: newValue)
             }
         }
 
-        public var actualStartTime: Date {
+        public var actualStartTime: Date? {
             get {
-                return convertJSONtoDate(date: _actualStartTime) ?? Date()
+                getDate(for: _actualStartTime)
             }
             set {
-                _actualStartTime = newValue.toJSONformat()
+                _actualStartTime = setDate(for: newValue)
             }
         }
 
-        public var actualEndTime: Date {
+        public var actualEndTime: Date? {
             get {
-                return convertJSONtoDate(date: _actualEndTime) ?? Date()
+                getDate(for: _actualEndTime)
             }
             set {
-                _actualEndTime = newValue.toJSONformat()
+                _actualEndTime = setDate(for: newValue)
+            }
+        }
+
+        private func getDate(for value: String?) -> Date? {
+            guard let value else { return nil }
+            return convertJSONtoDate(date: value)
+        }
+
+        private func setDate(for value: Date?) -> String? {
+            if let value {
+                return value.toJSONformat()
+            } else {
+                return nil
             }
         }
     }

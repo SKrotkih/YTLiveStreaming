@@ -201,7 +201,7 @@ extension YTLiveStreaming {
                         case .success(let liveStream):
                             let streamName = liveStream.cdn.ingestionInfo.streamName
                             let streamUrl = liveStream.cdn.ingestionInfo.ingestionAddress
-                            let scheduledStartTime = liveBroadcast.snippet.scheduledStartTime
+                            let scheduledStartTime = liveBroadcast.snippet.scheduledStartTime ?? Date()
 
                             let sreamId = liveStream.id
                             let monitorStream = liveBroadcast.contentDetails?.monitorStream.embedHtml ?? ""
@@ -404,7 +404,7 @@ extension YTLiveStreaming {
             completion(sortedItems)
         } else {
             let sortedItems = items.sorted(by: {
-                $0.snippet.scheduledStartTime.compare($1.snippet.scheduledStartTime) == ComparisonResult.orderedDescending
+                $0.snippet.scheduledStartTime?.compare($1.snippet.scheduledStartTime ?? Date()) == ComparisonResult.orderedDescending
             })
             completion(sortedItems)
         }

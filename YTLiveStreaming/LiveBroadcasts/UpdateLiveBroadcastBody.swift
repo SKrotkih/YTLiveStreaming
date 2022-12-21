@@ -53,16 +53,16 @@ struct UpdateLiveBroadcastBody: Codable {
     struct Snipped: Codable {
         var title: String
         var description: String
-        var scheduledStartTime: String
-        var scheduledEndTime: String
+        var scheduledStartTime: String?
+        var scheduledEndTime: String?
         var status: Status?
         var contentDetails: ContentDetails?
 
         init(broadcast: LiveBroadcastStreamModel) {
             title = broadcast.snippet.title
             description = broadcast.snippet.description
-            scheduledStartTime = broadcast.snippet.scheduledStartTime.toJSONformat()
-            scheduledEndTime = broadcast.snippet.scheduledEndTime.toJSONformat()
+            scheduledStartTime = broadcast.snippet.scheduledStartTime?.toJSONformat()
+            scheduledEndTime = broadcast.snippet.scheduledEndTime?.toJSONformat()
             if let broadcastStatus = broadcast.status {
                 status = Status(privacyStatus: broadcastStatus.privacyStatus)
             }

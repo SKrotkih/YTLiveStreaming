@@ -38,11 +38,20 @@ extension Date {
 }
 
 func convertJSONtoDate(date: String) -> Date? {
-    // "2020-10-06T06:29:30Z",
-    let formatter = DateFormatter()
-    formatter.locale = Locale(identifier: "en_US_POSIX")
-    formatter.timeZone = TimeZone(secondsFromGMT: 0)
-    formatter.calendar = Calendar(identifier: .iso8601)
-    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.sssZ"
-    return formatter.date(from: date)
+    func formatDate(_ date: String, format: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.dateFormat = format
+        return formatter.date(from: date)
+    }
+    if let _date = formatDate(date, format: "yyyy-MM-dd'T'HH:mm:ss.sssZ") {
+        // "2020-10-06T06:29:30.000Z",
+        return _date
+    } else if let _date = formatDate(date, format: "yyyy-MM-dd'T'HH:mm:ssZ") {
+        // "2020-10-06T06:29:30Z",
+        return _date
+    }
+    return nil
 }

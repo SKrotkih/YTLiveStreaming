@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
-        "revision" : "354dda32d89fc8cd4f5c46487f64957d355f53d8",
-        "version" : "5.6.1"
+        "revision" : "78424be314842833c04bc3bef5b72e85fff99204",
+        "version" : "5.6.4"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Moya/Moya.git",
       "state" : {
-        "revision" : "9b906860e3c3c09032879465c471e6375829593f",
-        "version" : "15.0.0"
+        "revision" : "c263811c1f3dbf002be9bd83107f7cdc38992b26",
+        "version" : "15.0.3"
       }
     },
     {

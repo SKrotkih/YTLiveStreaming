@@ -37,8 +37,8 @@
                 "lifeCycleStatus" : "created",
                 "recordingStatus" : "notRecording",
                 "privacyStatus" : "public",
-                "madeForKids": "",
-                "selfDeclaredMadeForKids": ""
+                "madeForKids": false,
+                "selfDeclaredMadeForKids": false
             },
             "contentDetails" : {
                 "boundStreamId": "0",

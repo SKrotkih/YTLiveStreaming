@@ -156,7 +156,7 @@ public struct LiveBroadcastStreamModel: Codable {
         public let lifeCycleStatus: String
         public var privacyStatus: String
         public let recordingStatus: String
-        public let madeForKids: String?
-        public let selfDeclaredMadeForKids: String?
+        public let madeForKids: Bool
+        public let selfDeclaredMadeForKids: Bool
     }
 }

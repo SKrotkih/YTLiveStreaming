@@ -193,4 +193,22 @@ public struct PostLiveBroadcastBody {
     let broadcastStreamDelayMs: Int // contentDetails.monitorStream.broadcastStreamDelayMs
     let privacyStatus: String       // status.privacyStatus ("public"
     let isReusable: Bool            // For LiveStream insert used. Indicates whether the stream is reusable, which means that it can be bound to multiple broadcasts. It is common for broadcasters to reuse the same stream for many different broadcasts if those broadcasts occur at different times.
+
+    public init(title: String, startDateTime: Date, description: String, endDateTime: Date, selfDeclaredMadeForKids: String, enableAutoStart: Bool, enableAutoStop: Bool, enableClosedCaptions: Bool, enableDvr: Bool, enableEmbed: Bool, recordFromStart: Bool, enableMonitorStream: Bool, broadcastStreamDelayMs: Int, privacyStatus: String, isReusable: Bool) {
+        self.title = title
+        self.startDateTime = startDateTime
+        self.description = description
+        self.endDateTime = endDateTime
+        self.selfDeclaredMadeForKids = selfDeclaredMadeForKids
+        self.enableAutoStart = enableAutoStart
+        self.enableAutoStop = enableAutoStop
+        self.enableClosedCaptions = enableClosedCaptions
+        self.enableDvr = enableDvr
+        self.enableEmbed = enableEmbed
+        self.recordFromStart = recordFromStart
+        self.enableMonitorStream = enableMonitorStream
+        self.broadcastStreamDelayMs = broadcastStreamDelayMs
+        self.privacyStatus = privacyStatus
+        self.isReusable = isReusable
+    }
 }

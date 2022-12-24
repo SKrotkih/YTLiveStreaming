@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.summary      = "YTLiveStreaming is an YouTube Live Streaming Framework"
   s.requires_arc = true
 
-  s.version      = "0.2.28"
+  s.version      = "0.2.36"
 
   # Initialize
   # Check podspec
@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   # git push -u origin master
 
   # Make for new version:
-  # 1. git tag 0.2.28
+  # 1. git tag 0.2.35
   # 2. git push -u origin master --tags
   # 3. pod spec lint YTLiveStreaming.podspec --allow-warnings
   # Push podspec with the new version info

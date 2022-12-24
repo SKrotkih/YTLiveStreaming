@@ -180,6 +180,9 @@ The project was created
 11-11-2016
 
 Changes history:
+24.12.2022
+- build 0.2.36
+- create new public structure PostLiveBroadcastBody as insert broadcast request body
 20-12-2022
 - build 0.2.29
 - update the project structure

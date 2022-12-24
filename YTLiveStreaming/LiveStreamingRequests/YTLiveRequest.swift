@@ -141,38 +141,14 @@ extension YTLiveRequest {
      - LiveBroadcastStreamModel
      - YTError
      */
-    class func createLiveBroadcast(_ title: String,
-                                   startDateTime: Date,
-                                   description: String,
-                                   endDateTime: Date,
-                                   selfDeclaredMadeForKids: String,
-                                   enableAutoStart: Bool,
-                                   enableAutoStop: Bool,
-                                   enableClosedCaptions: Bool,
-                                   enableDvr: Bool,
-                                   enableEmbed: Bool,
-                                   recordFromStart: Bool,
-                                   enableMonitorStream: Bool,
-                                   broadcastStreamDelayMs: Int,
+    class func createLiveBroadcast(body: PostLiveBroadcastBody,
                                    completion: @escaping (Result<LiveBroadcastStreamModel, YTError>) -> Void) {
         getHeaders { headers in
             guard let headers = headers else {
                 completion(.failure(.message("OAuth token is not presented")))
                 return
             }
-            let jsonBody = CreateLiveBroadcastBody(title: title,
-                                                   description: description,
-                                                   startDateTime: startDateTime,
-                                                   endDateTime: endDateTime,
-                                                   selfDeclaredMadeForKids: selfDeclaredMadeForKids,
-                                                   enableAutoStart: enableAutoStart,
-                                                   enableAutoStop: enableAutoStop,
-                                                   enableClosedCaptions: enableClosedCaptions,
-                                                   enableDvr: enableDvr,
-                                                   enableEmbed: enableEmbed,
-                                                   recordFromStart: recordFromStart,
-                                                   enableMonitorStream: enableMonitorStream,
-                                                   broadcastStreamDelayMs: broadcastStreamDelayMs)
+            let jsonBody = CreateLiveBroadcastBody(body: body)
             guard let jsonData = try? JSONEncoder().encode(jsonBody),
                   let jsonString = String(data: jsonData, encoding: .utf8) else {
                 completion(.failure(.message("Failed while preparing request")))

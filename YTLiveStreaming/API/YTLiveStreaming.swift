@@ -105,44 +105,19 @@ extension YTLiveStreaming {
      - broadcastStreamDelayMs:
      @return
      */
-    public func createBroadcast(_ title: String,
-                                description: String?,
-                                startTime: Date,
-                                isReusable: Bool,
-                                endDateTime: Date,
-                                selfDeclaredMadeForKids: String,
-                                enableAutoStart: Bool,
-                                enableAutoStop: Bool,
-                                enableClosedCaptions: Bool,
-                                enableDvr: Bool,
-                                enableEmbed: Bool,
-                                recordFromStart: Bool,
-                                enableMonitorStream: Bool,
-                                broadcastStreamDelayMs: Int,
+    public func createBroadcast(_ body: PostLiveBroadcastBody,
                                 completion: @escaping (Result<LiveBroadcastStreamModel, YTError>) -> Void) {
-        let liveStreamDescription = description ?? "This stream was created by the YTLiveStreaming iOS framework"
+        let liveStreamDescription = body.description.isEmpty ? "This stream was created by the YTLiveStreaming iOS framework" : body.description
         let liveStreamName = "YTLiveStreaming"
-        YTLiveRequest.createLiveBroadcast(title,
-                                          startDateTime: startTime,
-                                          description: liveStreamDescription,
-                                          endDateTime: endDateTime,
-                                          selfDeclaredMadeForKids: selfDeclaredMadeForKids,
-                                          enableAutoStart: enableAutoStart,
-                                          enableAutoStop: enableAutoStop,
-                                          enableClosedCaptions: enableClosedCaptions,
-                                          enableDvr: enableDvr,
-                                          enableEmbed: enableEmbed,
-                                          recordFromStart: recordFromStart,
-                                          enableMonitorStream: enableMonitorStream,
-                                          broadcastStreamDelayMs: broadcastStreamDelayMs) { result in
+        YTLiveRequest.createLiveBroadcast(body: body) { result in
             switch result {
             case .success(let liveBroadcast):
                 // Create Live stream
                 YTLiveRequest.createLiveStream(
-                    title,
+                    body.title,
                     description: liveStreamDescription,
                     streamName: liveStreamName,
-                    isReusable: isReusable
+                    isReusable: body.isReusable
                 ) { result in
                     switch result {
                     case .success(let liveStream):

@@ -172,3 +172,25 @@ public enum LifiCycleStatus: String, CaseIterable {
     case testStarting // – The broadcast is in the process of transitioning to testing status.
     case testing    // – The broadcast is only visible to the partner.
 }
+/**
+ Insert Broadcast  HTTP request  POST https://www.googleapis.com/youtube/v3/liveBroadcasts body
+ @param
+ @return
+ **/
+public struct PostLiveBroadcastBody {
+    let title: String               // snippet.title
+    let startDateTime: Date         // snippet.scheduledStartTime
+    let description: String         // snippet.description
+    let endDateTime: Date           // snippet.scheduledEndTime
+    let selfDeclaredMadeForKids: String // status.selfDeclaredMadeForKids
+    let enableAutoStart: Bool       // contentDetails.enableAutoStart
+    let enableAutoStop: Bool        // contentDetails.enableAutoStop
+    let enableClosedCaptions: Bool  // contentDetails.enableClosedCaptions
+    let enableDvr: Bool             // contentDetails.enableDvr
+    let enableEmbed: Bool           // contentDetails.enableEmbed
+    let recordFromStart: Bool       // contentDetails.recordFromStart
+    let enableMonitorStream: Bool   // contentDetails.monitorStream.enableMonitorStream
+    let broadcastStreamDelayMs: Int // contentDetails.monitorStream.broadcastStreamDelayMs
+    let privacyStatus: String       // status.privacyStatus ("public"
+    let isReusable: Bool            // For LiveStream insert used. Indicates whether the stream is reusable, which means that it can be bound to multiple broadcasts. It is common for broadcasters to reuse the same stream for many different broadcasts if those broadcasts occur at different times.
+}

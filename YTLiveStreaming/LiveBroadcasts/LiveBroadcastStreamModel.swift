@@ -179,9 +179,9 @@ public enum LifiCycleStatus: String, CaseIterable {
  **/
 public struct PostLiveBroadcastBody {
     let title: String               // snippet.title
-    let startDateTime: Date         // snippet.scheduledStartTime
     let description: String         // snippet.description
-    let endDateTime: Date           // snippet.scheduledEndTime
+    let scheduledStartTime: Date    // snippet.scheduledStartTime
+    let scheduledEndTime: Date      // snippet.scheduledEndTime
     let selfDeclaredMadeForKids: String // status.selfDeclaredMadeForKids
     let enableAutoStart: Bool       // contentDetails.enableAutoStart
     let enableAutoStop: Bool        // contentDetails.enableAutoStop
@@ -194,11 +194,11 @@ public struct PostLiveBroadcastBody {
     let privacyStatus: String       // status.privacyStatus ("public"
     let isReusable: Bool            // For LiveStream insert used. Indicates whether the stream is reusable, which means that it can be bound to multiple broadcasts. It is common for broadcasters to reuse the same stream for many different broadcasts if those broadcasts occur at different times.
 
-    public init(title: String, startDateTime: Date, description: String, endDateTime: Date, selfDeclaredMadeForKids: String, enableAutoStart: Bool, enableAutoStop: Bool, enableClosedCaptions: Bool, enableDvr: Bool, enableEmbed: Bool, recordFromStart: Bool, enableMonitorStream: Bool, broadcastStreamDelayMs: Int, privacyStatus: String, isReusable: Bool) {
+    public init(title: String, scheduledStartTime: Date, description: String, scheduledEndTime: Date, selfDeclaredMadeForKids: String, enableAutoStart: Bool, enableAutoStop: Bool, enableClosedCaptions: Bool, enableDvr: Bool, enableEmbed: Bool, recordFromStart: Bool, enableMonitorStream: Bool, broadcastStreamDelayMs: Int, privacyStatus: String, isReusable: Bool) {
         self.title = title
-        self.startDateTime = startDateTime
+        self.scheduledStartTime = scheduledStartTime
         self.description = description
-        self.endDateTime = endDateTime
+        self.scheduledEndTime = scheduledEndTime
         self.selfDeclaredMadeForKids = selfDeclaredMadeForKids
         self.enableAutoStart = enableAutoStart
         self.enableAutoStop = enableAutoStop

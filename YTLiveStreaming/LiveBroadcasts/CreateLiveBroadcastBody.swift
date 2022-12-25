@@ -33,11 +33,11 @@ struct CreateLiveBroadcastBody: Codable {
         var scheduledStartTime: String
         var scheduledEndTime: String
 
-        init(title: String, description: String, startDateTime: Date, endDateTime: Date) {
+        init(title: String, description: String, scheduledStartTime: Date, scheduledEndTime: Date) {
             self.title = title
             self.description = description
-            scheduledStartTime = startDateTime.toJSONformat()
-            scheduledEndTime = endDateTime.toJSONformat()
+            self.scheduledStartTime = scheduledStartTime.toJSONformat()
+            self.scheduledEndTime = scheduledEndTime.toJSONformat()
         }
     }
 
@@ -78,7 +78,7 @@ struct CreateLiveBroadcastBody: Codable {
     let contentDetails: ContentDetails
     
     init(body: PostLiveBroadcastBody) {
-        snippet = Snipped(title: body.title, description: body.description, startDateTime: body.startDateTime, endDateTime: body.endDateTime)
+        snippet = Snipped(title: body.title, description: body.description, scheduledStartTime: body.scheduledStartTime, scheduledEndTime: body.scheduledEndTime)
         status = Status(privacyStatus: body.privacyStatus, selfDeclaredMadeForKids: body.selfDeclaredMadeForKids)
         contentDetails = ContentDetails(enableAutoStart: body.enableAutoStart,
                                         enableAutoStop: body.enableAutoStop,

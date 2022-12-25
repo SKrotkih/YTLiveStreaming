@@ -182,7 +182,7 @@ public struct PostLiveBroadcastBody {
     let description: String         // snippet.description
     let scheduledStartTime: Date    // snippet.scheduledStartTime
     let scheduledEndTime: Date      // snippet.scheduledEndTime
-    let selfDeclaredMadeForKids: String // status.selfDeclaredMadeForKids
+    let selfDeclaredMadeForKids: Bool // status.selfDeclaredMadeForKids
     let enableAutoStart: Bool       // contentDetails.enableAutoStart
     let enableAutoStop: Bool        // contentDetails.enableAutoStop
     let enableClosedCaptions: Bool  // contentDetails.enableClosedCaptions
@@ -194,7 +194,7 @@ public struct PostLiveBroadcastBody {
     let privacyStatus: String       // status.privacyStatus ("public"
     let isReusable: Bool            // For LiveStream insert used. Indicates whether the stream is reusable, which means that it can be bound to multiple broadcasts. It is common for broadcasters to reuse the same stream for many different broadcasts if those broadcasts occur at different times.
 
-    public init(title: String, scheduledStartTime: Date, description: String, scheduledEndTime: Date, selfDeclaredMadeForKids: String, enableAutoStart: Bool, enableAutoStop: Bool, enableClosedCaptions: Bool, enableDvr: Bool, enableEmbed: Bool, recordFromStart: Bool, enableMonitorStream: Bool, broadcastStreamDelayMs: Int, privacyStatus: String, isReusable: Bool) {
+    public init(title: String, scheduledStartTime: Date, description: String, scheduledEndTime: Date, selfDeclaredMadeForKids: Bool, enableAutoStart: Bool, enableAutoStop: Bool, enableClosedCaptions: Bool, enableDvr: Bool, enableEmbed: Bool, recordFromStart: Bool, enableMonitorStream: Bool, broadcastStreamDelayMs: Int, privacyStatus: String, isReusable: Bool) {
         self.title = title
         self.scheduledStartTime = scheduledStartTime
         self.description = description

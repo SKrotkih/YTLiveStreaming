@@ -24,7 +24,7 @@ import Foundation
 struct CreateLiveBroadcastBody: Codable {
     struct Status: Codable {
         var privacyStatus: String
-        var selfDeclaredMadeForKids: String
+        var selfDeclaredMadeForKids: Bool
     }
 
     struct Snipped: Codable {

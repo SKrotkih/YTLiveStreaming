@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.summary      = "YTLiveStreaming is an YouTube Live Streaming Framework"
   s.requires_arc = true
 
-  s.version      = "0.2.38"
+  s.version      = "0.2.39"
 
   # Initialize
   # Check podspec

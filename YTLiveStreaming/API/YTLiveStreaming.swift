@@ -52,27 +52,31 @@ extension YTLiveStreaming {
      @return
      */
     public func getAllBroadcasts(
-        _ completion: @escaping ([LiveBroadcastStreamModel]?, [LiveBroadcastStreamModel]?, [LiveBroadcastStreamModel]?
-        ) -> Void) {
+        _ completion: @escaping ([LiveBroadcastStreamModel], [LiveBroadcastStreamModel], [LiveBroadcastStreamModel]
+        ) -> Void) throws {
         Task {
-            let broadcastList = await getBroadcastListAsync()
-            var streamsReady = [LiveBroadcastStreamModel]()
-            var streamsLive = [LiveBroadcastStreamModel]()
-            var streamsComplete = [LiveBroadcastStreamModel]()
-            for listItem in broadcastList {
-                let lifeCycleStatus = listItem.status?.lifeCycleStatus ?? "complete"
-                switch lifeCycleStatus {
-                case "ready":
-                    streamsReady.append(listItem)
-                case "live":
-                    streamsLive.append(listItem)
-                case "complete":
-                    streamsComplete.append(listItem)
-                default:
-                    break
+            do {
+                let broadcastList = try await getBroadcastListAsync()
+                var streamsReady = [LiveBroadcastStreamModel]()
+                var streamsLive = [LiveBroadcastStreamModel]()
+                var streamsComplete = [LiveBroadcastStreamModel]()
+                for listItem in broadcastList {
+                    let lifeCycleStatus = listItem.status?.lifeCycleStatus ?? "complete"
+                    switch lifeCycleStatus {
+                    case "ready":
+                        streamsReady.append(listItem)
+                    case "live":
+                        streamsLive.append(listItem)
+                    case "complete":
+                        streamsComplete.append(listItem)
+                    default:
+                        break
+                    }
                 }
+                completion(streamsReady, streamsLive, streamsComplete)
+            } catch {
+                throw error
             }
-            completion(streamsReady, streamsLive, streamsComplete)
         }
     }
     /**
@@ -81,21 +85,26 @@ extension YTLiveStreaming {
      @return
       [LiveBroadcastStreamModel]
      */
-    public func getBroadcastListAsync() async -> [LiveBroadcastStreamModel] {
-        let _broadcastList = await withUnsafeContinuation { continuation in
+    public func getBroadcastListAsync() async throws -> [LiveBroadcastStreamModel] {
+        let result: Result<[LiveBroadcastStreamModel], YTError> = await withUnsafeContinuation { continuation in
             YTLiveRequest.listBroadcasts(.all) { result in
                 switch result {
                 case .success(let broadcasts):
                     self.fillList(broadcasts, completion: { streams in
-                        continuation.resume(returning: streams)
+                        continuation.resume(returning: .success(streams))
                     })
                 case .failure(let error):
                     print(error.message())
-                    continuation.resume(returning: [])
+                    continuation.resume(returning: .failure(error))
                 }
             }
         }
-        return _broadcastList
+        switch result {
+        case .success(let broadcastList):
+            return broadcastList
+        case .failure(let error):
+            throw error
+        }
     }
     /**
      Create a New Broadcast

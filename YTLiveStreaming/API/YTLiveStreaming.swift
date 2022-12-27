@@ -54,40 +54,51 @@ extension YTLiveStreaming {
     public func getAllBroadcasts(
         _ completion: @escaping ([LiveBroadcastStreamModel]?, [LiveBroadcastStreamModel]?, [LiveBroadcastStreamModel]?
         ) -> Void) {
-        YTLiveRequest.listBroadcasts(.all) { result in
-            switch result {
-            case .success(let broadcasts):
-                self.fillList(broadcasts, completion: { streams in
-                    if let streams = streams {
-                        var streamsReady = [LiveBroadcastStreamModel]()
-                        var streamsLive = [LiveBroadcastStreamModel]()
-                        var streamsComplete = [LiveBroadcastStreamModel]()
-                        for item in streams {
-                            let lifeCycleStatus = item.status?.lifeCycleStatus ?? "complete"
-                            switch lifeCycleStatus {
-                            case "ready":
-                                streamsReady.append(item)
-                            case "live":
-                                streamsLive.append(item)
-                            case "complete":
-                                streamsComplete.append(item)
-                            default:
-                                break
-                            }
-                        }
-                        completion(streamsReady, streamsLive, streamsComplete)
-                    } else {
-                        completion(nil, nil, nil)
-                    }
-                })
-            case .failure(let error):
-                print(error.message())
-                completion(nil, nil, nil)
+        Task {
+            let broadcastList = await getBroadcastListAsync()
+            var streamsReady = [LiveBroadcastStreamModel]()
+            var streamsLive = [LiveBroadcastStreamModel]()
+            var streamsComplete = [LiveBroadcastStreamModel]()
+            for listItem in broadcastList {
+                let lifeCycleStatus = listItem.status?.lifeCycleStatus ?? "complete"
+                switch lifeCycleStatus {
+                case "ready":
+                    streamsReady.append(listItem)
+                case "live":
+                    streamsLive.append(listItem)
+                case "complete":
+                    streamsComplete.append(listItem)
+                default:
+                    break
+                }
             }
+            completion(streamsReady, streamsLive, streamsComplete)
         }
     }
     /**
-     Create New Broadcast
+     Returns Broadcast List
+     @param
+     @return
+      [LiveBroadcastStreamModel]
+     */
+    public func getBroadcastListAsync() async -> [LiveBroadcastStreamModel] {
+        let _broadcastList = await withUnsafeContinuation { continuation in
+            YTLiveRequest.listBroadcasts(.all) { result in
+                switch result {
+                case .success(let broadcasts):
+                    self.fillList(broadcasts, completion: { streams in
+                        continuation.resume(returning: streams)
+                    })
+                case .failure(let error):
+                    print(error.message())
+                    continuation.resume(returning: [])
+                }
+            }
+        }
+        return _broadcastList
+    }
+    /**
+     Create a New Broadcast
      @param
      - title: The broadcast's title. Note that the broadcast represents exactly one YouTube video. You can set this field by modifying the broadcast resource or by setting the title field of the corresponding video resource.
       - description: The broadcast's description. As with the title, you can set this field by modifying the broadcast resource or by setting the description field of the corresponding video resource.
@@ -277,7 +288,9 @@ extension YTLiveStreaming {
         return _deletedIDs.count == broadcastIDs.count
     }
     /**
+     Delete broadcast by ID
      @param
+      id: Broadcast ID
      @return
      */
     public func deleteBroadcast(id: String, completion: @escaping ((Result<Void, YTError>)) -> Void) {
@@ -405,11 +418,7 @@ extension YTLiveStreaming {
             switch result {
             case .success(let broadcasts):
                 self.fillList(broadcasts) { list in
-                    if let list = list {
-                        completion(.success(list))
-                    } else {
-                        completion(.failure(.message("Parse error")))
-                    }
+                    completion(.success(list))
                 }
             case .failure(let error):
                 completion(.failure(error))
@@ -418,7 +427,7 @@ extension YTLiveStreaming {
     }
 
     fileprivate func fillList(
-        _ broadcasts: LiveBroadcastListModel, completion: ([LiveBroadcastStreamModel]?) -> Void
+        _ broadcasts: LiveBroadcastListModel, completion: ([LiveBroadcastStreamModel]) -> Void
     ) {
         let items = broadcasts.items
         if kOrderByPublishedAt {

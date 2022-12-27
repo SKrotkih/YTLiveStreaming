@@ -85,6 +85,9 @@ To integrate YTLiveStreaming package using Apple's Swift package manager
 
 	...
 
+    // Get broadcasts list
+    let broadcastList = await input.getBroadcastListAsync()
+
 	// Get all events in different arrays of the LiveBroadcastStreamModel type
 	input.getAllBroadcasts(){ (upcomingEvents, liveNowEvents, completedEvents) in
 	   ...
@@ -191,6 +194,7 @@ The project was created
 
 Changes history:
 27.12.2022
+- added async function to get broadcasts list
 - added async functions for deleting broadcasts 
 24.12.2022
 - build 0.2.36

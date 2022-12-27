@@ -150,7 +150,17 @@ To integrate YTLiveStreaming package using Apple's Swift package manager
 	   }
 	})
 
-	// Delete broadcast video from YouTube
+	// Delete all broadcast from the USER's account
+    if await input.deleteAllBroadcastsAsync() {
+        // all broadcasts are deleted
+    }
+    
+    // Delete broadcasts by IDs
+    if await input.deleteBroadcastsAsync(broadcastIDs) {
+        // all broadcasts by IDs are deleted
+    }
+    
+    // Delete broadcast by ID   
 	input.deleteBroadcast(id: broadcastId, completion: { success in
 	    if success {
 	       ...
@@ -180,6 +190,8 @@ The project was created
 11-11-2016
 
 Changes history:
+27.12.2022
+- added async functions for deleting broadcasts 
 24.12.2022
 - build 0.2.36
 - create new public structure PostLiveBroadcastBody as insert broadcast request body

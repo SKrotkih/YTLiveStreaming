@@ -329,19 +329,18 @@ extension YTLiveRequest {
                     let json = try JSON(data: response.data)
                     let error = LiveBroadcastErrorModel.decode(json["error"])
                     if let code = error.code, code > 0 {
-                        completion(.failure(.message("Failed of deleting broadcast: " + error.message!)))
+                        completion(.failure(.YTMessage(.deleteBroadcast, "\(code): \(error.message ?? "")")))
                     } else {
-                        // print("Broadcast deleted: \(json)")
                         completion(.success(Void()))
                     }
                 } catch {
                     let message = "Parsing data error: \(error.localizedDescription)"
-                    completion(.failure(.message(message)))
+                    completion(.failure(.YTMessage(.deleteBroadcast, "\(message)")))
                 }
             case let .failure(error):
                 let code = error.errorCode
                 let message = error.errorDescription ?? error.localizedDescription
-                completion(.failure(.systemMessage(code, message)))
+                completion(.failure(.YTMessage(.deleteBroadcast, "\(code): \(message)")))
             }
         }
     }

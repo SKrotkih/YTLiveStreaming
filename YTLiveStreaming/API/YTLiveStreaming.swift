@@ -222,18 +222,67 @@ extension YTLiveStreaming {
         }
     }
     /**
+     deleteAllBroadcastsAsync - async function deleting all broadcasts from the Ussr's account
+     @param
+     @return
+        true if all broadcasts were deleted successfully. No error thrown.
+     */
+    public func deleteAllBroadcastsAsync() async -> Bool {
+        let broadcastIDs: [String] = await withUnsafeContinuation { continuation in
+            YTLiveRequest.listBroadcasts(.all, completion: { result in
+                switch result {
+                case .success(let broadcastList):
+                    let broadcastIDs = broadcastList.items.map { $0.id }
+                    continuation.resume(returning: broadcastIDs)
+                case .failure(let error):
+                    print(error.message())
+                    return continuation.resume(returning: [])
+                }
+            })
+        }
+        return await deleteBroadcastsAsync(broadcastIDs)
+    }
+    /**
+     deleteBroadcasts - async function deleting broadcasts by IDs
+     @param
+        broadcastsIDs - array of IDs which broadcasts will be deleted
+     @return
+        true if all broadcasts were deleted successfully
+     */
+    public func deleteBroadcastsAsync(_ broadcastIDs: [String]) async -> Bool {
+        let _deletedIDs = await withTaskGroup(of: [String].self,
+                                              returning: [String].self,
+                                              body: { taskGroup in
+            broadcastIDs.forEach { broadcastID in
+                taskGroup.addTask {
+                    let result = await withUnsafeContinuation { continuation in
+                        self.deleteBroadcast(id: broadcastID) { result in
+                            continuation.resume(returning: result)
+                        }
+                    }
+                    switch result {
+                    case .success():
+                        return [broadcastID]
+                    default:
+                        return []
+                    }
+                }
+            }
+            var _deletedIDs = [String]()
+            for await ids in taskGroup {
+                _deletedIDs.append(contentsOf: ids)
+            }
+            return _deletedIDs
+        })
+        return _deletedIDs.count == broadcastIDs.count
+    }
+    /**
      @param
      @return
      */
-    public func deleteBroadcast(id: String, completion: @escaping (Bool) -> Void) {
+    public func deleteBroadcast(id: String, completion: @escaping ((Result<Void, YTError>)) -> Void) {
         YTLiveRequest.deleteLiveBroadcast(broadcastId: id) { result in
-            switch result {
-            case .success:
-                completion(true)
-            case .failure(let error):
-                print(error.message)
-                completion(false)
-            }
+            completion(result)
         }
     }
     /**
@@ -382,36 +431,6 @@ extension YTLiveStreaming {
                 $0.snippet.scheduledStartTime?.compare($1.snippet.scheduledStartTime ?? Date()) == ComparisonResult.orderedDescending
             })
             completion(sortedItems)
-        }
-    }
-
-    fileprivate func deleteAllBroadcasts(_ completion: @escaping (Bool) -> Void) {
-        YTLiveRequest.listBroadcasts(.all, completion: { result in
-            switch result {
-            case .success(let broadcastList):
-                let items = broadcastList.items
-                self.deleteBroadcast(items, index: 0, completion: completion)
-            case .failure(let error):
-                print(error.message())
-                completion(false)
-            }
-        })
-    }
-
-    fileprivate func deleteBroadcast(_ items: [LiveBroadcastStreamModel],
-                                     index: Int,
-                                     completion: @escaping (Bool) -> Void) {
-        if index < items.count {
-            let item = items[index]
-            let broadcastId = item.id
-            self.deleteBroadcast(id: broadcastId, completion: { success in
-                if success {
-                    print("Broadcast \"\(broadcastId)\" deleted!")
-                }
-                self.deleteBroadcast(items, index: index + 1, completion: completion)
-            })
-        } else {
-            completion(true)
         }
     }
 }

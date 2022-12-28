@@ -178,8 +178,11 @@ public enum LifiCycleStatus: String, CaseIterable {
  @return
  **/
 public struct PostLiveBroadcastBody {
+    // The broadcast's title. Note that the broadcast represents exactly one YouTube video. You can set this field by modifying the broadcast resource or by setting the title field of the corresponding video resource.
     let title: String               // snippet.title
+    // The broadcast's description. As with the title, you can set this field by modifying the broadcast resource or by setting the description field of the corresponding video resource.
     let description: String         // snippet.description
+    // The date and time that the broadcast is scheduled to start. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format. Creator Studio supports the ability to create a broadcast without scheduling a start time. In this case, the broadcast starts whenever the channel owner starts streaming. For these broadcasts, the datetime value corresponds to UNIX time zero, and this value cannot be changed via the API or in Creator Studio.
     let scheduledStartTime: Date    // snippet.scheduledStartTime
     let scheduledEndTime: Date      // snippet.scheduledEndTime
     let selfDeclaredMadeForKids: Bool // status.selfDeclaredMadeForKids

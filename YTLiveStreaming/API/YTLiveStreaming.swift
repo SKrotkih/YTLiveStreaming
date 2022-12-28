@@ -28,26 +28,24 @@ extension YTLiveStreaming {
      @return
      */
     public func getUpcomingBroadcasts(_ completion: @escaping (Result<[LiveBroadcastStreamModel], YTError>) -> Void) {
-        print("+\(#function)")
-        getBroadcastList(.upcoming, completion)
+        getBroadcastListSync(.upcoming, completion: completion)
     }
     /**
      @param
      @return
      */
     public func getLiveNowBroadcasts(_ completion: @escaping (Result<[LiveBroadcastStreamModel], YTError>) -> Void) {
-        print("+\(#function)")
-        getBroadcastList(.active, completion)
+        getBroadcastListSync(.active, completion: completion)
     }
     /**
      @param
      @return
      */
     public func getCompletedBroadcasts(_ completion: @escaping (Result<[LiveBroadcastStreamModel], YTError>) -> Void) {
-        print("+\(#function)")
-        getBroadcastList(.completed, completion)
+        getBroadcastListSync(.completed, completion: completion)
     }
     /**
+     Deprecated
      @param
      @return
      */
@@ -56,7 +54,7 @@ extension YTLiveStreaming {
         ) -> Void) throws {
         Task {
             do {
-                let broadcastList = try await getBroadcastListAsync()
+                let broadcastList = try await getBroadcastListAsync(.all)
                 var streamsReady = [LiveBroadcastStreamModel]()
                 var streamsLive = [LiveBroadcastStreamModel]()
                 var streamsComplete = [LiveBroadcastStreamModel]()
@@ -85,16 +83,25 @@ extension YTLiveStreaming {
      @return
       [LiveBroadcastStreamModel]
      */
-    public func getBroadcastListAsync() async throws -> [LiveBroadcastStreamModel] {
+    public func getBroadcastListAsync(_ status: YTLiveVideoState) async throws -> [LiveBroadcastStreamModel] {
         let result: Result<[LiveBroadcastStreamModel], YTError> = await withUnsafeContinuation { continuation in
-            YTLiveRequest.listBroadcasts(.all) { result in
+            YTLiveRequest.listBroadcasts(status) { result in
                 switch result {
                 case .success(let broadcasts):
-                    self.fillList(broadcasts, completion: { streams in
-                        continuation.resume(returning: .success(streams))
-                    })
+                    // sort items either published or scheduled date
+                    let items = broadcasts.items
+                    if kOrderByPublishedAt {
+                        let sortedItems = items.sorted(by: {
+                            $0.snippet.publishedAt.compare($1.snippet.publishedAt) == ComparisonResult.orderedDescending
+                        })
+                        continuation.resume(returning: .success(sortedItems))
+                    } else {
+                        let sortedItems = items.sorted(by: {
+                            $0.snippet.scheduledStartTime?.compare($1.snippet.scheduledStartTime ?? Date()) == ComparisonResult.orderedDescending
+                        })
+                        continuation.resume(returning: .success(sortedItems))
+                    }
                 case .failure(let error):
-                    print(error.message())
                     continuation.resume(returning: .failure(error))
                 }
             }
@@ -109,26 +116,32 @@ extension YTLiveStreaming {
     /**
      Create a New Broadcast
      @param
-     - title: The broadcast's title. Note that the broadcast represents exactly one YouTube video. You can set this field by modifying the broadcast resource or by setting the title field of the corresponding video resource.
-      - description: The broadcast's description. As with the title, you can set this field by modifying the broadcast resource or by setting the description field of the corresponding video resource.
-     - startTime: The date and time that the broadcast is scheduled to start. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format. Creator Studio supports the ability to create a broadcast without scheduling a start time. In this case, the broadcast starts whenever the channel owner starts streaming. For these broadcasts, the datetime value corresponds to UNIX time zero, and this value cannot be changed via the API or in Creator Studio.
-     - isReusable: Indicates whether the stream is reusable, which means that it can be bound to multiple broadcasts. It is common for broadcasters to reuse the same stream for many different broadcasts if those broadcasts occur at different times.
-     - endDateTime:
-     - selfDeclaredMadeForKids:
-     - enableAutoStart:
-     - enableAutoStop:
-     - enableClosedCaptions:
-     - enableDvr:
-     - enableEmbed:
-     - recordFromStart:
-     - enableMonitorStream:
-     - broadcastStreamDelayMs:
+      body: PostLiveBroadcastBody
      @return
      */
+    public func createBroadcastAsync(_ body: PostLiveBroadcastBody) async throws -> LiveBroadcastStreamModel {
+        let result: Result<LiveBroadcastStreamModel, YTError> = await withUnsafeContinuation { continuation in
+            createBroadcast(body) { result in
+                switch result {
+                case .success(let broadcast):
+                    continuation.resume(returning: .success(broadcast))
+                case .failure(let error):
+                    continuation.resume(returning: .failure(error))
+                }
+            }
+        }
+        switch result {
+        case .success(let broadcastList):
+            return broadcastList
+        case .failure(let error):
+            throw error
+        }
+    }
+    
     public func createBroadcast(_ body: PostLiveBroadcastBody,
+                                liveStreamName: String = "YTLiveStreaming",
                                 completion: @escaping (Result<LiveBroadcastStreamModel, YTError>) -> Void) {
         let liveStreamDescription = body.description.isEmpty ? "This stream was created by the YTLiveStreaming iOS framework" : body.description
-        let liveStreamName = "YTLiveStreaming"
         YTLiveRequest.createLiveBroadcast(body: body) { result in
             switch result {
             case .success(let liveBroadcast):
@@ -164,6 +177,7 @@ extension YTLiveStreaming {
         }
     }
     /**
+     Update Broadcast
      @param
      @return
      */
@@ -247,19 +261,9 @@ extension YTLiveStreaming {
      @return
         true if all broadcasts were deleted successfully. No error thrown.
      */
-    public func deleteAllBroadcastsAsync() async -> Bool {
-        let broadcastIDs: [String] = await withUnsafeContinuation { continuation in
-            YTLiveRequest.listBroadcasts(.all, completion: { result in
-                switch result {
-                case .success(let broadcastList):
-                    let broadcastIDs = broadcastList.items.map { $0.id }
-                    continuation.resume(returning: broadcastIDs)
-                case .failure(let error):
-                    print(error.message())
-                    return continuation.resume(returning: [])
-                }
-            })
-        }
+    public func deleteAllBroadcastsAsync() async throws -> Bool {
+        let broadcastList = try await getBroadcastListAsync(.all)
+        let broadcastIDs = broadcastList.map { $0.id }
         return await deleteBroadcastsAsync(broadcastIDs)
     }
     /**
@@ -420,35 +424,15 @@ extension YTLiveStreaming {
 // MARK: Private methods
 
 extension YTLiveStreaming {
-    fileprivate func getBroadcastList(
-        _ status: YTLiveVideoState, _ completion: @escaping (Result<[LiveBroadcastStreamModel], YTError>) -> Void
-    ) {
-        YTLiveRequest.listBroadcasts(status) { result in
-            switch result {
-            case .success(let broadcasts):
-                self.fillList(broadcasts) { list in
-                    completion(.success(list))
-                }
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
 
-    fileprivate func fillList(
-        _ broadcasts: LiveBroadcastListModel, completion: ([LiveBroadcastStreamModel]) -> Void
-    ) {
-        let items = broadcasts.items
-        if kOrderByPublishedAt {
-            let sortedItems = items.sorted(by: {
-                $0.snippet.publishedAt.compare($1.snippet.publishedAt) == ComparisonResult.orderedDescending
-            })
-            completion(sortedItems)
-        } else {
-            let sortedItems = items.sorted(by: {
-                $0.snippet.scheduledStartTime?.compare($1.snippet.scheduledStartTime ?? Date()) == ComparisonResult.orderedDescending
-            })
-            completion(sortedItems)
+    private func getBroadcastListSync(_ status: YTLiveVideoState, completion:  @escaping (Result<[LiveBroadcastStreamModel], YTError>) -> Void) {
+        Task {
+            do {
+                let broadcastList = try await getBroadcastListAsync(status)
+                completion(.success(broadcastList))
+            } catch {
+                completion(.failure(error as! YTError))
+            }
         }
     }
 }

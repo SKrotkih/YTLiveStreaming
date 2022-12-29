@@ -314,38 +314,45 @@ extension YTLiveRequest {
      @param
      - broadcast ID
      @return
-     - success(Void)
-     - YTError
+     - throws YTError
      */
-    class func deleteLiveBroadcast(broadcastId: String, completion: @escaping (Result<Void, YTError>) -> Void) {
+    class func deleteLiveBroadcast(broadcastId: String) async throws {
         let parameters: [String: AnyObject] = [
             "id": broadcastId as AnyObject,
             "key": Credentials.APIkey as AnyObject
         ]
-        youTubeLiveVideoProvider.request(.deleteLiveBroadcast(parameters)) { result in
-            switch result {
-            case let .success(response):
-                do {
-                    let json = try JSON(data: response.data)
-                    let error = LiveBroadcastErrorModel.decode(json["error"])
-                    if let code = error.code, code > 0 {
-                        completion(.failure(.YTMessage(.deleteBroadcast, "\(code): \(error.message ?? "")")))
-                    } else {
-                        completion(.success(Void()))
+        let result: Result<Void, YTError> = await withUnsafeContinuation { continuation in
+            youTubeLiveVideoProvider.request(.deleteLiveBroadcast(parameters)) { result in
+                switch result {
+                case let .success(response):
+                    do {
+                        let json = try JSON(data: response.data)
+                        let error = LiveBroadcastErrorModel.decode(json["error"])
+                        if let code = error.code, code > 0 {
+                            continuation.resume(returning: .failure(.YTMessage(.deleteBroadcast, "\(code): \(error.message ?? "")")))
+                        } else {
+                            continuation.resume(returning: .success(Void()))
+                        }
+                    } catch {
+                        let message = "Parsing data error: \(error.localizedDescription)"
+                        continuation.resume(returning: .failure(.YTMessage(.deleteBroadcast, "\(message)")))
                     }
-                } catch {
-                    let message = "Parsing data error: \(error.localizedDescription)"
-                    completion(.failure(.YTMessage(.deleteBroadcast, "\(message)")))
+                case let .failure(error):
+                    let code = error.errorCode
+                    let message = error.errorDescription ?? error.localizedDescription
+                    continuation.resume(returning: .failure(.YTMessage(.deleteBroadcast, "\(code): \(message)")))
                 }
-            case let .failure(error):
-                let code = error.errorCode
-                let message = error.errorDescription ?? error.localizedDescription
-                completion(.failure(.YTMessage(.deleteBroadcast, "\(code): \(message)")))
             }
+        }
+        switch result {
+        case .success:
+            return
+        case .failure(let error):
+            throw error
         }
     }
     /**
-     Bind a YouTube broadcast to a stream or remove an existing binding between a broadcast and a stream.
+     Bind a YouTube broadcast to a stream or remove an existing one.
      A broadcast can only be bound to one video stream, though a video stream may be bound to more than one broadcast.
      Request
       POST https://www.googleapis.com/youtube/v3/liveBroadcasts/bind

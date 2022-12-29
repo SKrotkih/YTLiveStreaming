@@ -259,46 +259,44 @@ extension YTLiveStreaming {
      deleteAllBroadcastsAsync - async function deleting all broadcasts from the Ussr's account
      @param
      @return
-        true if all broadcasts were deleted successfully. No error thrown.
+     - throws YTError
      */
-    public func deleteAllBroadcastsAsync() async throws -> Bool {
+    public func deleteAllBroadcastsAsync() async throws {
         let broadcastList = try await getBroadcastListAsync(.all)
         let broadcastIDs = broadcastList.map { $0.id }
-        return await deleteBroadcastsAsync(broadcastIDs)
+        try await deleteBroadcastsAsync(broadcastIDs)
     }
     /**
      deleteBroadcasts - async function deleting broadcasts by IDs
      @param
-        broadcastsIDs - array of IDs which broadcasts will be deleted
+        broadcastsIDs - array of IDs broadcasts will be deleted
      @return
         true if all broadcasts were deleted successfully
      */
-    public func deleteBroadcastsAsync(_ broadcastIDs: [String]) async -> Bool {
-        let _deletedIDs = await withTaskGroup(of: [String].self,
-                                              returning: [String].self,
-                                              body: { taskGroup in
-            broadcastIDs.forEach { broadcastID in
+    public func deleteBroadcastsAsync(_ broadcastIDs: [String]) async throws {
+        let _deletedIDs = try await withThrowingTaskGroup(of: [String].self,
+                                                          returning: [String].self,
+                                                          body: { taskGroup in
+            for broadcastID in broadcastIDs {
                 taskGroup.addTask {
-                    let result = await withUnsafeContinuation { continuation in
-                        self.deleteBroadcast(id: broadcastID) { result in
-                            continuation.resume(returning: result)
-                        }
-                    }
-                    switch result {
-                    case .success():
+                    do {
+                        try await self.deleteBroadcast(id: broadcastID)
                         return [broadcastID]
-                    default:
-                        return []
+                    }
+                    catch {
+                        throw error
                     }
                 }
             }
             var _deletedIDs = [String]()
-            for await ids in taskGroup {
+            for try await ids in taskGroup {
                 _deletedIDs.append(contentsOf: ids)
             }
             return _deletedIDs
         })
-        return _deletedIDs.count == broadcastIDs.count
+        if _deletedIDs.count != broadcastIDs.count {
+            throw YTError.YTMessage(.deleteBroadcast, "Unexpected Error")
+        }
     }
     /**
      Delete broadcast by ID
@@ -306,10 +304,8 @@ extension YTLiveStreaming {
       id: Broadcast ID
      @return
      */
-    public func deleteBroadcast(id: String, completion: @escaping ((Result<Void, YTError>)) -> Void) {
-        YTLiveRequest.deleteLiveBroadcast(broadcastId: id) { result in
-            completion(result)
-        }
+    public func deleteBroadcast(id: String) async throws {
+        try await YTLiveRequest.deleteLiveBroadcast(broadcastId: id)
     }
     /**
      @param

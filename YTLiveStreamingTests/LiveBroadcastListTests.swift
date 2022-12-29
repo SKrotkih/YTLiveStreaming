@@ -10,19 +10,19 @@ import XCTest
 
 class LiveBroadcastListTestCase: XCTestCase {
 
-    fileprivate var broiadCastListDataProvider: BroadcastListMockDataProvider!
+    fileprivate var broadcastListDataProvider: BroadcastListMockDataProvider!
 
     // MARK: - Class Setup and Teardown
 
     override func setUp() {
         super.setUp()
-        broiadCastListDataProvider = BroadcastListMockDataProvider()
+        broadcastListDataProvider = BroadcastListMockDataProvider()
     }
 
     // MARK: - Live Broadcasts Section
 
     func testLiveBroadcastList() {
-        if let model =  broiadCastListDataProvider.getBroadcastList() {
+        if let model =  broadcastListDataProvider.getBroadcastList() {
             XCTAssertEqual(model.items.count, 3)
         }
     }

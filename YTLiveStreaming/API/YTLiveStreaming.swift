@@ -28,21 +28,21 @@ extension YTLiveStreaming {
      @return
      */
     public func getUpcomingBroadcasts(_ completion: @escaping (Result<[LiveBroadcastStreamModel], YTError>) -> Void) {
-        getBroadcastListSync(.upcoming, completion: completion)
+        getBroadcastList(.upcoming, completion: completion)
     }
     /**
      @param
      @return
      */
     public func getLiveNowBroadcasts(_ completion: @escaping (Result<[LiveBroadcastStreamModel], YTError>) -> Void) {
-        getBroadcastListSync(.active, completion: completion)
+        getBroadcastList(.active, completion: completion)
     }
     /**
      @param
      @return
      */
     public func getCompletedBroadcasts(_ completion: @escaping (Result<[LiveBroadcastStreamModel], YTError>) -> Void) {
-        getBroadcastListSync(.completed, completion: completion)
+        getBroadcastList(.completed, completion: completion)
     }
     /**
      Deprecated
@@ -177,83 +177,129 @@ extension YTLiveStreaming {
         }
     }
     /**
-     Update Broadcast
+     Deprecated: Update Broadcast
      @param
      @return
      */
     public func updateBroadcast(_ broadcast: LiveBroadcastStreamModel, completion: @escaping (Bool) -> Void) {
-        YTLiveRequest.updateLiveBroadcast(broadcast) { result in
-            switch result {
-            case .success:
+        Task {
+            do {
+                try await updateBroadcastAsync(broadcast)
                 completion(true)
-            case .failure(let error):
-                print(error.message())
+            }
+            catch {
+                print(error.localizedDescription)
                 completion(false)
             }
         }
     }
     /**
+     Update Broadcast
+     @param
+     @return
+     */
+    public func updateBroadcastAsync(_ broadcast: LiveBroadcastStreamModel) async throws {
+        let result: Result<Void, YTError> = await withUnsafeContinuation { continuation in
+            YTLiveRequest.updateLiveBroadcast(broadcast) { result in
+                continuation.resume(returning: result)
+            }
+        }
+        switch result {
+        case .success:
+            return
+        case .failure(let error):
+            throw error
+        }
+    }
+    /**
+     Deprecated. Please use async version
      @param
      @return
      */
     public func startBroadcast(_ broadcast: LiveBroadcastStreamModel,
                                delegate: LiveStreamTransitioning,
                                completion: @escaping (String?, String?, Date?) -> Void) {
-        let broadcastId = broadcast.id
-        let liveStreamId = broadcast.contentDetails?.boundStreamId ?? ""
-        if !broadcastId.isEmpty && !liveStreamId.isEmpty {
-            YTLiveRequest.getLiveBroadcast(broadcastId: broadcastId) { result in
-                switch result {
-                case .success(let liveBroadcast):
-                    YTLiveRequest.getLiveStream(liveStreamId, completion: { result in
-                        switch result {
-                        case .success(let liveStream):
-                            let streamName = liveStream.cdn.ingestionInfo.streamName
-                            let streamUrl = liveStream.cdn.ingestionInfo.ingestionAddress
-                            let scheduledStartTime = liveBroadcast.snippet.scheduledStartTime ?? Date()
-
-                            let sreamId = liveStream.id
-                            let monitorStream = liveBroadcast.contentDetails?.monitorStream.embedHtml ?? ""
-                            let streamTitle = liveStream.snipped.title
-
-                            print("\n-BroadcastId=\(liveBroadcast.id);\n-Live stream id=\(sreamId); \n-title=\(streamTitle); \n-start=\(scheduledStartTime); \n-STREAM_URL=\(streamUrl)/STREAM_NAME=\(streamName): created!\n-MONITOR_STREAM=\(monitorStream)\n")
-
-                            LiveLauncher.sharedInstance.youTubeWorker = self
-                            LiveLauncher.sharedInstance.delegate = delegate
-                            LiveLauncher.sharedInstance.launchBroadcast(broadcast: broadcast, stream: liveStream)
-                            completion(streamName, streamUrl, scheduledStartTime)
-                        case .failure(let error):
-                            print(error.message())
-                            completion(nil, nil, nil)
-                        }
-                    })
-                case .failure(let error):
-                    print(error.message())
-                    print("Please xheck broadcast.youtubeId. It has to contain broadcast Id and live stream Id")
-                    completion(nil, nil, nil)
-                }
+        Task {
+            do {
+                let result = try await startBroadcastAsync(broadcast, delegate: delegate)
+                completion(result.0, result.1, result.2)
             }
-        } else {
-            print("Please check broadcast.youtubeId. It has to contain broadcast Id and live stream Id")
-            completion(nil, nil, nil)
+            catch {
+                completion(nil, nil, nil)
+            }
         }
     }
     /**
      @param
      @return
      */
+    public func startBroadcastAsync(_ broadcast: LiveBroadcastStreamModel,
+                                    delegate: LiveStreamTransitioning) async throws -> (String?, String?, Date?) {
+        let broadcastId = broadcast.id
+        let liveStreamId = broadcast.contentDetails?.boundStreamId ?? ""
+        if !broadcastId.isEmpty && !liveStreamId.isEmpty {
+            let result: Result<(String?, String?, Date?), YTError> = await withUnsafeContinuation { continuation in
+                YTLiveRequest.getLiveBroadcast(broadcastId: broadcastId) { result in
+                    switch result {
+                    case .success(let liveBroadcast):
+                        YTLiveRequest.getLiveStream(liveStreamId, completion: { result in
+                            switch result {
+                            case .success(let liveStream):
+                                let streamName = liveStream.cdn.ingestionInfo.streamName
+                                let streamUrl = liveStream.cdn.ingestionInfo.ingestionAddress
+                                let scheduledStartTime = liveBroadcast.snippet.scheduledStartTime ?? Date()
+                                LiveLauncher.sharedInstance.youTubeWorker = self
+                                LiveLauncher.sharedInstance.delegate = delegate
+                                LiveLauncher.sharedInstance.launchBroadcast(broadcast: broadcast, stream: liveStream)
+                                continuation.resume(returning: .success((streamName, streamUrl, scheduledStartTime)))
+                            case .failure(let error):
+                                continuation.resume(returning: .failure(error))
+                            }
+                        })
+                    case .failure(let error):
+                        let _error: YTError = .message("\(error.message())/nPlease xheck broadcast.youtubeId. It has to contain broadcast Id and live stream Id")
+                        continuation.resume(returning: .failure(_error))
+                    }
+                }
+            }
+            switch result {
+            case .success(let streamInfo):
+                return streamInfo
+            case .failure(let error):
+                throw error
+            }
+        } else {
+            let _error: YTError = .message("Please check broadcast.youtubeId. It has to contain broadcast Id and live stream Id")
+            throw _error
+        }
+    }
+    /**
+     Deprecated
+     @param
+     @return
+     */
     public func completeBroadcast(_ broadcast: LiveBroadcastStreamModel, completion: @escaping (Bool) -> Void) {
         LiveLauncher.sharedInstance.stopBroadcast()
-        // complete – The broadcast is over. YouTube stops transmitting video.
-        YTLiveRequest.transitionLiveBroadcast(broadcast.id, broadcastStatus: "complete") { result in
-            switch result {
-            case .success:
+        Task {
+            do {
+                // complete – The broadcast is over. YouTube stops transmitting video.
+                try await self.completeBroadcastAsync(broadcast)
                 completion(true)
-            case .failure(let error):
-                print(error.message())
+            }
+            catch {
+                print(error.localizedDescription)
                 completion(false)
             }
         }
+    }
+    /**
+     @param
+     @return
+     */
+    public func completeBroadcastAsync(_ broadcast: LiveBroadcastStreamModel) async throws {
+        LiveLauncher.sharedInstance.stopBroadcast()
+        // complete – The broadcast is over. YouTube stops transmitting video.
+        try await YTLiveRequest.transitionLiveBroadcastAsync(broadcast.id, broadcastStatus: "complete")
     }
     /**
      deleteAllBroadcastsAsync - async function deleting all broadcasts from the Ussr's account
@@ -308,6 +354,7 @@ extension YTLiveStreaming {
         try await YTLiveRequest.deleteLiveBroadcast(broadcastId: id)
     }
     /**
+     Deprecated. Please use async version
      @param
      @return
      */
@@ -318,13 +365,14 @@ extension YTLiveStreaming {
         // live – The broadcast is visible to its audience. YouTube transmits video to the broadcast's
         // monitor stream and its broadcast stream.
         // testing – Start testing the broadcast. YouTube transmits video to the broadcast's monitor stream.
-        YTLiveRequest.transitionLiveBroadcast(broadcast.id, broadcastStatus: toStatus) { result in
-            switch result {
-            case .success:
-                print("Our broadcast in the \(toStatus) status!")
+        Task {
+            do {
+                try await YTLiveRequest.transitionLiveBroadcastAsync(broadcast.id, broadcastStatus: toStatus)
+                print("The broadcast transitioned to \(toStatus) status!")
                 completion(true)
-            case .failure(let error):
-                print(error.message)
+            }
+            catch {
+                print(error.localizedDescription)
                 completion(false)
             }
         }
@@ -421,7 +469,7 @@ extension YTLiveStreaming {
 
 extension YTLiveStreaming {
 
-    private func getBroadcastListSync(_ status: YTLiveVideoState, completion:  @escaping (Result<[LiveBroadcastStreamModel], YTError>) -> Void) {
+    private func getBroadcastList(_ status: YTLiveVideoState, completion:  @escaping (Result<[LiveBroadcastStreamModel], YTError>) -> Void) {
         Task {
             do {
                 let broadcastList = try await getBroadcastListAsync(status)

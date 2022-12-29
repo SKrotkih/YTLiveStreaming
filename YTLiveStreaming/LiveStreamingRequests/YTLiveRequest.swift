@@ -269,42 +269,47 @@ extension YTLiveRequest {
      - LiveBroadcastStreamModel
      - YTError
      */
-    class func transitionLiveBroadcast(_ boadcastId: String,
-                                       broadcastStatus: String,
-                                       completion: @escaping (Result<LiveBroadcastStreamModel, YTError>) -> Void) {
-
+    class func transitionLiveBroadcastAsync(_ boadcastId: String, broadcastStatus: String) async throws {
         let parameters: [String: AnyObject] = [
             "id": boadcastId as AnyObject,
             "broadcastStatus": broadcastStatus as AnyObject,
             "part": "id,snippet,contentDetails,status" as AnyObject,
             "key": Credentials.APIkey as AnyObject
         ]
-        youTubeLiveVideoProvider.request(.transitionLiveBroadcast(parameters)) { result in
-            switch result {
-            case let .success(response):
-                do {
-                    let json = try JSON(data: response.data)
-                    let error = json["error"]
-                    let message = error["message"].stringValue
-                    if !message.isEmpty {
-                        // print("Error while Youtube broadcast transition", message: message)
-                        let text = "FAILED TRANSITION TO THE \(broadcastStatus) STATUS [\(message)]!"
-                        completion(.failure(.message(text)))
-                    } else {
-                        // print(json)
-                        let decoder = JSONDecoder()
-                        let liveBroadcast = try decoder.decode(LiveBroadcastStreamModel.self, from: response.data)
-                        completion(.success(liveBroadcast))
+        let result: Result<LiveBroadcastStreamModel, YTError> = await withUnsafeContinuation { continuation in
+            youTubeLiveVideoProvider.request(.transitionLiveBroadcast(parameters)) { result in
+                switch result {
+                case let .success(response):
+                    do {
+                        let json = try JSON(data: response.data)
+                        let error = json["error"]
+                        let message = error["message"].stringValue
+                        if !message.isEmpty {
+                            // print("Error while Youtube broadcast transition", message: message)
+                            let text = "FAILED TRANSITION TO THE \(broadcastStatus) STATUS [\(message)]!"
+                            continuation.resume(returning: .failure(.message(text)))
+                        } else {
+                            // print(json)
+                            let decoder = JSONDecoder()
+                            let liveBroadcast = try decoder.decode(LiveBroadcastStreamModel.self, from: response.data)
+                                continuation.resume(returning: .success(liveBroadcast))
+                        }
+                    } catch {
+                        let message = "Parsing data error: \(error.localizedDescription)"
+                        continuation.resume(returning: .failure(.message(message)))
                     }
-                } catch {
-                    let message = "Parsing data error: \(error.localizedDescription)"
-                    completion(.failure(.message(message)))
+                case let .failure(error):
+                    let code = error.errorCode
+                    let message = error.errorDescription ?? error.localizedDescription
+                    continuation.resume(returning: .failure(.systemMessage(code, message)))
                 }
-            case let .failure(error):
-                let code = error.errorCode
-                let message = error.errorDescription ?? error.localizedDescription
-                completion(.failure(.systemMessage(code, message)))
             }
+        }
+        switch result {
+        case .success:
+            return
+        case .failure(let error):
+            throw error
         }
     }
     /**

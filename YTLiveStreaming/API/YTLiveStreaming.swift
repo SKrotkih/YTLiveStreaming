@@ -150,6 +150,9 @@ extension YTLiveStreaming {
                     body.title,
                     description: liveStreamDescription,
                     streamName: liveStreamName,
+                    frameRate: body.frameRate,
+                    ingestionType: body.ingestionType,
+                    resolution: body.resolution,
                     isReusable: body.isReusable
                 ) { result in
                     switch result {

@@ -132,7 +132,7 @@ public struct LiveBroadcastStreamModel: Codable {
 
     public struct ContentDetails: Codable {
         public let boundStreamId: String?
-        public let boundStreamLastUpdateTimeMs: Int
+        private var _boundStreamLastUpdateTimeMs: String?    // The date and time that the live stream referenced by boundStreamId was last updated. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
         public let monitorStream: MonitorStream
         public let enableEmbed: Bool
         public let enableDvr: Bool
@@ -141,9 +141,31 @@ public struct LiveBroadcastStreamModel: Codable {
         public let closedCaptionsType: String
         public let projection: String
         public let enableLowLatency: Bool
-        public let latencyPreference: Bool
+        public let latencyPreference: String
         public let enableAutoStart: Bool
         public let enableAutoStop: Bool
+        
+        public var boundStreamLastUpdateTimeMs: Date? {
+            get {
+                getDate(for: _boundStreamLastUpdateTimeMs)
+            }
+            set {
+                _boundStreamLastUpdateTimeMs = setDate(for: newValue)
+            }
+        }
+        
+        private func getDate(for value: String?) -> Date? {
+            guard let value else { return nil }
+            return convertJSONtoDate(date: value)
+        }
+
+        private func setDate(for value: Date?) -> String? {
+            if let value {
+                return value.toJSONformat()
+            } else {
+                return nil
+            }
+        }
     }
 
     public struct MonitorStream: Codable {
@@ -156,7 +178,7 @@ public struct LiveBroadcastStreamModel: Codable {
         public let lifeCycleStatus: String
         public var privacyStatus: String
         public let recordingStatus: String
-        public let madeForKids: Bool
+        public let madeForKids: Bool?
         public let selfDeclaredMadeForKids: Bool
     }
 }
@@ -195,9 +217,13 @@ public struct PostLiveBroadcastBody {
     let enableMonitorStream: Bool   // contentDetails.monitorStream.enableMonitorStream
     let broadcastStreamDelayMs: Int // contentDetails.monitorStream.broadcastStreamDelayMs
     let privacyStatus: String       // status.privacyStatus ("public"
+    let frameRate: String?          // For LiveStream insert used. cdn.frameRate
+    let ingestionType: String?      // For LiveStream insert used. cdn.ingestionType
+    let resolution: String?         // For LiveStream insert used. cdn.resolution
     let isReusable: Bool            // For LiveStream insert used. Indicates whether the stream is reusable, which means that it can be bound to multiple broadcasts. It is common for broadcasters to reuse the same stream for many different broadcasts if those broadcasts occur at different times.
 
-    public init(title: String, scheduledStartTime: Date, description: String, scheduledEndTime: Date, selfDeclaredMadeForKids: Bool, enableAutoStart: Bool, enableAutoStop: Bool, enableClosedCaptions: Bool, enableDvr: Bool, enableEmbed: Bool, recordFromStart: Bool, enableMonitorStream: Bool, broadcastStreamDelayMs: Int, privacyStatus: String, isReusable: Bool) {
+    public init(title: String, scheduledStartTime: Date, description: String, scheduledEndTime: Date, selfDeclaredMadeForKids: Bool, enableAutoStart: Bool, enableAutoStop: Bool, enableClosedCaptions: Bool, enableDvr: Bool, enableEmbed: Bool, recordFromStart: Bool, enableMonitorStream: Bool, broadcastStreamDelayMs: Int, privacyStatus: String,
+                frameRate: String? = nil, ingestionType: String? = nil, resolution: String? = nil, isReusable: Bool) {
         self.title = title
         self.scheduledStartTime = scheduledStartTime
         self.description = description
@@ -212,6 +238,9 @@ public struct PostLiveBroadcastBody {
         self.enableMonitorStream = enableMonitorStream
         self.broadcastStreamDelayMs = broadcastStreamDelayMs
         self.privacyStatus = privacyStatus
+        self.frameRate = frameRate
+        self.ingestionType = ingestionType
+        self.resolution = resolution
         self.isReusable = isReusable
     }
 }

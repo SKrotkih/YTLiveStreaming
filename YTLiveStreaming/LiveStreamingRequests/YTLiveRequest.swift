@@ -476,6 +476,9 @@ extension YTLiveRequest {
     class func createLiveStream(_ title: String,
                                 description: String,
                                 streamName: String,
+                                frameRate: String? = nil,
+                                ingestionType: String? = nil,
+                                resolution: String? = nil,
                                 isReusable: Bool,
                                 completion: @escaping (Result<LiveStreamModel, YTError>) -> Void) {
         getHeaders { headers in
@@ -483,14 +486,16 @@ extension YTLiveRequest {
                 completion(.failure(.message("OAuth token is not presented")))
                 return
             }
-            let jsonBody = CreateLiveStreamBody(title: title, description: description, streamName: streamName, isReusable: isReusable)
+            let jsonBody = CreateLiveStreamBody(title: title, description: description, streamName: streamName,
+                                                frameRate: frameRate, ingestionType: ingestionType, resolution: resolution,
+                                                isReusable: isReusable)
             guard let jsonData = try? JSONEncoder().encode(jsonBody),
                   let jsonString = String(data: jsonData, encoding: .utf8) else {
                 completion(.failure(.message("Failed while preparing request")))
                 return
             }
             let encoder = JSONBodyStringEncoding(jsonBody: jsonString)
-            let url = "\(LiveAPI.BaseURL)/liveStreams?part=id,snippet,cdn,status&key=\(Credentials.APIkey)"
+            let url = "\(LiveAPI.BaseURL)/liveStreams?part=id,snippet,cdn,contentDetails,status&key=\(Credentials.APIkey)"
             AF.request(url, method: .post, parameters: [:], encoding: encoder, headers: headers)
                 .validate()
                 .responseData { response in

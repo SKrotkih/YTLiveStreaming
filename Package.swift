@@ -5,8 +5,8 @@ import PackageDescription
 
 let package = Package(
     name: "YTLiveStreaming",
-    platforms: [.iOS(.v17),
-                .macOS(.v10_17)],
+    platforms: [.iOS(.v14),
+                .macOS(.v10_14)],
     products: [
         .library(
             name: "YTLiveStreaming",

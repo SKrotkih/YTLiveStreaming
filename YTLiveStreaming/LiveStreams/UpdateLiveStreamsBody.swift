@@ -36,14 +36,16 @@ struct CreateLiveStreamBody: Codable {
     }
 
     struct Cdn: Codable {
+        let streamName: String
         var frameRate: String
         var ingestionType: String
         var resolution: String
 
-        init(streamName: String) {
-            frameRate = LiveAPI.FrameRate
-            ingestionType = LiveAPI.IngestionType
-            resolution = LiveAPI.Resolution
+        init(streamName: String, frameRate: String? = nil, ingestionType: String? = nil, resolution: String? = nil) {
+            self.streamName = streamName
+            self.frameRate = frameRate ?? LiveAPI.FrameRate
+            self.ingestionType = ingestionType ?? LiveAPI.IngestionType
+            self.resolution = resolution ?? LiveAPI.Resolution
         }
     }
 
@@ -51,9 +53,10 @@ struct CreateLiveStreamBody: Codable {
     let cdn: Cdn
     let contentDetails: ContentDetails
     
-    init(title: String, description: String, streamName: String, isReusable: Bool) {
+    init(title: String, description: String, streamName: String, frameRate: String? = nil,
+         ingestionType: String? = nil, resolution: String? = nil, isReusable: Bool) {
         snippet = Snipped(title: title, description: description)
-        cdn = Cdn(streamName: streamName)
+        cdn = Cdn(streamName: streamName, frameRate: frameRate, ingestionType: ingestionType, resolution: resolution)
         contentDetails = ContentDetails(isReusable: isReusable)
     }
 }

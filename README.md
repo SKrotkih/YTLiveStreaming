@@ -187,6 +187,12 @@ do {
 Inject an `HTTPTransport` instead of `URLSession.shared` to answer requests from fixtures — see
 `Tests/YTLiveStreamingTests/TestSupport.swift` for a ready-made recording mock.
 
+## Documentation
+
+The package ships a DocC catalog: in Xcode choose **Product ▸ Build Documentation** (⌃⇧⌘D) with the
+`YTLiveStreaming` scheme, or run `swift package generate-documentation` with the
+[swift-docc-plugin](https://github.com/apple/swift-docc-plugin).
+
 ## Migrating from 0.2.x
 
 | 0.2.x | 1.0 |

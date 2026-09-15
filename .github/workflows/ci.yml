@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [master, "feature/**"]
+    tags-ignore: ["**"]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  macos:
+    name: macOS · swift build & test
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.2.app
+      - name: Swift version
+        run: swift --version
+      - name: Build (debug)
+        run: swift build -v
+      - name: Test
+        run: swift test -v
+      - name: Build (release)
+        run: swift build -c release
+
+  ios:
+    name: iOS Simulator · xcodebuild test
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.2.app
+      - name: Pick a simulator
+        id: sim
+        run: |
+          UDID=$(xcrun simctl list devices available --json \
+            | python3 -c 'import json,sys; d=json.load(sys.stdin)["devices"]; ids=[x["udid"] for k,v in d.items() if "iOS" in k for x in v if x["name"].startswith("iPhone")]; print(ids[0])')
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+      - name: Build & test
+        run: |
+          xcodebuild test -quiet \
+            -scheme YTLiveStreaming \
+            -destination "platform=iOS Simulator,id=${{ steps.sim.outputs.udid }}" \
+            CODE_SIGNING_ALLOWED=NO
+
+  other-platforms:
+    name: ${{ matrix.name }} · build only
+    runs-on: macos-15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: tvOS
+            destination: "generic/platform=tvOS Simulator"
+          - name: watchOS
+            destination: "generic/platform=watchOS Simulator"
+          - name: visionOS
+            destination: "generic/platform=visionOS Simulator"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.2.app
+      - name: Build
+        run: |
+          xcodebuild build -quiet \
+            -scheme YTLiveStreaming \
+            -destination "${{ matrix.destination }}" \
+            CODE_SIGNING_ALLOWED=NO

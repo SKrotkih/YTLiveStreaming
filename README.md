@@ -1,5 +1,8 @@
 # YTLiveStreaming
 
+[![CI](https://github.com/SKrotkih/YTLiveStreaming/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/SKrotkih/YTLiveStreaming/actions/workflows/ci.yml)
+![Swift 5.9+](https://img.shields.io/badge/Swift-5.9%2B-orange) ![Platforms](https://img.shields.io/badge/platforms-iOS%2015%20%7C%20macOS%2012%20%7C%20tvOS%2015%20%7C%20watchOS%208%20%7C%20visionOS%201-blue) ![SPM](https://img.shields.io/badge/SPM-compatible-brightgreen)
+
 A dependency-free Swift client for the **YouTube Live Streaming API** (the `liveBroadcasts` and
 `liveStreams` resources of YouTube Data API v3). Create, schedule, bind, start and end live
 broadcasts on YouTube from iOS, macOS, tvOS, watchOS or visionOS apps.

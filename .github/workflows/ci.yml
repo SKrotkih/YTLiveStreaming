@@ -18,8 +18,8 @@ jobs:
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v5
-      - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_16.2.app
+      - name: Xcode version
+        run: xcodebuild -version
       - name: Swift version
         run: swift --version
       - name: Build (debug)
@@ -34,17 +34,24 @@ jobs:
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v5
-      - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_16.2.app
-      - name: List schemes and simulators
+      - name: Xcode version
+        run: xcodebuild -version
+      - name: Pick an iPhone simulator
+        id: sim
         run: |
-          xcodebuild -list
-          xcrun simctl list devices available | grep -E "iPhone|iOS" | head -20
+          xcrun simctl list devices available | grep -E "iPhone" | head -10
+          UDID=$(xcrun simctl list devices available --json | python3 -c '
+          import json, sys
+          devices = json.load(sys.stdin)["devices"]
+          ids = [d["udid"] for runtime, ds in devices.items() if "iOS" in runtime
+                 for d in ds if d["name"].startswith("iPhone")]
+          print(ids[0])')
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
       - name: Build & test
         run: |
           xcodebuild test \
             -scheme YTLiveStreaming \
-            -destination "platform=iOS Simulator,name=iPhone 16" \
+            -destination "platform=iOS Simulator,id=${{ steps.sim.outputs.udid }}" \
             CODE_SIGNING_ALLOWED=NO
 
   other-platforms:
@@ -62,8 +69,8 @@ jobs:
             destination: "generic/platform=visionOS Simulator"
     steps:
       - uses: actions/checkout@v5
-      - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_16.2.app
+      - name: Xcode version
+        run: xcodebuild -version
       - name: Build
         run: |
           xcodebuild build -quiet \

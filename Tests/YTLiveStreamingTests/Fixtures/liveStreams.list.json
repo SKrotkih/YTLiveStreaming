@@ -1,0 +1,43 @@
+{
+  "kind": "youtube#liveStreamListResponse",
+  "etag": "etag-streams",
+  "pageInfo": { "totalResults": 1, "resultsPerPage": 50 },
+  "items": [
+    {
+      "kind": "youtube#liveStream",
+      "etag": "etag-s1",
+      "id": "stream-1",
+      "snippet": {
+        "publishedAt": "2024-05-29T10:30:00Z",
+        "channelId": "UCm4xprzPvVL8Uravaneq7CA",
+        "title": "Encoder stream",
+        "description": "Created by YTLiveStreaming",
+        "isDefaultStream": false
+      },
+      "cdn": {
+        "ingestionType": "rtmp",
+        "ingestionInfo": {
+          "streamName": "abcd-efgh-ijkl-mnop-qrst",
+          "ingestionAddress": "rtmp://a.rtmp.youtube.com/live2",
+          "backupIngestionAddress": "rtmp://b.rtmp.youtube.com/live2?backup=1",
+          "rtmpsIngestionAddress": "rtmps://a.rtmps.youtube.com/live2",
+          "rtmpsBackupIngestionAddress": "rtmps://b.rtmps.youtube.com/live2?backup=1"
+        },
+        "resolution": "variable",
+        "frameRate": "variable"
+      },
+      "status": {
+        "streamStatus": "active",
+        "healthStatus": {
+          "status": "good",
+          "lastUpdateTimeSeconds": "1716980400",
+          "configurationIssues": []
+        }
+      },
+      "contentDetails": {
+        "closedCaptionsIngestionUrl": "http://upload.youtube.com/closedcaption?cid=abcd",
+        "isReusable": true
+      }
+    }
+  ]
+}

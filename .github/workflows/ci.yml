@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches: [master, "feature/**"]
+    tags-ignore: ["**"]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  macos:
+    name: macOS · swift build & test
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v5
+      - name: Xcode version
+        run: xcodebuild -version
+      - name: Swift version
+        run: swift --version
+      - name: Build (debug)
+        run: swift build -v
+      - name: Test
+        run: swift test -v
+      - name: Build (release)
+        run: swift build -c release
+
+  ios:
+    name: iOS Simulator · xcodebuild test
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v5
+      - name: Xcode version
+        run: xcodebuild -version
+      - name: Pick an iPhone simulator
+        id: sim
+        run: |
+          xcrun simctl list devices available | grep -E "iPhone" | head -10
+          UDID=$(xcrun simctl list devices available --json | python3 -c '
+          import json, sys
+          devices = json.load(sys.stdin)["devices"]
+          ids = [d["udid"] for runtime, ds in devices.items() if "iOS" in runtime
+                 for d in ds if d["name"].startswith("iPhone")]
+          print(ids[0])')
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+      - name: Build & test
+        run: |
+          xcodebuild test \
+            -scheme YTLiveStreaming \
+            -destination "platform=iOS Simulator,id=${{ steps.sim.outputs.udid }}" \
+            CODE_SIGNING_ALLOWED=NO
+
+  other-platforms:
+    name: ${{ matrix.name }} · build only
+    runs-on: macos-15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: tvOS
+            destination: "generic/platform=tvOS Simulator"
+          - name: watchOS
+            destination: "generic/platform=watchOS Simulator"
+          - name: visionOS
+            destination: "generic/platform=visionOS Simulator"
+    steps:
+      - uses: actions/checkout@v5
+      - name: Xcode version
+        run: xcodebuild -version
+      - name: Build
+        run: |
+          xcodebuild build -quiet \
+            -scheme YTLiveStreaming \
+            -destination "${{ matrix.destination }}" \
+            CODE_SIGNING_ALLOWED=NO

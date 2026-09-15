@@ -13,10 +13,15 @@ struct Endpoint: Sendable, Equatable {
     var path: String
     var query: [URLQueryItem] = []
     var body: Data?
+    /// `Content-Type` of `body`. JSON unless the call uploads media (thumbnails).
+    var contentType: String = "application/json"
+    /// Overrides the client's base URL, e.g. for the media-upload host.
+    var baseURLOverride: URL?
 
     /// Builds the request. `parts` are appended as the `part` query item, `apiKey` as `key`.
     func urlRequest(baseURL: URL, apiKey: String?, bundleIdentifier: String?, token: String) throws -> URLRequest {
-        guard var components = URLComponents(url: baseURL.appendingPathComponent(path), resolvingAgainstBaseURL: false) else {
+        let base = baseURLOverride ?? baseURL
+        guard var components = URLComponents(url: base.appendingPathComponent(path), resolvingAgainstBaseURL: false) else {
             throw YouTubeLiveError.invalidResponse
         }
         var items = query
@@ -36,7 +41,7 @@ struct Endpoint: Sendable, Equatable {
         }
         if let body {
             request.httpBody = body
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue(contentType, forHTTPHeaderField: "Content-Type")
         }
         return request
     }
@@ -48,6 +53,13 @@ struct Endpoint: Sendable, Equatable {
 enum Parts {
     static let broadcast = "id,snippet,contentDetails,status"
     static let stream = "id,snippet,cdn,status,contentDetails"
+    static let chatMessage = "id,snippet,authorDetails"
+}
+
+/// Hosts the YouTube Data API is spread over.
+enum YouTubeHosts {
+    /// Media uploads (`thumbnails.set`) go to a different host than the JSON API.
+    static let upload = URL(string: "https://www.googleapis.com/upload/youtube/v3")!
 }
 
 extension Endpoint {

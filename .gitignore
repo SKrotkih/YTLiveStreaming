@@ -28,3 +28,6 @@ Podfile.lock
 .build
 
 Sample/Config.plist
+
+# Files the Claude desktop app drops next to the project
+Claude outputs/

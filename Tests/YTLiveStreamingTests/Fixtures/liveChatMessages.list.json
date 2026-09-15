@@ -1,0 +1,58 @@
+{
+  "kind": "youtube#liveChatMessageListResponse",
+  "etag": "etag-chat",
+  "nextPageToken": "GKj4kLq2",
+  "pollingIntervalMillis": 2000,
+  "pageInfo": { "totalResults": 2, "resultsPerPage": 200 },
+  "items": [
+    {
+      "kind": "youtube#liveChatMessage",
+      "etag": "e1",
+      "id": "msg-1",
+      "snippet": {
+        "type": "textMessageEvent",
+        "liveChatId": "chat-1",
+        "authorChannelId": "UCviewer",
+        "publishedAt": "2024-05-29T11:02:10.512Z",
+        "hasDisplayContent": true,
+        "displayMessage": "hello from the chat",
+        "textMessageDetails": { "messageText": "hello from the chat" }
+      },
+      "authorDetails": {
+        "channelId": "UCviewer",
+        "channelUrl": "http://www.youtube.com/channel/UCviewer",
+        "displayName": "A Viewer",
+        "profileImageUrl": "https://yt3.ggpht.com/a.jpg",
+        "isVerified": false,
+        "isChatOwner": false,
+        "isChatSponsor": false,
+        "isChatModerator": false
+      }
+    },
+    {
+      "kind": "youtube#liveChatMessage",
+      "etag": "e2",
+      "id": "msg-2",
+      "snippet": {
+        "type": "superChatEvent",
+        "liveChatId": "chat-1",
+        "authorChannelId": "UCfan",
+        "publishedAt": "2024-05-29T11:02:12Z",
+        "hasDisplayContent": true,
+        "displayMessage": "$5.00 from A Fan: great stream!",
+        "superChatDetails": {
+          "amountMicros": "5000000",
+          "currency": "USD",
+          "amountDisplayString": "$5.00",
+          "userComment": "great stream!",
+          "tier": 2
+        }
+      },
+      "authorDetails": {
+        "channelId": "UCfan",
+        "displayName": "A Fan",
+        "isChatOwner": false
+      }
+    }
+  ]
+}

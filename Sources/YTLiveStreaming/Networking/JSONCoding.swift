@@ -62,3 +62,14 @@ public enum RFC3339 {
         return formatter.string(from: date)
     }
 }
+
+public extension JSONDecoder {
+    /// A decoder configured for YouTube Data API payloads (RFC 3339 dates with or without
+    /// fractional seconds). Use it to decode fixtures or cached responses into the library's models.
+    static func youtubeLive() -> JSONDecoder { JSONCoding.makeDecoder() }
+}
+
+public extension JSONEncoder {
+    /// An encoder configured for YouTube Data API payloads (RFC 3339 dates with fractional seconds).
+    static func youtubeLive() -> JSONEncoder { JSONCoding.makeEncoder() }
+}

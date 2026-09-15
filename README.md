@@ -21,7 +21,7 @@ broadcasts on YouTube from iOS, macOS, tvOS, watchOS or visionOS apps.
 Swift Package Manager only:
 
 ```swift
-.package(url: "https://github.com/SKrotkih/YTLiveStreaming.git", from: "1.0.0")
+.package(url: "https://github.com/SKrotkih/YTLiveStreaming.git", from: "1.1.0")
 ```
 
 ## Google Cloud setup
@@ -146,7 +146,27 @@ The monitor polls every 3 s by default (`MonitorOptions(pollInterval:)`), follow
 when the broadcast ends or the consuming task is cancelled. Pass `autoGoLive: false` to only
 observe, e.g. for broadcasts created with `enableAutoStart`.
 
-### 5. Errors
+### 5. Live chat, ad breaks, thumbnails
+
+```swift
+// Chat: liveChatId comes from the broadcast
+if let chatId = broadcast.snippet.liveChatId {
+    for try await batch in youtube.chatMessageStream(liveChatId: chatId) {   // polls at YouTube's interval
+        for message in batch { print(message.authorName, message.text) }
+    }
+    try await youtube.sendChatMessage("Welcome!", liveChatId: chatId)
+}
+
+// Ad break (channel must have ads enabled)
+try await youtube.insertCuepoint(broadcastID: broadcast.id, CuepointRequest(durationSeconds: 60))
+
+// Custom thumbnail (JPEG/PNG, ≤ 2 MB)
+try await youtube.setThumbnail(broadcastID: broadcast.id, imageData: jpegData)
+```
+
+Decoding fixtures or cached JSON into the models: `JSONDecoder.youtubeLive()`.
+
+### 6. Errors
 
 Everything throws `YouTubeLiveError`:
 

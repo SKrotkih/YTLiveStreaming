@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.1.0 — 2026-09-15
+
+### Added
+- **Live chat**: `chatMessages(liveChatId:pageToken:)`, `chatMessageStream(liveChatId:)` (an
+  `AsyncThrowingStream` that polls at the interval YouTube requests and ends when the chat goes
+  offline), `sendChatMessage(_:liveChatId:)`, `deleteChatMessage(id:)`; `LiveChatMessage` model with
+  text, Super Chat, Super Sticker, membership and moderation event types.
+- **Ad breaks**: `insertCuepoint(broadcastID:_:)` (`liveBroadcasts.cuepoint`).
+- **Thumbnails**: `setThumbnail(broadcastID:imageData:contentType:)` (`thumbnails.set`, media upload).
+- `JSONDecoder.youtubeLive()` / `JSONEncoder.youtubeLive()` — the library's coders (RFC 3339 dates)
+  for decoding fixtures or cached responses into the models.
+
+### Verified
+- 1.0 `monitor(broadcastID:)` confirmed end-to-end on a physical iPhone with the LiveEvents sample:
+  `ready → testing → live → complete` against a real channel.
+
 ## 1.0.0 — 2026-09-15
 
 A from-scratch rewrite. The 0.2.x line is preserved under the `legacy-0.2.45` tag and is no longer maintained.

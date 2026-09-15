@@ -1,0 +1,106 @@
+{
+  "kind": "youtube#liveBroadcastListResponse",
+  "etag": "etag-list-1",
+  "nextPageToken": "CAUQAA",
+  "pageInfo": { "totalResults": 3, "resultsPerPage": 50 },
+  "items": [
+    {
+      "kind": "youtube#liveBroadcast",
+      "etag": "etag-b1",
+      "id": "abc123LIVE",
+      "snippet": {
+        "publishedAt": "2024-05-29T10:28:10Z",
+        "channelId": "UCm4xprzPvVL8Uravaneq7CA",
+        "title": "Live now",
+        "description": "Currently streaming",
+        "thumbnails": {
+          "default": { "url": "https://i.ytimg.com/vi/abc123LIVE/default_live.jpg", "width": 120, "height": 90 },
+          "medium": { "url": "https://i.ytimg.com/vi/abc123LIVE/mqdefault_live.jpg", "width": 320, "height": 180 },
+          "high": { "url": "https://i.ytimg.com/vi/abc123LIVE/hqdefault_live.jpg", "width": 480, "height": 360 }
+        },
+        "scheduledStartTime": "2024-05-29T11:00:00Z",
+        "actualStartTime": "2024-05-29T11:00:07.123Z",
+        "isDefaultBroadcast": false,
+        "liveChatId": "Cg0KC2FiYzEyM0xJVkU"
+      },
+      "status": {
+        "lifeCycleStatus": "live",
+        "privacyStatus": "public",
+        "recordingStatus": "recording",
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "contentDetails": {
+        "boundStreamId": "stream-1",
+        "boundStreamLastUpdateTimeMs": "2024-05-29T10:59:00.000Z",
+        "monitorStream": {
+          "enableMonitorStream": true,
+          "broadcastStreamDelayMs": 0,
+          "embedHtml": "<iframe src=\"https://www.youtube.com/embed/abc123LIVE?autoplay=1&livemonitor=1\"></iframe>"
+        },
+        "enableEmbed": true,
+        "enableDvr": true,
+        "recordFromStart": true,
+        "enableClosedCaptions": false,
+        "closedCaptionsType": "closedCaptionsDisabled",
+        "enableLowLatency": false,
+        "latencyPreference": "normal",
+        "projection": "rectangular",
+        "enableAutoStart": false,
+        "enableAutoStop": false
+      }
+    },
+    {
+      "kind": "youtube#liveBroadcast",
+      "etag": "etag-b2",
+      "id": "def456READY",
+      "snippet": {
+        "publishedAt": "2024-05-28T09:00:00.000Z",
+        "channelId": "UCm4xprzPvVL8Uravaneq7CA",
+        "title": "Upcoming, no start time",
+        "description": "",
+        "thumbnails": {
+          "default": { "url": "https://i.ytimg.com/vi/def456READY/default_live.jpg", "width": 120, "height": 90 }
+        },
+        "scheduledStartTime": "1970-01-01T00:00:00Z",
+        "isDefaultBroadcast": false
+      },
+      "status": {
+        "lifeCycleStatus": "ready",
+        "privacyStatus": "unlisted",
+        "recordingStatus": "notRecording",
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "contentDetails": {
+        "monitorStream": { "enableMonitorStream": false, "broadcastStreamDelayMs": 0 },
+        "enableEmbed": true,
+        "enableDvr": true,
+        "recordFromStart": true,
+        "enableClosedCaptions": false,
+        "latencyPreference": "ultraLow",
+        "enableAutoStart": true,
+        "enableAutoStop": true
+      }
+    },
+    {
+      "kind": "youtube#liveBroadcast",
+      "etag": "etag-b3",
+      "id": "ghi789DONE",
+      "snippet": {
+        "publishedAt": "2024-05-30T12:00:00Z",
+        "channelId": "UCm4xprzPvVL8Uravaneq7CA",
+        "title": "Finished, new lifecycle value",
+        "description": "Uses a lifeCycleStatus this library has never seen",
+        "scheduledStartTime": "2024-05-30T13:00:00Z",
+        "scheduledEndTime": "2024-05-30T14:00:00Z",
+        "actualStartTime": "2024-05-30T13:00:02Z",
+        "actualEndTime": "2024-05-30T13:58:41Z"
+      },
+      "status": {
+        "lifeCycleStatus": "someFutureStatus",
+        "privacyStatus": "private"
+      }
+    }
+  ]
+}

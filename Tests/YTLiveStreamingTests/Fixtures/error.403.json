@@ -1,0 +1,14 @@
+{
+  "error": {
+    "code": 403,
+    "message": "Stream is inactive",
+    "errors": [
+      {
+        "message": "Stream is inactive",
+        "domain": "youtube.liveBroadcast",
+        "reason": "errorStreamInactive",
+        "extendedHelp": "https://developers.google.com/youtube/v3/live/docs/liveBroadcasts/transition"
+      }
+    ]
+  }
+}

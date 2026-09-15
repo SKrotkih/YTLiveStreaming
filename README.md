@@ -113,7 +113,37 @@ try await youtube.deleteStream(id: created.id)
 if stream.isReceivingData && stream.health == .good { /* safe to transition to .live */ }
 ```
 
-### 4. Errors
+### 4. Going live
+
+Start your encoder against the stream's ingestion URL, then either observe the broadcast:
+
+```swift
+for try await event in youtube.monitor(broadcastID: broadcast.id) {
+    switch event {
+    case .snapshot(let s):       status = "\(s.lifeCycleStatus) · encoder \(s.streamStatus) · \(s.streamHealth)"
+    case .encoderConnected:      // YouTube is receiving data
+    case .transitionRequested:   // monitor is moving the broadcast towards .live
+    case .transitionFailed(_, let error): log(error)   // e.g. errorStreamInactive; it retries
+    case .testing:               // preview available in YouTube Studio
+    case .live:                  onAir = true
+    case .pollFailed(let error): log(error)            // transient; polling continues
+    case .ended(let state):      onAir = false          // .complete / .revoked / .abandoned
+    }
+}
+```
+
+…or just wait for it:
+
+```swift
+let live = try await youtube.goLive(broadcastID: broadcast.id, timeout: 120)
+```
+
+The monitor polls every 3 s by default (`MonitorOptions(pollInterval:)`), follows YouTube's rules
+(`ready → testing → live` when the monitor stream is enabled, `ready → live` otherwise), and stops
+when the broadcast ends or the consuming task is cancelled. Pass `autoGoLive: false` to only
+observe, e.g. for broadcasts created with `enableAutoStart`.
+
+### 5. Errors
 
 Everything throws `YouTubeLiveError`:
 
@@ -143,7 +173,8 @@ Inject an `HTTPTransport` instead of `URLSession.shared` to answer requests from
 | `API_KEY` / `CLIENT_ID` in `Info.plist` | `Configuration(apiKey:)` (optional) |
 | `getUpcomingBroadcasts { result in … }` | `try await client.allBroadcasts(.upcoming)` |
 | `createBroadcast(PostLiveBroadcastBody)` | `createBroadcastWithStream(CreateBroadcastRequest, stream:)` |
-| `startBroadcast(_:delegate:)` (polling + delegate) | coming in 1.1 as `AsyncStream` — for now poll `stream(id:)` and call `transition(to: .live)` |
+| `startBroadcast(_:delegate:)` + `LiveStreamTransitioning` delegate | `for try await event in client.monitor(broadcastID:)` or `try await client.goLive(broadcastID:)` |
+| `completeBroadcast(_:)` | `transition(broadcastID:to: .complete)` |
 | `LiveBroadcastStreamModel.status?.lifeCycleStatus: String` | `LifeCycleStatus` enum (`.live`, `.ready`, …, `.unknown`) |
 | `LiveStreamModel.snipped` | `LiveStreamModel.snippet` |
 | CocoaPods | SPM only |

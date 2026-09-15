@@ -73,6 +73,10 @@ public enum YouTubeLiveError: Error, Sendable {
     case transport(any Error)
     /// The transport returned something that is not an HTTP response.
     case invalidResponse
+    /// ``YouTubeLiveClient/goLive(broadcastID:timeout:pollInterval:)`` gave up waiting.
+    case timeout(lastKnown: LiveBroadcastStreamModel?)
+    /// The broadcast ended before it could be taken live.
+    case broadcastEnded(LifeCycleStatus)
 
     /// The Google error payload, when the failure carried one.
     public var apiError: GoogleAPIError? {
@@ -133,6 +137,11 @@ extension YouTubeLiveError: LocalizedError {
             return "Network error: \(underlying.localizedDescription)"
         case .invalidResponse:
             return "The server returned a non-HTTP response."
+        case .timeout(let last):
+            let state = last.map { "\($0.lifeCycleStatus.rawValue)" } ?? "unknown"
+            return "Timed out waiting for the broadcast to go live (last state: \(state))."
+        case .broadcastEnded(let status):
+            return "The broadcast ended (\(status.rawValue)) before going live."
         }
     }
 }

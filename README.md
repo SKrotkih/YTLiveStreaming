@@ -1,7 +1,9 @@
 # YTLiveStreaming
 
 [![CI](https://github.com/SKrotkih/YTLiveStreaming/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/SKrotkih/YTLiveStreaming/actions/workflows/ci.yml)
-![Swift 5.9+](https://img.shields.io/badge/Swift-5.9%2B-orange) ![Platforms](https://img.shields.io/badge/platforms-iOS%2015%20%7C%20macOS%2012%20%7C%20tvOS%2015%20%7C%20watchOS%208%20%7C%20visionOS%201-blue) ![SPM](https://img.shields.io/badge/SPM-compatible-brightgreen)
+[![Swift Package Index](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FSKrotkih%2FYTLiveStreaming%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/SKrotkih/YTLiveStreaming)
+[![Platforms](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FSKrotkih%2FYTLiveStreaming%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/SKrotkih/YTLiveStreaming)
+![SPM](https://img.shields.io/badge/SPM-compatible-brightgreen)
 
 A dependency-free Swift client for the **YouTube Live Streaming API** (the `liveBroadcasts` and
 `liveStreams` resources of YouTube Data API v3). Create, schedule, bind, start and end live

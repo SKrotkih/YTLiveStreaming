@@ -66,6 +66,7 @@ for try await event in youtube.monitor(broadcastID: broadcast.id) {
 - ``BroadcastListFilter``
 - ``BroadcastTransition``
 - ``LifeCycleStatus``
+- ``PurgeResult``
 
 ### Streams
 

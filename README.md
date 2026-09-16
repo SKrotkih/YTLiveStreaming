@@ -104,6 +104,12 @@ try await youtube.transition(broadcastID: broadcast.id, to: .complete)
 // Delete
 try await youtube.deleteBroadcast(id: broadcast.id)
 try await youtube.deleteBroadcasts(ids: upcoming.map(\.id))
+
+// Delete without leaving traces: ends a running broadcast first, removes the recording
+// (`videos.delete`) when YouTube refuses `liveBroadcasts.delete` for a completed one, and
+// drops the bound stream unless it is reusable.
+let result = try await youtube.purgeBroadcast(id: broadcast.id)
+try await youtube.purgeBroadcasts(ids: selected)
 ```
 
 ### 3. Streams

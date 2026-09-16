@@ -19,6 +19,18 @@ final class PurgeTests: XCTestCase {
         """.utf8)
     }
 
+    /// A single `liveBroadcast` resource, as `liveBroadcasts.transition` returns it.
+    private func broadcastResource(id: String, status: String) -> Data {
+        Data("""
+        {
+          "kind": "youtube#liveBroadcast", "etag": "e", "id": "\(id)",
+          "snippet": { "publishedAt": "2024-05-29T10:28:10Z", "channelId": "UC1", "title": "t", "description": "" },
+          "status": { "lifeCycleStatus": "\(status)", "privacyStatus": "unlisted" },
+          "contentDetails": { "enableEmbed": true }
+        }
+        """.utf8)
+    }
+
     private func streamList(id: String, reusable: Bool) -> Data {
         Data("""
         {
@@ -104,7 +116,7 @@ final class PurgeTests: XCTestCase {
     func testPurgeLiveBroadcastEndsItFirst() async throws {
         let transport = MockTransport()
         await transport.enqueue(status: 200, body: broadcastList(id: "B4", status: "live", boundStreamId: nil))
-        await transport.enqueue(status: 200, body: broadcastList(id: "B4", status: "complete", boundStreamId: nil)) // transition
+        await transport.enqueue(status: 200, body: broadcastResource(id: "B4", status: "complete"))      // transition
         await transport.enqueue(status: 204, body: Data())                                      // liveBroadcasts.delete
         await transport.enqueue(status: 204, body: Data())                                      // videos.delete
         let client = makeClient(transport)

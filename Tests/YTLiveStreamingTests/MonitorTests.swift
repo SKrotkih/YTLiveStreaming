@@ -262,6 +262,43 @@ final class MonitorTests: XCTestCase {
         XCTAssertEqual(pollFailures, 3)
     }
 
+    func testNotFoundWithinGracePeriodIsRetried() async throws {
+        let yt = FakeYouTube(lifeCycle: .ready, streamStatus: .inactive)
+        await yt.setOutage(404)
+        let options = MonitorOptions(pollInterval: 0.01, autoGoLive: false, notFoundGracePeriod: 5)
+        var notFoundPolls = 0
+        var snapshots = 0
+
+        for try await event in client(yt).monitor(broadcastID: "B1", options: options) {
+            switch event {
+            case .pollFailed(let error):
+                XCTAssertEqual(error.statusCode, 404)
+                notFoundPolls += 1
+                if notFoundPolls == 3 { await yt.setOutage(nil) }   // YouTube "indexes" the broadcast
+            case .snapshot:
+                snapshots += 1
+                if snapshots == 2 { await yt.set(lifeCycle: .complete) }
+            default:
+                break
+            }
+        }
+        XCTAssertEqual(notFoundPolls, 3, "404s inside the grace period are reported, not thrown")
+        XCTAssertGreaterThanOrEqual(snapshots, 2)
+    }
+
+    func testNotFoundAfterGracePeriodThrows() async throws {
+        let yt = FakeYouTube()
+        await yt.setOutage(404)
+        let options = MonitorOptions(pollInterval: 0.01, notFoundGracePeriod: 0)
+
+        do {
+            for try await _ in client(yt).monitor(broadcastID: "B1", options: options) {}
+            XCTFail("expected notFound")
+        } catch YouTubeLiveError.notFound {
+            // ok
+        }
+    }
+
     func testUnauthorizedEndsTheStreamImmediately() async throws {
         let yt = FakeYouTube()
         await yt.setOutage(401)

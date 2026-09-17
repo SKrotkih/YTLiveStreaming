@@ -105,6 +105,9 @@ try await youtube.transition(broadcastID: broadcast.id, to: .complete)
 try await youtube.deleteBroadcast(id: broadcast.id)
 try await youtube.deleteBroadcasts(ids: upcoming.map(\.id))
 
+// A broadcast created seconds ago can 404 for a moment; the monitor waits it out
+// (`MonitorOptions.notFoundGracePeriod`, 90 s by default) instead of failing.
+
 // Delete without leaving traces: ends a running broadcast first, removes the recording
 // (`videos.delete`) when YouTube refuses `liveBroadcasts.delete` for a completed one, and
 // drops the bound stream unless it is reusable.

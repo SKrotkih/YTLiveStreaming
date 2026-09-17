@@ -48,17 +48,24 @@ public struct MonitorOptions: Sendable {
     public var maxConsecutivePollFailures: Int
     /// Finish the stream once the broadcast is complete.
     public var stopWhenEnded: Bool
+    /// A broadcast created moments ago may not be visible to `liveBroadcasts.list` for a few
+    /// seconds. A 404 within this many seconds after the monitor starts is treated as a
+    /// transient poll failure (``BroadcastEvent/pollFailed(_:)``) instead of ending the stream.
+    /// `0` restores the old behaviour (404 is always fatal).
+    public var notFoundGracePeriod: TimeInterval
 
     public init(
         pollInterval: TimeInterval = 3,
         autoGoLive: Bool = true,
         maxConsecutivePollFailures: Int = 5,
-        stopWhenEnded: Bool = true
+        stopWhenEnded: Bool = true,
+        notFoundGracePeriod: TimeInterval = 90
     ) {
         self.pollInterval = max(pollInterval, 0.01)
         self.autoGoLive = autoGoLive
         self.maxConsecutivePollFailures = max(maxConsecutivePollFailures, 1)
         self.stopWhenEnded = stopWhenEnded
+        self.notFoundGracePeriod = max(notFoundGracePeriod, 0)
     }
 }
 
@@ -76,7 +83,8 @@ public extension YouTubeLiveClient {
     /// }
     /// ```
     /// Cancelling the consuming task stops polling. Errors that end the stream are
-    /// `YouTubeLiveError.unauthorized`, `.notFound`, or repeated poll failures.
+    /// `YouTubeLiveError.unauthorized`, `.notFound` (after ``MonitorOptions/notFoundGracePeriod``),
+    /// or repeated poll failures.
     func monitor(broadcastID: String, options: MonitorOptions = MonitorOptions()) -> AsyncThrowingStream<BroadcastEvent, any Error> {
         AsyncThrowingStream { continuation in
             let task = Task {
@@ -140,6 +148,7 @@ extension YouTubeLiveClient {
         var requestedFrom: LifeCycleStatus?
         var pollsSinceRequest = 0
         var consecutiveFailures = 0
+        let startedAt = Date()
 
         while !Task.isCancelled {
             let snapshot: BroadcastSnapshot
@@ -148,6 +157,11 @@ extension YouTubeLiveClient {
                 consecutiveFailures = 0
             } catch let error as YouTubeLiveError {
                 switch error {
+                case .notFound where Date().timeIntervalSince(startedAt) < options.notFoundGracePeriod:
+                    // Not indexed yet — keep polling; grace-period 404s do not count as failures.
+                    emit(.pollFailed(error))
+                    try await sleep(options.pollInterval)
+                    continue
                 case .unauthorized, .notFound, .missingAccessToken:
                     throw error
                 default:

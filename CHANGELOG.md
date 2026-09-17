@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.1.2 — 2026-09-17
+
+### Fixed
+- `monitor(broadcastID:)` no longer ends with `.notFound` when a just-created broadcast is not yet
+  visible to `liveBroadcasts.list`: a 404 inside `MonitorOptions.notFoundGracePeriod` (default 90 s)
+  is reported as `.pollFailed` and polling continues. Set it to `0` for the old behaviour.
+- `allBroadcasts(_:)` drops duplicate IDs when YouTube pages overlap (the channel changing between
+  page requests) — duplicates crashed SwiftUI `List` diffing in clients.
+
+## 1.1.1 — 2026-09-16
+
+### Added
+- `purgeBroadcast(id:deleteBoundStream:)` / `purgeBroadcasts(ids:)`: delete a broadcast without
+  leaving traces — ends a running one first, falls back to `videos.delete` when
+  `liveBroadcasts.delete` refuses a completed broadcast, removes the recording and the bound
+  `liveStream` (unless reusable). `PurgeResult` reports what was done.
+- `deleteVideo(id:)` (`videos.delete`).
+
 ## 1.1.0 — 2026-09-15
 
 ### Added

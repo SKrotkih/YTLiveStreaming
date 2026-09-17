@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.3 — 2026-09-17
+
+### Fixed
+- `purgeBroadcast(id:)`: after `videos.delete` on a completed broadcast the broadcast resource
+  stayed behind in `created` state (reappearing as upcoming); it is now deleted as well.
+
 ## 1.1.2 — 2026-09-17
 
 ### Fixed

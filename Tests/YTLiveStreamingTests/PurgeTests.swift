@@ -81,6 +81,7 @@ final class PurgeTests: XCTestCase {
         await transport.enqueue(status: 200, body: broadcastList(id: "B2", status: "complete"))
         await transport.enqueue(status: 403, body: googleError(code: 403, reason: "liveBroadcastDeletionNotAllowed"))
         await transport.enqueue(status: 204, body: Data())                                      // videos.delete
+        await transport.enqueue(status: 204, body: Data())                                      // liveBroadcasts.delete again (now allowed)
         await transport.enqueue(status: 200, body: streamList(id: "stream-1", reusable: false))
         await transport.enqueue(status: 204, body: Data())
         let client = makeClient(transport)
@@ -90,8 +91,26 @@ final class PurgeTests: XCTestCase {
         XCTAssertTrue(result.deletedAsVideo)
         XCTAssertEqual(result.deletedStreamID, "stream-1")
         let requests = await transport.requests
-        XCTAssertEqual(requests[2].url?.path, "/youtube/v3/videos")
-        XCTAssertEqual(requests[2].httpMethod, "DELETE")
+        XCTAssertEqual(requests.map(path), [
+            "GET /youtube/v3/liveBroadcasts",
+            "DELETE /youtube/v3/liveBroadcasts",
+            "DELETE /youtube/v3/videos",
+            "DELETE /youtube/v3/liveBroadcasts",   // the leftover `created` broadcast
+            "GET /youtube/v3/liveStreams",
+            "DELETE /youtube/v3/liveStreams"
+        ])
+    }
+
+    func testPurgeCompletedBroadcastLeftoverAlreadyGone() async throws {
+        let transport = MockTransport()
+        await transport.enqueue(status: 200, body: broadcastList(id: "B2", status: "complete", boundStreamId: nil))
+        await transport.enqueue(status: 403, body: googleError(code: 403, reason: "liveBroadcastDeletionNotAllowed"))
+        await transport.enqueue(status: 204, body: Data())                                      // videos.delete
+        await transport.enqueue(status: 404, body: googleError(code: 404, reason: "liveBroadcastNotFound"))
+        let client = makeClient(transport)
+
+        let result = try await client.purgeBroadcast(id: "B2")
+        XCTAssertTrue(result.deletedAsVideo)
     }
 
     func testPurgeCompletedBroadcastAlsoRemovesRecordingWhenBroadcastDeleteSucceeds() async throws {

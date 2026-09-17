@@ -30,7 +30,8 @@ public extension YouTubeLiveClient {
     ///
     /// 1. a broadcast that is still going (`testing` / `live` / …) is ended first;
     /// 2. `liveBroadcasts.delete`; when YouTube answers `liveBroadcastDeletionNotAllowed`
-    ///    (completed broadcasts) the recording is deleted with `videos.delete` instead;
+    ///    (completed broadcasts) the recording is deleted with `videos.delete`, after which the
+    ///    broadcast — left behind as `created` — is deleted as well;
     /// 3. the bound `liveStream` is deleted too unless `deleteBoundStream` is `false` or the
     ///    stream is marked reusable (it may serve other broadcasts).
     ///
@@ -67,6 +68,13 @@ public extension YouTubeLiveClient {
         } catch let error as YouTubeLiveError where error.apiError?.reason == "liveBroadcastDeletionNotAllowed" {
             try await deleteVideoIgnoringNotFound(id: id)
             deletedAsVideo = true
+            // Deleting the video leaves the broadcast resource behind in `created` state (it shows
+            // up as an upcoming broadcast again); it is deletable now, so remove it too.
+            do {
+                try await deleteBroadcast(id: id)
+            } catch let error as YouTubeLiveError where error.isNotFound {
+                // Gone together with the video.
+            }
         }
         // A broadcast that has run leaves a recording; make sure it is gone as well.
         if !deletedAsVideo, endedFirst || broadcast.lifeCycleStatus == .complete {

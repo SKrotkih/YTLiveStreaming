@@ -84,7 +84,11 @@ public extension YouTubeLiveClient {
             items.append(contentsOf: page.items)
             pageToken = page.nextPageToken
         } while pageToken != nil
-        return items.sorted { $0.snippet.publishedAt > $1.snippet.publishedAt }
+        // Pages can overlap when the channel changes between requests; keep each ID once.
+        var seen = Set<String>()
+        return items
+            .filter { seen.insert($0.id).inserted }
+            .sorted { $0.snippet.publishedAt > $1.snippet.publishedAt }
     }
 
     /// A single broadcast by ID.

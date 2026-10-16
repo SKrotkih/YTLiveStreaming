@@ -54,6 +54,7 @@ enum Parts {
     static let broadcast = "id,snippet,contentDetails,status"
     static let stream = "id,snippet,cdn,status,contentDetails"
     static let chatMessage = "id,snippet,authorDetails"
+    static let channel = "id,snippet,status"
 }
 
 /// Hosts the YouTube Data API is spread over.

@@ -59,6 +59,12 @@ for try await event in youtube.monitor(broadcastID: broadcast.id) {
 - ``YouTubeLiveError``
 - ``GoogleAPIError``
 
+### Channel
+
+- ``YouTubeLiveClient/myChannel()``
+- ``YouTubeLiveClient/createChannelURL``
+- ``ChannelModel``
+
 ### Broadcasts
 
 - ``LiveBroadcastStreamModel``

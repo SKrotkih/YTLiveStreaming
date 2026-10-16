@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.2.0 — 2026-10-16
+
+### Added
+- `myChannel()` (`channels.list?mine=true`, 1 quota unit): the signed-in account's channel —
+  `ChannelModel` with title, handle, avatar and status — or `nil` when the Google account has no
+  YouTube channel yet (empty list or 401 `youtubeSignupRequired`). Call it right after sign-in.
+- `YouTubeLiveClient.createChannelURL`: YouTube's "create a channel" page. The API cannot create
+  a channel on the user's behalf.
+- `YouTubeLiveError` classification: `reason`, `isSignupRequired`, `isLiveStreamingNotEnabled`,
+  `isQuotaExceeded`, `isRateLimited`, `isInsufficientPermissions` — no more string comparisons
+  on `apiError?.reason` in apps.
+
 ## 1.1.3 — 2026-09-17
 
 ### Fixed

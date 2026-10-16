@@ -101,6 +101,31 @@ public enum YouTubeLiveError: Error, Sendable {
         }
     }
 
+    /// The `reason` of the Google error payload, e.g. `"quotaExceeded"`.
+    public var reason: String? { apiError?.reason }
+
+    /// 401 `youtubeSignupRequired`: the Google account has no YouTube channel. Not an expired
+    /// sign-in — signing in again does not help; see ``YouTubeLiveClient/myChannel()``.
+    public var isSignupRequired: Bool { reason == "youtubeSignupRequired" }
+
+    /// 403 `liveStreamingNotEnabled`: the channel has not enabled live streaming yet (YouTube
+    /// Studio → Go live; the first activation can take up to 24 hours). Even listing fails.
+    public var isLiveStreamingNotEnabled: Bool { reason == "liveStreamingNotEnabled" }
+
+    /// The daily YouTube Data API quota of the Google Cloud project is used up
+    /// (`quotaExceeded` / `dailyLimitExceeded`). It resets at midnight Pacific time.
+    public var isQuotaExceeded: Bool { reason == "quotaExceeded" || reason == "dailyLimitExceeded" }
+
+    /// Too many requests in a short time (`rateLimitExceeded` / `userRateLimitExceeded`, or
+    /// HTTP 429 on `thumbnails.set`). Retrying later succeeds.
+    public var isRateLimited: Bool {
+        statusCode == 429 || reason == "rateLimitExceeded" || reason == "userRateLimitExceeded"
+    }
+
+    /// The token lacks a scope the call needs (`insufficientPermissions` / 403 `PERMISSION_DENIED`
+    /// with that reason). Ask the user to sign in again and grant YouTube access.
+    public var isInsufficientPermissions: Bool { reason == "insufficientPermissions" }
+
     /// Maps an HTTP status + body to the matching case. Only called for non-2xx responses.
     static func from(statusCode: Int, body: Data) -> YouTubeLiveError {
         let apiError = GoogleAPIError.parse(body)

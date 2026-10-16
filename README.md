@@ -23,7 +23,7 @@ broadcasts on YouTube from iOS, macOS, tvOS, watchOS or visionOS apps.
 Swift Package Manager only:
 
 ```swift
-.package(url: "https://github.com/SKrotkih/YTLiveStreaming.git", from: "1.1.0")
+.package(url: "https://github.com/SKrotkih/YTLiveStreaming.git", from: "1.2.0")
 ```
 
 ## Google Cloud setup
@@ -179,7 +179,9 @@ Decoding fixtures or cached JSON into the models: `JSONDecoder.youtubeLive()`.
 
 ### 6. Errors
 
-Everything throws `YouTubeLiveError`:
+Everything throws `YouTubeLiveError`. The common YouTube failures have their own flags —
+`isSignupRequired`, `isLiveStreamingNotEnabled`, `isQuotaExceeded`, `isRateLimited`,
+`isInsufficientPermissions` — and `reason` gives the raw value:
 
 ```swift
 do {
@@ -192,6 +194,26 @@ do {
     print(error.localizedDescription, error.apiError?.reason ?? "")
 }
 ```
+
+### 7. After sign-in: does the user have a channel?
+
+A Google account without a YouTube channel signs in fine, but every live-streaming call then
+fails with 401 `youtubeSignupRequired` — easy to mistake for an expired sign-in. Check once:
+
+```swift
+if try await youtube.myChannel() == nil {
+    // The API cannot create a channel: send the user to YouTube, keep the token,
+    // and call myChannel() again when they come back.
+    openURL(YouTubeLiveClient.createChannelURL)
+}
+```
+
+A channel created as a *Brand Account* is a separate identity: the user has to sign in again
+and pick it in Google's account chooser.
+
+A channel that has never enabled live streaming answers 403 `liveStreamingNotEnabled`
+(`error.isLiveStreamingNotEnabled`) even to `liveBroadcasts.list`; enabling it in YouTube Studio
+can take up to 24 hours the first time.
 
 ### Testing your own code
 
